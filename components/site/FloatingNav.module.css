@@ -1,11 +1,17 @@
 /* =============================================================================
- * FloatingNav — the pill nav that replaces fumadocs' default top bar.
- * Fixed to the viewport, centered horizontally, small iPhone-island body
- * with a dark tint + strong blur so it stays legible over any section.
+ * FloatingNav — the site's top nav pill.
  *
- * Every child sits in the same `.navIcon` slot (32×32 rounded button with
- * the same hover treatment) — logo included — so the row reads as one
- * consistent strip of icons with a single uniform gap.
+ * A single translucent island with logo, word links (Products dropdown + a
+ * few flat links), search, and social icons. Anchored to the top of every
+ * page; below 960px it collapses to logo + search + hamburger, and the
+ * hamburger opens a full-screen sheet.
+ *
+ * The Products dropdown lives in ./ProductsMenu, portaled to <body> so its
+ * backdrop-filter escapes this header's `isolation: isolate`. .panelWrap
+ * here is only the positioning shell for that portal.
+ *
+ * Mobile breakpoint is 960px — matches the ProductsMenu's min renderable
+ * width. Below that the dropdown can't lay out properly, so we go mobile.
  * ==========================================================================*/
 
 .floatingNav {
@@ -19,23 +25,21 @@
   justify-content: center;
   padding: 0 var(--site-pad-x, clamp(24px, 4vw, 56px));
   pointer-events: none;
-  /* Own stacking context so backdrop-filter samples the true backdrop
-     even when the page has mix-blend-mode / isolate layers below (grain). */
   isolation: isolate;
 }
+
 .navPill {
   pointer-events: auto;
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 7px 13px;
+  gap: 2px;
+  padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid var(--site-border);
   background: color-mix(in oklab, var(--site-bg-overlay) 72%, transparent);
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
-  /* Force a dedicated compositor layer — fixes desktop Chrome/Safari where
-     backdrop-filter renders transparent above a mix-blend-mode ancestor. */
   transform: translateZ(0);
   will-change: backdrop-filter;
   font-family: var(--font-display);
@@ -47,6 +51,7 @@
   .navPill { background: var(--site-bg-overlay); }
 }
 
+/* Shared 35px hit slot — used by icons, words, and the hamburger. */
 .navIcon {
   display: inline-flex;
   align-items: center;
@@ -61,7 +66,230 @@
   text-decoration: none;
   transition: color .18s ease, background .18s ease;
 }
-.navIcon:hover {
+.navIcon:hover,
+.navIcon:focus-visible {
   color: var(--site-ink);
   background: var(--site-wash-2);
+  outline: none;
+}
+
+.navWord {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--site-ink-2);
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 999px;
+  font: inherit;
+  letter-spacing: inherit;
+  white-space: nowrap;
+  transition: color .18s ease, background .18s ease;
+}
+.navWord:hover,
+.navWord:focus-visible,
+.navWord[data-open='true'] {
+  color: var(--site-ink);
+  background: var(--site-wash-2);
+  outline: none;
+}
+
+.caret {
+  display: inline-block;
+  margin-left: 6px;
+  opacity: 0.7;
+  transition: transform .18s ease;
+}
+.navWord[data-open='true'] .caret { transform: rotate(180deg); }
+
+.divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 6px;
+  background: var(--site-border);
+  flex: 0 0 auto;
+}
+
+/* Positioning shell for the portaled ProductsMenu. Sits below the pill,
+   full-width so its child centers via flex (a transform would create a
+   containing block and break the child's backdrop-filter). */
+.panelWrap {
+  position: fixed;
+  top: calc(clamp(16px, 2.2vh, 28px) + 59px);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 41;
+  pointer-events: none;
+}
+.panelWrap > * { pointer-events: auto; }
+
+/* -------- Mobile: pill collapses; hamburger opens sheet ------------------ */
+
+.hamburger { display: none; }
+.mobileOnly { display: none; }
+.desktopOnly { display: inline-flex; }
+
+/* Products trigger needs its own slot: same desktop-only visibility, but must
+   stay position: relative for the caret/hover geometry. Kept off .desktopOnly
+   so the shared utility stays a pure display toggle. */
+.productsSlot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .desktopOnly { display: none; }
+  .productsSlot { display: none; }
+  .hamburger { display: inline-flex; }
+  .mobileOnly { display: inline-flex; }
+  .panelWrap { display: none; }
+  .divider { display: none; }
+}
+
+.sheet {
+  /* Header sets pointer-events: none so the pill doesn't eat clicks over its
+     transparent bounds; the sheet must opt back in or touches pass through. */
+  pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: color-mix(in oklab, var(--site-bg) 92%, transparent);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  /* Close button is position: absolute and only occupies the right edge, so
+     content flows near the top with just safe-area breathing room. */
+  padding:
+    max(24px, calc(env(safe-area-inset-top) + 8px))
+    max(24px, env(safe-area-inset-right))
+    max(32px, calc(env(safe-area-inset-bottom) + 16px))
+    max(24px, env(safe-area-inset-left));
+  gap: 6px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  animation: sheetIn .18s ease-out;
+}
+@keyframes sheetIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet { animation: none; }
+}
+.sheetClose {
+  position: absolute;
+  /* Nudge into the safe area on notched devices. */
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  /* HIG minimum 44px for comfortable thumb targets. */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--site-border);
+  background: transparent;
+  color: var(--site-ink-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease;
+}
+.sheetClose:hover,
+.sheetClose:focus-visible {
+  color: var(--site-ink);
+  background: var(--site-wash-2);
+  outline: none;
+}
+/* Top-level items in the sheet: Products (accordion) + flat links share a row
+   treatment so they read as siblings. Hairline between rows. */
+.sheetAccordion,
+.sheetTopLink {
+  border-bottom: 1px solid var(--site-rule);
+}
+
+.sheetTopLink {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 4px;
+  color: var(--site-ink);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: var(--site-fs-8);
+  font-weight: 500;
+  transition: color .18s ease;
+}
+.sheetTopLink:hover,
+.sheetTopLink:focus-visible {
+  color: var(--site-ink);
+  outline: none;
+}
+
+.sheetAccordionSummary {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 4px;
+  color: var(--site-ink);
+  font-family: var(--font-display);
+  font-size: var(--site-fs-8);
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+.sheetAccordionSummary::-webkit-details-marker { display: none; }
+
+.sheetAccordionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0 16px 12px;
+}
+.sheetSubGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sheetSubHeader {
+  color: var(--site-ink-4);
+  font-family: var(--font-display);
+  font-size: var(--site-fs-1);
+  font-weight: 600;
+  letter-spacing: var(--site-tr-wide);
+  text-transform: uppercase;
+  padding: 6px 4px 4px;
+}
+.sheetSubLink {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 8px;
+  min-height: 44px;
+  justify-content: center;
+  color: var(--site-ink);
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: var(--site-fs-6);
+  font-weight: 500;
+}
+.sheetSubLink:hover { background: var(--site-wash-2); }
+.sheetLinkDesc {
+  font-size: var(--site-fs-3);
+  font-weight: 400;
+  color: var(--site-ink-3);
+}
+
+.sheetIconRow {
+  display: flex;
+  gap: 8px;
+  padding: 20px 4px 0;
 }

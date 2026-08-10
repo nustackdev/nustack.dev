@@ -1,6 +1,6 @@
-# nu docs
+# nustack.dev website
 
-Nu website + docs. Fumadocs 16 · Next 16 · React 19 · Tailwind 4 · TS.
+Nu website + docs + blog. Next 16 · React 19 · Tailwind 4 · TS.
 
 ```bash
 pnpm i && pnpm dev   # http://localhost:3000

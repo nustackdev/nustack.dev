@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Search, BookOpen } from 'lucide-react';
+import { Search, BookOpen, Rss } from 'lucide-react';
 import { useSearchContext } from 'fumadocs-ui/contexts/search';
 import { NuLogo } from '@/components/site/marks/NuLogo';
 import { GithubMark } from '@/components/site/marks/GithubMark';
@@ -28,6 +28,10 @@ export function FloatingNav() {
 
         <Link href="/docs" className={s.navIcon} aria-label="docs">
           <BookOpen size={18} aria-hidden />
+        </Link>
+
+        <Link href="/blog" className={s.navIcon} aria-label="blog">
+          <Rss size={18} aria-hidden />
         </Link>
 
         <a

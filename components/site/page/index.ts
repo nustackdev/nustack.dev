@@ -8,7 +8,6 @@ export { PageBody } from './PageBody';
 export type { PageBodyProps } from './PageBody';
 export { Chapter } from './Chapter';
 export type { ChapterProps } from './Chapter';
-export { PageFooter } from './PageFooter';
 export { Section } from './Section';
 export type { SectionProps, SectionHue, SectionSplit } from './Section';
 export { SectionCell } from './SectionCell';

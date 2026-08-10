@@ -1,0 +1,266 @@
+/* =============================================================================
+ * SiteFooterV6 — rich sitemap footer.
+ *
+ * Vercel/Stripe-style deep footer: each product entry shows its name + a
+ * one-line description underneath. Four product groups become peer columns
+ * with a header + tagline. Brand column on the left carries wordmark, a
+ * confident tagline, Learn links, and socials.
+ *
+ * Transparent — sits on the PageShell surface (--site-bg), no bg/border.
+ * ==========================================================================*/
+
+.footer {
+  composes: tokens from '@/components/site/tokens.module.css';
+  position: relative;
+  width: 100%;
+  color: var(--site-ink-2);
+  font-family: var(--font-display);
+}
+
+.inner {
+  max-width: var(--site-kal-max-width, 1360px);
+  margin: 0 auto;
+  padding-inline: var(--site-space-4);
+  padding-block: 72px 28px;
+}
+
+/* --- Top region ---------------------------------------------------------- */
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 3.4fr);
+  gap: 56px;
+  align-items: start;
+}
+
+/* --- Brand column -------------------------------------------------------- */
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--site-ink);
+}
+.brandLogo { flex: 0 0 auto; }
+.brandMark { font-size: var(--site-fs-8); }
+
+.brandTagline {
+  margin: 0;
+  color: var(--site-ink-2);
+  font-size: var(--site-fs-6);
+  line-height: 1.45;
+  letter-spacing: var(--site-tr-tight);
+  max-width: 22ch;
+}
+
+.learnList {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.learnLink {
+  color: var(--site-ink-3);
+  text-decoration: none;
+  font-size: var(--site-fs-5);
+  transition: color .18s ease;
+}
+.learnLink:hover,
+.learnLink:focus-visible {
+  color: var(--site-ink);
+  outline: none;
+}
+
+/* --- Socials ------------------------------------------------------------- */
+
+.socials {
+  display: flex;
+  gap: 4px;
+  margin-right: -8px;
+}
+.socialIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: var(--site-ink-3);
+  text-decoration: none;
+  transition: color .18s ease, background .18s ease;
+}
+.socialIcon:hover,
+.socialIcon:focus-visible {
+  color: var(--site-ink);
+  background: var(--site-wash-2);
+  outline: none;
+}
+
+/* --- Sitemap ------------------------------------------------------------- */
+
+.sitemap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-areas: "foundations fabrics infra apps";
+  gap: 32px;
+  min-width: 0;
+}
+
+.group { min-width: 0; }
+
+.groupHead {
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--site-rule-2);
+}
+
+.groupHeader {
+  color: var(--site-ink);
+  font-size: var(--site-fs-5);
+  font-weight: var(--site-fw-semibold);
+  letter-spacing: 0.005em;
+}
+
+.groupTagline {
+  margin-top: 4px;
+  color: var(--site-ink-4);
+  font-size: var(--site-fs-3);
+  line-height: 1.4;
+}
+
+.items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.itemName {
+  color: var(--site-ink-2);
+  text-decoration: none;
+  font-size: var(--site-fs-5);
+  font-weight: var(--site-fw-medium);
+  letter-spacing: var(--site-tr-tight);
+  transition: color .18s ease;
+}
+.itemName:hover,
+.itemName:focus-visible {
+  color: var(--site-ink);
+  outline: none;
+}
+
+.itemDesc {
+  color: var(--site-ink-4);
+  font-size: var(--site-fs-3);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- Bottom strip -------------------------------------------------------- */
+
+.bottom {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--site-rule-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+  color: var(--site-ink-4);
+  font-size: var(--site-fs-3);
+}
+
+.copyright { color: var(--site-ink-4); }
+
+/* --- Responsive ---------------------------------------------------------- */
+
+/* Tablet: brand stacks above sitemap; brand col becomes a horizontal band that
+   uses the freed-up right side — mark+tagline left, Learn links inline right. */
+@media (max-width: 1024px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .brandCol {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+  }
+  .brandBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+  .brandTagline { max-width: none; }
+  .learnList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+    gap: 8px 20px;
+    align-items: center;
+  }
+  .sitemap { gap: 24px; }
+}
+
+/* Small: sitemap folds to 2×2. Descriptions still visible. */
+@media (max-width: 720px) {
+  .inner { padding-block: 48px 24px; }
+  .sitemap {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "foundations fabrics"
+      "infra       apps";
+    gap: 32px 24px;
+  }
+  .groupHead { margin-bottom: 14px; padding-bottom: 10px; }
+  .items { gap: 12px; }
+  .bottom { margin-top: 40px; }
+}
+
+/* Match Chapters gutter at ≤640px. */
+@media (max-width: 640px) {
+  .inner { padding-inline: 10px; }
+}
+
+/* Mobile: single column. Titled rows survive, descriptions tighten. */
+@media (max-width: 420px) {
+  .sitemap {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "foundations"
+      "fabrics"
+      "infra"
+      "apps";
+    gap: 28px;
+  }
+  .items { gap: 10px; }
+  .itemDesc {
+    -webkit-line-clamp: 1;
+    line-height: 1.35;
+  }
+}

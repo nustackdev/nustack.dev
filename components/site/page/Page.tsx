@@ -9,7 +9,7 @@ export interface PageProps {
 /**
  * Page — content container inside PageShell. Owns the top margin that
  * clears the floating fixed nav so hero/body content doesn't collide with
- * it. Wraps PageHero + PageBody + PageFooter.
+ * it. Wraps PageHero and PageBody.
  */
 export function Page({ children, className }: PageProps) {
   const cls = [s.root, className].filter(Boolean).join(' ');

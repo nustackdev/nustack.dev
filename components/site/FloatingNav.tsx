@@ -36,6 +36,7 @@ export function FloatingNav() {
 
   const pillRef = useRef<HTMLDivElement>(null);
   const productsTriggerRef = useRef<HTMLButtonElement>(null);
+  const productsPanelRef = useRef<HTMLDivElement>(null);
   const sheetCloseRef = useRef<HTMLButtonElement>(null);
   const hoverTimer = useRef<number | null>(null);
 
@@ -50,9 +51,10 @@ export function FloatingNav() {
   useEffect(() => {
     if (!productsOpen) return;
     const onDown = (e: MouseEvent) => {
-      if (pillRef.current && !pillRef.current.contains(e.target as Node)) {
-        setProductsOpen(false);
-      }
+      const target = e.target as Node;
+      const inPill = pillRef.current?.contains(target);
+      const inPanel = productsPanelRef.current?.contains(target);
+      if (!inPill && !inPanel) setProductsOpen(false);
     };
     document.addEventListener('mousedown', onDown);
     return () => document.removeEventListener('mousedown', onDown);
@@ -158,6 +160,7 @@ export function FloatingNav() {
 
           {productsOpen && mounted && createPortal(
             <div
+              ref={productsPanelRef}
               className={s.panelWrap}
               onMouseEnter={openProducts}
               onMouseLeave={scheduleCloseProducts}

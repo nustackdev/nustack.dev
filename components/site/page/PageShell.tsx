@@ -3,6 +3,7 @@ import { Container } from '@/components/site/grid/Container';
 import { DotPattern } from '@/components/site/bg/DotPattern';
 import { GradientBlobs, HERO_BLOBS } from '@/components/site/bg/GradientBlobs';
 import type { Blob as GradientBlob } from '@/components/site/bg/GradientBlobs';
+import { SiteFooter } from '@/components/site/SiteFooter';
 import s from './PageShell.module.css';
 
 export interface PageShellProps {
@@ -46,6 +47,9 @@ export function PageShell({
       <Container full className={s.contentLayer}>
         {children}
       </Container>
+      <div className={s.footerLayer}>
+        <SiteFooter />
+      </div>
     </div>
   );
 }

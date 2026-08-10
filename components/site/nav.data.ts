@@ -20,7 +20,7 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     tagline: 'The five surfaces of nu.',
     items: [
       { name: 'nu.mem', href: '/products/fabrics/mem', desc: 'Shape-tree memory.' },
-      { name: 'nu.v', href: '/products/fabrics/v', desc: 'Virtual collections.' },
+      { name: 'nu.kv', href: '/products/fabrics/kv', desc: 'Virtual collections.' },
       { name: 'nu.ui', href: '/products/fabrics/ui', desc: 'Reactive UI over refs.' },
       { name: 'nu.invisibles', href: '/products/fabrics/invisibles', desc: 'Transparent remote objects.' },
       { name: 'nu.ray', href: '/products/fabrics/ray', desc: 'Distributed compute fabric.' },

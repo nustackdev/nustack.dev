@@ -20,3 +20,4 @@
 .decorationsLayer  { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .dotLayer          { z-index: 2; }
 .contentLayer      { position: relative; z-index: 3; }
+.footerLayer       { position: relative; z-index: 3; }

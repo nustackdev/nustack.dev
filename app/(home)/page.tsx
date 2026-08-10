@@ -32,7 +32,6 @@ import {
   PageHero,
   PageBody,
   Chapter,
-  PageFooter,
   Section,
   SectionCell,
   SectionHead,
@@ -478,9 +477,6 @@ export default function Home() {
         </Section>
         </Chapter>
       </PageBody>
-
-      {/* 8. Footer */}
-      <PageFooter />
       </Page>
     </PageShell>
   );

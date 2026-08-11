@@ -152,7 +152,7 @@ export function IntroStory() {
                   <dd>browser widgets, live-rendered</dd>
                 </div>
                 <div className={s.fabricRow}>
-                  <dt><code>nu.invisibles</code></dt>
+                  <dt><code>nu.proxy</code></dt>
                   <dd>any Fabric on the wire</dd>
                 </div>
                 <div className={s.fabricRow}>

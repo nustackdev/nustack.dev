@@ -12,19 +12,18 @@ The final program lives at `examples/movies.py`. You build it in four stages. Ea
 
 Start headless. Declare state, seed it, print it.
 
-A **collection Ref** holds many values under one slot. `nv.ListRef` is the list flavor. `nv.IntRef` and `nv.StrRef` are the scalar flavors you already know from the counter.
+A **collection Ref** holds many values under one slot. `nu.kv.ListRef` is the list flavor. `nu.kv.IntRef` and `nu.kv.StrRef` are the scalar flavors you already know from the counter.
 
 Save as `movies.py`:
 
 ```python
 import nu
-import nu.virtuals as nv
 
 
 class State(nu.Shape):
-    movies = nv.ListRef.slot(object)
-    total = nv.IntRef.slot()
-    watched = nv.IntRef.slot()
+    movies = nu.kv.ListRef.slot(object)
+    total = nu.kv.IntRef.slot()
+    watched = nu.kv.IntRef.slot()
 
 
 SEED = [
@@ -72,13 +71,12 @@ Replace `movies.py` with:
 ```python
 import asyncio
 import nu
-import nu.virtuals as nv
 
 
 class State(nu.Shape):
-    movies = nv.ListRef.slot(object)
-    total = nv.IntRef.slot()
-    watched = nv.IntRef.slot()
+    movies = nu.kv.ListRef.slot(object)
+    total = nu.kv.IntRef.slot()
+    watched = nu.kv.IntRef.slot()
 
 
 class StatsRow(nu.ui.Row):
@@ -242,13 +240,12 @@ Full file for the final program:
 ```python
 import asyncio
 import nu
-import nu.virtuals as nv
 
 
 class State(nu.Shape):
-    movies = nv.ListRef.slot(object)
-    total = nv.IntRef.slot()
-    watched = nv.IntRef.slot()
+    movies = nu.kv.ListRef.slot(object)
+    total = nu.kv.IntRef.slot()
+    watched = nu.kv.IntRef.slot()
 
 
 class TitleField(nu.ui.Field):

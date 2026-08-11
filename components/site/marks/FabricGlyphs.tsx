@@ -142,14 +142,14 @@ export function MemGlyph() {
   );
 }
 
-/* ----------------------------- virtuals ------------------------------------ */
+/* ------------------------------- nu.kv ------------------------------------- */
 /** Disk stack with backend swap-plates. */
-export function VirtualsGlyph() {
+export function KvGlyph() {
   const cx = V.w / 2;
   const cy = V.h / 2 - 6;
 
   return (
-    <Frame aria="Virtuals glyph: a stacked-disk substrate with four labeled backend swap-plates — rocksdb, lmdb, acid-inmem, text.">
+    <Frame aria="nu.kv glyph: a stacked-disk substrate with four labeled backend swap-plates — rocksdb, lmdb, acid-inmem, text.">
       {/* eyebrow */}
       <text
         x={40}
@@ -209,15 +209,15 @@ export function VirtualsGlyph() {
   );
 }
 
-/* ---------------------------- invisibles ----------------------------------- */
+/* ------------------------------ nu.proxy ----------------------------------- */
 /** Two nodes with a dashed remote link + tiny proxy netref. */
-export function InvisiblesGlyph() {
+export function ProxyGlyph() {
   const y = V.h / 2;
   const leftX = 100;
   const rightX = V.w - 100;
 
   return (
-    <Frame aria="Invisibles glyph: two nodes connected by a dashed remote link, a small proxy pill hovers over the wire.">
+    <Frame aria="nu.proxy glyph: two nodes connected by a dashed remote link, a small proxy pill hovers over the wire.">
       {/* eyebrow */}
       <text
         x={40}

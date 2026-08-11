@@ -11,7 +11,7 @@ import { CtaRow } from '@/components/site/layout/CtaRow';
 import { SiteButton } from '@/components/site/SiteButton';
 import {
   MemGlyph,
-  VirtualsGlyph,
+  KvGlyph,
   UiGlyph,
 } from '@/components/site/marks/FabricGlyphs';
 import { GithubMark } from '@/components/site/marks/GithubMark';
@@ -168,7 +168,7 @@ export default function Home() {
               </CtaRow>
             </div>
             <div className={s.itemViz}>
-              <VizFrame><VirtualsGlyph /></VizFrame>
+              <VizFrame><KvGlyph /></VizFrame>
             </div>
           </div>
         </Section>

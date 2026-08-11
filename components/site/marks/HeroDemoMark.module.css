@@ -61,7 +61,7 @@
 .containerTight { padding: 6px 10px 8px; }
 .container .container { margin-top: 8px; }
 
-.container[data-role="virtuals"] {
+.container[data-role="kv"] {
   --role-hue:  var(--site-hue-sage);
   --role-wash: var(--site-hue-sage-wash);
   --role-line: var(--site-hue-sage-line);
@@ -71,7 +71,7 @@
   --role-wash: var(--site-hue-teal-wash);
   --role-line: var(--site-hue-teal-line);
 }
-.container[data-role="invisibles"] {
+.container[data-role="proxy"] {
   --role-hue:  var(--site-hue-plum);
   --role-wash: var(--site-hue-plum-wash);
   --role-line: var(--site-hue-plum-line);
@@ -130,9 +130,9 @@
 .dim          { color: var(--site-ink-3); }
 .num          { color: var(--site-ink-2); }
 
-.tVirtuals    { color: var(--site-hue-sage);  font-weight: 700; }
+.tKv          { color: var(--site-hue-sage);  font-weight: 700; }
 .tUi          { color: var(--site-hue-teal);  font-weight: 700; }
-.tInvisibles  { color: var(--site-hue-plum);  font-weight: 700; }
+.tProxy       { color: var(--site-hue-plum);  font-weight: 700; }
 .tRay         { color: var(--site-hue-amber); font-weight: 700; }
 
 .right {

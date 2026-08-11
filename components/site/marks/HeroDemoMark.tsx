@@ -56,16 +56,16 @@ export function HeroDemoMark({ className }: { className?: string }) {
 function LeftTree() {
   return (
     <div className={s.tree}>
-      <Container role="virtuals" tag="state" hint="kv storage">
+      <Container role="kv" tag="state" hint="kv storage">
         <Line>
           <span className={s.kw}>class</span>{' '}
-          <span className={s.tVirtuals}>Counter</span>
+          <span className={s.tKv}>Counter</span>
           <span className={s.dim}>(nu.Shape):</span>
         </Line>
         <Line indent>
           <span className={s.ident}>val</span>
           <span className={s.dim}>: </span>
-          <span className={s.tVirtuals}>nu.kv.IntRef</span>
+          <span className={s.tKv}>nu.kv.IntRef</span>
         </Line>
       </Container>
 
@@ -90,24 +90,24 @@ function LeftTree() {
           <span className={s.dim}>(</span>
         </Line>
 
-        <Container role="invisibles" tag="tick" hint="loop forever">
+        <Container role="proxy" tag="tick" hint="loop forever">
           <Line>
-            <span className={s.tInvisibles}>nu.ForeverDo</span>
+            <span className={s.tProxy}>nu.ForeverDo</span>
             <span className={s.dim}>(</span>
           </Line>
 
-          <Container role="virtuals" tag="inc" hint="add 1 to state" tight>
+          <Container role="kv" tag="inc" hint="add 1 to state" tight>
             <Line>
-              <span className={s.tVirtuals}>Counter.val</span>
+              <span className={s.tKv}>Counter.val</span>
               <span className={s.dim}>.inc()</span>
             </Line>
           </Container>
 
           <div className={s.op}>&gt;&gt;</div>
 
-          <Container role="invisibles" tag="wait" hint="delay 1 second" tight>
+          <Container role="proxy" tag="wait" hint="delay 1 second" tight>
             <Line>
-              <span className={s.tInvisibles}>nu.Delay</span>
+              <span className={s.tProxy}>nu.Delay</span>
               <span className={s.dim}>(</span>
               <span className={s.num}>1.0</span>
               <span className={s.dim}>)</span>
@@ -119,15 +119,15 @@ function LeftTree() {
           </Line>
         </Container>
 
-        <Container role="invisibles" tag="live" hint="wake on change">
+        <Container role="proxy" tag="live" hint="wake on change">
           <Line>
-            <span className={s.tInvisibles}>nu.ReactForever</span>
+            <span className={s.tProxy}>nu.ReactForever</span>
             <span className={s.dim}>(</span>
           </Line>
 
-          <Container role="virtuals" tag="subscribe" hint="which ref" tight>
+          <Container role="kv" tag="subscribe" hint="which ref" tight>
             <Line>
-              <span className={s.tVirtuals}>Counter.val</span>
+              <span className={s.tKv}>Counter.val</span>
               <span className={s.dim}>.on_change(),</span>
             </Line>
           </Container>
@@ -136,7 +136,7 @@ function LeftTree() {
             <Line>
               <span className={s.tUi}>Dashboard.count</span>
               <span className={s.dim}>.set(</span>
-              <span className={s.tVirtuals}>Counter.val</span>
+              <span className={s.tKv}>Counter.val</span>
               <span className={s.dim}>)</span>
             </Line>
           </Container>
@@ -161,7 +161,7 @@ function Container({
   tight,
   children,
 }: {
-  role: 'virtuals' | 'ui' | 'invisibles' | 'ray';
+  role: 'kv' | 'ui' | 'proxy' | 'ray';
   tag: string;
   hint: string;
   tight?: boolean;

@@ -9,7 +9,7 @@
  *   │        │
  *   ══════════  (bottom platter, opacity 1)
  *
- * Adopts the platter-stack recipe from FabricGlyphs.VirtualsGlyph so every
+ * Adopts the platter-stack recipe from FabricGlyphs.KvGlyph so every
  * disk on the site reads the same way. Configurable platter count so hero
  * (3 platters) and fabric/one-line (4 platters) can share the primitive.
  *

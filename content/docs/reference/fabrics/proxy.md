@@ -1,15 +1,15 @@
 ---
-title: nu.invisibles
+title: nu.proxy
 ---
 
-Transparent remote objects: local calls, remote execution. Pure transport over
-TCP or Unix socket. No new refs, no new interactions. Method calls on a client
-proxy travel the wire and land on the server-side bound fabric, dispatched by
-the same `FabricRef` machinery that works locally.
+Network fabric: transparent remote objects, local calls, remote execution.
+Pure transport over TCP or Unix socket. No new refs, no new interactions.
+Method calls on a client proxy travel the wire and land on the server-side
+bound fabric, dispatched by the same `FabricRef` machinery that works locally.
 
 ## Server
 
-`from nu.invisibles import InvisiblesServer`
+`from nu.proxy import InvisiblesServer`
 
 | Name             | Sort            | Signature                                                                                            | Effect        | Meaning                                                                              |
 | ---------------- | --------------- | ---------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------- |
@@ -21,7 +21,7 @@ Transport is `"tcp"` or `"unix"`. Executor is `"simple"` or `"threaded"`
 
 ## Client
 
-`from nu.invisibles import InvisiblesClient`
+`from nu.proxy import InvisiblesClient`
 
 | Name             | Sort            | Signature                                                                                                          | Effect         | Meaning                                                          |
 | ---------------- | --------------- | ------------------------------------------------------------------------------------------------------------------ | -------------- | ----------------------------------------------------------------- |
@@ -32,12 +32,12 @@ method calls go over the wire synchronously.
 
 ## Bracket
 
-`from nu.invisibles import InvisiblesProxy`
+`from nu.proxy import InvisiblesProxy`
 
 | Name            | Sort            | Signature                                                                                                                        | Effect            | Meaning                                                                                    |
 | --------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------- |
 | InvisiblesProxy | Bracket         | `InvisiblesProxy(target, body=None, *, address, tag=None, transport="tcp", timeout=5.0, max_retries=3, bg_serve=False, buffered_iteration=True)` | binds proxy       | provision an `InvisiblesClient` and bind its `.root` on ctx under `target` in one step      |
 
 Async-only bracket. Collapses the two-Provide-plus-rebind pattern into one
-line: connect to an invisibles-hosted fabric and let the rest of the tree talk
+line: connect to a nu.proxy-hosted fabric and let the rest of the tree talk
 to it as the plain target type.

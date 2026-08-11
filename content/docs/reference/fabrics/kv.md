@@ -1,8 +1,8 @@
 ---
-title: nu.virtuals
+title: nu.kv
 ---
 
-KV-storage fabric adapter: virtual collections layered over any tkv backend (in-memory, LMDB, RocksDB, text). Views decompose containers into per-element storage; refs navigate the view hierarchy against a snapshot or transaction resolved from the Context. Persistent, paged, composable through view types. Aliased as `nu.kv`.
+Persistent state fabric: virtual collections layered over any KV backend (in-memory, LMDB, RocksDB, text). Views decompose containers into per-element storage; refs navigate the view hierarchy against a snapshot or transaction resolved from the Context. Persistent, paged, composable through view types.
 
 ## Base
 

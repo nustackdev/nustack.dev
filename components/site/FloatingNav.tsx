@@ -3,7 +3,7 @@
 /**
  * FloatingNav — the site's top nav pill.
  *
- * Desktop: logo · Products▾ · Use-cases · Docs · Blog · About · search · socials.
+ * Desktop: logo · Products▾ · Docs · Blog · About · search · socials.
  * Mobile:  logo · search · hamburger → full-screen sheet with everything stacked.
  *
  * The Products dropdown (ProductsMenu) is portaled to <body> so its blur
@@ -236,8 +236,8 @@ export function FloatingNav() {
             <CloseIcon size={18} aria-hidden />
           </button>
 
-          {/* Top-level nav mirrors desktop: Products (expandable) · Use-cases
-              · Docs · Blog · About. Only Products has a submenu. */}
+          {/* Top-level nav mirrors desktop: Products (expandable) · Docs
+              · Blog · About. Only Products has a submenu. */}
           <details className={s.sheetAccordion}>
             <summary className={s.sheetAccordionSummary}>
               <span>Products</span>

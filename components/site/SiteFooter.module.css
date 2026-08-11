@@ -13,6 +13,11 @@
   composes: tokens from '@/components/site/tokens.module.css';
   position: relative;
   width: 100%;
+  /* Transition into the footer reads as: chapter → xloose gap → hairline
+   * → xloose gap (inner padding-top) → footer content. The border spans
+   * the full viewport width, not just the 1200 content column. */
+  margin-top: var(--site-gap-xloose);
+  border-top: 1px solid var(--site-rule);
   color: var(--site-ink-2);
   font-family: var(--font-display);
 }

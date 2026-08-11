@@ -9,6 +9,9 @@
   composes: tokens from '@/components/site/tokens.module.css';
   position: relative;
   isolation: isolate;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--site-bg);
   color: rgba(255, 255, 255, 0.92);
   overflow-x: clip;
@@ -19,7 +22,8 @@
 .gradientLayer     { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .decorationsLayer  { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .dotLayer          { z-index: 2; }
-.contentLayer      { position: relative; z-index: 3; }
+/* Content grows to push footer to the bottom on short pages (sticky-footer). */
+.contentLayer      { position: relative; z-index: 3; flex: 1 0 auto; }
 .footerLayer       { position: relative; z-index: 3; }
 
 /* Top clearance so page content sits below the fixed FloatingNav.

@@ -1,135 +1,52 @@
-.wrap {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
-}
+/* Blog-specific bits that don't live in the kit yet.
+ * Page shell + Header/Body/Chapter come straight from the site kit. */
 
-.head {
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--color-fd-border);
-}
-
-.title {
-  font-size: 2.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.5rem;
-}
-
-.subtitle {
-  color: var(--color-fd-muted-foreground);
-  margin: 0;
-  font-size: 1rem;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.item {
-  border-bottom: 1px solid var(--color-fd-border);
-  padding-bottom: 2rem;
-}
-
-.item:last-child {
-  border-bottom: none;
-}
-
-.itemLink {
-  display: block;
+/* Blog index — each preview is a linked Chapter card. */
+.postLink {
   color: inherit;
   text-decoration: none;
-}
-
-.itemLink:hover .itemTitle {
-  color: var(--color-fd-primary);
-}
-
-.date {
   display: block;
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.75rem;
-  color: var(--color-fd-muted-foreground);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  transition: color var(--site-t);
 }
 
-.itemTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0 0 0.5rem;
-  transition: color 0.15s;
+.postCard {
+  transition: border-color var(--site-t), background var(--site-t);
 }
 
-.itemDesc {
-  color: var(--color-fd-muted-foreground);
-  margin: 0 0 0.75rem;
-  line-height: 1.5;
+.postLink:hover .postCard,
+.postLink:focus-visible .postCard {
+  border-color: var(--site-accent-line);
+  background: var(--site-bg-overlay);
 }
 
-.itemMeta {
-  color: var(--color-fd-muted-foreground);
-  font-size: 0.8125rem;
-  margin: 0;
+.postLink:focus-visible {
+  outline: none;
 }
 
-/* --- Post page --- */
-
-.post {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
-}
-
-.postBack {
-  display: inline-block;
-  color: var(--color-fd-muted-foreground);
-  text-decoration: none;
-  font-size: 0.875rem;
-  margin-bottom: 2rem;
-}
-
-.postBack:hover {
-  color: var(--color-fd-foreground);
-}
-
-.postHead {
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--color-fd-border);
-}
-
-.postTitle {
-  font-size: 2.25rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin: 0.5rem 0 1rem;
-  line-height: 1.15;
-}
-
-.postDesc {
-  color: var(--color-fd-muted-foreground);
-  font-size: 1.125rem;
-  line-height: 1.5;
-  margin: 0 0 1.25rem;
-}
-
-.postMeta {
-  color: var(--color-fd-muted-foreground);
-  font-size: 0.875rem;
-  display: flex;
-  gap: 0.5rem;
+/* Post page — Header meta row (back link + date + author). */
+.postMetaRow {
+  display: inline-flex;
   align-items: center;
+  gap: var(--site-gap-tight);
+  color: var(--site-ink-3);
+  font-variant-numeric: tabular-nums;
 }
 
-.postMeta::before {
-  content: '';
+.backLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--site-t);
+}
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--site-ink);
+  outline: none;
+}
+
+.metaSep {
+  opacity: 0.5;
+}
+
+.author {
+  color: var(--site-ink-3);
 }

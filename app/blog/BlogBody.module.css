@@ -8,6 +8,10 @@
   font-size: 1.0625rem;
   line-height: 1.75;
   --blog-heading-lh: 1.25;
+  /* Constrain prose to a comfortable reading measure — the Chapter card
+   * around it can be much wider, but text stays at ~72ch and centers. */
+  max-width: 72ch;
+  margin-inline: auto;
 }
 
 /* Block flow — first/last elements sit flush */

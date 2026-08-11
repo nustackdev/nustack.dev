@@ -2,6 +2,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { BlogBody } from '../BlogBody';
+import { Page, Header, Body, Chapter } from '@/components/site/page';
+import { Row } from '@/components/site/grid/Row';
+import { Cell } from '@/components/site/grid/Cell';
+import { CellContent } from '@/components/site/grid/CellContent';
 import { blogSource, getAllBlogPosts, getBlogPageImage } from '@/lib/source';
 import { getMDXComponents } from '@/components/mdx';
 import { formatDate } from '@/lib/date';
@@ -49,21 +53,33 @@ export default async function BlogPost(props: PageProps<'/blog/[slug]'>) {
   const MDX = post.data.body;
 
   return (
-    <article className={s.post}>
-      <Link href="/blog" className={s.postBack}>← Blog</Link>
-      <header className={s.postHead}>
-        <time className={s.date} dateTime={post.data.date}>
-          {formatDate(post.data.date)}
-        </time>
-        <h1 className={s.postTitle}>{post.data.title}</h1>
-        {post.data.description ? (
-          <p className={s.postDesc}>{post.data.description}</p>
-        ) : null}
-        <p className={s.postMeta}>by {post.data.author}</p>
-      </header>
-      <BlogBody>
-        <MDX components={getMDXComponents()} />
-      </BlogBody>
-    </article>
+    <Page>
+      <Header
+        meta={
+          <span className={s.postMetaRow}>
+            <Link href="/blog" className={s.backLink}>← Blog</Link>
+            <span className={s.metaSep}>·</span>
+            <time dateTime={post.data.date}>{formatDate(post.data.date)}</time>
+            <span className={s.metaSep}>·</span>
+            <span className={s.author}>by {post.data.author}</span>
+          </span>
+        }
+        title={post.data.title}
+        lede={post.data.description}
+      />
+      <Body>
+        <Chapter>
+          <Row cols={1}>
+            <Cell>
+              <CellContent pad="lg">
+                <BlogBody>
+                  <MDX components={getMDXComponents()} />
+                </BlogBody>
+              </CellContent>
+            </Cell>
+          </Row>
+        </Chapter>
+      </Body>
+    </Page>
   );
 }

@@ -3,10 +3,8 @@ import s from './Container.module.css';
 
 export interface ContainerProps {
   children?: ReactNode;
-  /** Max content width (px). Default 1360. */
+  /** Max content width (px). Default 1200. */
   maxWidth?: number;
-  /** If true, min-height: 100vh. */
-  full?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -18,12 +16,11 @@ export interface ContainerProps {
  */
 export function Container({
   children,
-  maxWidth = 1360,
-  full = false,
+  maxWidth = 1200,
   className,
   style,
 }: ContainerProps) {
-  const cls = [s.root, full ? s.full : null, className].filter(Boolean).join(' ');
+  const cls = [s.root, className].filter(Boolean).join(' ');
   return (
     <div
       className={cls}

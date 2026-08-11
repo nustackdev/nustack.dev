@@ -53,7 +53,6 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
 export type WordLink = { label: string; href: string };
 
 export const WORD_LINKS: WordLink[] = [
-  { label: 'Use-cases', href: '/use-cases' },
   { label: 'Docs', href: '/docs' },
   { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },

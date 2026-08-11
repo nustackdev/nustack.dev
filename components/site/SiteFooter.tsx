@@ -18,7 +18,6 @@ import s from './SiteFooter.module.css';
 const LEARN_LINKS = [
   { label: 'Docs', href: '/docs' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Use-cases', href: '/use-cases' },
   { label: 'Changelog', href: '/changelog' },
   { label: 'About', href: '/about' },
 ];

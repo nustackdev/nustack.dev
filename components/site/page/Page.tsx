@@ -52,7 +52,7 @@ export function Page({
         </div>
       ) : null}
       <DotPattern className={s.dotLayer} />
-      <Container full className={s.contentLayer}>
+      <Container className={s.contentLayer}>
         <div className={s.content}>{children}</div>
       </Container>
       <div className={s.footerLayer}>

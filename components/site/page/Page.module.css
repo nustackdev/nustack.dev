@@ -22,5 +22,6 @@
 .contentLayer      { position: relative; z-index: 3; }
 .footerLayer       { position: relative; z-index: 3; }
 
-/* Top clearance so page content (Header/Hero) sits below the fixed FloatingNav. */
-.content { padding-top: var(--site-space-8); }
+/* Top clearance so page content sits below the fixed FloatingNav.
+ * Scales with the u-atom so proportion holds across viewports. */
+.content { padding-top: var(--site-nav-clearance); }

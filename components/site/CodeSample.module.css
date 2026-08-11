@@ -67,7 +67,7 @@
 }
 .ideMetaShort { display: none; }
 
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .ideMetaLong  { display: none; }
   .ideMetaShort { display: inline; }
 }
@@ -77,7 +77,7 @@
   position: relative;
   display: flex;
   align-items: stretch;
-  padding: 16px 0;
+  padding: var(--site-code-pad-y) 0;
   min-width: 0;
 }
 
@@ -111,7 +111,7 @@
 }
 .ideGutter {
   flex: none;
-  padding: 0 14px 0 20px;
+  padding: 0 calc(var(--site-code-pad-x) * 0.7) 0 var(--site-code-pad-x);
   text-align: right;
   border-right: 1px solid var(--site-border-subtle);
   color: var(--site-ink-4);
@@ -126,7 +126,7 @@
 .ideCode {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 0 20px;
+  padding: 0 var(--site-code-pad-x);
   font-size: var(--site-fs-4);
   line-height: 1.7;
   color: var(--site-ink-2);

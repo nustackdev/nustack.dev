@@ -16,7 +16,7 @@
   display: grid;
   grid-template-columns: 2.4em 1fr;
   align-items: baseline;
-  padding: 5px 0;
+  padding: var(--site-list-item-pad-y) 0;
   font-family: var(--font-display);
   font-size: var(--site-fs-7);
   line-height: 1.45;

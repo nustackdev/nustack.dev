@@ -1,8 +1,8 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 1.1rem;
+  gap: var(--site-gap-tight);
+  padding: var(--site-link-card-pad-y) var(--site-link-card-pad-x);
   border: 1px solid var(--site-border);
   border-radius: var(--site-r-md);
   background: var(--site-surface-2);
@@ -22,7 +22,7 @@
 .head {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--site-gap-tight);
   font-weight: 600;
   color: var(--site-ink);
   min-width: 0;

@@ -42,7 +42,7 @@
  * on mobile+tablet where the hero collapses to a regular vertical layout. */
 .sloganInline {
   display: none;
-  margin: 0 0 var(--site-gap-loose);
+  margin: 0 0 var(--site-gap-normal);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--site-fs-13);
@@ -68,11 +68,33 @@
 
 /* -- Hero right column: layout wrappers (kit components handle type/mechanics) -- */
 
+/* Hero opts in to a slightly larger u-atom locally. Every derived slot
+ * inside (paddings, gaps, buttons, list items) inflates proportionally,
+ * so the hero feels grander without departing from the system. */
+.heroRow {
+  --site-u: clamp(12px, calc(0.8vw + 7px), 20px);
+}
+
 .heroRight {
   display: flex;
   flex-direction: column;
   gap: var(--site-gap-loose);
   min-width: 0;
+}
+
+/* Kicker "Built for" + numbered list are a single visual unit — tight rhythm. */
+.heroUseCases {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-gap-tight);
+  max-width: 36ch;
+}
+
+/* CTA rows inside a group hug each other; group as a whole sits on the parent's loose gap. */
+.heroCtaGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-gap-tight);
 }
 
 .heroTagline {
@@ -101,31 +123,14 @@
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.005em;
 }
-@media (max-width: 620px) {
+@media (max-width: 640px) {
   .heroTagline br { display: none; }
-}
-
-.useCasesKickerBox {
-  margin: 4px 0 0;
-  max-width: 36ch;
-}
-.useCasesListBox {
-  margin-top: calc(-1 * clamp(15px, 1.65vw, 21px));
-}
-
-.metaLineBox {
-  margin: 6px 0 0;
 }
 
 .heroCtaRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 4px;
-}
-/* Second CTA row hugs the first — fixed 6px visual gap regardless of parent gap. */
-.heroCtaRow + .heroCtaRow {
-  margin-top: calc(6px - var(--site-gap-loose));
+  gap: var(--site-btn-gap);
 }
 
 /* Interaction-model row: between ~700 and 1075 the SVG does not fit;
@@ -156,7 +161,7 @@
 .itemViz {
   min-width: 0;
 }
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .itemRow {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--site-gap-normal);
@@ -216,7 +221,7 @@
   gap: var(--site-gap-loose);
   min-width: 0;
 }
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .demoGrid {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--site-gap-loose);
@@ -236,7 +241,7 @@
   gap: var(--site-gap-normal);
   min-width: 0;
 }
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .learnGrid {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--site-gap-loose);
@@ -250,7 +255,7 @@
   gap: var(--site-gap-normal);
   min-width: 0;
 }
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .communityGrid {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--site-gap-loose);
@@ -265,20 +270,20 @@
 .underGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px 24px;
+  gap: var(--site-gap-loose) var(--site-gap-normal);
   min-width: 0;
 }
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .underGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-@media (max-width: 520px) {
+@media (max-width: 640px) {
   .underGrid { grid-template-columns: minmax(0, 1fr); }
 }
 
 .underItem {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--site-gap-tight);
   min-width: 0;
 }
 
@@ -303,7 +308,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 4px;
+  margin-top: var(--site-gap-tight);
   font-family: var(--font-mono);
   font-size: var(--site-fs-2);
   color: var(--site-ink-4);

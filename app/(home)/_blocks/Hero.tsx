@@ -56,33 +56,37 @@ export function Hero() {
               <em className={s.taglineAccent}>50&times; less code.</em>
             </p>
 
-            <MonoKicker as="p" size="xs" tracking="wider" className={s.useCasesKickerBox}>
-              Built for
-            </MonoKicker>
-            <NumberedList items={USE_CASES} className={s.useCasesListBox} />
-
-            <div className={s.heroCtaRow}>
-              <SiteButton variant="primaryPurple" href="/docs">
-                <BookOpen size={14} aria-hidden />
-                <span>Quickstart</span>
-              </SiteButton>
-              <SiteButton variant="primaryBlue" href="https://github.com/nustackdev/nu">
-                <GithubMark size={14} />
-                <SiteButtonRepoLabel>nustackdev/nu</SiteButtonRepoLabel>
-              </SiteButton>
-            </div>
-            <div className={s.heroCtaRow}>
-              <SiteButton href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Discord</span>
-              </SiteButton>
-              <SiteButton href="https://twitter.com/nustackdev">
-                <XMark size={13} />
-                <span>Follow</span>
-              </SiteButton>
+            <div className={s.heroUseCases}>
+              <MonoKicker as="p" size="xs" tracking="wider">
+                Built for
+              </MonoKicker>
+              <NumberedList items={USE_CASES} />
             </div>
 
-            <MonoKicker as="p" size="xs" tracking="wide" className={s.metaLineBox}>
+            <div className={s.heroCtaGroup}>
+              <div className={s.heroCtaRow}>
+                <SiteButton variant="primaryPurple" href="/docs">
+                  <BookOpen size={14} aria-hidden />
+                  <span>Quickstart</span>
+                </SiteButton>
+                <SiteButton variant="primaryBlue" href="https://github.com/nustackdev/nu">
+                  <GithubMark size={14} />
+                  <SiteButtonRepoLabel>nustackdev/nu</SiteButtonRepoLabel>
+                </SiteButton>
+              </div>
+              <div className={s.heroCtaRow}>
+                <SiteButton href="https://discord.gg/tCa8YE7XVr">
+                  <DiscordMark size={14} />
+                  <span>Discord</span>
+                </SiteButton>
+                <SiteButton href="https://twitter.com/nustackdev">
+                  <XMark size={13} />
+                  <span>Follow</span>
+                </SiteButton>
+              </div>
+            </div>
+
+            <MonoKicker as="p" size="xs" tracking="wide">
               <Meta items={[<>Apache&#8209;2.0</>, 'Python 3.10+']} />
             </MonoKicker>
           </div>

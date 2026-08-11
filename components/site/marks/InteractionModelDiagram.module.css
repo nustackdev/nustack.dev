@@ -138,7 +138,7 @@
 }
 .mLeaf .mBlurb { font-size: var(--site-fs-3); }
 
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .treeDesktop { display: none; }
   .treeMobile  { display: flex; }
 }

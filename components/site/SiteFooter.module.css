@@ -18,10 +18,10 @@
 }
 
 .inner {
-  max-width: var(--site-kal-max-width, 1360px);
+  max-width: var(--site-kal-max-width, 1200px);
   margin: 0 auto;
-  padding-inline: var(--site-space-4);
-  padding-block: 72px 28px;
+  padding-inline: var(--site-container-pad-x);
+  padding-block: var(--site-gap-xloose) var(--site-gap-loose);
 }
 
 /* --- Top region ---------------------------------------------------------- */
@@ -29,7 +29,7 @@
 .top {
   display: grid;
   grid-template-columns: minmax(240px, 1fr) minmax(0, 3.4fr);
-  gap: 56px;
+  gap: var(--site-gap-loose);
   align-items: start;
 }
 
@@ -38,7 +38,7 @@
 .brandCol {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--site-gap-normal);
   min-width: 0;
 }
 
@@ -63,10 +63,10 @@
 .learnList {
   list-style: none;
   padding: 0;
-  margin: 4px 0 0;
+  margin: var(--site-gap-tight) 0 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--site-gap-tight);
 }
 .learnLink {
   color: var(--site-ink-3);
@@ -111,15 +111,15 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-areas: "foundations fabrics infra apps";
-  gap: 32px;
+  gap: var(--site-gap-loose);
   min-width: 0;
 }
 
 .group { min-width: 0; }
 
 .groupHead {
-  margin-bottom: 18px;
-  padding-bottom: 12px;
+  margin-bottom: var(--site-gap-normal);
+  padding-bottom: var(--site-gap-tight);
   border-bottom: 1px solid var(--site-rule-2);
 }
 
@@ -143,7 +143,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--site-list-item-gap);
 }
 
 .item {
@@ -181,7 +181,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin-top: 14px;
+  margin-top: var(--site-gap-normal);
   font-size: var(--site-fs-4);
   font-weight: var(--site-fw-medium);
   color: var(--site-ink-2);
@@ -199,13 +199,13 @@
 /* --- Bottom strip -------------------------------------------------------- */
 
 .bottom {
-  margin-top: 56px;
-  padding-top: 20px;
+  margin-top: var(--site-gap-loose);
+  padding-top: var(--site-gap-normal);
   border-top: 1px solid var(--site-rule-2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px 24px;
+  gap: var(--site-gap-normal);
   flex-wrap: wrap;
   color: var(--site-ink-4);
   font-size: var(--site-fs-3);
@@ -217,22 +217,22 @@
 
 /* Tablet: brand stacks above sitemap; brand col becomes a horizontal band that
    uses the freed-up right side — mark+tagline left, Learn links inline right. */
+/* Tablet: brand stacks above sitemap. */
 @media (max-width: 1024px) {
   .top {
     grid-template-columns: 1fr;
-    gap: 44px;
   }
   .brandCol {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px 40px;
+    gap: var(--site-gap-normal) var(--site-gap-loose);
   }
   .brandBlock {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--site-gap-tight);
     min-width: 0;
   }
   .brandTagline { max-width: none; }
@@ -240,34 +240,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 0;
-    gap: 8px 20px;
+    gap: var(--site-gap-tight) var(--site-gap-normal);
     align-items: center;
   }
-  .sitemap { gap: 24px; }
 }
 
-/* Small: sitemap folds to 2×2. Descriptions still visible. */
-@media (max-width: 720px) {
-  .inner { padding-block: 48px 24px; }
-  .sitemap {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas:
-      "foundations fabrics"
-      "infra       apps";
-    gap: 32px 24px;
-  }
-  .groupHead { margin-bottom: 14px; padding-bottom: 10px; }
-  .items { gap: 12px; }
-  .bottom { margin-top: 40px; }
-}
-
-/* Match Chapters gutter at ≤640px. */
+/* Phone: sitemap folds to single column. Descriptions tighten. */
 @media (max-width: 640px) {
-  .inner { padding-inline: 10px; }
-}
-
-/* Mobile: single column. Titled rows survive, descriptions tighten. */
-@media (max-width: 420px) {
   .sitemap {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -275,9 +254,7 @@
       "fabrics"
       "infra"
       "apps";
-    gap: 28px;
   }
-  .items { gap: 10px; }
   .itemDesc {
     -webkit-line-clamp: 1;
     line-height: 1.35;

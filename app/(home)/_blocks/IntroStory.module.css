@@ -3,14 +3,14 @@
 .story {
   display: flex;
   flex-direction: column;
-  gap: 2.75rem;
+  gap: var(--site-gap-loose);
 }
 
 /* Every beat: two-column split — explanation left, demonstration right. */
 .beat {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 2.25rem;
+  gap: var(--site-gap-loose);
   align-items: start;
 }
 
@@ -18,12 +18,12 @@
 .beatRight {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: var(--site-gap-normal);
   min-width: 0;
 }
 
-@media (max-width: 720px) {
-  .beat { grid-template-columns: 1fr; gap: 1.5rem; }
+@media (max-width: 640px) {
+  .beat { grid-template-columns: 1fr; gap: var(--site-gap-normal); }
 }
 
 /* Inline <code> — scoped to story so we don't touch globals. */
@@ -51,8 +51,8 @@
   letter-spacing: -0.005em;
   color: #fff;
   border-left: 2px solid var(--pq-hue, var(--site-hue-teal));
-  padding: 0.1rem 0 0.1rem 1.15rem;
-  margin: 0.25rem 0;
+  padding: calc(var(--site-u) * 0.15) 0 calc(var(--site-u) * 0.15) var(--site-link-card-pad-x);
+  margin: 0;
   max-width: 72ch;
 }
 
@@ -71,15 +71,15 @@
 /* Vocabulary card (Beat 2 right) — Ref / Interaction / Fabric definitions. */
 .vocab {
   display: grid;
-  gap: 0.9rem;
+  gap: var(--site-gap-normal);
   margin: 0;
-  padding: 1rem 1.15rem;
+  padding: var(--site-link-card-pad-y) var(--site-link-card-pad-x);
   border: 1px solid var(--site-border, rgba(255, 255, 255, 0.12));
-  border-radius: 4px;
+  border-radius: var(--site-r-sm);
   background: rgba(255, 255, 255, 0.02);
 }
 
-.vocabItem { display: grid; gap: 0.2rem; }
+.vocabItem { display: grid; gap: calc(var(--site-u) * 0.2); }
 
 .vocabItem dt {
   font-family: var(--font-mono, ui-monospace, monospace);
@@ -100,7 +100,7 @@
 /* Fabric list (Beat 5 right) — compact <code> / description rows. */
 .fabricList {
   display: grid;
-  gap: 0.5rem;
+  gap: var(--site-gap-tight);
   margin: 0;
   padding: 0;
 }
@@ -108,9 +108,9 @@
 .fabricRow {
   display: grid;
   grid-template-columns: minmax(6.5rem, auto) 1fr;
-  gap: 0.9rem;
+  gap: var(--site-gap-normal);
   align-items: baseline;
-  padding: 0.3rem 0;
+  padding: var(--site-list-item-pad-y) 0;
   border-bottom: 1px dashed var(--site-border, rgba(255, 255, 255, 0.08));
 }
 
@@ -141,7 +141,7 @@
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 0.7rem;
+  gap: var(--site-list-item-gap);
 }
 
 .consequences li {
@@ -168,6 +168,6 @@
 .closerCardTitle {
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
+  gap: var(--site-gap-tight);
   flex-wrap: wrap;
 }

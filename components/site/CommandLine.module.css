@@ -25,7 +25,7 @@
 
 .body {
   position: relative;
-  padding: 12px 60px 12px 20px; /* right pad reserves room for copy button */
+  padding: var(--site-code-pad-y) calc(var(--site-code-pad-x) * 3) var(--site-code-pad-y) var(--site-code-pad-x);
   min-width: 0;
 }
 
@@ -71,8 +71,8 @@
 /* Copy button — floats top-right, matches .ideCopy exactly. */
 .copy {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 12px;
   z-index: 1;
   display: inline-flex;
   align-items: center;

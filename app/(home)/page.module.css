@@ -6,13 +6,17 @@
 
 .landingRoot {}
 
+/* Hero row. Two-column at >1024 (left = stacked slogan, right = tagline stack);
+ * single-column at ≤1024 (left cell hidden, inline slogan takes over).
+ * Locally overrides --site-u so every derived pad/gap/button inflates
+ * proportionally — the hero feels grander without leaving the system. */
 .heroRow {
   position: relative;
+  margin-bottom: var(--site-gap-xloose);
+  --site-u: clamp(12px, calc(0.8vw + 7px), 20px);
 }
 
-/* -- Typography ----------------------------------------------------------- */
-
-/* -- Hero left column: word-per-line slogan --------------------------------- */
+/* -- Slogan — stacked (>1024) and inline (≤1024) ------------------------- */
 
 .sloganStack {
   margin: 0;
@@ -27,7 +31,7 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--site-fs-display);
-  line-height: 0.92;
+  line-height: 0.95;
   letter-spacing: -0.045em;
   color: #fff;
 }
@@ -38,11 +42,12 @@
   flex: 0 0 auto;
 }
 
-/* Inline single-line slogan — hidden on desktop, replaces stacked slogan
- * on mobile+tablet where the hero collapses to a regular vertical layout. */
+/* Inline single-line slogan for ≤1024. Hidden by default; the 1024 media
+ * query above flips it on. First child of .heroRight, so parent flex gap
+ * handles its bottom spacing — no margin needed. */
 .sloganInline {
   display: none;
-  margin: 0 0 var(--site-gap-normal);
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--site-fs-13);
@@ -50,30 +55,22 @@
   letter-spacing: -0.03em;
   color: #fff;
 }
-.sloganLogo { display: none; }
-@media (max-width: 640px) {
-  .sloganLogo   {
-    display: inline-block;
-    vertical-align: -0.12em;
-    margin-right: 0.24em;
-  }
+.sloganLogo {
+  display: inline-block;
+  vertical-align: -0.12em;
+  margin-right: 0.24em;
+  flex: 0 0 auto;
 }
 
-/* -- ≤1024: collapse hero to single-column layout ------------------------ */
+/* Collapse hero to single-column at tablet+phone: hide the left cell,
+ * flip the inline slogan on. Sits after the base rules so it wins. */
 @media (max-width: 1024px) {
-  .heroRow            { grid-template-columns: minmax(0, 1fr); }
+  .heroRow { grid-template-columns: minmax(0, 1fr); }
   .heroRow .heroLeftCell { display: none; }
-  .sloganInline       { display: block; }
+  .sloganInline { display: block; }
 }
 
-/* -- Hero right column: layout wrappers (kit components handle type/mechanics) -- */
-
-/* Hero opts in to a slightly larger u-atom locally. Every derived slot
- * inside (paddings, gaps, buttons, list items) inflates proportionally,
- * so the hero feels grander without departing from the system. */
-.heroRow {
-  --site-u: clamp(12px, calc(0.8vw + 7px), 20px);
-}
+/* -- Hero right column ---------------------------------------------------- */
 
 .heroRight {
   display: flex;

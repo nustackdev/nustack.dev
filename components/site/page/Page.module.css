@@ -1,5 +1,26 @@
-/* Page — content container inside PageShell. Adds top clearance so page
- * content sits below the fixed FloatingNav (nav top ≈ 16-28px + 35px tall). */
+/* =============================================================================
+ * Page — the site's outer page wrapper.
+ * Layered composition: gradient (z=0), decorations slot (z=1),
+ * dot pattern (z=2), content Container (z=3).
+ * Dark-only. Owns pageRoot tokens + nav clearance.
+ * ==========================================================================*/
+
 .root {
-  padding-top: var(--site-space-8);
+  composes: tokens from '@/components/site/tokens.module.css';
+  position: relative;
+  isolation: isolate;
+  background: var(--site-bg);
+  color: rgba(255, 255, 255, 0.92);
+  overflow-x: clip;
+  color-scheme: dark;
 }
+
+/* Stacking: gradient (0) < decorations (1) < dots (2) < content (3). */
+.gradientLayer     { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.decorationsLayer  { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.dotLayer          { z-index: 2; }
+.contentLayer      { position: relative; z-index: 3; }
+.footerLayer       { position: relative; z-index: 3; }
+
+/* Top clearance so page content (Header/Hero) sits below the fixed FloatingNav. */
+.content { padding-top: var(--site-space-8); }

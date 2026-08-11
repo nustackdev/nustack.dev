@@ -17,13 +17,13 @@
 .floatingNav {
   composes: tokens from '@/components/site/tokens.module.css';
   position: fixed;
-  top: clamp(16px, 2.2vh, 28px);
+  top: var(--site-gap-normal);
   left: 0;
   right: 0;
   z-index: 40;
   display: flex;
   justify-content: center;
-  padding: 0 var(--site-pad-x, clamp(24px, 4vw, 56px));
+  padding: 0 var(--site-container-pad-x);
   pointer-events: none;
   isolation: isolate;
 }
@@ -118,8 +118,11 @@
    full-width so its child centers via flex (a transform would create a
    containing block and break the child's backdrop-filter). */
 .panelWrap {
+  /* Portaled to <body>, so it needs its own token scope — the nav's
+   * .floatingNav is not an ancestor at runtime, and vars wouldn't inherit. */
+  composes: tokens from '@/components/site/tokens.module.css';
   position: fixed;
-  top: calc(clamp(16px, 2.2vh, 28px) + 59px);
+  top: calc(var(--site-gap-normal) + var(--site-nav-h) + var(--site-gap-tight));
   left: 0;
   right: 0;
   display: flex;
@@ -168,11 +171,11 @@
   /* Close button is position: absolute and only occupies the right edge, so
      content flows near the top with just safe-area breathing room. */
   padding:
-    max(24px, calc(env(safe-area-inset-top) + 8px))
-    max(24px, env(safe-area-inset-right))
-    max(32px, calc(env(safe-area-inset-bottom) + 16px))
-    max(24px, env(safe-area-inset-left));
-  gap: 6px;
+    max(var(--site-gap-normal), calc(env(safe-area-inset-top) + var(--site-gap-tight)))
+    max(var(--site-gap-normal), env(safe-area-inset-right))
+    max(var(--site-gap-loose), calc(env(safe-area-inset-bottom) + var(--site-gap-normal)))
+    max(var(--site-gap-normal), env(safe-area-inset-left));
+  gap: var(--site-gap-tight);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   animation: sheetIn .18s ease-out;
@@ -250,8 +253,8 @@
 .sheetAccordionBody {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 4px 0 16px 12px;
+  gap: var(--site-gap-tight);
+  padding: var(--site-gap-tight) 0 var(--site-gap-normal) var(--site-gap-tight);
 }
 .sheetSubGroup {
   display: flex;
@@ -290,6 +293,6 @@
 
 .sheetIconRow {
   display: flex;
-  gap: 8px;
-  padding: 20px 4px 0;
+  gap: var(--site-btn-gap);
+  padding: var(--site-gap-normal) var(--site-gap-tight) 0;
 }

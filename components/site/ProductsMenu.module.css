@@ -12,8 +12,8 @@
   composes: tokens from '@/components/site/tokens.module.css';
   min-width: 880px;
   max-width: min(1080px, 96vw);
-  padding: 18px 28px;
-  border-radius: 18px;
+  padding: var(--site-link-card-pad-y) var(--site-link-card-pad-x);
+  border-radius: var(--site-r-lg);
   border: 1px solid var(--site-border);
   background: color-mix(in oklab, var(--site-bg-overlay) 72%, transparent);
   -webkit-backdrop-filter: blur(30px);
@@ -30,8 +30,8 @@
 .row {
   display: flex;
   align-items: flex-start;
-  gap: 28px;
-  padding: 18px 0;
+  gap: var(--site-gap-loose);
+  padding: var(--site-link-card-pad-y) 0;
   border-top: 1px solid var(--site-rule-2);
 }
 .row[data-first='true'] { border-top: 0; }
@@ -40,8 +40,8 @@
   flex: 0 0 200px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-top: 8px;
+  gap: var(--site-gap-tight);
+  padding-top: var(--site-gap-tight);
 }
 .groupName {
   font-family: var(--font-display);
@@ -62,7 +62,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin-top: 8px;
+  margin-top: var(--site-gap-tight);
   font-family: var(--font-display);
   font-size: var(--site-fs-4);
   font-weight: 500;
@@ -83,7 +83,7 @@
   min-width: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 8px;
+  column-gap: var(--site-gap-tight);
   row-gap: 4px;
 }
 
@@ -91,8 +91,8 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 8px;
-  border-radius: 10px;
+  padding: var(--site-gap-tight);
+  border-radius: var(--site-r-md);
   text-decoration: none;
   color: var(--site-ink);
   transition: background 180ms ease-out;

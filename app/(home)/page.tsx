@@ -1,4 +1,4 @@
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Star } from 'lucide-react';
 import { NuLogo } from '@/components/site/marks/NuLogo';
 import { Cell } from '@/components/site/grid/Cell';
 import { CellContent } from '@/components/site/grid/CellContent';
@@ -9,7 +9,7 @@ import { VizFrame } from '@/components/site/VizFrame';
 import { MonoKicker } from '@/components/site/MonoKicker';
 import { Meta } from '@/components/site/Meta';
 import { NumberedList } from '@/components/site/NumberedList';
-import { Heading, Tagline, Description, Label } from '@/components/site/text';
+import { Tagline, Description, Label } from '@/components/site/text';
 import { CommandLine } from '@/components/site/CommandLine';
 import { LinkCard } from '@/components/site/LinkCard';
 import { Stack } from '@/components/site/layout/Stack';
@@ -18,11 +18,7 @@ import {
   MemGlyph,
   VirtualsGlyph,
   UiGlyph,
-  InvisiblesGlyph,
-  RayGlyph,
 } from '@/components/site/marks/FabricGlyphs';
-import { NulogMockSvg } from '@/components/site/marks/NulogMock';
-import { NuspaceMockSvg } from '@/components/site/marks/NuspaceMock';
 import { GithubMark } from '@/components/site/marks/GithubMark';
 import { DiscordMark } from '@/components/site/marks/DiscordMark';
 import { XMark } from '@/components/site/marks/XMark';
@@ -33,7 +29,6 @@ import {
   PageBody,
   Chapter,
   Section,
-  SectionCell,
   SectionHead,
 } from '@/components/site/page';
 import { IntroStory } from './_blocks/IntroStory';
@@ -236,7 +231,7 @@ export default function Home() {
         <Section hue="sage">
           <div className={s.itemRow}>
             <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="sage">nu.virtuals</SilverWovenName>
+              <SilverWovenName as="h3" hue="sage">nu.kv</SilverWovenName>
               <Tagline>Persistent state fabric.</Tagline>
               <Description>
                 Refs over a KV backend (RocksDB, LMDB). Transactions,
@@ -244,7 +239,7 @@ export default function Home() {
               </Description>
               <Label>Backends: rocksdb, lmdb</Label>
               <CtaRow>
-                <SiteButton href="/docs/reference/fabrics/virtuals" variant="hueTinted">
+                <SiteButton href="/docs/reference/fabrics/kv" variant="hueTinted">
                   <BookOpen size={14} aria-hidden />
                   <span>Read the docs</span>
                 </SiteButton>
@@ -279,203 +274,101 @@ export default function Home() {
           </div>
         </Section>
 
-        <Section hue="plum">
-          <div className={s.itemRow}>
-            <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="plum">nu.invisibles</SilverWovenName>
-              <Tagline>Network fabric.</Tagline>
-              <Description>
-                A Nu fabric that puts other fabrics on the network. Bind a
-                fabric in one process, use it from another; same Refs, same
-                interactions, over TCP or Unix socket.
-              </Description>
-              <CtaRow>
-                <SiteButton href="/docs/reference/fabrics/invisibles" variant="hueTinted">
-                  <BookOpen size={14} aria-hidden />
-                  <span>Read the docs</span>
-                </SiteButton>
-              </CtaRow>
-            </div>
-            <div className={s.itemViz}>
-              <VizFrame><InvisiblesGlyph /></VizFrame>
-            </div>
-          </div>
-        </Section>
-
-        <Section hue="amber">
-          <div className={s.itemRow}>
-            <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="amber">nu.ray</SilverWovenName>
-              <Tagline>Cluster compute fabric.</Tagline>
-              <Description>
-                A Nu fabric for cluster compute. Teleport a Nu tree to any
-                worker in your Ray cluster; it runs there and returns the
-                result.
-              </Description>
-              <CtaRow>
-                <SiteButton href="/docs/reference/fabrics/ray" variant="hueTinted">
-                  <BookOpen size={14} aria-hidden />
-                  <span>Read the docs</span>
-                </SiteButton>
-              </CtaRow>
-            </div>
-            <div className={s.itemViz}>
-              <VizFrame><RayGlyph /></VizFrame>
-            </div>
-          </div>
+        <Section>
+          <CtaRow>
+            <SiteButton href="/fabrics" variant="primaryPurple">
+              <span>Explore all fabrics</span>
+            </SiteButton>
+          </CtaRow>
         </Section>
         </Chapter>
 
-        {/* 6. Apps */}
+        {/* 6. Under the hood — the standalone Python libs Nu is built on. */}
         <Chapter>
         <SectionHead
-          title="Standalone apps built on Nu."
-          lede="Applications built on Nu today."
+          title="Under the hood."
+          lede={<>Standalone Python libraries Nu is built on. Each is useful on its own.</>}
         />
-
-        <Section hue="amber">
-          <div className={s.itemRow}>
-            <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="amber">nulog</SilverWovenName>
-              <Tagline>
-                Pure-Python, serverless logger and metrics store. Billions of
-                entries, live UI.
-              </Tagline>
-              <Description>
-                Log messages and observe metrics from any Python code. Entries
-                persist to an embedded KV store and scale to billions,
-                in-process. One line boots a live viewer.
-              </Description>
-              <CtaRow>
-                <SiteButton variant="repo" href="https://github.com/nustackdev/nulog">
-                  <GithubMark size={14} />
-                  <SiteButtonRepoLabel>nustackdev/nulog</SiteButtonRepoLabel>
-                </SiteButton>
-              </CtaRow>
-            </div>
-            <div className={s.itemViz}>
-              <VizFrame><NulogMockSvg /></VizFrame>
-            </div>
-          </div>
-        </Section>
-
-        <Section hue="plum">
-          <div className={s.itemRow}>
-            <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="plum">nuspace</SilverWovenName>
-              <Tagline>
-                A programmable knowledge base.
-              </Tagline>
-              <Description>
-                A knowledge base whose pages hold both writing, data and code
-                as first-class citizens. Blocks store markdown, live metrics,
-                saved searches, or automation rules, all in the same tree,
-                all inspectable and composable.
-              </Description>
-              <Label>Status: Coming soon.</Label>
-            </div>
-            <div className={s.itemViz}>
-              <VizFrame><NuspaceMockSvg /></VizFrame>
-            </div>
+        <Section>
+          <div className={s.underGrid}>
+            {[
+              {
+                name: 'virtuals',
+                tagline: 'Virtual Python collections over any KV storage.',
+                repo: 'nustackdev/virtuals',
+              },
+              {
+                name: 'invisibles',
+                tagline: 'Transparent remote objects for Python.',
+                repo: 'nustackdev/invisibles',
+              },
+              {
+                name: 'rdbpy',
+                tagline: 'RocksDB for Python, with transactions.',
+                repo: 'nustackdev/rdbpy',
+              },
+              {
+                name: 'kh57',
+                tagline: 'Deterministic range reservoir sampling.',
+                repo: 'nustackdev/kh57',
+              },
+            ].map((lib) => (
+              <div key={lib.name} className={s.underItem}>
+                <h3 className={s.underName}>{lib.name}</h3>
+                <p className={s.underTagline}>{lib.tagline}</p>
+                <a
+                  href={`https://github.com/${lib.repo}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={s.underRepo}
+                >
+                  <GithubMark size={12} />
+                  <span>{lib.repo}</span>
+                </a>
+              </div>
+            ))}
           </div>
         </Section>
         </Chapter>
 
-        {/* 7. Infra */}
+        {/* 7. Like what you see — closing CTA to turn readers into followers. */}
         <Chapter>
         <SectionHead
-          title="Infra. The tools that power Nu fabrics."
+          title="Like what you see?"
           lede={
             <>
-              Standalone Python libraries the fabrics build on. Each is
-              useful on its own; together they form the substrate under Nu.
+              The project is young. Star it, join the room, watch what we
+              ship next.
             </>
           }
         />
-
-        <Section split="1/1">
-          <SectionCell>
-            <Stack gap="normal" pushLast>
-              <Stack gap="tight">
-                <Heading level={2}>virtuals</Heading>
-                <Tagline>
-                  Virtual Python collections over any KV storage.
-                </Tagline>
-              </Stack>
-              <Description>
-                Native-shaped Python collections that are thin views over an
-                ordered KV store. Same API as a built-in dict or list, but
-                the bytes stay on disk and stream in on access.
-              </Description>
-              <CtaRow>
-                <SiteButton href="https://github.com/nustackdev/virtuals">
-                  <GithubMark size={14} />
-                  <SiteButtonRepoLabel>nustackdev/virtuals</SiteButtonRepoLabel>
-                </SiteButton>
-              </CtaRow>
-            </Stack>
-          </SectionCell>
-          <SectionCell>
-            <Stack gap="normal" pushLast>
-              <Stack gap="tight">
-                <Heading level={2}>invisibles</Heading>
-                <Tagline>Transparent remote objects for Python.</Tagline>
-              </Stack>
-              <Description>
-                Move an object to another process or node; the calling code
-                doesn&apos;t change. Sync stays sync, async stays async.
-              </Description>
-              <CtaRow>
-                <SiteButton href="https://github.com/nustackdev/invisibles">
-                  <GithubMark size={14} />
-                  <SiteButtonRepoLabel>nustackdev/invisibles</SiteButtonRepoLabel>
-                </SiteButton>
-              </CtaRow>
-            </Stack>
-          </SectionCell>
-        </Section>
-
-        <Section split="1/1">
-          <SectionCell>
-            <Stack gap="normal" pushLast>
-              <Stack gap="tight">
-                <Heading level={2}>rdbpy</Heading>
-                <Tagline>RocksDB for Python, with transactions.</Tagline>
-              </Stack>
-              <Description>
-                RocksDB and its compression libs bundled into the wheel for
-                Linux and macOS. No system install. Open a DB and
-                put/get/iterate.
-              </Description>
-              <CtaRow>
-                <SiteButton href="https://github.com/nustackdev/rdbpy">
-                  <GithubMark size={14} />
-                  <SiteButtonRepoLabel>nustackdev/rdbpy</SiteButtonRepoLabel>
-                </SiteButton>
-              </CtaRow>
-            </Stack>
-          </SectionCell>
-          <SectionCell>
-            <Stack gap="normal" pushLast>
-              <Stack gap="tight">
-                <Heading level={2}>kh57</Heading>
-                <Tagline>Deterministic range reservoir sampling.</Tagline>
-              </Stack>
-              <Description>
-                Draw <code>n</code> uniform samples from a sub-range of a
-                massive (billions) sorted KV dataset without scanning it. Any
-                sorted KV store works as a backend.
-              </Description>
-              <CtaRow>
-                <SiteButton href="https://github.com/nustackdev/kh57">
-                  <GithubMark size={14} />
-                  <SiteButtonRepoLabel>nustackdev/kh57</SiteButtonRepoLabel>
-                </SiteButton>
-              </CtaRow>
-            </Stack>
-          </SectionCell>
+        <Section>
+          <div className={s.communityGrid}>
+            <LinkCard
+              href="https://github.com/nustackdev/nu"
+              icon={<Star size={14} />}
+              title="Star on GitHub"
+            >
+              nustackdev/nu
+            </LinkCard>
+            <LinkCard
+              href="https://discord.gg/tCa8YE7XVr"
+              icon={<DiscordMark size={14} />}
+              title="Join Discord"
+            >
+              Talk to the team, share what you build.
+            </LinkCard>
+            <LinkCard
+              href="https://twitter.com/nustackdev"
+              icon={<XMark size={13} />}
+              title="Follow updates"
+            >
+              Ship notes and small demos on X.
+            </LinkCard>
+          </div>
         </Section>
         </Chapter>
+
       </PageBody>
       </Page>
     </PageShell>

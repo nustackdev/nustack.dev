@@ -177,6 +177,25 @@
   overflow: hidden;
 }
 
+.explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  font-size: var(--site-fs-4);
+  font-weight: var(--site-fw-medium);
+  color: var(--site-ink-2);
+  text-decoration: none;
+  transition: color .18s ease, gap .18s ease;
+  width: fit-content;
+}
+.explore:hover,
+.explore:focus-visible {
+  color: var(--site-ink);
+  gap: 6px;
+  outline: none;
+}
+
 /* --- Bottom strip -------------------------------------------------------- */
 
 .bottom {

@@ -11,7 +11,7 @@
   isolation: isolate;
   background: var(--site-bg);
   color: rgba(255, 255, 255, 0.92);
-  overflow-x: hidden;
+  overflow-x: clip;
   color-scheme: dark;
 }
 

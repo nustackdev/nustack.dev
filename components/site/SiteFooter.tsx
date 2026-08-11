@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { NuLogo } from '@/components/site/marks/NuLogo';
 import { NustackMark } from '@/components/site/marks/NustackMark';
 import { SocialLinks } from './SocialLinks';
@@ -72,6 +73,12 @@ export function SiteFooter() {
                     </li>
                   ))}
                 </ul>
+                {group.explore ? (
+                  <Link href={group.explore.href} className={s.explore}>
+                    <span>{group.explore.label}</span>
+                    <ArrowRight size={12} aria-hidden />
+                  </Link>
+                ) : null}
               </div>
             ))}
           </div>

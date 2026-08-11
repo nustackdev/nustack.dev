@@ -10,6 +10,7 @@
  */
 
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { PRODUCT_GROUPS } from './nav.data';
 import s from './ProductsMenu.module.css';
 
@@ -25,6 +26,12 @@ export function ProductsMenu() {
           <div className={s.left}>
             <div className={s.groupName}>{group.header}</div>
             <div className={s.groupTagline}>{group.tagline}</div>
+            {group.explore ? (
+              <Link href={group.explore.href} className={s.explore} role="menuitem">
+                <span>{group.explore.label}</span>
+                <ArrowRight size={12} aria-hidden />
+              </Link>
+            ) : null}
           </div>
           <div className={s.right}>
             {group.items.map((item) => (

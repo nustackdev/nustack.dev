@@ -64,14 +64,12 @@
 .primaryPurple {
   composes: btn;
   background: color-mix(in oklab, var(--site-accent) 85%, black 15%);
-  border-color: color-mix(in oklab, var(--site-accent) 40%, black 60%);
+  border: 1px solid #6b48b8;
   color: white;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset,
-              0 6px 18px -8px var(--site-accent-glow);
 }
 .primaryPurple:hover {
   background: color-mix(in oklab, var(--site-accent) 92%, black 8%);
-  border-color: color-mix(in oklab, var(--site-accent) 35%, black 65%);
+  border-color: #6b48b8;
 }
 .primaryPurple > svg,
 .primaryPurple .arrow {
@@ -81,14 +79,12 @@
 .primaryBlue {
   composes: btn;
   background: color-mix(in oklab, var(--site-accent-2) 85%, black 15%);
-  border-color: color-mix(in oklab, var(--site-accent-2) 40%, black 60%);
+  border: 1px solid #3f68c8;
   color: white;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset,
-              0 6px 18px -8px var(--site-accent-2-glow);
 }
 .primaryBlue:hover {
   background: color-mix(in oklab, var(--site-accent-2) 92%, black 8%);
-  border-color: color-mix(in oklab, var(--site-accent-2) 35%, black 65%);
+  border-color: #3f68c8;
 }
 .primaryBlue > svg,
 .primaryBlue .arrow {

@@ -4,7 +4,13 @@
  */
 
 export type ProductItem = { name: string; href: string; desc: string };
-export type ProductGroup = { header: string; tagline: string; items: ProductItem[] };
+export type ProductGroup = {
+  header: string;
+  tagline: string;
+  items: ProductItem[];
+  /** Optional trailing text link (e.g. "Explore →") pointing to a catalogue. */
+  explore?: { label: string; href: string };
+};
 
 export const PRODUCT_GROUPS: ProductGroup[] = [
   {
@@ -17,14 +23,13 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
   {
     header: 'Fabrics',
-    tagline: 'The five surfaces of nu.',
+    tagline: 'The interaction surfaces of nu.',
     items: [
-      { name: 'nu.mem', href: '/products/fabrics/mem', desc: 'Shape-tree memory.' },
-      { name: 'nu.kv', href: '/products/fabrics/kv', desc: 'Virtual collections.' },
-      { name: 'nu.ui', href: '/products/fabrics/ui', desc: 'Reactive UI over refs.' },
-      { name: 'nu.invisibles', href: '/products/fabrics/invisibles', desc: 'Transparent remote objects.' },
-      { name: 'nu.ray', href: '/products/fabrics/ray', desc: 'Distributed compute fabric.' },
+      { name: 'nu.mem', href: '/fabrics/mem', desc: 'In-memory state.' },
+      { name: 'nu.kv', href: '/fabrics/kv', desc: 'Persistent state.' },
+      { name: 'nu.ui', href: '/fabrics/ui', desc: 'Reactive web UI.' },
     ],
+    explore: { label: 'Explore all', href: '/fabrics' },
   },
   {
     header: 'Infra',

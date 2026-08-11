@@ -58,6 +58,26 @@
   line-height: 1.35;
 }
 
+.explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: var(--site-fs-4);
+  font-weight: 500;
+  color: var(--site-ink-2);
+  text-decoration: none;
+  transition: color 180ms ease-out, gap 180ms ease-out;
+  width: fit-content;
+}
+.explore:hover,
+.explore:focus-visible {
+  color: var(--site-ink);
+  gap: 6px;
+  outline: none;
+}
+
 .right {
   flex: 1 1 auto;
   min-width: 0;

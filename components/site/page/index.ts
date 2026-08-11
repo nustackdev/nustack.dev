@@ -14,3 +14,5 @@ export { SectionCell } from './SectionCell';
 export type { SectionCellProps } from './SectionCell';
 export { SectionHead } from './SectionHead';
 export type { SectionHeadProps } from './SectionHead';
+export { SamplePage } from './SamplePage';
+export type { SamplePageProps } from './SamplePage';

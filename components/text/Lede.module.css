@@ -1,0 +1,12 @@
+/* Lede — oversized intro paragraph. Zero margin. */
+.lede {
+  font-size: var(--site-fs-lede);
+  line-height: 1.55;
+  color: var(--site-ink);
+  margin: 0;
+  max-width: 78ch;
+}
+.lede strong {
+  color: var(--site-ink);
+  font-weight: 600;
+}

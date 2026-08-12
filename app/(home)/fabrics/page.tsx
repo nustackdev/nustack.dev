@@ -1,4 +1,4 @@
-import { Page, Header, Body } from '@/components/site/page';
+import { Page, Header, Body } from '@/components/page';
 import { FabricsCatalogue } from './FabricsCatalogue';
 
 export default function FabricsPage() {

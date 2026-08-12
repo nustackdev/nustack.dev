@@ -1,15 +1,15 @@
 import { BookOpen } from 'lucide-react';
-import { NuLogo } from '@/components/site/marks/NuLogo';
-import { GithubMark } from '@/components/site/marks/GithubMark';
-import { DiscordMark } from '@/components/site/marks/DiscordMark';
-import { XMark } from '@/components/site/marks/XMark';
-import { Cell } from '@/components/site/grid/Cell';
-import { CellContent } from '@/components/site/grid/CellContent';
-import { Row } from '@/components/site/grid/Row';
-import { SiteButton, SiteButtonRepoLabel } from '@/components/site/SiteButton';
-import { MonoKicker } from '@/components/site/MonoKicker';
-import { Meta } from '@/components/site/Meta';
-import { NumberedList } from '@/components/site/NumberedList';
+import { NuLogo } from '@/components/marks/NuLogo';
+import { GithubMark } from '@/components/marks/GithubMark';
+import { DiscordMark } from '@/components/marks/DiscordMark';
+import { XMark } from '@/components/marks/XMark';
+import { Cell } from '@/components/grid/Cell';
+import { CellContent } from '@/components/grid/CellContent';
+import { Row } from '@/components/grid/Row';
+import { Button, ButtonRepoLabel } from '@/components/controls/Button';
+import { MonoKicker } from '@/components/meta/MonoKicker';
+import { Meta } from '@/components/meta/Meta';
+import { NumberedList } from '@/components/controls/NumberedList';
 import s from '../page.module.css';
 
 const USE_CASES = [
@@ -65,24 +65,24 @@ export function Hero() {
 
             <div className={s.heroCtaGroup}>
               <div className={s.heroCtaRow}>
-                <SiteButton variant="primaryPurple" href="/docs">
+                <Button variant="primaryPurple" href="/docs">
                   <BookOpen size={14} aria-hidden />
                   <span>Quickstart</span>
-                </SiteButton>
-                <SiteButton variant="primaryBlue" href="https://github.com/nustackdev/nu">
+                </Button>
+                <Button variant="primaryBlue" href="https://github.com/nustackdev/nu">
                   <GithubMark size={14} />
-                  <SiteButtonRepoLabel>nustackdev/nu</SiteButtonRepoLabel>
-                </SiteButton>
+                  <ButtonRepoLabel>nustackdev/nu</ButtonRepoLabel>
+                </Button>
               </div>
               <div className={s.heroCtaRow}>
-                <SiteButton href="https://discord.gg/tCa8YE7XVr">
+                <Button href="https://discord.gg/tCa8YE7XVr">
                   <DiscordMark size={14} />
                   <span>Discord</span>
-                </SiteButton>
-                <SiteButton href="https://twitter.com/nustackdev">
+                </Button>
+                <Button href="https://twitter.com/nustackdev">
                   <XMark size={13} />
                   <span>Follow</span>
-                </SiteButton>
+                </Button>
               </div>
             </div>
 

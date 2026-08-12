@@ -1,30 +1,30 @@
 import { BookOpen, Star } from 'lucide-react';
-import { SilverWovenName } from '@/components/site/SilverWovenName';
-import { VizFrame } from '@/components/site/VizFrame';
-import { MonoKicker } from '@/components/site/MonoKicker';
-import { NumberedList } from '@/components/site/NumberedList';
-import { Tagline, Description, Label } from '@/components/site/text';
-import { CommandLine } from '@/components/site/CommandLine';
-import { LinkCard } from '@/components/site/LinkCard';
-import { Stack } from '@/components/site/layout/Stack';
-import { CtaRow } from '@/components/site/layout/CtaRow';
-import { SiteButton } from '@/components/site/SiteButton';
+import { SilverWovenName } from '@/components/meta/SilverWovenName';
+import { VizFrame } from '@/components/media/VizFrame';
+import { MonoKicker } from '@/components/meta/MonoKicker';
+import { NumberedList } from '@/components/controls/NumberedList';
+import { Tagline, Description, Label } from '@/components/text';
+import { CommandLine } from '@/components/media/CommandLine';
+import { LinkCard } from '@/components/controls/LinkCard';
+import { Stack } from '@/components/layout/Stack';
+import { CtaRow } from '@/components/layout/CtaRow';
+import { Button } from '@/components/controls/Button';
 import {
   MemGlyph,
   KvGlyph,
   UiGlyph,
-} from '@/components/site/marks/FabricGlyphs';
-import { GithubMark } from '@/components/site/marks/GithubMark';
-import { DiscordMark } from '@/components/site/marks/DiscordMark';
-import { XMark } from '@/components/site/marks/XMark';
+} from '@/components/marks/FabricGlyphs';
+import { GithubMark } from '@/components/marks/GithubMark';
+import { DiscordMark } from '@/components/marks/DiscordMark';
+import { XMark } from '@/components/marks/XMark';
 import {
   Page,
   Body,
   Chapter,
   Section,
   SectionHead,
-} from '@/components/site/page';
-import { HERO_BLOBS } from '@/components/site/bg/GradientBlobs';
+} from '@/components/page';
+import { HERO_BLOBS } from '@/components/bg/GradientBlobs';
 import { Hero } from './_blocks/Hero';
 import { IntroStory } from './_blocks/IntroStory';
 import s from './page.module.css';
@@ -138,10 +138,10 @@ export default function Home() {
                 and in-process coordination.
               </Description>
               <CtaRow>
-                <SiteButton href="/docs/reference/fabrics/mem" variant="hueTinted">
+                <Button href="/docs/reference/fabrics/mem" variant="hueTinted">
                   <BookOpen size={14} aria-hidden />
                   <span>Read the docs</span>
-                </SiteButton>
+                </Button>
               </CtaRow>
             </div>
             <div className={s.itemViz}>
@@ -161,10 +161,10 @@ export default function Home() {
               </Description>
               <Label>Backends: rocksdb, lmdb</Label>
               <CtaRow>
-                <SiteButton href="/docs/reference/fabrics/kv" variant="hueTinted">
+                <Button href="/docs/reference/fabrics/kv" variant="hueTinted">
                   <BookOpen size={14} aria-hidden />
                   <span>Read the docs</span>
-                </SiteButton>
+                </Button>
               </CtaRow>
             </div>
             <div className={s.itemViz}>
@@ -184,10 +184,10 @@ export default function Home() {
                 and live-updates them as your state changes.
               </Description>
               <CtaRow>
-                <SiteButton href="/docs/reference/fabrics/ui" variant="hueTinted">
+                <Button href="/docs/reference/fabrics/ui" variant="hueTinted">
                   <BookOpen size={14} aria-hidden />
                   <span>Read the docs</span>
-                </SiteButton>
+                </Button>
               </CtaRow>
             </div>
             <div className={s.itemViz}>
@@ -198,9 +198,9 @@ export default function Home() {
 
         <Section>
           <CtaRow>
-            <SiteButton href="/fabrics" variant="primaryPurple">
+            <Button href="/fabrics" variant="primaryPurple">
               <span>Explore all fabrics</span>
-            </SiteButton>
+            </Button>
           </CtaRow>
         </Section>
         </Chapter>

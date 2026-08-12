@@ -3,9 +3,9 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
-import { Chapter, Section } from '@/components/site/page';
-import { SilverWovenName } from '@/components/site/SilverWovenName';
-import { Tagline, Description } from '@/components/site/text';
+import { Chapter, Section } from '@/components/page';
+import { SilverWovenName } from '@/components/meta/SilverWovenName';
+import { Tagline, Description } from '@/components/text';
 import s from './FabricsCatalogue.module.css';
 
 type Hue = 'steel' | 'sage' | 'teal' | 'plum' | 'amber';

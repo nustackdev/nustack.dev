@@ -1,12 +1,12 @@
 import { BookOpen } from 'lucide-react';
-import { Stack } from '@/components/site/layout/Stack';
-import { CtaRow } from '@/components/site/layout/CtaRow';
-import { Heading, Tagline, Description } from '@/components/site/text';
-import { MonoKicker } from '@/components/site/MonoKicker';
-import { CodeSample } from '@/components/site/CodeSample';
-import { SiteButton, SiteButtonRepoLabel } from '@/components/site/SiteButton';
-import { GithubMark } from '@/components/site/marks/GithubMark';
-import { Chapter, Section, SectionCell, SectionHead } from '@/components/site/page';
+import { Stack } from '@/components/layout/Stack';
+import { CtaRow } from '@/components/layout/CtaRow';
+import { Heading, Tagline, Description } from '@/components/text';
+import { MonoKicker } from '@/components/meta/MonoKicker';
+import { CodeSample } from '@/components/media/CodeSample';
+import { Button, ButtonRepoLabel } from '@/components/controls/Button';
+import { GithubMark } from '@/components/marks/GithubMark';
+import { Chapter, Section, SectionCell, SectionHead } from '@/components/page';
 import {
   INTRO_PLAIN_LINES,
   INTRO_KV_LINES,
@@ -229,10 +229,10 @@ export function IntroStory() {
               anyone can build another.
             </Description>
             <CtaRow>
-              <SiteButton href="https://github.com/nustackdev/interaction-model">
+              <Button href="https://github.com/nustackdev/interaction-model">
                 <GithubMark size={14} />
-                <SiteButtonRepoLabel>nustackdev/interaction-model</SiteButtonRepoLabel>
-              </SiteButton>
+                <ButtonRepoLabel>nustackdev/interaction-model</ButtonRepoLabel>
+              </Button>
             </CtaRow>
           </Stack>
         </SectionCell>
@@ -251,14 +251,14 @@ export function IntroStory() {
               cluster compute.
             </Description>
             <CtaRow>
-              <SiteButton href="/docs">
+              <Button href="/docs">
                 <BookOpen size={14} aria-hidden />
                 <span>Quickstart</span>
-              </SiteButton>
-              <SiteButton href="https://github.com/nustackdev/nu">
+              </Button>
+              <Button href="https://github.com/nustackdev/nu">
                 <GithubMark size={14} />
-                <SiteButtonRepoLabel>nustackdev/nu</SiteButtonRepoLabel>
-              </SiteButton>
+                <ButtonRepoLabel>nustackdev/nu</ButtonRepoLabel>
+              </Button>
             </CtaRow>
           </Stack>
         </SectionCell>

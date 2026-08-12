@@ -1,4 +1,4 @@
-import type { CodeTok } from '@/components/site/CodeSample';
+import type { CodeTok } from '@/components/media/CodeSample';
 
 /** Landing Nu code sample — persistent counter + live UI in one file. */
 export const NU_SAMPLE_LINES: CodeTok[][] = [

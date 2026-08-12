@@ -1,0 +1,55 @@
+/* =============================================================================
+ * Fumadocs → site token bridge.
+ *
+ * Fumadocs-ui components consume --color-fd-* internally. This sheet aliases
+ * every --color-fd-* to the corresponding --site-* token, so docs and blog
+ * render in the marketing palette without any per-component overrides.
+ *
+ * Loaded after fumadocs' preset.css / neutral.css so these declarations win.
+ *
+ * Naming trap: fumadocs' `--color-fd-accent` is the interaction hover bg
+ * (NOT brand accent). Brand accent maps to --color-fd-primary.
+ * ==========================================================================*/
+
+:root {
+  /* --- Surface & structure --------------------------------------------- */
+  --color-fd-background: var(--site-bg);
+  --color-fd-foreground: var(--site-ink);
+  --color-fd-border:     var(--site-border);
+  --color-fd-ring:       var(--site-accent-line);
+  --color-fd-overlay:    var(--site-scrim);
+  --color-fd-article:    var(--site-bg);
+
+  /* --- Semantic surface pairs ------------------------------------------ */
+  --color-fd-card:                 var(--site-surface);
+  --color-fd-card-foreground:      var(--site-ink);
+  --color-fd-popover:              var(--site-bg-overlay);
+  --color-fd-popover-foreground:   var(--site-ink);
+  --color-fd-muted:                var(--site-wash);
+  --color-fd-muted-foreground:     var(--site-ink-3);
+
+  /* Brand (nustack purple). Foreground: dark ink for contrast on purple. */
+  --color-fd-primary:              var(--site-accent);
+  --color-fd-primary-foreground:   var(--site-bg);
+
+  /* Secondary — subtle button / chip surface inside docs. */
+  --color-fd-secondary:            var(--site-wash);
+  --color-fd-secondary-foreground: var(--site-ink);
+
+  /* Interaction bg (hover/active), not brand. */
+  --color-fd-accent:               var(--site-wash-2);
+  --color-fd-accent-foreground:    var(--site-ink);
+
+  /* --- Status ---------------------------------------------------------- */
+  --color-fd-info:    var(--site-status-info);
+  --color-fd-idea:    var(--site-status-idea);
+  --color-fd-success: var(--site-status-success);
+  --color-fd-warning: var(--site-status-warning);
+  --color-fd-error:   var(--site-status-error);
+
+  /* --- Diff (code blocks) ---------------------------------------------- */
+  --color-fd-diff-add:           var(--site-diff-add);
+  --color-fd-diff-add-symbol:    var(--site-diff-add-symbol);
+  --color-fd-diff-remove:        var(--site-diff-remove);
+  --color-fd-diff-remove-symbol: var(--site-diff-remove-symbol);
+}

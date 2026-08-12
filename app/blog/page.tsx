@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Page, Header, Body, Chapter } from '@/components/site/page';
-import { Row } from '@/components/site/grid/Row';
-import { Cell } from '@/components/site/grid/Cell';
-import { CellContent } from '@/components/site/grid/CellContent';
-import { Heading, Lede } from '@/components/site/text';
-import { MonoKicker } from '@/components/site/MonoKicker';
+import { Page, Header, Body, Chapter } from '@/components/page';
+import { Row } from '@/components/grid/Row';
+import { Cell } from '@/components/grid/Cell';
+import { CellContent } from '@/components/grid/CellContent';
+import { Heading, Lede } from '@/components/text';
+import { MonoKicker } from '@/components/meta/MonoKicker';
 import { getAllBlogPosts } from '@/lib/source';
 import { appName } from '@/lib/shared';
 import { formatDate } from '@/lib/date';

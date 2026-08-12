@@ -1,0 +1,29 @@
+/* =============================================================================
+ * Page — the site's outer page wrapper.
+ * Layered composition: gradient (z=0), decorations slot (z=1),
+ * dot pattern (z=2), content Container (z=3).
+ * ==========================================================================*/
+
+.root {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--site-bg);
+  color: var(--site-ink);
+  overflow-x: clip;
+  color-scheme: light dark;
+}
+
+/* Stacking: gradient (0) < decorations (1) < dots (2) < content (3). */
+.gradientLayer     { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.decorationsLayer  { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.dotLayer          { z-index: 2; }
+/* Content grows to push footer to the bottom on short pages (sticky-footer). */
+.contentLayer      { position: relative; z-index: 3; flex: 1 0 auto; }
+.footerLayer       { position: relative; z-index: 3; }
+
+/* Top clearance so page content sits below the fixed FloatingNav.
+ * Scales with the u-atom so proportion holds across viewports. */
+.content { padding-top: var(--site-nav-clearance); }

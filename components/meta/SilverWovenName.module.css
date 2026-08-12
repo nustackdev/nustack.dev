@@ -1,0 +1,139 @@
+/* =============================================================================
+ * SilverWovenName — hero-scale silver-to-hue gradient title.
+ * Silver stops come from tokens (--site-silver-1 / --site-silver-2) which
+ * theme themselves. Hue stops are inlined per data-hue with a light-mode
+ * override under :global(.dark)-negated selectors so the metallic identity
+ * holds on both bgs (dark: pale hues glow; light: darker hues sit on white).
+ *
+ * Historical note: background-image via CSS var indirection has been flaky
+ * with some LightningCSS orderings — set the full `background-image` per
+ * hue rule directly (same pattern as .taglineAccent).
+ * ==========================================================================*/
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--site-fs-12);
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-transform: lowercase;
+  display: inline-block;
+  /* Shrink-wrap to the text so the background gradient (stretched to the
+   * element's box) spans the visible glyphs, not the whole parent. */
+  width: fit-content;
+  max-width: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- LIGHT (default) — darker hue stops read on white bg -------------- */
+
+.name[data-hue="steel"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #4a6b95 55%,
+    #2f4b73 100%
+  );
+}
+
+.name[data-hue="sage"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #5a8065 55%,
+    #3d5f4a 100%
+  );
+}
+
+.name[data-hue="plum"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #7c5a90 55%,
+    #5d3f70 100%
+  );
+}
+
+.name[data-hue="amber"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #a07840 55%,
+    #7a5a2a 100%
+  );
+}
+
+.name[data-hue="teal"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #3d7a85 55%,
+    #285860 100%
+  );
+}
+
+/* --- DARK — original pale hue stops -------------- */
+
+:global(.dark) .name[data-hue="steel"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #9bb0d0 55%,
+    #7a95b8 100%
+  );
+}
+
+:global(.dark) .name[data-hue="sage"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #a8c0af 55%,
+    #8ba894 100%
+  );
+}
+
+:global(.dark) .name[data-hue="plum"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #bda2c8 55%,
+    #a68ab2 100%
+  );
+}
+
+:global(.dark) .name[data-hue="amber"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #dab88a 55%,
+    #c8a26e 100%
+  );
+}
+
+:global(.dark) .name[data-hue="teal"] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    #a3ced4 55%,
+    #7fb0b8 100%
+  );
+}
+
+@media (max-width: 640px) {
+  .name { font-size: var(--site-fs-11); }
+}

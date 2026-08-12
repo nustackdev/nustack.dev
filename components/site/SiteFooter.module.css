@@ -10,7 +10,6 @@
  * ==========================================================================*/
 
 .footer {
-  composes: tokens from '@/components/site/tokens.module.css';
   position: relative;
   width: 100%;
   /* Transition into the footer reads as: chapter → xloose gap → hairline

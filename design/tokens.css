@@ -1,12 +1,14 @@
 /* =============================================================================
- * Site design tokens — single source of truth. Dark-only.
+ * Site design tokens — single source of truth.
  *
- * Consumed via `composes: tokens from '@/components/site/tokens.module.css'`
- * on the top-level shell class of each site route (home Backdrop.root and
- * home pageRoot). All descendants inherit these vars.
+ * Declared at :root so every surface (marketing site, fumadocs docs, blog)
+ * inherits them without opt-in. Fumadocs' --color-fd-* tokens are aliased
+ * onto these in ./fumadocs-bridge.css, so the whole site speaks one system.
+ *
+ * Currently dark-only. Light values will land alongside the theme toggle.
  * ==========================================================================*/
 
-.tokens {
+:root {
   /* --- Color: ink & rule ------------------------------------------------- */
   --site-ink:    #eae8f4;
   --site-ink-2:  #b3b0c8;
@@ -32,6 +34,7 @@
   --site-border:          rgba(255, 255, 255, 0.08);
   --site-border-strong:   rgba(255, 255, 255, 0.12);
   --site-border-stronger: rgba(255, 255, 255, 0.24);
+  --site-scrim:           rgba(0, 0, 0, 0.5);
 
   /* --- Color: accents (brand) ------------------------------------------- */
   /* primary — purple. carries nustack identity everywhere. */
@@ -80,13 +83,26 @@
   --site-silver-1: #dde1e8;
   --site-silver-2: #bcc2ce;
 
+  /* --- Color: status ----------------------------------------------------
+   * Semantic status colors. Blue/purple reuse the brand accents so the
+   * palette stays cohesive; green/amber/red are added for callouts, diff
+   * blocks, and any future badges. */
+  --site-status-info:    var(--site-accent-2);
+  --site-status-idea:    var(--site-accent);
+  --site-status-success: #6bcf9f;
+  --site-status-warning: var(--site-hue-amber);
+  --site-status-error:   #f28b8b;
+
+  /* --- Color: diff (code blocks) --------------------------------------- */
+  --site-diff-add:           rgba(107, 207, 159, 0.12);
+  --site-diff-add-symbol:    var(--site-status-success);
+  --site-diff-remove:        rgba(242, 139, 139, 0.12);
+  --site-diff-remove-symbol: var(--site-status-error);
+
   /* --- Color: code & chrome --------------------------------------------- */
-  /* Site owns its own palette (dark-only). Never reach into --color-fd-*
-   * from here — docs/ needs theming, site/ stays dark independently. */
   --site-code-bg:   rgba(255, 255, 255, 0.03);
   --site-code-bg-2: rgba(255, 255, 255, 0.02);
   --site-chrome-bg: rgba(255, 255, 255, 0.04);
-  --site-surface:   #121212;
 
   /* --- Type: families --------------------------------------------------- */
   --font-display: "Inter", "InterVariable", ui-sans-serif, system-ui,
@@ -211,17 +227,17 @@
 /* Rhythm gaps are now fluid via clamp() above — no breakpoint step. */
 /* Lede: 20 → 17 (from .lede's 1024 override). */
 @media (max-width: 1024px) {
-  .tokens { --site-fs-lede: var(--site-fs-9); }
+  :root { --site-fs-lede: var(--site-fs-9); }
 }
 /* Display: 88 → 64 (from sloganWord's 900 override). */
 @media (max-width: 900px) {
-  .tokens { --site-fs-display: var(--site-fs-14); }
+  :root { --site-fs-display: var(--site-fs-14); }
 }
 /* Heading-1: 48 → 32 (from .sectionTitle's 640 override). */
 @media (max-width: 640px) {
-  .tokens { --site-fs-heading-1: var(--site-fs-12); }
+  :root { --site-fs-heading-1: var(--site-fs-12); }
 }
 /* Display: 64 → 48 (from sloganWord's 560 override). */
 @media (max-width: 560px) {
-  .tokens { --site-fs-display: var(--site-fs-13); }
+  :root { --site-fs-display: var(--site-fs-13); }
 }

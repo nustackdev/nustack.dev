@@ -15,7 +15,6 @@
  * ==========================================================================*/
 
 .floatingNav {
-  composes: tokens from '@/components/site/tokens.module.css';
   position: fixed;
   top: var(--site-gap-normal);
   left: 0;
@@ -118,9 +117,6 @@
    full-width so its child centers via flex (a transform would create a
    containing block and break the child's backdrop-filter). */
 .panelWrap {
-  /* Portaled to <body>, so it needs its own token scope — the nav's
-   * .floatingNav is not an ancestor at runtime, and vars wouldn't inherit. */
-  composes: tokens from '@/components/site/tokens.module.css';
   position: fixed;
   top: calc(var(--site-gap-normal) + var(--site-nav-h) + var(--site-gap-tight));
   left: 0;

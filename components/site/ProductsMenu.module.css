@@ -9,7 +9,6 @@
  * ==========================================================================*/
 
 .panel {
-  composes: tokens from '@/components/site/tokens.module.css';
   min-width: 880px;
   max-width: min(1080px, 96vw);
   padding: var(--site-link-card-pad-y) var(--site-link-card-pad-x);

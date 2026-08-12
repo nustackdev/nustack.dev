@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Search, Menu, BookOpen, Rss, X as CloseIcon } from 'lucide-react';
+import { Search, Menu, BookOpen, Rss, X as CloseIcon, ArrowRight } from 'lucide-react';
 import { useSearchContext } from 'fumadocs-ui/contexts/search';
 import { NuLogo } from '@/components/marks/NuLogo';
 import { GithubMark } from '@/components/marks/GithubMark';
@@ -181,14 +181,31 @@ export function FloatingNav() {
 
         <span className={`${s.divider} ${s.desktopOnly}`} aria-hidden />
 
-        {/* Mobile-only word-link shortcuts. Placed before search to mirror the
-            desktop order (word links → search → socials). */}
+        {/* Desktop layout: logo | pages | socials | actions. */}
+        <span className={s.desktopOnly} style={{ gap: 2 }}>
+          <SocialLinks className={s.navIcon} />
+        </span>
+
+        <span className={`${s.divider} ${s.desktopOnly}`} aria-hidden />
+
+        {/* Mobile-only word-link shortcuts + github. Ordered to mirror the
+            desktop grouping: logo | pages | socials | actions. */}
         <Link href="/docs" className={`${s.navIcon} ${s.mobileOnly}`} aria-label="docs">
           <BookOpen size={18} aria-hidden />
         </Link>
         <Link href="/blog" className={`${s.navIcon} ${s.mobileOnly}`} aria-label="blog">
           <Rss size={18} aria-hidden />
         </Link>
+
+        <a
+          className={`${s.navIcon} ${s.mobileOnly}`}
+          href={SOCIAL_LINKS.github}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="github"
+        >
+          <GithubMark size={16} />
+        </a>
 
         <button
           type="button"
@@ -200,21 +217,6 @@ export function FloatingNav() {
         </button>
 
         <ThemeToggle className={s.navIcon} />
-
-        <span className={s.desktopOnly} style={{ gap: 2 }}>
-          <SocialLinks className={s.navIcon} />
-        </span>
-
-        {/* Mobile-only github shortcut, standing in for the desktop socials row. */}
-        <a
-          className={`${s.navIcon} ${s.mobileOnly}`}
-          href={SOCIAL_LINKS.github}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="github"
-        >
-          <GithubMark size={16} />
-        </a>
 
         <button
           type="button"
@@ -255,6 +257,14 @@ export function FloatingNav() {
                       <span className={s.sheetLinkDesc}>{item.desc}</span>
                     </Link>
                   ))}
+                  {group.explore ? (
+                    <Link href={group.explore.href} className={s.sheetSubLink}>
+                      <span>
+                        {group.explore.label}
+                        <ArrowRight size={14} aria-hidden className={s.sheetSubExploreArrow} />
+                      </span>
+                    </Link>
+                  ) : null}
                 </div>
               ))}
             </div>

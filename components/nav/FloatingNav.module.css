@@ -281,6 +281,18 @@
   font-weight: 500;
 }
 .sheetSubLink:hover { background: var(--site-wash-2); }
+
+/* Explore action — inline arrow after the label, subtle slide on hover. */
+.sheetSubExploreArrow {
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: -2px;
+  transition: transform 180ms ease-out;
+}
+.sheetSubLink:hover .sheetSubExploreArrow,
+.sheetSubLink:focus-visible .sheetSubExploreArrow {
+  transform: translateX(2px);
+}
 .sheetLinkDesc {
   font-size: var(--site-fs-3);
   font-weight: 400;

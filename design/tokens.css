@@ -160,6 +160,11 @@
  * ==========================================================================*/
 
 :root {
+  /* Bind the UA-chrome color scheme (scrollbars, form controls) to the
+   * active theme. .dark below flips it. Without this, scrollbars would
+   * follow OS preference instead of our toggle. */
+  color-scheme: light;
+
   /* --- Brand accents (per-theme via --rgb composition) ---------------- */
   /* Purple — slightly darker on white for legibility (was #a684ff). */
   --site-accent-rgb:      124, 92, 255;
@@ -236,6 +241,8 @@
  * ==========================================================================*/
 
 .dark {
+  color-scheme: dark;
+
   --site-accent-rgb:   166, 132, 255;
   --site-accent-2-rgb: 107, 150, 242;
 

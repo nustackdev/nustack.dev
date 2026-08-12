@@ -31,7 +31,7 @@
   display: flex;
   align-items: stretch;
   border-bottom: 1px solid var(--site-border-subtle);
-  background: rgba(0, 0, 0, 0.28);
+  background: var(--site-chrome-bg);
   min-height: 34px;
 }
 .ideTab {

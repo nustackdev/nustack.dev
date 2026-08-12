@@ -29,13 +29,13 @@ export interface GradientBlobsProps {
  */
 export const HERO_BLOBS: Blob[] = [
   {
-    color: 'rgb(122 76 224 / 0.78)',
+    color: 'var(--site-hero-blob-1)',
     x: '1800px',
     y: '0px',
     size: '1300px 1400px',
   },
   {
-    color: 'rgb(62 114 231 / 0.66)',
+    color: 'var(--site-hero-blob-2)',
     x: '2500px',
     y: '500px',
     size: '1400px 1400px',

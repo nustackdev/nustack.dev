@@ -35,7 +35,10 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#0f1117',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafbfc' },
+    { media: '(prefers-color-scheme: dark)',  color: '#0f1117' },
+  ],
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {
@@ -43,7 +46,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
         <RootProvider
-          theme={{ defaultTheme: 'dark' }}
+          theme={{ defaultTheme: 'system', enableSystem: true }}
           search={{ options: { type: 'static' } }}
         >
           {children}

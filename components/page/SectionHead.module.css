@@ -5,7 +5,7 @@
 .lede {
   font-size: var(--site-fs-9);
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--site-ink-2);
   margin: var(--site-gap-normal) 0 0;
   max-width: 68ch;
 }

@@ -30,7 +30,7 @@
 .solid {
   composes: frame;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005)),
+    linear-gradient(180deg, var(--site-code-bg-2), var(--site-code-bg-2)),
     var(--site-dot-grid);
 }
 

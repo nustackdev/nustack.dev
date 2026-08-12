@@ -20,6 +20,7 @@ import { NuLogo } from '@/components/marks/NuLogo';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { ProductsMenu } from './ProductsMenu';
 import { SocialLinks } from './SocialLinks';
+import { ThemeToggle } from './ThemeToggle';
 import { PRODUCT_GROUPS, WORD_LINKS, SOCIAL_LINKS } from './nav.data';
 import s from './FloatingNav.module.css';
 
@@ -197,6 +198,8 @@ export function FloatingNav() {
         >
           <Search size={18} aria-hidden />
         </button>
+
+        <ThemeToggle className={s.navIcon} />
 
         <span className={s.desktopOnly} style={{ gap: 2 }}>
           <SocialLinks className={s.navIcon} />

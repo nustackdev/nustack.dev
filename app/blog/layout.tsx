@@ -4,10 +4,8 @@ import { FloatingNav } from '@/components/nav/FloatingNav';
 
 export default function Layout({ children }: LayoutProps<'/blog'>) {
   return (
-    <div className="dark">
-      <HomeLayout {...baseOptions()} slots={{ header: FloatingNav }}>
-        {children}
-      </HomeLayout>
-    </div>
+    <HomeLayout {...baseOptions()} slots={{ header: FloatingNav }}>
+      {children}
+    </HomeLayout>
   );
 }

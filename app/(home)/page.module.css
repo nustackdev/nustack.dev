@@ -33,7 +33,7 @@
   font-size: var(--site-fs-display);
   line-height: 0.95;
   letter-spacing: -0.045em;
-  color: #fff;
+  color: var(--site-ink);
 }
 .sloganMark {
   display: inline-block;
@@ -53,7 +53,7 @@
   font-size: var(--site-fs-13);
   line-height: 1.05;
   letter-spacing: -0.03em;
-  color: #fff;
+  color: var(--site-ink);
 }
 .sloganLogo {
   display: inline-block;

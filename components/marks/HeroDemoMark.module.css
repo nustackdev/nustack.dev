@@ -47,7 +47,7 @@
 
 .container {
   --role-hue:  var(--site-ink-3);
-  --role-wash: rgba(255, 255, 255, 0.025);
+  --role-wash: var(--site-code-bg-2);
   --role-line: var(--site-rule);
   --chip-hue:  var(--role-hue);
   --chip-wash: var(--role-wash);

@@ -5,56 +5,112 @@
  * inherits them without opt-in. Fumadocs' --color-fd-* tokens are aliased
  * onto these in ./fumadocs-bridge.css, so the whole site speaks one system.
  *
- * Currently dark-only. Light values will land alongside the theme toggle.
+ * Themed primitives live in two blocks:
+ *   :root  — light values (default, no class needed).
+ *   .dark  — dark overrides. Fumadocs' RootProvider stamps `class="dark"` on
+ *            <html>, so these win whenever dark theme is active.
+ *
+ * Brand accents compose from --*-rgb tokens so alpha variants (soft/wash/
+ * line/glow) automatically track the base hex when a theme flips it.
+ * ==========================================================================*/
+
+/* =============================================================================
+ * Theme-invariant tokens — same in light and dark.
  * ==========================================================================*/
 
 :root {
-  /* --- Color: ink & rule ------------------------------------------------- */
-  --site-ink:    #eae8f4;
-  --site-ink-2:  #b3b0c8;
-  --site-ink-3:  rgba(179, 176, 200, 0.82);
-  --site-ink-4:  rgba(179, 176, 200, 0.55);
-  --site-rule:   rgba(255, 255, 255, 0.08);
-  --site-rule-2: rgba(255, 255, 255, 0.04);
+  /* --- Type: families --------------------------------------------------- */
+  --font-display: "Inter", "InterVariable", ui-sans-serif, system-ui,
+                  -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+                  Arial, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
-  /* --- Color: page backgrounds ------------------------------------------ */
-  /* Opaque dark blue-black scale. Elevation reads top-to-bottom:
-     sunken < bg (page) < raised < overlay. */
-  --site-bg:         #0f1117;
-  --site-bg-raised:  #161923;
-  --site-bg-sunken:  #0a0b10;
-  --site-bg-overlay: #1c1f2a;
+  /* --- Type: size scale (8 steps covering all repeated site sizes) ------ */
+  --site-fs-1: 10.5px;  /* micro caps  (Chip.sm, MonoKicker.xs, HeroViz hint, ideMeta) */
+  --site-fs-2: 11px;    /* small mono  (MonoKicker.sm, Chip.md, HeroViz code, NumberedList.num) */
+  --site-fs-3: 12px;    /* mono base   (MonoKicker.md, Button ghost/repo, ideTab) */
+  --site-fs-4: 12.5px;  /* small copy  (Button repoLabel, ideGutter, ideCode) */
+  --site-fs-5: 13px;    /* footer, blurbs */
+  --site-fs-6: 13.5px;  /* Button base, FloatingNav */
+  --site-fs-7: 14.5px;  /* NumberedList item */
+  --site-fs-8: 15px;    /* body text (AppsGrid/FabricsSection body max) */
+  --site-fs-9:  17px;   /* body-lg  (heroTagline, sectionIntro) */
+  --site-fs-10: 20px;   /* lede     (.tagline, .lede) */
+  --site-fs-11: 24px;   /* h4       (entryName) */
+  --site-fs-12: 32px;   /* h3       (sectionTitle) */
+  --site-fs-13: 48px;   /* h2 */
+  --site-fs-14: 64px;   /* h1 / slogan mobile */
+  --site-fs-15: 88px;   /* display-sm / slogan tablet */
+  --site-fs-16: 114px;  /* display  / slogan desktop */
+  --site-fs-17: 200px;  /* watermark (chapterPeek) */
 
-  /* --- Color: surface & border ------------------------------------------ */
-  --site-surface:   var(--site-bg-raised);
-  --site-surface-2: var(--site-bg-overlay);
-  --site-wash:      rgba(255, 255, 255, 0.03);
-  --site-wash-2:    rgba(255, 255, 255, 0.06);
-  --site-border-subtle:   rgba(255, 255, 255, 0.05);
-  --site-border:          rgba(255, 255, 255, 0.08);
-  --site-border-strong:   rgba(255, 255, 255, 0.12);
-  --site-border-stronger: rgba(255, 255, 255, 0.24);
-  --site-scrim:           rgba(0, 0, 0, 0.5);
+  /* --- Type: role scale (semantic, resolves to atomic --site-fs-N) ------ */
+  --site-fs-display:   var(--site-fs-16);
+  --site-fs-heading-1: var(--site-fs-13);
+  --site-fs-heading-2: var(--site-fs-11);
+  --site-fs-tagline:   var(--site-fs-10);
+  --site-fs-lede:      var(--site-fs-10);
+  --site-fs-body:      var(--site-fs-8);
+  --site-fs-label:     var(--site-fs-5);
 
-  /* --- Color: accents (brand) ------------------------------------------- */
-  /* primary — purple. carries nustack identity everywhere. */
-  --site-accent:      #a684ff;
-  --site-accent-soft: rgba(166, 132, 255, 0.18);
-  --site-accent-wash: rgba(166, 132, 255, 0.09);
-  --site-accent-line: rgba(166, 132, 255, 0.44);
-  --site-accent-glow: rgba(166, 132, 255, 0.34);
+  /* --- Type: tracking + weights ---------------------------------------- */
+  --site-tr-tight:  -0.02em;
+  --site-tr-normal: 0;
+  --site-tr-wide:   0.14em;
+  --site-tr-wider:  0.22em;
 
-  /* secondary — blue. section labels, indices, status pills. */
-  --site-accent-2:      #6b96f2;
-  --site-accent-2-soft: rgba(107, 150, 242, 0.18);
-  --site-accent-2-wash: rgba(107, 150, 242, 0.08);
-  --site-accent-2-line: rgba(107, 150, 242, 0.44);
-  --site-accent-2-glow: rgba(107, 150, 242, 0.34);
+  --site-fw-normal:   400;
+  --site-fw-medium:   500;
+  --site-fw-semibold: 600;
+  --site-fw-bold:     700;
+  --site-fw-black:    800;
 
-  /* --- Color: hue palette (silver-woven) -------------------------------- */
-  /* Every visualization on the landing pulls its accent from this set.
-     Sections/rows re-map --site-accent[-2] to one of these hues at scope,
-     so shared primitives auto-recolor. */
+  /* --- Space: one fluid atom, everything derived ----------------------
+   * Hero and other "grand" surfaces opt in by locally overriding --site-u
+   * to a bigger clamp; everything under them inflates proportionally. */
+  --site-u: clamp(10px, calc(0.6vw + 6px), 16px);
+
+  --site-gap-tight:  calc(var(--site-u) * 0.75);
+  --site-gap-normal: calc(var(--site-u) * 1.5);
+  --site-gap-loose:  calc(var(--site-u) * 3);
+  --site-gap-xloose: calc(var(--site-u) * 5);
+
+  --site-pad-sm-y: calc(var(--site-u) * 1.25);
+  --site-pad-sm-x: calc(var(--site-u) * 1.7);
+  --site-pad-md-y: calc(var(--site-u) * 2);
+  --site-pad-md-x: calc(var(--site-u) * 2.7);
+  --site-pad-lg-y: calc(var(--site-u) * 2.75);
+  --site-pad-lg-x: calc(var(--site-u) * 3.7);
+
+  --site-btn-pad-y:      calc(var(--site-u) * 0.75);
+  --site-btn-pad-x:      calc(var(--site-u) * 1.2);
+  --site-btn-gap:        calc(var(--site-u) * 0.75);
+  --site-list-item-gap:  calc(var(--site-u) * 0.75);
+  --site-list-item-pad-y: calc(var(--site-u) * 0.35);
+  --site-code-pad-y:     calc(var(--site-u) * 1);
+  --site-code-pad-x:     calc(var(--site-u) * 1.5);
+  --site-link-card-pad-y: calc(var(--site-u) * 1.35);
+  --site-link-card-pad-x: calc(var(--site-u) * 1.65);
+  --site-container-pad-x: calc(var(--site-u) * 2);
+  --site-nav-h:          47px;
+  --site-nav-clearance:  calc(var(--site-u) * 5 + var(--site-nav-h));
+
+  /* Legacy aliases — kept so any consumer still referencing them works. */
+  --site-space-1: var(--site-gap-tight);
+  --site-space-2: var(--site-gap-normal);
+  --site-space-4: var(--site-gap-loose);
+  --site-space-8: var(--site-gap-xloose);
+  --site-pad-x:   var(--site-container-pad-x);
+
+  /* --- Shape ----------------------------------------------------------- */
+  --site-r-sm: 8px;
+  --site-r-md: 10px;
+  --site-r-lg: 14px;
+  --site-t:    0.15s ease;
+
+  /* --- Silver-woven hue palette --------------------------------------- */
+  /* Section-specific accents. Same values in both themes — the -soft/-wash/
+     -line alpha variants degrade gracefully on either background. */
   --site-hue-steel:      #9bb0d0;
   --site-hue-steel-soft: rgba(155, 176, 208, 0.18);
   --site-hue-steel-wash: rgba(155, 176, 208, 0.10);
@@ -80,164 +136,167 @@
   --site-hue-teal-wash:  rgba(163, 206, 212, 0.10);
   --site-hue-teal-line:  rgba(163, 206, 212, 0.42);
 
-  --site-silver-1: #dde1e8;
-  --site-silver-2: #bcc2ce;
-
-  /* --- Color: status ----------------------------------------------------
-   * Semantic status colors. Blue/purple reuse the brand accents so the
-   * palette stays cohesive; green/amber/red are added for callouts, diff
-   * blocks, and any future badges. */
+  /* --- Status ---------------------------------------------------------- */
+  /* Info/idea reuse the brand accents so they auto-theme; success/warning/
+     error keep fixed hues (they read fine in both themes). */
   --site-status-info:    var(--site-accent-2);
   --site-status-idea:    var(--site-accent);
   --site-status-success: #6bcf9f;
   --site-status-warning: var(--site-hue-amber);
   --site-status-error:   #f28b8b;
 
-  /* --- Color: diff (code blocks) --------------------------------------- */
+  /* --- Diff (code blocks) --------------------------------------------- */
   --site-diff-add:           rgba(107, 207, 159, 0.12);
   --site-diff-add-symbol:    var(--site-status-success);
   --site-diff-remove:        rgba(242, 139, 139, 0.12);
   --site-diff-remove-symbol: var(--site-status-error);
+}
 
-  /* --- Color: code & chrome --------------------------------------------- */
-  --site-code-bg:   rgba(255, 255, 255, 0.03);
-  --site-code-bg-2: rgba(255, 255, 255, 0.02);
-  --site-chrome-bg: rgba(255, 255, 255, 0.04);
+/* =============================================================================
+ * Themed primitives — LIGHT (default).
+ *
+ * Cool white palette pairing with the dark's cool blue-black. Brand accents
+ * darken slightly for contrast on white.
+ * ==========================================================================*/
 
-  /* --- Type: families --------------------------------------------------- */
-  --font-display: "Inter", "InterVariable", ui-sans-serif, system-ui,
-                  -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-                  Arial, sans-serif;
-  --font-mono:    ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+:root {
+  /* --- Brand accents (per-theme via --rgb composition) ---------------- */
+  /* Purple — slightly darker on white for legibility (was #a684ff). */
+  --site-accent-rgb:      124, 92, 255;
+  --site-accent:      rgb(var(--site-accent-rgb));
+  --site-accent-soft: rgba(var(--site-accent-rgb), 0.14);
+  --site-accent-wash: rgba(var(--site-accent-rgb), 0.07);
+  --site-accent-line: rgba(var(--site-accent-rgb), 0.38);
+  --site-accent-glow: rgba(var(--site-accent-rgb), 0.28);
 
-  /* --- Type: size scale (8 steps covering all repeated site sizes) ------ */
-  --site-fs-1: 10.5px;  /* micro caps  (Chip.sm, MonoKicker.xs, HeroViz hint, ideMeta) */
-  --site-fs-2: 11px;    /* small mono  (MonoKicker.sm, Chip.md, HeroViz code, NumberedList.num) */
-  --site-fs-3: 12px;    /* mono base   (MonoKicker.md, SiteButton ghost/repo, ideTab) */
-  --site-fs-4: 12.5px;  /* small copy  (SiteButton repoLabel, ideGutter, ideCode) */
-  --site-fs-5: 13px;    /* footer, blurbs */
-  --site-fs-6: 13.5px;  /* SiteButton base, FloatingNav */
-  --site-fs-7: 14.5px;  /* NumberedList item */
-  --site-fs-8: 15px;    /* body text (AppsGrid/FabricsSection body max) */
-  --site-fs-9:  17px;   /* body-lg  (heroTagline, sectionIntro) */
-  --site-fs-10: 20px;   /* lede     (.tagline, .lede) */
-  --site-fs-11: 24px;   /* h4       (entryName) */
-  --site-fs-12: 32px;   /* h3       (sectionTitle) */
-  --site-fs-13: 48px;   /* h2 */
-  --site-fs-14: 64px;   /* h1 / slogan mobile */
-  --site-fs-15: 88px;   /* display-sm / slogan tablet */
-  --site-fs-16: 114px;  /* display  / slogan desktop */
-  --site-fs-17: 200px;  /* watermark (chapterPeek) */
+  /* Blue — darker on white (was #6b96f2). */
+  --site-accent-2-rgb:      75, 126, 230;
+  --site-accent-2:      rgb(var(--site-accent-2-rgb));
+  --site-accent-2-soft: rgba(var(--site-accent-2-rgb), 0.14);
+  --site-accent-2-wash: rgba(var(--site-accent-2-rgb), 0.07);
+  --site-accent-2-line: rgba(var(--site-accent-2-rgb), 0.38);
+  --site-accent-2-glow: rgba(var(--site-accent-2-rgb), 0.28);
 
-  /* --- Type: role scale (semantic, resolves to atomic --site-fs-N) --------
-   * Each role carries its own responsive story via @media reassignments
-   * below. Consumers pick a role by intent; the role owns the breakpoints.
-   * Sizes only — line-height/weight/tracking stay with the consumer. */
-  --site-fs-display:   var(--site-fs-16);  /* hero slogan, one per page */
-  --site-fs-heading-1: var(--site-fs-13);  /* section titles (h2) */
-  --site-fs-heading-2: var(--site-fs-11);  /* subsection titles (h3) */
-  --site-fs-tagline:   var(--site-fs-10);  /* accent phrase above a description */
-  --site-fs-lede:      var(--site-fs-10);  /* oversized intro paragraph */
-  --site-fs-body:      var(--site-fs-8);   /* default paragraph */
-  --site-fs-label:     var(--site-fs-5);   /* meta rows, captions, footer */
+  /* --- Ink ------------------------------------------------------------ */
+  --site-ink:    #14161d;
+  --site-ink-2:  #4c4f5b;
+  --site-ink-3:  rgba(76, 79, 91, 0.75);
+  --site-ink-4:  rgba(76, 79, 91, 0.5);
 
-  /* --- Type: tracking scale --------------------------------------------- */
-  --site-tr-tight:  -0.02em;
-  --site-tr-normal: 0;
-  --site-tr-wide:   0.14em;
-  --site-tr-wider:  0.22em;
+  /* --- Rule ----------------------------------------------------------- */
+  --site-rule:   rgba(0, 0, 0, 0.08);
+  --site-rule-2: rgba(0, 0, 0, 0.04);
 
-  /* --- Type: weights (only what's actually used) ------------------------ */
-  --site-fw-normal:   400;
-  --site-fw-medium:   500;
-  --site-fw-semibold: 600;
-  --site-fw-bold:     700;
-  --site-fw-black:    800;
+  /* --- Backgrounds ---------------------------------------------------- */
+  /* On light, elevation reads reverse of dark: sunken is a hair darker
+     (a well), raised/overlay are pure white "pop" over the near-white page. */
+  --site-bg:         #fafbfc;
+  --site-bg-raised:  #ffffff;
+  --site-bg-sunken:  #f2f4f7;
+  --site-bg-overlay: #ffffff;
 
-  /* --- Space: one fluid atom, everything derived -----------------------
-   * The site has ONE spatial atom: --site-u. Every gap, pad, and offset
-   * is a fixed multiple of it. Ratios lock across the whole viewport
-   * range; nothing steps at a breakpoint. Want the whole site tighter?
-   * Bump the clamp() bounds — every derived slot moves in proportion.
-   *
-   * Hero and other "grand" surfaces opt in by locally overriding
-   * --site-u to a bigger clamp; everything under them inflates
-   * proportionally, so their proportions stay identical to body pages.
-   * ==================================================================== */
-  --site-u: clamp(10px, calc(0.6vw + 6px), 16px);
+  /* --- Surface & border ---------------------------------------------- */
+  --site-surface:   var(--site-bg-raised);
+  --site-surface-2: var(--site-bg-overlay);
+  --site-wash:      rgba(0, 0, 0, 0.03);
+  --site-wash-2:    rgba(0, 0, 0, 0.06);
+  --site-border-subtle:   rgba(0, 0, 0, 0.05);
+  --site-border:          rgba(0, 0, 0, 0.10);
+  --site-border-strong:   rgba(0, 0, 0, 0.14);
+  --site-border-stronger: rgba(0, 0, 0, 0.24);
+  --site-scrim:           rgba(0, 0, 0, 0.4);
 
-  /* Rhythm — between text blocks inside a cell.
-   *   tight  — descriptor→CTA, tightly-related lines
-   *   normal — tagline→description, adjacent paragraphs
-   *   loose  — between distinct blocks/groups inside a cell
-   *   xloose — outermost separations (between chapters) */
-  --site-gap-tight:  calc(var(--site-u) * 0.75);
-  --site-gap-normal: calc(var(--site-u) * 1.5);
-  --site-gap-loose:  calc(var(--site-u) * 3);
-  --site-gap-xloose: calc(var(--site-u) * 5);
+  /* --- Silvers ------------------------------------------------------- */
+  /* On white these need to be dark for text-legibility; used as accent
+     stops in SilverWovenName gradients. */
+  --site-silver-1: #3f4550;
+  --site-silver-2: #5c6270;
 
-  /* Cell interior — asymmetric, x = 1.35 × y across sm/md/lg. */
-  --site-pad-sm-y: calc(var(--site-u) * 1.25);
-  --site-pad-sm-x: calc(var(--site-u) * 1.7);
-  --site-pad-md-y: calc(var(--site-u) * 2);
-  --site-pad-md-x: calc(var(--site-u) * 2.7);
-  --site-pad-lg-y: calc(var(--site-u) * 2.75);
-  --site-pad-lg-x: calc(var(--site-u) * 3.7);
+  /* --- Hero background blobs -----------------------------------------
+   * Consumed by GradientBlobs' HERO_BLOBS. On light, near-invisible so
+   * they don't overwhelm the white bg; on dark, the original bloom. */
+  --site-hero-blob-1: rgb(122 76 224 / 0.25);
+  --site-hero-blob-2: rgb(62 114 231 / 0.21);
 
-  /* Derived primitives — buttons, lists, code, cards, container.
-   * All are u-multiples so they scale with everything else. */
-  --site-btn-pad-y:      calc(var(--site-u) * 0.75);
-  --site-btn-pad-x:      calc(var(--site-u) * 1.2);
-  --site-btn-gap:        calc(var(--site-u) * 0.75);
-  --site-list-item-gap:  calc(var(--site-u) * 0.75);
-  --site-list-item-pad-y: calc(var(--site-u) * 0.35);
-  --site-code-pad-y:     calc(var(--site-u) * 1);
-  --site-code-pad-x:     calc(var(--site-u) * 1.5);
-  --site-link-card-pad-y: calc(var(--site-u) * 1.35);
-  --site-link-card-pad-x: calc(var(--site-u) * 1.65);
-  --site-container-pad-x: calc(var(--site-u) * 2);
-  --site-nav-h:          47px;
-  --site-nav-clearance:  calc(var(--site-u) * 5 + var(--site-nav-h));
+  /* --- Code & chrome ------------------------------------------------- */
+  --site-code-bg:   rgba(0, 0, 0, 0.03);
+  --site-code-bg-2: rgba(0, 0, 0, 0.02);
+  --site-chrome-bg: rgba(0, 0, 0, 0.04);
 
-  /* Legacy aliases — kept so any consumer still referencing them works.
-   * --site-space-N and --site-pad-x resolve to derivations of u. */
-  --site-space-1: var(--site-gap-tight);
-  --site-space-2: var(--site-gap-normal);
-  --site-space-4: var(--site-gap-loose);
-  --site-space-8: var(--site-gap-xloose);
-  --site-pad-x:   var(--site-container-pad-x);
-
-  /* --- Shape ------------------------------------------------------------ */
-  --site-r-sm: 8px;
-  --site-r-md: 10px;
-  --site-r-lg: 14px;
-  --site-t:    0.15s ease;
-
-  /* --- Patterns --------------------------------------------------------- */
-  --site-dot-grid: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1.1px, transparent 1.4px);
+  /* --- Patterns ------------------------------------------------------ */
+  --site-dot-grid: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.10) 1.1px, transparent 1.4px);
   --site-dot-size: 22px 22px;
 }
 
 /* =============================================================================
- * Role-token responsive story. Each @media block reassigns one or more role
- * tokens to a smaller atomic step at the given breakpoint. All consumers
- * that adopt these roles inherit the responsive behavior for free.
+ * Themed primitives — DARK (overrides).
+ *
+ * The site's original cool blue-black palette. Applied when
+ * fumadocs' RootProvider stamps `class="dark"` on <html>.
  * ==========================================================================*/
 
-/* Rhythm gaps are now fluid via clamp() above — no breakpoint step. */
-/* Lede: 20 → 17 (from .lede's 1024 override). */
+.dark {
+  --site-accent-rgb:   166, 132, 255;
+  --site-accent-2-rgb: 107, 150, 242;
+
+  --site-accent-soft: rgba(var(--site-accent-rgb), 0.18);
+  --site-accent-wash: rgba(var(--site-accent-rgb), 0.09);
+  --site-accent-line: rgba(var(--site-accent-rgb), 0.44);
+  --site-accent-glow: rgba(var(--site-accent-rgb), 0.34);
+
+  --site-accent-2-soft: rgba(var(--site-accent-2-rgb), 0.18);
+  --site-accent-2-wash: rgba(var(--site-accent-2-rgb), 0.08);
+  --site-accent-2-line: rgba(var(--site-accent-2-rgb), 0.44);
+  --site-accent-2-glow: rgba(var(--site-accent-2-rgb), 0.34);
+
+  --site-ink:    #eae8f4;
+  --site-ink-2:  #b3b0c8;
+  --site-ink-3:  rgba(179, 176, 200, 0.82);
+  --site-ink-4:  rgba(179, 176, 200, 0.55);
+
+  --site-rule:   rgba(255, 255, 255, 0.08);
+  --site-rule-2: rgba(255, 255, 255, 0.04);
+
+  --site-bg:         #0f1117;
+  --site-bg-raised:  #161923;
+  --site-bg-sunken:  #0a0b10;
+  --site-bg-overlay: #1c1f2a;
+
+  --site-wash:      rgba(255, 255, 255, 0.03);
+  --site-wash-2:    rgba(255, 255, 255, 0.06);
+  --site-border-subtle:   rgba(255, 255, 255, 0.05);
+  --site-border:          rgba(255, 255, 255, 0.08);
+  --site-border-strong:   rgba(255, 255, 255, 0.12);
+  --site-border-stronger: rgba(255, 255, 255, 0.24);
+  --site-scrim:           rgba(0, 0, 0, 0.5);
+
+  --site-silver-1: #dde1e8;
+  --site-silver-2: #bcc2ce;
+
+  --site-hero-blob-1: rgb(122 76 224 / 0.78);
+  --site-hero-blob-2: rgb(62 114 231 / 0.66);
+
+  --site-code-bg:   rgba(255, 255, 255, 0.03);
+  --site-code-bg-2: rgba(255, 255, 255, 0.02);
+  --site-chrome-bg: rgba(255, 255, 255, 0.04);
+
+  --site-dot-grid: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1.1px, transparent 1.4px);
+}
+
+/* =============================================================================
+ * Role-token responsive story. Each @media block reassigns one or more role
+ * tokens to a smaller atomic step at the given breakpoint.
+ * ==========================================================================*/
+
 @media (max-width: 1024px) {
   :root { --site-fs-lede: var(--site-fs-9); }
 }
-/* Display: 88 → 64 (from sloganWord's 900 override). */
 @media (max-width: 900px) {
   :root { --site-fs-display: var(--site-fs-14); }
 }
-/* Heading-1: 48 → 32 (from .sectionTitle's 640 override). */
 @media (max-width: 640px) {
   :root { --site-fs-heading-1: var(--site-fs-12); }
 }
-/* Display: 64 → 48 (from sloganWord's 560 override). */
 @media (max-width: 560px) {
   :root { --site-fs-display: var(--site-fs-13); }
 }

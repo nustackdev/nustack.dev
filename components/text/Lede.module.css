@@ -2,11 +2,11 @@
 .lede {
   font-size: var(--site-fs-lede);
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--site-ink);
   margin: 0;
   max-width: 78ch;
 }
 .lede strong {
-  color: #fff;
+  color: var(--site-ink);
   font-weight: 600;
 }

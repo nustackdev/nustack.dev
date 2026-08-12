@@ -1,14 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
-import { Search } from 'lucide-react';
 import { Chapter, Section } from '@/components/page';
-import { SilverWovenName } from '@/components/meta/SilverWovenName';
-import { Tagline, Description } from '@/components/text';
-import s from './FabricsCatalogue.module.css';
-
-type Hue = 'steel' | 'sage' | 'teal' | 'plum' | 'amber';
+import { Description } from '@/components/text';
+import { SearchInput } from '@/components/controls/SearchInput';
+import { CatalogueGrid, CatalogueCard, type Hue } from '@/components/chapters/CatalogueGrid';
 
 interface Fabric {
   name: string;
@@ -80,23 +76,6 @@ function matches(f: Fabric, q: string) {
   );
 }
 
-function FabricCard({ f }: { f: Fabric }) {
-  return (
-    <Link href={`/fabrics/${f.slug}`} className={s.card} data-hue={f.hue}>
-      <div className={s.cardHead}>
-        <SilverWovenName as="h3" hue={f.hue} className={s.cardName}>
-          {f.name}
-        </SilverWovenName>
-        {f.status === 'coming-soon' ? (
-          <span className={s.badge}>Coming soon</span>
-        ) : null}
-      </div>
-      <Tagline>{f.tagline}</Tagline>
-      <Description>{f.description}</Description>
-    </Link>
-  );
-}
-
 export function FabricsCatalogue() {
   const [q, setQ] = useState('');
 
@@ -105,26 +84,29 @@ export function FabricsCatalogue() {
   return (
     <Chapter>
       <Section>
-        <label className={s.searchWrap}>
-          <Search size={16} aria-hidden className={s.searchIcon} />
-          <input
-            type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search fabrics..."
-            className={s.searchInput}
-            aria-label="Search fabrics"
-          />
-        </label>
+        <SearchInput
+          value={q}
+          onChange={setQ}
+          placeholder="Search fabrics..."
+          ariaLabel="Search fabrics"
+        />
       </Section>
 
       <Section>
         {fabrics.length > 0 ? (
-          <div className={s.grid}>
+          <CatalogueGrid>
             {fabrics.map((f) => (
-              <FabricCard key={f.slug} f={f} />
+              <CatalogueCard
+                key={f.slug}
+                href={`/fabrics/${f.slug}`}
+                name={f.name}
+                hue={f.hue}
+                tagline={f.tagline}
+                description={f.description}
+                badge={f.status === 'coming-soon' ? 'Coming soon' : undefined}
+              />
             ))}
-          </div>
+          </CatalogueGrid>
         ) : (
           <Description>No fabrics match &ldquo;{q}&rdquo;.</Description>
         )}

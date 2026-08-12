@@ -55,3 +55,11 @@
   color: var(--site-ink-3);
   line-height: 1.5;
 }
+
+/* Branded variant — SilverWovenName + Tagline + Description. No arrow.
+   Mirrors the FabricsCatalogue card shape; hue is exposed as `data-hue`
+   on the anchor so pages can hook per-card accent scoping if needed. */
+.branded {
+  gap: 8px;
+  padding: 18px 20px;
+}

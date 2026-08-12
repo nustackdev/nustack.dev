@@ -1,0 +1,62 @@
+/* GainGrid — hue-tinted card grid for "what your program gains" blocks.
+ * Extracted from fabrics/kv and use-cases/nulog. Layout only. */
+
+.grid {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.grid[data-cols="auto"] {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.grid[data-cols="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid[data-cols="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 720px) {
+  .grid[data-cols="2"],
+  .grid[data-cols="3"] { grid-template-columns: 1fr; }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--site-border);
+  border-radius: var(--site-r-md);
+  background: var(--site-surface-2);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--site-t), background var(--site-t);
+}
+.card:hover { border-color: var(--site-accent); background: var(--site-chrome-bg); }
+.card:focus-visible { outline: 2px solid var(--site-accent); outline-offset: 2px; }
+
+.card[data-hue="sage"]  { --site-accent: var(--site-hue-sage); }
+.card[data-hue="steel"] { --site-accent: var(--site-hue-steel); }
+.card[data-hue="teal"]  { --site-accent: var(--site-hue-teal); }
+.card[data-hue="plum"]  { --site-accent: var(--site-hue-plum); }
+.card[data-hue="amber"] { --site-accent: var(--site-hue-amber); }
+.card[data-hue="rose"]  { --site-accent: var(--site-hue-rose); }
+
+.kicker {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--site-ink-4);
+  margin: 0;
+}
+
+.title {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+  color: var(--site-ink);
+  margin: 0;
+}

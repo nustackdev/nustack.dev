@@ -32,14 +32,15 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     explore: { label: 'Explore all', href: '/fabrics' },
   },
   {
-    header: 'Infra',
+    header: 'Tools',
     tagline: 'The libraries the fabrics stand on.',
     items: [
-      { name: 'virtuals', href: '/products/infra/virtuals', desc: 'Virtual Python collections.' },
-      { name: 'invisibles', href: '/products/infra/invisibles', desc: 'Remote objects for Python.' },
-      { name: 'rdbpy', href: '/products/infra/rdbpy', desc: 'RocksDB bindings.' },
-      { name: 'kh57', href: '/products/infra/kh57', desc: 'Deterministic KV sampling.' },
+      { name: 'virtuals', href: '/tools/virtuals', desc: 'Virtual Python collections.' },
+      { name: 'invisibles', href: '/tools/invisibles', desc: 'Remote objects for Python.' },
+      { name: 'rdbpy', href: '/tools/rdbpy', desc: 'RocksDB bindings.' },
+      { name: 'kh57', href: '/tools/kh57', desc: 'Deterministic KV sampling.' },
     ],
+    explore: { label: 'Explore all', href: '/tools' },
   },
   {
     header: 'Apps',

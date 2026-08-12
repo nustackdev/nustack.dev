@@ -1,0 +1,31 @@
+import type { CodeTok } from '@/components/media/CodeSample';
+
+/** Counter — a rocksdb-backed counter ticking every second, live in the browser. */
+export const UI_COUNTER_LINES: CodeTok[][] = [
+  [{ c: 'kw', t: 'import' }, { t: ' nu' }],
+  [],
+  [{ c: 'kw', t: 'class' }, { t: ' Counter(' }, { c: 'nu', t: 'nu.Shape' }, { t: '):' }],
+  [{ t: '    value = ' }, { c: 'nu', t: 'nu.kv.IntRef' }, { t: '.slot()' }],
+  [],
+  [{ c: 'kw', t: 'class' }, { t: ' Dashboard(' }, { c: 'nu', t: 'nu.ui.Page' }, { t: '):' }],
+  [{ t: '    count = ' }, { c: 'nu', t: 'nu.ui.StatRef' }, { t: '.slot(label=' }, { c: 'str', t: '"Count"' }, { t: ')' }],
+  [],
+  [{ c: 'kw', t: 'class' }, { t: ' App(' }, { c: 'nu', t: 'nu.ui.Index' }, { t: '):' }],
+  [{ t: '    pages = ' }, { c: 'nu', t: 'nu.ui.Pages' }, { t: '({' }, { c: 'str', t: '"/"' }, { t: ': Dashboard})' }],
+  [],
+  [{ c: 'cmt', t: '# whenever value changes, mirror it into the browser' }],
+  [{ t: 'ui = ' }, { c: 'nu', t: 'nu.ReactForever' }, { t: '(' }],
+  [{ t: '    Counter.value.on_change(),' }],
+  [{ t: '    Dashboard.count.set_value(' }, { c: 'nu', t: 'nu.str' }, { t: '(Counter.value)),' }],
+  [{ t: ')' }],
+  [],
+  [{ c: 'cmt', t: '# tick the counter every second, forever' }],
+  [{ t: 'tick = Counter.value.init(' }, { c: 'num', t: '0' }, { t: ') >> ' }, { c: 'nu', t: 'nu.ForeverDo' }, { t: '(Counter.value.inc() >> ' }, { c: 'nu', t: 'nu.Delay' }, { t: '(' }, { c: 'num', t: '1.0' }, { t: '))' }],
+  [],
+  [{ c: 'cmt', t: '# assemble: rocksdb-backed, served over the browser' }],
+  [{ t: 'app = ' }, { c: 'nu', t: 'nu.With' }, { t: '(' }],
+  [{ t: '    ' }, { c: 'nu', t: 'nu.kv.rocksdb_navigator' }, { t: '(' }, { c: 'str', t: '".dbcounter"' }, { t: '),' }],
+  [{ t: '    ' }, { c: 'nu', t: 'nu.ui.server' }, { t: '(' }, { c: 'nu', t: 'nu.kv.auto_flow_atomic' }, { t: '(ui)),' }],
+  [{ t: '    body=' }, { c: 'nu', t: 'nu.kv.auto_flow_atomic' }, { t: '(tick),' }],
+  [{ t: ')' }],
+];

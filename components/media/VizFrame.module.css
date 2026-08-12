@@ -37,7 +37,11 @@
 .glass {
   composes: frame;
   background:
-    linear-gradient(180deg, rgba(22, 22, 26, 0.55), rgba(22, 22, 26, 0.45)),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--site-bg-overlay) 55%, transparent),
+      color-mix(in oklab, var(--site-bg-overlay) 45%, transparent)
+    ),
     var(--site-dot-grid);
 }
 

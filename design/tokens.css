@@ -55,15 +55,11 @@
 
   /* --- Type: tracking + weights ---------------------------------------- */
   --site-tr-tight:  -0.02em;
-  --site-tr-normal: 0;
   --site-tr-wide:   0.14em;
   --site-tr-wider:  0.22em;
 
-  --site-fw-normal:   400;
   --site-fw-medium:   500;
   --site-fw-semibold: 600;
-  --site-fw-bold:     700;
-  --site-fw-black:    800;
 
   /* --- Space: one fluid atom, everything derived ----------------------
    * Hero and other "grand" surfaces opt in by locally overriding --site-u
@@ -94,13 +90,6 @@
   --site-container-pad-x: calc(var(--site-u) * 2);
   --site-nav-h:          47px;
   --site-nav-clearance:  calc(var(--site-u) * 5 + var(--site-nav-h));
-
-  /* Legacy aliases — kept so any consumer still referencing them works. */
-  --site-space-1: var(--site-gap-tight);
-  --site-space-2: var(--site-gap-normal);
-  --site-space-4: var(--site-gap-loose);
-  --site-space-8: var(--site-gap-xloose);
-  --site-pad-x:   var(--site-container-pad-x);
 
   /* --- Shape ----------------------------------------------------------- */
   --site-r-sm: 8px;
@@ -197,7 +186,6 @@
      (a well), raised/overlay are pure white "pop" over the near-white page. */
   --site-bg:         #fafbfc;
   --site-bg-raised:  #ffffff;
-  --site-bg-sunken:  #f2f4f7;
   --site-bg-overlay: #ffffff;
 
   /* --- Surface & border ---------------------------------------------- */
@@ -266,7 +254,6 @@
 
   --site-bg:         #0f1117;
   --site-bg-raised:  #161923;
-  --site-bg-sunken:  #0a0b10;
   --site-bg-overlay: #1c1f2a;
 
   --site-wash:      rgba(255, 255, 255, 0.03);

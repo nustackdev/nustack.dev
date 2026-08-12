@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import s from './SiteButton.module.css';
+import s from './Button.module.css';
 
-export type SiteButtonVariant =
+export type ButtonVariant =
   | 'neutral'
   | 'hueTinted'
   | 'primaryPurple'
@@ -12,7 +12,7 @@ export type SiteButtonVariant =
   | 'repo';
 
 interface Props {
-  variant?: SiteButtonVariant;
+  variant?: ButtonVariant;
   href?: string;
   /** Single size for now — reserved for future scale variants. */
   size?: 'md';
@@ -24,12 +24,12 @@ interface Props {
 }
 
 /**
- * SiteButton — the single CTA/button primitive for the landing.
+ * Button — the single CTA/button primitive for the landing.
  * Internal href (starts with `/` or `#`) renders a next/Link + ArrowRight.
  * External href (starts with `http`) renders `<a target="_blank">` + ArrowUpRight.
  * `variant="ghost"` renders a static `<span>` (no href needed).
  */
-export function SiteButton({
+export function Button({
   variant = 'neutral',
   href,
   children,
@@ -97,13 +97,13 @@ export function SiteButton({
   );
 }
 
-/** Mono `org/repo` label — pair with a `variant="neutral"` SiteButton to make
+/** Mono `org/repo` label — pair with a `variant="neutral"` Button to make
  *  a GitHub-repo CTA. Matches the old `RepoName` from SectionCard.tsx. */
-export function SiteButtonRepoLabel({ children }: { children: ReactNode }) {
+export function ButtonRepoLabel({ children }: { children: ReactNode }) {
   return <span className={s.repoLabel}>{children}</span>;
 }
 
-function classesFor(v: Exclude<SiteButtonVariant, 'ghost'>): [string, string] {
+function classesFor(v: Exclude<ButtonVariant, 'ghost'>): [string, string] {
   switch (v) {
     case 'neutral':       return [s.btn,           s.arrow];
     case 'hueTinted':     return [s.hueTinted,     s.arrowHue];

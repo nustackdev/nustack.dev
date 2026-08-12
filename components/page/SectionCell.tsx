@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
-import { Cell } from '@/components/site/grid/Cell';
-import { CellContent } from '@/components/site/grid/CellContent';
-import type { CellYAlign } from '@/components/site/grid/Cell';
-import type { CellPad } from '@/components/site/grid/CellContent';
+import { Cell } from '@/components/grid/Cell';
+import { CellContent } from '@/components/grid/CellContent';
+import type { CellYAlign } from '@/components/grid/Cell';
+import type { CellPad } from '@/components/grid/CellContent';
 
 export interface SectionCellProps {
   children?: ReactNode;

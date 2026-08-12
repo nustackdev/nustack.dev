@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { NuLogo } from '@/components/site/marks/NuLogo';
-import { NustackMark } from '@/components/site/marks/NustackMark';
-import { SocialLinks } from './SocialLinks';
-import { PRODUCT_GROUPS } from './nav.data';
-import s from './SiteFooter.module.css';
+import { NuLogo } from '@/components/marks/NuLogo';
+import { NustackMark } from '@/components/marks/NustackMark';
+import { SocialLinks } from '@/components/nav/SocialLinks';
+import { PRODUCT_GROUPS } from '@/components/nav/nav.data';
+import s from './Footer.module.css';
 
 /**
  * Site footer — rich sitemap.
@@ -29,7 +29,7 @@ const AREAS: Record<string, string> = {
   Apps: 'apps',
 };
 
-export function SiteFooter() {
+export function Footer() {
   return (
     <footer className={s.footer}>
       <div className={s.inner}>

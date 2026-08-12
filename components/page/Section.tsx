@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
-import { Cell } from '@/components/site/grid/Cell';
-import { CellContent } from '@/components/site/grid/CellContent';
-import { Row } from '@/components/site/grid/Row';
-import type { RowStackAt } from '@/components/site/grid/Row';
-import type { CellPad } from '@/components/site/grid/CellContent';
+import { Cell } from '@/components/grid/Cell';
+import { CellContent } from '@/components/grid/CellContent';
+import { Row } from '@/components/grid/Row';
+import type { RowStackAt } from '@/components/grid/Row';
+import type { CellPad } from '@/components/grid/CellContent';
 import s from './Section.module.css';
 
 export type SectionHue = 'steel' | 'sage' | 'teal' | 'plum' | 'amber' | 'code';

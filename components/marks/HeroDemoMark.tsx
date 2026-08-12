@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
-import { BrowserChrome } from './primitives/BrowserChrome';
-import { DiskStack } from './primitives/DiskStack';
-import { Chip } from '../Chip';
-import { VizFrame } from '../VizFrame';
+import { BrowserChrome } from './BrowserChrome';
+import { DiskStack } from './DiskStack';
+import { Chip } from '@/components/controls/Chip';
+import { VizFrame } from '@/components/media/VizFrame';
 import s from './HeroDemoMark.module.css';
 
 /**

@@ -1,5 +1,5 @@
-import { BrowserChrome } from './primitives/BrowserChrome';
-import { DiskStack } from './primitives/DiskStack';
+import { BrowserChrome } from './BrowserChrome';
+import { DiskStack } from './DiskStack';
 
 const MONO = 'var(--font-mono)';
 

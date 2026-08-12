@@ -1,6 +1,6 @@
-import { GithubMark } from '@/components/site/marks/GithubMark';
-import { XMark } from '@/components/site/marks/XMark';
-import { DiscordMark } from '@/components/site/marks/DiscordMark';
+import { GithubMark } from '@/components/marks/GithubMark';
+import { XMark } from '@/components/marks/XMark';
+import { DiscordMark } from '@/components/marks/DiscordMark';
 import { SOCIAL_LINKS } from './nav.data';
 
 type Props = { className: string };

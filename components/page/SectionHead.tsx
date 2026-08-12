@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
-import { Cell } from '@/components/site/grid/Cell';
-import { CellContent } from '@/components/site/grid/CellContent';
-import { Row } from '@/components/site/grid/Row';
-import { Heading } from '@/components/site/text';
+import { Cell } from '@/components/grid/Cell';
+import { CellContent } from '@/components/grid/CellContent';
+import { Row } from '@/components/grid/Row';
+import { Heading } from '@/components/text';
 import s from './SectionHead.module.css';
 
 export interface SectionHeadProps {

@@ -1,5 +1,5 @@
 import s from './marks.module.css';
-import { BrowserChrome } from './primitives/BrowserChrome';
+import { BrowserChrome } from './BrowserChrome';
 
 /**
  * nuspace — workspace mock, calm cut.

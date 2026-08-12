@@ -1,4 +1,4 @@
-import s from '../marks.module.css';
+import s from './marks.module.css';
 
 /**
  * BrowserChrome — the canonical browser tab used in every landing SVG.

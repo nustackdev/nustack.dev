@@ -1,5 +1,5 @@
 /* =============================================================================
- * SiteButton — every landing CTA/button collapses here.
+ * Button — every landing CTA/button collapses here.
  * Variants:
  *   neutral        transparent-white bg, hairline border (hero CTAs, section CTAs)
  *   hueTinted      reads --site-accent-* from surrounding hue scope (fabric docs btn)

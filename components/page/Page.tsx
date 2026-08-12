@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
-import { Container } from '@/components/site/grid/Container';
-import { DotPattern } from '@/components/site/bg/DotPattern';
-import { GradientBlobs } from '@/components/site/bg/GradientBlobs';
-import type { Blob as GradientBlob } from '@/components/site/bg/GradientBlobs';
-import { SiteFooter } from '@/components/site/SiteFooter';
+import { Container } from '@/components/grid/Container';
+import { DotPattern } from '@/components/bg/DotPattern';
+import { GradientBlobs } from '@/components/bg/GradientBlobs';
+import type { Blob as GradientBlob } from '@/components/bg/GradientBlobs';
+import { Footer } from '@/components/nav/Footer';
 import s from './Page.module.css';
 
 export interface PageProps {
@@ -29,7 +29,7 @@ export interface PageProps {
  * Page — the site's outer page wrapper. Composes:
  *   1. bg color + optional gradient + optional decorations + dot pattern
  *   2. Container that hosts the page content (Header/Hero + Body)
- *   3. SiteFooter
+ *   3. Footer
  * Owns top clearance for the fixed FloatingNav so children start below it.
  */
 export function Page({
@@ -56,7 +56,7 @@ export function Page({
         <div className={s.content}>{children}</div>
       </Container>
       <div className={s.footerLayer}>
-        <SiteFooter />
+        <Footer />
       </div>
     </div>
   );

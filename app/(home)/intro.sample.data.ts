@@ -1,4 +1,4 @@
-import type { CodeTok } from '@/components/site/CodeSample';
+import type { CodeTok } from '@/components/media/CodeSample';
 
 /** Beat 1 — the joyful three-liner. Plain Python, no Nu. */
 export const INTRO_PLAIN_LINES: CodeTok[][] = [

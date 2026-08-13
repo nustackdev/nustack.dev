@@ -18,12 +18,12 @@ import s from './Footer.module.css';
 const LEARN_LINKS = [
   { label: 'Docs', href: '/docs' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Spec', href: '/spec' },
   { label: 'Changelog', href: '/changelog' },
   { label: 'About', href: '/about' },
 ];
 
 const AREAS: Record<string, string> = {
-  Foundations: 'foundations',
   Fabrics: 'fabrics',
   Tools: 'tools',
   'Use cases': 'usecases',

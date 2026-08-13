@@ -19,14 +19,6 @@ export type ProductGroup = {
 
 export const PRODUCT_GROUPS: ProductGroup[] = [
   {
-    header: 'Foundations',
-    tagline: 'The primitive and its spec.',
-    items: [
-      { name: 'nu', href: '/products/nu', desc: 'The interaction primitive.' },
-      { name: 'interaction-model', href: '/products/interaction-model', desc: 'Language-agnostic spec.' },
-    ],
-  },
-  {
     header: 'Fabrics',
     tagline: 'The interaction surfaces of nu.',
     href: '/fabrics',
@@ -70,6 +62,7 @@ export type WordLink = { label: string; href: string };
 export const WORD_LINKS: WordLink[] = [
   { label: 'Docs', href: '/docs' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Spec', href: '/spec' },
   { label: 'About', href: '/about' },
 ];
 

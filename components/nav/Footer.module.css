@@ -113,8 +113,8 @@
 
 .sitemap {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-areas: "foundations fabrics tools usecases";
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas: "fabrics tools usecases";
   gap: var(--site-gap-loose);
   min-width: 0;
 }
@@ -284,7 +284,6 @@
   .sitemap {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "foundations"
       "fabrics"
       "tools"
       "usecases";

@@ -294,3 +294,13 @@
 @media (max-width: 560px) {
   :root { --site-fs-display: var(--site-fs-13); }
 }
+/* On small phones, drop CellContent lg/md pads one step so Chapter cards
+ * (and any other pad="lg"/"md" surface) don't eat the whole viewport. */
+@media (max-width: 425px) {
+  :root {
+    --site-pad-lg-y: calc(var(--site-u) * 2);
+    --site-pad-lg-x: calc(var(--site-u) * 2.7);
+    --site-pad-md-y: calc(var(--site-u) * 1.25);
+    --site-pad-md-x: calc(var(--site-u) * 1.7);
+  }
+}

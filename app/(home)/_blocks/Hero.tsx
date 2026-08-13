@@ -29,33 +29,26 @@ export function Hero() {
     <Row template="minmax(0, 55fr) minmax(0, 45fr)" divider={false} stackAt="sm" className={s.heroRow}>
       <Cell yalign="middle" className={s.heroLeftCell}>
         <CellContent pad="lg">
-          <h1 className={s.sloganStack} aria-label="Nu the interaction primitive">
-            <span className={s.sloganWord} aria-hidden>
-              <NuLogo size="0.9em" className={s.sloganMark} />
-              Nu &mdash;
-            </span>
-            <span className={s.sloganWord} aria-hidden>the</span>
-            <span className={s.sloganWord} aria-hidden>interaction</span>
-            <span className={s.sloganWord} aria-hidden>primitive.</span>
-          </h1>
+          <div className={s.heroLeft}>
+            <h1 className={s.slogan} aria-label="Nu the interaction primitive">
+              <span className={s.sloganWord} aria-hidden>
+                <NuLogo size="0.9em" className={s.sloganMark} />
+                Nu &mdash;
+              </span>{' '}
+              <span className={s.sloganWord} aria-hidden>the</span>{' '}
+              <span className={s.sloganWord} aria-hidden>interaction</span>{' '}
+              <span className={s.sloganWord} aria-hidden>primitive.</span>
+            </h1>
+            <p className={s.heroTagline}>
+              Build apps in one primitive that spans your whole stack &mdash; databases, UIs, AI agents, and services. No glue.{' '}
+              <em className={s.taglineAccent}>50&times; less code.</em>
+            </p>
+          </div>
         </CellContent>
       </Cell>
       <Cell yalign="middle">
         <CellContent pad="lg">
           <div className={s.heroRight}>
-            <h1 className={s.sloganInline}>
-              <NuLogo size="1em" className={s.sloganLogo} />
-              Nu &mdash; the interaction primitive.
-            </h1>
-            <p className={s.heroTagline}>
-              Build apps in one primitive that spans your
-              <br />
-              whole stack &mdash; databases, UIs, AI agents,
-              <br />
-              and services. No glue.{' '}
-              <em className={s.taglineAccent}>50&times; less code.</em>
-            </p>
-
             <div className={s.heroUseCases}>
               <MonoKicker as="p" size="xs" tracking="wider">
                 Built for

@@ -16,67 +16,88 @@
   --site-u: clamp(12px, calc(0.8vw + 7px), 20px);
 }
 
-/* -- Slogan — stacked (>1024) and inline (≤1024) ------------------------- */
+/* -- Slogan — one h1, two visual modes via CSS --------------------------- */
+/* Default (≤1024): single inline line at fs-13.
+ * >1024: each word on its own line, at display scale. */
 
-.sloganStack {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-}
-.sloganWord {
-  display: flex;
-  align-items: baseline;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--site-fs-display);
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  color: var(--site-ink);
-}
-.sloganMark {
-  display: inline-block;
-  vertical-align: -0.1em;
-  margin-right: 0.18em;
-  flex: 0 0 auto;
-}
-
-/* Inline single-line slogan for ≤1024. Hidden by default; the 1024 media
- * query above flips it on. First child of .heroRight, so parent flex gap
- * handles its bottom spacing — no margin needed. */
-.sloganInline {
-  display: none;
+.slogan {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--site-fs-13);
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--site-ink);
+  text-wrap: balance;
 }
-.sloganLogo {
+.sloganWord {
+  /* inline by default so words flow into one line */
+}
+.sloganMark {
   display: inline-block;
   vertical-align: -0.12em;
   margin-right: 0.24em;
-  flex: 0 0 auto;
 }
 
-/* Collapse hero to single-column at tablet+phone: hide the left cell,
- * flip the inline slogan on. Sits after the base rules so it wins. */
+@media (min-width: 1025px) {
+  .slogan {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    font-size: var(--site-fs-15);
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+  }
+  .slogan .sloganWord {
+    display: flex;
+    align-items: baseline;
+  }
+  .slogan .sloganMark {
+    /* vertical-align: -0.1em; */
+    /* margin-right: 0.18em; */
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .slogan { font-size: var(--site-fs-16); }
+}
+
+/* Collapse hero to single-column at tablet+phone. Left cell stacks above
+ * right cell; slogan flips to inline via the media query above. */
 @media (max-width: 1024px) {
   .heroRow { grid-template-columns: minmax(0, 1fr); }
-  .heroRow .heroLeftCell { display: none; }
-  .sloganInline { display: block; }
 }
 
-/* -- Hero right column ---------------------------------------------------- */
+/* -- Hero columns --------------------------------------------------------- */
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-gap-loose);
+  min-width: 0;
+  flex: 1;
+  justify-content: center;
+}
 
 .heroRight {
   display: flex;
   flex-direction: column;
   gap: var(--site-gap-loose);
   min-width: 0;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Two-column mode: spread each cell's children across the full cell height
+ * so the two columns share a common top/bottom rhythm — slogan aligns with
+ * "Built for" up top; tagline aligns with the meta labels at the bottom. */
+@media (min-width: 1025px) {
+  .heroLeft,
+  .heroRight {
+    justify-content: space-between;
+  }
 }
 
 /* Kicker "Built for" + numbered list are a single visual unit — tight rhythm. */
@@ -103,7 +124,9 @@
   letter-spacing: -0.005em;
   color: color-mix(in oklab, var(--site-ink) 88%, var(--site-ink-2) 12%);
   text-wrap: pretty;
-  max-width: 36ch;
+}
+@media (max-width: 1024px) {
+  .heroTagline { max-width: 48ch; }
 }
 .taglineAccent {
   font-style: normal;
@@ -120,10 +143,6 @@
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.005em;
 }
-@media (max-width: 640px) {
-  .heroTagline br { display: none; }
-}
-
 .heroCtaRow {
   display: flex;
   flex-wrap: wrap;

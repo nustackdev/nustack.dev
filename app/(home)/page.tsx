@@ -3,17 +3,12 @@ import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { VizFrame } from '@/components/media/VizFrame';
 import { MonoKicker } from '@/components/meta/MonoKicker';
 import { NumberedList } from '@/components/controls/NumberedList';
-import { Tagline, Description, Label } from '@/components/text';
+import { Tagline, Description } from '@/components/text';
 import { CommandLine } from '@/components/media/CommandLine';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { Stack } from '@/components/layout/Stack';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
-import {
-  MemGlyph,
-  KvGlyph,
-  UiGlyph,
-} from '@/components/marks/FabricGlyphs';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { DiscordMark } from '@/components/marks/DiscordMark';
 import { XMark } from '@/components/marks/XMark';
@@ -27,7 +22,11 @@ import {
 import { HERO_BLOBS } from '@/components/bg/GradientBlobs';
 import { Hero } from './_blocks/Hero';
 import { IntroStory } from './_blocks/IntroStory';
+import { FABRICS } from '@/lib/fabrics';
+import { TOOLS } from '@/lib/tools';
 import s from './page.module.css';
+
+const SHOWCASE_FABRICS = FABRICS.filter((f) => f.showcase);
 
 export default function Home() {
   return (
@@ -128,73 +127,31 @@ export default function Home() {
           }
         />
 
-        <Section hue="steel">
-          <div className={s.itemRow}>
-            <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="steel">nu.mem</SilverWovenName>
-              <Tagline>In-memory state fabric.</Tagline>
-              <Description>
-                In-memory state on plain dicts. Perfect for cache, hot state,
-                and in-process coordination.
-              </Description>
-              <CtaRow>
-                <Button href="/docs/reference/fabrics/mem" variant="hueTinted">
-                  <BookOpen size={14} aria-hidden />
-                  <span>Read the docs</span>
-                </Button>
-              </CtaRow>
-            </div>
-            <div className={s.itemViz}>
-              <VizFrame><MemGlyph /></VizFrame>
-            </div>
-          </div>
-        </Section>
-
-        <Section hue="sage">
-          <div className={s.itemRow}>
-            <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="sage">nu.kv</SilverWovenName>
-              <Tagline>Persistent state fabric.</Tagline>
-              <Description>
-                Refs over a KV backend (RocksDB, LMDB). Transactions,
-                snapshots, and change notifications, built in.
-              </Description>
-              <Label>Backends: rocksdb, lmdb</Label>
-              <CtaRow>
-                <Button href="/docs/reference/fabrics/kv" variant="hueTinted">
-                  <BookOpen size={14} aria-hidden />
-                  <span>Read the docs</span>
-                </Button>
-              </CtaRow>
-            </div>
-            <div className={s.itemViz}>
-              <VizFrame><KvGlyph /></VizFrame>
-            </div>
-          </div>
-        </Section>
-
-        <Section hue="teal">
-          <div className={s.itemRow}>
-            <div className={s.itemBody}>
-              <SilverWovenName as="h3" hue="teal">nu.ui</SilverWovenName>
-              <Tagline>Web UI fabric.</Tagline>
-              <Description>
-                Same fabric shape as the others, but the Refs are widgets:
-                text, buttons, tables. The fabric renders them in the browser
-                and live-updates them as your state changes.
-              </Description>
-              <CtaRow>
-                <Button href="/docs/reference/fabrics/ui" variant="hueTinted">
-                  <BookOpen size={14} aria-hidden />
-                  <span>Read the docs</span>
-                </Button>
-              </CtaRow>
-            </div>
-            <div className={s.itemViz}>
-              <VizFrame><UiGlyph /></VizFrame>
-            </div>
-          </div>
-        </Section>
+        {SHOWCASE_FABRICS.map((f) => {
+          const Glyph = f.glyph;
+          return (
+            <Section key={f.slug} hue={f.hue}>
+              <div className={s.itemRow}>
+                <div className={s.itemBody}>
+                  <SilverWovenName as="h3" hue={f.hue}>{f.name}</SilverWovenName>
+                  <Tagline>{f.tagline}</Tagline>
+                  <Description>{f.description}</Description>
+                  <CtaRow>
+                    <Button href={`/docs/reference/fabrics/${f.slug}`} variant="hueTinted">
+                      <BookOpen size={14} aria-hidden />
+                      <span>Read the docs</span>
+                    </Button>
+                  </CtaRow>
+                </div>
+                {Glyph ? (
+                  <div className={s.itemViz}>
+                    <VizFrame><Glyph /></VizFrame>
+                  </div>
+                ) : null}
+              </div>
+            </Section>
+          );
+        })}
 
         <Section>
           <CtaRow>
@@ -213,39 +170,18 @@ export default function Home() {
         />
         <Section>
           <div className={s.underGrid}>
-            {[
-              {
-                name: 'virtuals',
-                tagline: 'Virtual Python collections over any KV storage.',
-                repo: 'nustackdev/virtuals',
-              },
-              {
-                name: 'invisibles',
-                tagline: 'Transparent remote objects for Python.',
-                repo: 'nustackdev/invisibles',
-              },
-              {
-                name: 'rdbpy',
-                tagline: 'RocksDB for Python, with transactions.',
-                repo: 'nustackdev/rdbpy',
-              },
-              {
-                name: 'kh57',
-                tagline: 'Deterministic range reservoir sampling.',
-                repo: 'nustackdev/kh57',
-              },
-            ].map((lib) => (
-              <div key={lib.name} className={s.underItem}>
-                <h3 className={s.underName}>{lib.name}</h3>
-                <p className={s.underTagline}>{lib.tagline}</p>
+            {TOOLS.map((t) => (
+              <div key={t.slug} className={s.underItem}>
+                <h3 className={s.underName}>{t.name}</h3>
+                <p className={s.underTagline}>{t.tagline}</p>
                 <a
-                  href={`https://github.com/${lib.repo}`}
+                  href={t.github}
                   target="_blank"
                   rel="noreferrer"
                   className={s.underRepo}
                 >
                   <GithubMark size={12} />
-                  <span>{lib.repo}</span>
+                  <span>{t.repo}</span>
                 </a>
               </div>
             ))}

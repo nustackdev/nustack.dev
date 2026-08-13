@@ -9,8 +9,16 @@
  * `poweredBy` lists what the fabric stands on — nu tools + external tech.
  */
 
+import type { ComponentType } from 'react';
 import type { Hue } from '@/components/chapters/CatalogueGrid';
 import { type Powered, fabricHref as _fh } from '@/lib/refs';
+import {
+  MemGlyph,
+  KvGlyph,
+  UiGlyph,
+  ProxyGlyph,
+  RayGlyph,
+} from '@/components/marks/FabricGlyphs';
 
 export interface Fabric {
   name: string;
@@ -22,6 +30,8 @@ export interface Fabric {
   /** Surfaces in curated spots: nav dropdown, footer, landing intro. */
   showcase?: boolean;
   poweredBy?: Powered[];
+  /** Optional glyph for landing/detail pages. */
+  glyph?: ComponentType;
 }
 
 export const FABRICS: Fabric[] = [
@@ -40,6 +50,7 @@ export const FABRICS: Fabric[] = [
       { kind: 'external', name: 'RocksDB', url: 'https://rocksdb.org' },
       { kind: 'external', name: 'LMDB', url: 'https://www.symas.com/lmdb' },
     ],
+    glyph: KvGlyph,
   },
   {
     name: 'nu.ui',
@@ -51,6 +62,7 @@ export const FABRICS: Fabric[] = [
     navDesc: 'Reactive web UI.',
     showcase: true,
     poweredBy: [],
+    glyph: UiGlyph,
   },
   {
     name: 'nu.cluster',
@@ -62,6 +74,7 @@ export const FABRICS: Fabric[] = [
     navDesc: 'Cluster compute.',
     showcase: true,
     poweredBy: [{ kind: 'external', name: 'Ray', url: 'https://www.ray.io' }],
+    glyph: RayGlyph,
   },
   {
     name: 'nu.mem',
@@ -73,6 +86,7 @@ export const FABRICS: Fabric[] = [
     navDesc: 'In-memory state.',
     showcase: true,
     poweredBy: [],
+    glyph: MemGlyph,
   },
   {
     name: 'nu.proxy',
@@ -83,6 +97,7 @@ export const FABRICS: Fabric[] = [
       'Puts other fabrics on the network. Bind a fabric in one process, use it from another; same Refs, over TCP or Unix socket.',
     navDesc: 'Fabrics over the network.',
     poweredBy: [{ kind: 'tool', slug: 'invisibles' }],
+    glyph: ProxyGlyph,
   },
   {
     name: 'nu.http',

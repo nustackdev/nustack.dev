@@ -18,7 +18,9 @@ export interface Tool {
   description: string;
   navDesc: string;
   poweredBy?: Powered[];
-  /** Full GitHub URL. */
+  /** GitHub `owner/name` — display slug, also used to build the URL. */
+  repo: string;
+  /** Full GitHub URL (derived from `repo` at build time). */
   github: string;
   /** PyPI package name — `pip install ${pypi}`. */
   pypi: string;
@@ -26,7 +28,7 @@ export interface Tool {
   pyVersion: string;
 }
 
-const REPO = (slug: string) => `https://github.com/nustackdev/${slug}`;
+const gh = (repo: string) => ({ repo, github: `https://github.com/${repo}` });
 
 export const TOOLS: Tool[] = [
   {
@@ -37,7 +39,7 @@ export const TOOLS: Tool[] = [
     description:
       'Native-shaped Python collections that are thin views over an ordered KV store. Same API as a built-in dict or list, but the bytes stay on disk and stream in on access.',
     navDesc: 'Virtual Python collections.',
-    github: REPO('virtuals'),
+    ...gh('nustackdev/virtuals'),
     pypi: 'virtuals-py',
     pyVersion: '3.10+',
   },
@@ -49,7 +51,7 @@ export const TOOLS: Tool[] = [
     description:
       "Move an object to another process or node; the calling code doesn't change. Sync stays sync, async stays async.",
     navDesc: 'Remote objects for Python.',
-    github: REPO('invisibles'),
+    ...gh('nustackdev/invisibles'),
     pypi: 'invisibles-py',
     pyVersion: '3.10+',
   },
@@ -62,7 +64,7 @@ export const TOOLS: Tool[] = [
       'RocksDB and its compression libs bundled into the wheel for Linux and macOS. No system install. Open a DB and put/get/iterate.',
     navDesc: 'RocksDB bindings.',
     poweredBy: [{ kind: 'external', name: 'RocksDB', url: 'https://rocksdb.org' }],
-    github: REPO('rdbpy'),
+    ...gh('nustackdev/rdbpy'),
     pypi: 'rocksdbpy',
     pyVersion: '3.9+',
   },
@@ -74,7 +76,7 @@ export const TOOLS: Tool[] = [
     description:
       'Draw n uniform samples from a sub-range of a massive (billions) sorted KV dataset without scanning it. Any sorted KV store works as a backend.',
     navDesc: 'Deterministic KV sampling.',
-    github: REPO('kh57'),
+    ...gh('nustackdev/kh57'),
     pypi: 'kh57',
     pyVersion: '3.10+',
   },

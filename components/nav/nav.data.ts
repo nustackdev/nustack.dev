@@ -42,13 +42,6 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     ],
     explore: { label: 'Explore all', href: '/tools' },
   },
-  {
-    header: 'Apps',
-    tagline: 'Tools built on Nu.',
-    items: [
-      { name: 'nulog', href: '/products/apps/nulog', desc: 'Serverless logs + metrics.' },
-    ],
-  },
 ];
 
 export type WordLink = { label: string; href: string };

@@ -233,9 +233,6 @@ export default function Kh57ToolPage() {
           />
           <Section>
             <CtaRow>
-              <Button href="/apps/nulog" variant="hueTinted">
-                <span>See nulog</span>
-              </Button>
               <Button href="/fabrics/kv" variant="hueTinted">
                 <span>See nu.kv</span>
               </Button>

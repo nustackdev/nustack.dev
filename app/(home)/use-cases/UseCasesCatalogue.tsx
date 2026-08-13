@@ -20,13 +20,13 @@ interface UseCase {
 
 const USE_CASES: UseCase[] = [
   {
-    name: 'nulog',
-    slug: 'nulog',
+    name: 'observability',
+    slug: 'observability',
     hue: 'sage',
     job: 'I want logs and metrics without running a server.',
     tagline: 'Billions of entries in one process.',
     description:
-      'Serverless observability on plain RocksDB. Live UI over the same store. Sample huge streams without scanning them.',
+      'Serverless observability on plain RocksDB. Live UI over the same store. Sample huge streams without scanning them. Shipped as nulog.',
     stack: ['nu.kv', 'nu.ui', 'kh57'],
   },
 ];

@@ -1,5 +1,5 @@
 /* GainGrid — hue-tinted card grid for "what your program gains" blocks.
- * Extracted from fabrics/kv and use-cases/nulog. Layout only. */
+ * Extracted from fabrics/kv and use-cases/observability. Layout only. */
 
 .grid {
   display: grid;

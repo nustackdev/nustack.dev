@@ -16,11 +16,11 @@ import { NulogMockSvg } from '@/components/marks/NulogMock';
 import { Screenshot } from '@/components/media/Screenshot';
 import { NULOG_SNIPPET_LINES } from './snippet.data';
 
-export default function NulogUseCasePage() {
+export default function ObservabilityUseCasePage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="use case" name="nulog" hue="sage" />}
+        meta={<PageBadge kind="use case" name="observability" hue="sage" />}
         title="Logs and metrics without running a server."
         lede={
           <>
@@ -42,14 +42,14 @@ export default function NulogUseCasePage() {
       />
 
       <Body>
-        {/* Situation — JTBD open, plus the running mock */}
+        {/* Situation — JTBD open */}
         <Chapter>
           <SectionHead
             title="The job."
             lede={
               <>
-                Observability for a single process, without another process to
-                run it. One pip install, one file, one browser tab.
+                Observability for a single process, without another process
+                to run it. One pip install, one file, one browser tab.
               </>
             }
           />
@@ -57,14 +57,14 @@ export default function NulogUseCasePage() {
             <SectionCell>
               <Description>
                 Most log stacks assume a fleet. When you are one binary on
-                one box, the fleet is overhead. Nulog runs inside your
-                program. Writes append to <code>nu.kv</code>. Reads open a
-                browser.
+                one box, the fleet is overhead. Nu lets observability run
+                inside your program. Writes append to <code>nu.kv</code>.
+                Reads open a browser.
               </Description>
               <Description>
                 Billions of entries on plain RocksDB. Metric series sampled
-                with kh57 so any window renders fast, no downsampling
-                service in the middle.
+                with <code>kh57</code> so any window renders fast, no
+                downsampling service in the middle.
               </Description>
             </SectionCell>
             <SectionCell>
@@ -82,11 +82,12 @@ export default function NulogUseCasePage() {
         {/* Mechanism — 60-second snippet */}
         <Chapter>
           <SectionHead
-            title="See it."
+            title="How Nu does it."
             lede={
               <>
-                One Nu tree. It opens a store, boots the viewer, writes a
-                few log lines and a metric point inside a transaction.
+                One Nu tree opens a store, boots the viewer, writes a few
+                log lines and a metric point inside a transaction. That is
+                the whole app.
               </>
             }
           />
@@ -125,7 +126,7 @@ export default function NulogUseCasePage() {
                 {
                   kicker: 'no server',
                   title: 'One pip install, no daemon.',
-                  body: 'Nulog runs in the same process that writes the logs. No agent, no collector, no port to open. Delete the store, and it is gone.',
+                  body: 'The store runs in the same process that writes to it. No agent, no collector, no port to open. Delete the store and it is gone.',
                 },
                 {
                   kicker: 'logs and metrics',
@@ -149,14 +150,15 @@ export default function NulogUseCasePage() {
           </Section>
         </Chapter>
 
-        {/* Combines-with — lateral cross-links */}
+        {/* Built on the stack — lateral cross-links */}
         <Chapter>
           <SectionHead
             title="Built on the stack."
             lede={
               <>
-                Nulog is a Nu app. It sits on the same fabrics your program
-                already uses. Follow any of them to see how the parts click.
+                The observability implementation ships as <code>nulog</code>,
+                a Nu app under a thousand lines. It sits on the same fabrics
+                and tools your program already uses.
               </>
             }
           />
@@ -185,7 +187,7 @@ export default function NulogUseCasePage() {
                 Tutorials and reference for the fabrics nulog stands on.
               </LinkCard>
               <LinkCard href="/use-cases" icon={<BookOpen size={14} />} title="Other use cases">
-                Movies tracker, distributed indexer. Same primitives, different jobs.
+                Same primitives, different jobs. See what else the stack fits.
               </LinkCard>
             </LinkGrid>
           </Section>
@@ -196,11 +198,11 @@ export default function NulogUseCasePage() {
           heading="Install and run it."
           lede={
             <>
-              One command puts nulog on your path. Then paste the snippet
-              above, hit run, and open the viewer.
+              One command puts <code>nulog</code> on your path. Paste the
+              snippet above, hit run, open the viewer.
             </>
           }
-          command='pip install "nustack-py[all]"'
+          command='pip install nulog'
           id="install"
           actions={
             <CtaRow>
@@ -208,7 +210,7 @@ export default function NulogUseCasePage() {
                 <DiscordMark size={14} />
                 <span>Ask on Discord</span>
               </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
+              <Button href="https://github.com/nustackdev/nulog/issues">
                 <GithubMark size={14} />
                 <span>Report an issue</span>
               </Button>

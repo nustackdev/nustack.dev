@@ -20,12 +20,12 @@ export default function KvPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.kv" hue="sage" />}
-        title="State that survives every restart."
+        title="Durable state for Nu apps, from prototype to terabytes."
         lede={
           <>
-            Your app needs to remember things. So you reach for Postgres, an
-            ORM, migrations, a server. That is a lot of ceremony for a dict
-            that persists. Nu gives you refs, durable by default.
+            <code>nu.kv</code> turns Refs into slots in a document-shaped
+            data model over any KV storage, with snapshots for consistent
+            reads and transactions for whole-state writes.
           </>
         }
         actions={
@@ -49,8 +49,8 @@ export default function KvPage() {
             title="See it."
             lede={
               <>
-                Point a variable at durable storage the same way you would
-                point it at memory. That is a ref bound to <code>nu.kv</code>.
+                Declare a Shape, hang typed Refs off it, then read and write
+                as plain Python attributes.
               </>
             }
           />
@@ -58,19 +58,22 @@ export default function KvPage() {
             hue="sage"
             prose={
               <>
-                <Tagline>Refs on disk. Same shape as refs in memory.</Tagline>
+                <Tagline>Refs are addresses. Shapes are your data model.</Tagline>
                 <Description>
-                  Declare a Shape with typed slots. Write to them. Read them
-                  back. The KV backend keeps the bytes. Kill the process, run
-                  it again, the values are still there.
+                  Any Python primitive, dict, list, tuple, nested Shape, or
+                  indexed collection can hang off a Shape as a typed Ref.
+                  Subscript and dot navigate through the tree. Nothing is
+                  fetched until a bracket runs it.
                 </Description>
                 <Description>
-                  Every write is atomic. Every read sees a snapshot. Every
-                  slot can be watched for changes.
+                  Wrap reads in <code>Snapshot</code> for a consistent view.
+                  Wrap writes in <code>Transaction</code> and the whole body
+                  commits or none of it does. Backend picks change one line
+                  at the top.
                 </Description>
               </>
             }
-            code={<CodeSample filename="mydb.py" lines={KV_SNIPPET_LINES} />}
+            code={<CodeSample filename="store.py" lines={KV_SNIPPET_LINES} />}
           />
         </Chapter>
 
@@ -78,26 +81,31 @@ export default function KvPage() {
         <Chapter>
           <SectionHead
             title="What your program gains."
-            lede={<>Three things you get the moment you import the fabric.</>}
+            lede={<>Four properties once your state lives on nu.kv.</>}
           />
           <Section>
             <GainGrid
               hue="sage"
               items={[
                 {
-                  kicker: 'refs feel like variables',
-                  title: 'Write four lines, not forty.',
-                  body: 'Assign, read, iterate. No ORM, no schema, no migration step. Handlers stay small because persistence is under the hood.',
+                  kicker: 'persistence',
+                  title: 'State is there when the process comes back.',
+                  body: 'Every write goes to the backing store. Restart, redeploy, crash and recover. The values are still there in the same slots you declared.',
                 },
                 {
-                  kicker: 'transactions built in',
-                  title: 'Wrap writes in Atomic.',
-                  body: 'Group any set of writes into one atomic body. Conflicts retry with backoff. Snapshots for reads come free.',
+                  kicker: 'scalability',
+                  title: 'Shard the storage. Refs do not notice.',
+                  body: 'The same Ref API runs against a laptop directory and a terabyte-scale store. Partition by key, split across disks, add read-only tailers. The Shape code does not change.',
                 },
                 {
-                  kicker: 'change notifications',
-                  title: 'Subscribe once, wire live UIs.',
-                  body: <>Every slot emits on change. The same signal <code>nu.ui</code> uses to re-render turns your data into a live view.</>,
+                  kicker: 'reactivity',
+                  title: 'Any Ref emits on change.',
+                  body: <>Subscribe with <code>on_change</code> and wake code on write. The default observer fires in-process. Swap in the Redis observer and the same subscription fires across the cluster.</>,
+                },
+                {
+                  kicker: 'durability',
+                  title: 'Snapshots and transactions built in.',
+                  body: <>Wrap reads in <code>Snapshot</code> for one consistent view. Wrap writes in <code>Transaction</code> and the whole body commits or none of it does.</>,
                 },
               ]}
             />
@@ -110,8 +118,8 @@ export default function KvPage() {
             title="Pick a backend."
             lede={
               <>
-                One line switches the storage. Your Refs do not notice. Ship
-                the same code from a laptop test to a production disk.
+                Storage on one line. Notifications on another. The Ref API
+                stays the same across every combination.
               </>
             }
           />
@@ -121,18 +129,23 @@ export default function KvPage() {
               items={[
                 {
                   kicker: 'rocksdb',
-                  title: 'Workhorse persistence.',
-                  body: 'Billions of keys. Range scans, snapshots, WAL. The default when the data outlives the process.',
+                  title: 'LSM store for terabytes and up.',
+                  body: 'Billions of keys, range scans, snapshots, WAL. Primary writer plus read-only tailers in other processes. The default when data outlives the process.',
                 },
                 {
                   kicker: 'lmdb',
-                  title: 'Fast local storage.',
-                  body: 'Memory-mapped, single-file, no daemon. Great for desktop apps and small services.',
+                  title: 'Memory-mapped, single-writer ACID.',
+                  body: 'Zero-copy reads, one writer, real transactions in a single directory. Reach for it when one process owns writes and readers want speed.',
                 },
                 {
-                  kicker: 'in-memory · text',
-                  title: 'For tests and drafts.',
-                  body: 'Same API, no disk. Swap in RocksDB when you are ready. Text JSON storage also ships for readable dumps.',
+                  kicker: 'in-memory',
+                  title: 'ACID in RAM for tests and drafts.',
+                  body: 'Same Ref API, same brackets, no disk. Real snapshots and transactions, so tests exercise the production code path.',
+                },
+                {
+                  kicker: 'observers',
+                  title: 'Redis or in-memory pub/sub.',
+                  body: <>The observer decides who wakes up on write. In-memory for one process, Redis for many. <code>on_change</code> stays the same call.</>,
                 },
               ]}
             />
@@ -145,21 +158,21 @@ export default function KvPage() {
             title="Combines well with."
             lede={
               <>
-                Refs are refs. Pair <code>nu.kv</code> with any other fabric
-                and the code shape stays identical.
+                Refs are Refs. The state you declared here is what the other
+                fabrics read, render, and react to.
               </>
             }
           />
           <Section>
             <LinkGrid>
               <LinkCard href="/fabrics/mem" name="nu.mem" hue="steel" tagline="Hot state, in-process.">
-                Keep hot state in dicts, spill the durable bits into kv.
+                Mix mem slots and kv slots on the same Shape. Scratch beside durable, same attribute syntax.
               </LinkCard>
               <LinkCard href="/fabrics/ui" name="nu.ui" hue="teal" tagline="Live browser widgets.">
-                Render kv slots as text, tables, forms. Live-updates for free.
+                Bind a widget to a kv slot. Writes flow both ways through the same Ref. No polling.
               </LinkCard>
               <LinkCard href="/fabrics/cluster" name="nu.cluster" hue="amber" tagline="Compute on the workers.">
-                Teleport a body to a worker. The kv Refs travel with it.
+                Teleport a body to a worker. The kv Refs travel with it. State stays one shared tree.
               </LinkCard>
             </LinkGrid>
           </Section>

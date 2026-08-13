@@ -8,7 +8,6 @@
   display: inline-block;
   margin: 0;
   font-family: var(--font-mono);
-  text-transform: uppercase;
   color: var(--site-ink-3);
   font-variant-numeric: tabular-nums;
 }

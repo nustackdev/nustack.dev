@@ -14,7 +14,8 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--site-fs-12);
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin: 0;
   display: inline-block;
   /* Shrink-wrap to the text so the background gradient (stretched to the
@@ -27,6 +28,11 @@
   background-size: 100% 100%;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  /* Extend the painted background above/below the line-box so glyph
+   * ascenders/descenders keep their gradient at tight line-heights.
+   * Negative margins cancel the layout impact. */
+  padding-block: 0.15em;
+  margin-block: -0.15em;
 }
 
 /* --- LIGHT (default) — darker hue stops read on white bg -------------- */

@@ -1,5 +1,6 @@
 import { BookOpen } from 'lucide-react';
-import { Page, Header, Body, Chapter, Section, SectionCell, SectionHead } from '@/components/page';
+import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/page';
+import { Tagline, Description } from '@/components/text';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { CodeSample } from '@/components/media/CodeSample';
@@ -7,7 +8,7 @@ import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
-import { GainGrid } from '@/components/chapters/GainGrid';
+import { SnippetBeat } from '@/components/chapters/SnippetBeat';
 import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
@@ -26,10 +27,8 @@ export default function MemPage() {
         }
         lede={
           <>
-            Give your program state on a plain Python dict. No server, no
-            schema, no wiring. Under the hood, that is{' '}
-            <SilverWovenName as="span" hue="steel">nu.mem</SilverWovenName>,
-            {' '}same Refs you use everywhere else in Nu.
+            The simplest state in Nu. Declare a Shape, hang typed Refs, use
+            them. Gone when the process ends.
           </>
         }
         actions={
@@ -47,49 +46,38 @@ export default function MemPage() {
       />
 
       <Body>
-        {/* Chapter 1 — 60-second snippet + what your program gains */}
+        {/* Chapter 1 — See it */}
         <Chapter>
           <SectionHead
-            title="A counter, end to end."
+            title="See it."
             lede={
               <>
-                Declare a shape, bind it to a dict, run the program. The
-                state lives for the life of the process.
+                Declare a Shape, hang typed Refs, use them. That is the
+                whole surface.
               </>
             }
           />
 
-          <Section hue="steel" split="1/1">
-            <SectionCell>
-              <CodeSample filename="counter.py" lines={MEM_COUNTER_LINES} />
-            </SectionCell>
-            <SectionCell>
-              <GainGrid
-                hue="steel"
-                items={[
-                  {
-                    title: 'State without ceremony.',
-                    body: 'A dict is your database. No migration, no schema, no lifecycle to manage. Restart clears it. That is the point.',
-                  },
-                  {
-                    title: 'Same Refs, everywhere.',
-                    body: (
-                      <>
-                        <code>IntRef</code>, <code>DictRef</code>,{' '}
-                        <code>ShapeRef</code> read the same as in{' '}
-                        <code>nu.kv</code> or <code>nu.ui</code>. Swap the
-                        fabric later, the program stays put.
-                      </>
-                    ),
-                  },
-                  {
-                    title: 'In-process speed.',
-                    body: 'Reads and writes are dict ops. No serialization, no round trip. Use it for cache, hot state, and coordination between shapes in one process.',
-                  },
-                ]}
-              />
-            </SectionCell>
-          </Section>
+          <SnippetBeat
+            hue="steel"
+            prose={
+              <>
+                <Tagline>The simplest state in Nu.</Tagline>
+                <Description>
+                  Same <code>IntRef</code>, <code>DictRef</code>,{' '}
+                  <code>ShapeRef</code> you use everywhere else in Nu.
+                  Reads and writes are in-process, no serialization, no
+                  round trip. Use it for cache, hot state, and
+                  coordination between Shapes in one process.
+                </Description>
+                <Description>
+                  No backend to pick. No transactions to wrap. Restart
+                  clears it. That is the whole point.
+                </Description>
+              </>
+            }
+            code={<CodeSample filename="memory.py" lines={MEM_COUNTER_LINES} />}
+          />
         </Chapter>
 
         {/* Chapter 2 — when to reach for mem vs kv */}

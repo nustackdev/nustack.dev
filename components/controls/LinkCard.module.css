@@ -12,7 +12,7 @@
 }
 .card:hover {
   border-color: var(--site-accent);
-  background: var(--site-chrome-bg);
+  background: var(--site-bg-overlay);
 }
 .card:focus-visible {
   outline: 2px solid var(--site-accent);

@@ -68,8 +68,8 @@
   color: white;
 }
 .primaryPurple:hover {
-  background: color-mix(in oklab, var(--site-accent) 92%, black 8%);
-  border-color: #6b48b8;
+  background: var(--site-accent);
+  border-color: var(--site-accent);
 }
 .primaryPurple > svg,
 .primaryPurple .arrow {
@@ -83,8 +83,8 @@
   color: white;
 }
 .primaryBlue:hover {
-  background: color-mix(in oklab, var(--site-accent-2) 92%, black 8%);
-  border-color: #3f68c8;
+  background: var(--site-accent-2);
+  border-color: var(--site-accent-2);
 }
 .primaryBlue > svg,
 .primaryBlue .arrow {

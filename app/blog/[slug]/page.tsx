@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { ArrowLeft } from 'lucide-react';
 import { BlogBody } from '../BlogBody';
 import { Page, Header, Body, Chapter } from '@/components/page';
 import { Row } from '@/components/grid/Row';
@@ -57,7 +58,10 @@ export default async function BlogPost(props: PageProps<'/blog/[slug]'>) {
       <Header
         meta={
           <span className={s.postMetaRow}>
-            <Link href="/blog" className={s.backLink}>← Blog</Link>
+            <Link href="/blog" className={s.backLink}>
+              <ArrowLeft size={12} aria-hidden />
+              <span>Blog</span>
+            </Link>
             <span className={s.metaSep}>·</span>
             <time dateTime={post.data.date}>{formatDate(post.data.date)}</time>
             <span className={s.metaSep}>·</span>

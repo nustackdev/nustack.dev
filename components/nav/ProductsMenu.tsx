@@ -37,18 +37,18 @@ export function ProductsMenu({ groups = PRODUCT_GROUPS }: { groups?: ProductGrou
             )}
           </div>
           <div className={s.right}>
-            {group.items.map((item) => (
-              <Link key={item.href} href={item.href} className={s.item} role="menuitem">
-                <span className={s.itemName}>{item.name}</span>
-                <span className={s.itemDesc}>{item.desc}</span>
-              </Link>
-            ))}
+            <div className={s.itemsGrid}>
+              {group.items.map((item) => (
+                <Link key={item.href} href={item.href} className={s.item} role="menuitem">
+                  <span className={s.itemName}>{item.name}</span>
+                  <span className={s.itemDesc}>{item.desc}</span>
+                </Link>
+              ))}
+            </div>
             {group.explore ? (
-              <Link href={group.explore.href} className={s.item} role="menuitem">
-                <span className={s.itemName}>
-                  {group.explore.label}
-                  <ArrowRight size={13} aria-hidden className={s.exploreArrow} />
-                </span>
+              <Link href={group.explore.href} className={s.explore} role="menuitem">
+                <span>{group.explore.label}</span>
+                <ArrowRight size={12} aria-hidden />
               </Link>
             ) : null}
           </div>

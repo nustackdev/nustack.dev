@@ -14,7 +14,7 @@ export function TryIt() {
   return (
     <Chapter>
       <SectionHead
-        title="Try it."
+        title="Try Nu."
         lede={
           <>
             One command gets you the wheel with every fabric. Then follow the

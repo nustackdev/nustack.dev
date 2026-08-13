@@ -129,6 +129,16 @@ const SPECS: FabricSpec[] = [
     ],
   },
   {
+    name: 'nu.service',
+    slug: 'service',
+    hue: 'steel',
+    tagline: 'In-process service fabric.',
+    description:
+      'Wrap any Python object as a Nu Service. Its methods become Refs — queries, actions, streams, commands — you compose into the tree.',
+    navDesc: 'Python objects as Refs.',
+    poweredBy: [],
+  },
+  {
     name: 'nu.mp',
     slug: 'mp',
     hue: 'plum',

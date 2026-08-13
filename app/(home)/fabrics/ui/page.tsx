@@ -17,9 +17,9 @@ import { FABRIC } from '@/lib/fabrics';
 import { UI_COUNTER_LINES } from './ui.sample.data';
 
 export const metadata = {
-  title: 'nu.ui — a live web UI from pure Python',
+  title: 'nu.ui — the browser surface for Nu apps',
   description:
-    'Widgets are Refs. State changes redraw the browser. No React, no JSX, no template engine, no HTMX.',
+    'Browser widgets as typed Python attributes. Declare a Page, hang buttons, tables, inputs, charts. Writes redraw the browser, clicks push back.',
 };
 
 export default function UiFabricPage() {
@@ -27,11 +27,11 @@ export default function UiFabricPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.ui" hue="teal" />}
-        title="Ship a live web UI from pure Python."
+        title="The browser surface for Nu apps."
         lede={
           <>
-            Widgets are Refs. State changes redraw the browser. No React, no
-            JSX, no template engine, no HTMX.
+            Write your widgets in Python. Nu draws them in the browser.
+            Clicks and edits come back to you as writes on the same widget.
           </>
         }
         actions={
@@ -52,11 +52,11 @@ export default function UiFabricPage() {
         {/* Chapter 1 — PAS + capability code */}
         <Chapter>
           <SectionHead
-            title="Skip the frontend tax."
+            title="See it."
             lede={
               <>
-                You want a dashboard, a control panel, an internal tool. Just a
-                browser page that updates when your data does.
+                One class per page. One attribute per widget. Set a
+                value, the browser shows it.
               </>
             }
           />
@@ -66,24 +66,25 @@ export default function UiFabricPage() {
             prose={
               <>
                 <Description>
-                  The Python side is a hundred lines. The frontend side is
-                  another thousand: a bundler, a framework, a router, websocket
-                  glue, a template engine.
+                  Every widget is a Ref you hang off a class. <code>StatRef</code>,{' '}
+                  <code>TableRef</code>, <code>ButtonRef</code>,{' '}
+                  <code>InputRef</code>, <code>ChartRef</code>, and about
+                  thirty more. Subclass <code>Row</code>,{' '}
+                  <code>Card</code>, or <code>Page</code> to compose your
+                  own layouts.
                 </Description>
                 <Description>
-                  <SilverWovenName as="span" hue="teal">
-                    nu.ui
-                  </SilverWovenName>{' '}
-                  makes browser widgets first-class Refs. Set a value, the page
-                  redraws. That is the surface.
+                  Writes from Python land in the browser. Clicks and edits
+                  in the browser come back to Python through the same
+                  Ref. One wire protocol handled for you, async only.
                 </Description>
                 <Description>
-                  Below: a RocksDB-backed counter that ticks every second and
-                  streams into a live browser stat. One file. No JavaScript.
+                  See: a small dashboard with a stats row, a table, and
+                  a refresh button. One Python file, no JavaScript.
                 </Description>
               </>
             }
-            code={<CodeSample filename="counter.py" lines={UI_COUNTER_LINES} />}
+            code={<CodeSample filename="dashboard.py" lines={UI_COUNTER_LINES} />}
           />
         </Chapter>
 
@@ -91,9 +92,7 @@ export default function UiFabricPage() {
         <Chapter>
           <SectionHead
             title="What your program gains."
-            lede={
-              <>Three things, all falling out of naming widgets as Refs.</>
-            }
+            lede={<>Four properties once your surface lives on nu.ui.</>}
           />
 
           <Section>
@@ -101,30 +100,49 @@ export default function UiFabricPage() {
               hue="teal"
               items={[
                 {
-                  title: 'Widgets are Refs.',
+                  kicker: 'one language full stack',
+                  title: 'Same tree on both sides of the wire.',
                   body: (
                     <>
-                      <code>StatRef</code>, <code>TableRef</code>,{' '}
-                      <code>ButtonRef</code>, <code>FormRef</code> read and write
-                      like plain Python. One vocabulary, top to bottom.
+                      Server-side Python declares the widgets. The client
+                      renders them. One vocabulary top to bottom, no
+                      template DSL, no client codegen.
                     </>
                   ),
                 },
                 {
-                  title: 'State edits redraw the browser.',
+                  kicker: 'component kit built in',
+                  title: 'About thirty widgets, sensible defaults.',
                   body: (
                     <>
-                      Wire a KV Ref to a text block once. Every write lands in the
-                      browser, live, without a hand-rolled websocket handler.
+                      Inputs, outputs, layouts, charts. <code>ButtonRef</code>,{' '}
+                      <code>TableRef</code>, <code>InputRef</code>,{' '}
+                      <code>ChartRef</code>, <code>Card</code>,{' '}
+                      <code>Column</code>, <code>Row</code>. Compose
+                      your own by subclassing <code>Section</code>.
                     </>
                   ),
                 },
                 {
-                  title: 'No JavaScript, no build.',
+                  kicker: 'reactive by default',
+                  title: 'Bind once, state and ui stay in sync.',
                   body: (
                     <>
-                      You never open a <code>package.json</code>. No Node, no
-                      bundler, no compile step. Just <code>python app.py</code>.
+                      Any attribute emits on change. Wire a state
+                      attribute to a widget attribute and both directions
+                      flow through the same hook. No polling, no manual
+                      invalidation.
+                    </>
+                  ),
+                },
+                {
+                  kicker: 'no client build step',
+                  title: 'No npm, no bundler, no compile.',
+                  body: (
+                    <>
+                      The Python process serves the page. You never open a{' '}
+                      <code>package.json</code>. Just{' '}
+                      <code>python app.py</code>.
                     </>
                   ),
                 },
@@ -139,27 +157,24 @@ export default function UiFabricPage() {
             title="Combines well with."
             lede={
               <>
-                Widgets are Refs. Data is Refs. Pick a state fabric, wire it
-                once, watch the UI follow.
+                Widgets are Refs. Data is Refs. Pick a state fabric, bind
+                it once, watch the surface follow.
               </>
             }
           />
 
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/mem" name="nu.mem" hue="steel" tagline="Hot state, in-process.">
-                Use it for cache, session state, and anything you do not need
-                to survive a restart.
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable state, on disk.">
+                Bind widget slots to kv Refs. Restart the process, the surface snaps back to where it was.
               </LinkCard>
 
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable state, on disk.">
-                Refs backed by RocksDB or LMDB. Restart the process, the
-                widgets snap back to where they were.
+              <LinkCard href="/fabrics/mem" name="nu.mem" hue="steel" tagline="Hot state, in-process.">
+                For cache, session state, and anything that does not need to survive a restart.
               </LinkCard>
 
               <LinkCard href="/fabrics/http" name="nu.http" hue="amber" tagline="Refs on the wire.">
-                Expose a Ref as an HTTP endpoint, or pull one from an outside
-                service. The UI does not care where data lives.
+                Expose a Ref as an HTTP endpoint, or pull one from an outside service. The surface does not care where data lives.
               </LinkCard>
             </LinkGrid>
           </Section>

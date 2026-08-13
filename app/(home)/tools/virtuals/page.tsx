@@ -1,14 +1,19 @@
 import Link from 'next/link';
-import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/page';
-import { Heading, Tagline, Description } from '@/components/text';
+import { Page, Header, Body, Chapter, Section, SectionCell, SectionHead } from '@/components/page';
+import { Tagline, Description } from '@/components/text';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { CodeSample } from '@/components/media/CodeSample';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { Stack } from '@/components/layout/Stack';
+import { CtaRow } from '@/components/layout/CtaRow';
+import { Button } from '@/components/controls/Button';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { SnippetBeat } from '@/components/chapters/SnippetBeat';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
+import { GithubMark } from '@/components/marks/GithubMark';
+import { TOOL } from '@/lib/tools';
 import { VIRTUALS_LINES } from './snippet.data';
 
 export default function VirtualsToolPage() {
@@ -22,11 +27,25 @@ export default function VirtualsToolPage() {
             Dicts, lists, sets, and trees that feel native to Python but live in RocksDB, LMDB, or memory.
           </>
         }
+        actions={
+          <CtaRow>
+            <Button variant="primaryPurple" href={TOOL.virtuals.github} external>
+              <GithubMark size={14} />
+              <span>See on GitHub</span>
+            </Button>
+            <Button variant="hueTinted" href={TOOL.virtuals.examples} external>
+              <GithubMark size={14} />
+              <span>Browse examples</span>
+            </Button>
+          </CtaRow>
+        }
       />
+
       <Body>
+        {/* What it is */}
         <Chapter>
           <SectionHead
-            title={<><SilverWovenName as="span" hue="sage">virtuals</SilverWovenName></>}
+            title="What it is."
             lede={
               <>
                 The KV foundation under <Link href="/fabrics/kv">nu.kv</Link>.
@@ -34,8 +53,6 @@ export default function VirtualsToolPage() {
               </>
             }
           />
-
-          {/* What it is */}
           <Section>
             <Stack>
               <Tagline>Native feel. Flat KV under.</Tagline>
@@ -49,74 +66,89 @@ export default function VirtualsToolPage() {
               </Description>
             </Stack>
           </Section>
+        </Chapter>
 
-          {/* Why standalone */}
+        {/* Why standalone */}
+        <Chapter>
+          <SectionHead title="Why it ships alone." />
           <Section split="1/1">
-            <Stack>
-              <Heading level={2}>Why it ships alone.</Heading>
-              <Description>
-                <SilverWovenName as="span" hue="sage">virtuals</SilverWovenName>{' '}
-                predates the Nu stack. It is the KV substrate <code>nu.kv</code> rides on,
-                but it is useful on its own.
-              </Description>
-              <Description>
-                Grab it when you want SQLAlchemy-shaped ergonomics over a KV store instead
-                of over SQL. No ORM. No schema. No server.
-              </Description>
-            </Stack>
-            <GainGrid
-              hue="sage"
-              items={[
-                { title: 'Backend-agnostic.', body: 'RocksDB, LMDB, in-memory. Bring your own.' },
-                { title: 'Transactional.', body: 'Full ACID when the backend supports it.' },
-                { title: 'Observable.', body: 'Watch changes at any level of the hierarchy.' },
-                { title: 'Lazy.', body: 'Nothing loads until you access it.' },
-              ]}
-            />
+            <SectionCell>
+              <Stack>
+                <Description>
+                  <SilverWovenName as="span" hue="sage">virtuals</SilverWovenName>{' '}
+                  predates the Nu stack. It is the KV substrate <code>nu.kv</code> rides on,
+                  but it is useful on its own.
+                </Description>
+                <Description>
+                  Grab it when you want SQLAlchemy-shaped ergonomics over a KV store instead
+                  of over SQL. No ORM. No schema. No server.
+                </Description>
+              </Stack>
+            </SectionCell>
+            <SectionCell>
+              <GainGrid
+                hue="sage"
+                items={[
+                  { title: 'Backend-agnostic.', body: 'RocksDB, LMDB, in-memory. Bring your own.' },
+                  { title: 'Transactional.', body: 'Full ACID when the backend supports it.' },
+                  { title: 'Observable.', body: 'Watch changes at any level of the hierarchy.' },
+                  { title: 'Lazy.', body: 'Nothing loads until you access it.' },
+                ]}
+              />
+            </SectionCell>
           </Section>
+        </Chapter>
 
-          {/* Snippet */}
+        {/* Snippet */}
+        <Chapter>
+          <SectionHead
+            title="Sixty seconds of code."
+            lede={
+              <>
+                Open a root. Assign nested dicts. Open a list underneath. Commit.
+              </>
+            }
+          />
           <SnippetBeat
             ratio="45/55"
             hue="sage"
             prose={
-              <>
-                <Heading level={2}>Sixty seconds of code.</Heading>
-                <Description>
-                  Open a root. Assign nested dicts. Open a list underneath. Commit.
-                </Description>
-                <Description>
-                  Swap <code>InMemoryStorage</code> for <code>RocksDBStorage</code>{' '}
-                  and the same lines write to disk.
-                </Description>
-              </>
+              <Description>
+                Swap <code>InMemoryStorage</code> for <code>RocksDBStorage</code>{' '}
+                and the same lines write to disk.
+              </Description>
             }
             code={<CodeSample filename="basic.py" lines={VIRTUALS_LINES} />}
           />
+        </Chapter>
 
-          {/* Combines with */}
-          <Section>
-            <Stack>
-              <Heading level={2}>Where it fits in Nu.</Heading>
-              <Description>
+        {/* Powers Nu. */}
+        <Chapter>
+          <SectionHead
+            title="Powers Nu."
+            lede={
+              <>
                 <SilverWovenName as="span" hue="sage">virtuals</SilverWovenName>{' '}
                 is the substrate. <code>nu.kv</code> wraps it in Refs so state reads
                 and writes look like plain Python.
-              </Description>
-              <LinkGrid>
-                <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
-                  Refs over the same KV backends. Transactions and change
-                  notifications baked in.
-                </LinkCard>
-                <LinkCard href="/tools/rdbpy" name="rdbpy" hue="sage" tagline="RocksDB bindings for Python.">
-                  The Python bindings that back the RocksDB storage. Also a
-                  standalone tool.
-                </LinkCard>
-              </LinkGrid>
-            </Stack>
+              </>
+            }
+          />
+          <Section>
+            <LinkGrid>
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
+                Refs over the same KV backends. Transactions and change
+                notifications baked in.
+              </LinkCard>
+              <LinkCard href="/tools/rdbpy" name="rdbpy" hue="steel" tagline="RocksDB bindings for Python.">
+                The Python bindings that back the RocksDB storage. Also a
+                standalone tool.
+              </LinkCard>
+            </LinkGrid>
           </Section>
-
         </Chapter>
+
+        <LikeThisBlock />
       </Body>
     </Page>
   );

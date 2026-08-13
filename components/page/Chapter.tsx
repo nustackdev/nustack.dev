@@ -4,6 +4,7 @@ import s from './Chapter.module.css';
 export interface ChapterProps {
   children?: ReactNode;
   className?: string;
+  id?: string;
 }
 
 /**
@@ -12,7 +13,7 @@ export interface ChapterProps {
  * unified line weights). Multiple Chapters stack inside PageBody separated
  * by vertical gap.
  */
-export function Chapter({ children, className }: ChapterProps) {
+export function Chapter({ children, className, id }: ChapterProps) {
   const cls = [s.root, className].filter(Boolean).join(' ');
-  return <div className={cls}>{children}</div>;
+  return <div className={cls} id={id}>{children}</div>;
 }

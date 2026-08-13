@@ -1,4 +1,3 @@
-import { BookOpen } from 'lucide-react';
 import {
   Page,
   Header,
@@ -10,12 +9,16 @@ import {
 import { Description, Label } from '@/components/text';
 import { CodeSample } from '@/components/media/CodeSample';
 import { Button } from '@/components/controls/Button';
+import { LinkCard } from '@/components/controls/LinkCard';
+import { LinkGrid } from '@/components/layout/LinkGrid';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Stack } from '@/components/layout/Stack';
 import { GainGrid } from '@/components/chapters/GainGrid';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { TOOL } from '@/lib/tools';
 
 export const metadata = {
   title: 'Invisibles: transparent remote objects for Python',
@@ -42,17 +45,13 @@ export default function InvisiblesPage() {
         }
         actions={
           <CtaRow>
-            <Button
-              href="https://github.com/nustackdev/invisibles"
-              variant="primaryPurple"
-              external
-            >
+            <Button variant="primaryPurple" href={TOOL.invisibles.github} external>
               <GithubMark size={14} />
               <span>See on GitHub</span>
             </Button>
-            <Button href="/fabrics/proxy" variant="hueTinted">
-              <BookOpen size={14} aria-hidden />
-              <span>See the fabric it powers</span>
+            <Button variant="hueTinted" href={TOOL.invisibles.examples} external>
+              <GithubMark size={14} />
+              <span>Browse examples</span>
             </Button>
           </CtaRow>
         }
@@ -139,36 +138,30 @@ export default function InvisiblesPage() {
           </Section>
         </Chapter>
 
-        {/* Where it fits. */}
+        {/* Powers Nu. */}
         <Chapter>
           <SectionHead
-            title="Where it fits in Nu"
+            title="Powers Nu."
             lede={
               <>
-                Invisibles is the foundation under <code>nu.proxy</code>, the
-                network fabric. Bind a fabric in one process, use it from
-                another; same Refs, over TCP or Unix socket.
+                <SilverWovenName as="span" hue="plum">invisibles</SilverWovenName>{' '}
+                is the foundation under <code>nu.proxy</code>, the network fabric.
+                Bind a fabric in one process, use it from another; same Refs,
+                over TCP or Unix socket.
               </>
             }
           />
           <Section>
-            <CtaRow>
-              <Button href="/fabrics/proxy" variant="hueTinted">
-                <span>See nu.proxy</span>
-              </Button>
-              <Button href="/docs/reference/fabrics/proxy" variant="hueTinted">
-                <BookOpen size={14} aria-hidden />
-                <span>Read the docs</span>
-              </Button>
-              <Button href="/tools" variant="hueTinted">
-                <span>See other tools</span>
-              </Button>
-              <Button href="/" variant="hueTinted">
-                <span>Read the pitch</span>
-              </Button>
-            </CtaRow>
+            <LinkGrid>
+              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum" tagline="Network fabric.">
+                The fabric that puts other fabrics on the network. Built on
+                invisibles.
+              </LinkCard>
+            </LinkGrid>
           </Section>
         </Chapter>
+
+        <LikeThisBlock />
       </Body>
     </Page>
   );

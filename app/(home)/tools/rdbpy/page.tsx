@@ -1,4 +1,3 @@
-import { BookOpen } from 'lucide-react';
 import {
   Page,
   Header,
@@ -12,12 +11,14 @@ import { PageBadge } from '@/components/meta/PageBadge';
 import { Tagline, Description } from '@/components/text';
 import { Button } from '@/components/controls/Button';
 import { GainGrid } from '@/components/chapters/GainGrid';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { Stack } from '@/components/layout/Stack';
 import { CodeSample, type CodeTok } from '@/components/media/CodeSample';
 import { GithubMark } from '@/components/marks/GithubMark';
+import { TOOL } from '@/lib/tools';
 
 const HUE = 'sage'; // rdbpy backs nu.kv, share its hue
 
@@ -95,16 +96,13 @@ export default function RdbpyPage() {
         }
         actions={
           <CtaRow>
-            <Button
-              href="https://github.com/nustackdev/rdbpy"
-              variant="primaryPurple"
-              external
-            >
-              <GithubMark size={14} aria-hidden />
+            <Button variant="primaryPurple" href={TOOL.rdbpy.github} external>
+              <GithubMark size={14} />
               <span>See on GitHub</span>
             </Button>
-            <Button href="/fabrics/kv" variant="neutral">
-              <span>Use it via nu.kv</span>
+            <Button variant="hueTinted" href={TOOL.rdbpy.examples} external>
+              <GithubMark size={14} />
+              <span>Browse examples</span>
             </Button>
           </CtaRow>
         }
@@ -179,22 +177,16 @@ export default function RdbpyPage() {
 
         <Chapter>
           <SectionHead
-            title="Combines with."
+            title="Powers Nu."
             lede={<>Where rdbpy shows up in the rest of the stack.</>}
           />
           <Section>
             <LinkGrid>
-              <LinkCard
-                href="/fabrics/kv"
-                title="nu.kv, persistent state fabric"
-              >
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
                 The fabric that turns Refs into durable state. Runs on rdbpy
                 out of the box.
               </LinkCard>
-              <LinkCard
-                href="/tools/virtuals"
-                title="virtuals, python collections over KV"
-              >
+              <LinkCard href="/tools/virtuals" name="virtuals" hue="sage" tagline="Collections over KV.">
                 Dict, list, and set backed by any KV store, including rdbpy.
                 The layer between raw bytes and Python objects.
               </LinkCard>
@@ -202,28 +194,7 @@ export default function RdbpyPage() {
           </Section>
         </Chapter>
 
-        <Chapter>
-          <SectionHead title="Take it from here." />
-          <Section>
-            <CtaRow>
-              <Button
-                href="https://github.com/nustackdev/rdbpy"
-                variant="primaryPurple"
-                external
-              >
-                <GithubMark size={14} aria-hidden />
-                <span>See on GitHub</span>
-              </Button>
-              <Button href="/tools" variant="neutral">
-                <span>Browse all tools</span>
-              </Button>
-              <Button href="/docs" variant="ghost">
-                <BookOpen size={14} aria-hidden />
-                <span>Read the docs</span>
-              </Button>
-            </CtaRow>
-          </Section>
-        </Chapter>
+        <LikeThisBlock />
       </Body>
     </Page>
   );

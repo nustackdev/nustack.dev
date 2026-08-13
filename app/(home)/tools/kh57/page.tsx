@@ -1,4 +1,3 @@
-import { BookOpen } from 'lucide-react';
 import {
   Page,
   Header,
@@ -10,12 +9,16 @@ import {
 import { Description, Label } from '@/components/text';
 import { CodeSample } from '@/components/media/CodeSample';
 import { Button } from '@/components/controls/Button';
+import { LinkCard } from '@/components/controls/LinkCard';
+import { LinkGrid } from '@/components/layout/LinkGrid';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Stack } from '@/components/layout/Stack';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { GainGrid } from '@/components/chapters/GainGrid';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
+import { TOOL } from '@/lib/tools';
 
 export const metadata = {
   title: 'kh57. Uniform samples from huge sorted key-value stores.',
@@ -43,17 +46,13 @@ export default function Kh57ToolPage() {
         }
         actions={
           <CtaRow>
-            <Button
-              href="https://github.com/nustackdev/kh57"
-              variant="primaryPurple"
-              external
-            >
+            <Button variant="primaryPurple" href={TOOL.kh57.github} external>
               <GithubMark size={14} />
               <span>See on GitHub</span>
             </Button>
-            <Button href="#how-it-works" variant="hueTinted">
-              <BookOpen size={14} aria-hidden />
-              <span>Read how it works</span>
+            <Button variant="hueTinted" href={TOOL.kh57.examples} external>
+              <GithubMark size={14} />
+              <span>Browse examples</span>
             </Button>
           </CtaRow>
         }
@@ -160,8 +159,7 @@ export default function Kh57ToolPage() {
         </Chapter>
 
         {/* How it works. */}
-        <span id="how-it-works" aria-hidden />
-        <Chapter>
+        <Chapter id="how-it-works">
           <SectionHead
             title="How it works."
             lede={
@@ -192,10 +190,10 @@ export default function Kh57ToolPage() {
           </Section>
         </Chapter>
 
-        {/* Where it fits. */}
+        {/* Powers Nu. */}
         <Chapter>
           <SectionHead
-            title="Where it fits."
+            title="Powers Nu."
             lede={
               <>
                 <SilverWovenName as="span" hue="amber">kh57</SilverWovenName>{' '}
@@ -206,19 +204,21 @@ export default function Kh57ToolPage() {
             }
           />
           <Section>
-            <CtaRow>
-              <Button href="/fabrics/kv" variant="hueTinted">
-                <span>See nu.kv</span>
-              </Button>
-              <Button href="/tools" variant="hueTinted">
-                <span>See other tools</span>
-              </Button>
-              <Button href="/" variant="hueTinted">
-                <span>See the Nu stack</span>
-              </Button>
-            </CtaRow>
+            <LinkGrid>
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
+                The Ref-shaped state layer that also runs over sorted KV
+                stores. Pair kh57 with the same backend to sample what you
+                already persist.
+              </LinkCard>
+              <LinkCard href="/tools/virtuals" name="virtuals" hue="sage" tagline="Collections over KV.">
+                Views over the same sorted-KV substrate kh57 samples from.
+                Store rich objects, sample uniformly.
+              </LinkCard>
+            </LinkGrid>
           </Section>
         </Chapter>
+
+        <LikeThisBlock />
       </Body>
     </Page>
   );

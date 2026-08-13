@@ -21,6 +21,7 @@ import { Stack } from '@/components/layout/Stack';
 import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { DiscordMark } from '@/components/marks/DiscordMark';
+import { FABRIC } from '@/lib/fabrics';
 
 export const metadata: Metadata = {
   title: 'nu.cluster - cluster compute fabric',
@@ -66,6 +67,18 @@ export default function ClusterFabricPage() {
             Wrap a Nu tree in <code>Teleport</code> and it runs on a remote
             actor. Same code, cluster-scale compute.
           </>
+        }
+        actions={
+          <CtaRow>
+            <Button variant="primaryPurple" href={FABRIC.cluster.docs}>
+              <BookOpen size={14} aria-hidden />
+              <span>Read the reference</span>
+            </Button>
+            <Button variant="hueTinted" href={FABRIC.cluster.src}>
+              <GithubMark size={14} />
+              <span>See the code</span>
+            </Button>
+          </CtaRow>
         }
       />
 
@@ -153,31 +166,17 @@ export default function ClusterFabricPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" title="nu.kv">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable across restarts.">
                 Keep the results. Persist model weights, epoch metrics, and
                 job state to a KV backend that workers share.
               </LinkCard>
-              <LinkCard href="/fabrics/proxy" title="nu.proxy">
+              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum" tagline="Fabrics on the wire.">
                 Put another fabric on the wire. Handy when the driver, the
                 workers, and the store all sit on different boxes.
               </LinkCard>
-              <LinkCard href="/fabrics/mem" title="nu.mem">
+              <LinkCard href="/fabrics/mem" name="nu.mem" hue="steel" tagline="In-process cache.">
                 In-process state on the worker. Cache what a single Teleport
                 needs without touching disk.
-              </LinkCard>
-              <LinkCard
-                href="/docs/reference/fabrics/cluster"
-                icon={<BookOpen size={14} />}
-                title="Read the reference"
-              >
-                Every ref, resource, and knob for <code>nu.cluster</code>.
-              </LinkCard>
-              <LinkCard
-                href="https://github.com/nustackdev/nu/tree/main/src/nu/ray"
-                icon={<GithubMark size={14} />}
-                title="Read the source"
-              >
-                Under 600 lines. Teleport, RayService, RayCluster.
               </LinkCard>
             </LinkGrid>
           </Section>

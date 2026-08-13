@@ -11,7 +11,12 @@
 
 import type { ComponentType } from 'react';
 import type { Hue } from '@/components/chapters/CatalogueGrid';
-import { type Powered, fabricHref as _fh } from '@/lib/refs';
+import {
+  type Powered,
+  fabricHref as _fh,
+  fabricDocsHref as _fd,
+  fabricSrcHref as _fs,
+} from '@/lib/refs';
 import {
   MemGlyph,
   KvGlyph,
@@ -20,6 +25,9 @@ import {
   RayGlyph,
 } from '@/components/marks/FabricGlyphs';
 
+/** Fabric record — derived link fields (`href`, `docs`, `src`) are attached
+ * at export from the slug, so consumers only need to import FABRICS/FABRIC
+ * and reach `f.docs`, `f.src`, `f.href` directly. */
 export interface Fabric {
   name: string;
   slug: string;
@@ -32,9 +40,18 @@ export interface Fabric {
   poweredBy?: Powered[];
   /** Optional glyph for landing/detail pages. */
   glyph?: ComponentType;
+  /** Catalogue link — derived. */
+  href: string;
+  /** Reference-doc link — derived. */
+  docs: string;
+  /** Source-code link on GitHub — derived. */
+  src: string;
 }
 
-export const FABRICS: Fabric[] = [
+/** Author-time shape: same as Fabric minus the derived link fields. */
+type FabricSpec = Omit<Fabric, 'href' | 'docs' | 'src'>;
+
+const SPECS: FabricSpec[] = [
   {
     name: 'nu.kv',
     slug: 'kv',
@@ -129,6 +146,18 @@ export const FABRICS: Fabric[] = [
   },
 ];
 
+export const FABRICS: Fabric[] = SPECS.map((f) => ({
+  ...f,
+  href: _fh(f.slug),
+  docs: _fd(f.slug),
+  src: _fs(f.slug),
+}));
+
+/** Slug-indexed map — use `FABRIC.kv.docs`, `FABRIC.mem.src`, etc. */
+export const FABRIC: Record<string, Fabric> = Object.fromEntries(
+  FABRICS.map((f) => [f.slug, f]),
+);
+
 export const fabricHref = (f: Pick<Fabric, 'slug'>) => _fh(f.slug);
 
-export const findFabric = (slug: string) => FABRICS.find((f) => f.slug === slug);
+export const findFabric = (slug: string) => FABRIC[slug];

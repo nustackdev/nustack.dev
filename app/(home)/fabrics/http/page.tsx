@@ -12,6 +12,7 @@ import { SnippetBeat } from '@/components/chapters/SnippetBeat';
 import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { DiscordMark } from '@/components/marks/DiscordMark';
+import { FABRIC } from '@/lib/fabrics';
 import { HTTP_SAMPLE_LINES } from './http.sample.data';
 
 export const metadata = {
@@ -34,11 +35,11 @@ export default function HttpFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryBlue" href="/docs">
+            <Button variant="primaryPurple" href={FABRIC.http.docs}>
               <BookOpen size={14} aria-hidden />
-              <span>Read the docs</span>
+              <span>Read the reference</span>
             </Button>
-            <Button href="https://github.com/nustackdev/nu/tree/main/examples">
+            <Button variant="hueTinted" href={FABRIC.http.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

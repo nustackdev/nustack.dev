@@ -13,6 +13,7 @@ import { SnippetBeat } from '@/components/chapters/SnippetBeat';
 import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { DiscordMark } from '@/components/marks/DiscordMark';
+import { FABRIC } from '@/lib/fabrics';
 import { UI_COUNTER_LINES } from './ui.sample.data';
 
 export const metadata = {
@@ -35,13 +36,13 @@ export default function UiFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryBlue" href="/use-cases/movies">
-              <Play size={14} aria-hidden />
-              <span>Run the demo</span>
-            </Button>
-            <Button href="/docs/tutorials/counter">
+            <Button variant="primaryPurple" href={FABRIC.ui.docs}>
               <BookOpen size={14} aria-hidden />
-              <span>Read the tutorial</span>
+              <span>Read the reference</span>
+            </Button>
+            <Button variant="hueTinted" href={FABRIC.ui.src}>
+              <GithubMark size={14} />
+              <span>See the code</span>
             </Button>
           </CtaRow>
         }

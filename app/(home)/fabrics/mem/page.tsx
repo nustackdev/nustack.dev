@@ -11,6 +11,7 @@ import { GainGrid } from '@/components/chapters/GainGrid';
 import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { DiscordMark } from '@/components/marks/DiscordMark';
 import { GithubMark } from '@/components/marks/GithubMark';
+import { FABRIC } from '@/lib/fabrics';
 import { MEM_COUNTER_LINES } from './mem.sample.data';
 
 export default function MemPage() {
@@ -30,6 +31,18 @@ export default function MemPage() {
             <SilverWovenName as="span" hue="steel">nu.mem</SilverWovenName>,
             {' '}same Refs you use everywhere else in Nu.
           </>
+        }
+        actions={
+          <CtaRow>
+            <Button variant="primaryPurple" href={FABRIC.mem.docs}>
+              <BookOpen size={14} aria-hidden />
+              <span>Read the reference</span>
+            </Button>
+            <Button variant="hueTinted" href={FABRIC.mem.src}>
+              <GithubMark size={14} />
+              <span>See the code</span>
+            </Button>
+          </CtaRow>
         }
       />
 
@@ -124,14 +137,14 @@ export default function MemPage() {
 
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable on disk.">
                 Move hot state to disk when you outgrow the process.
               </LinkCard>
-              <LinkCard href="/fabrics/ui" name="nu.ui" hue="teal">
+              <LinkCard href="/fabrics/ui" name="nu.ui" hue="teal" tagline="Live browser widgets.">
                 Bind mem state straight into browser widgets. Live
                 updates, no glue.
               </LinkCard>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum">
+              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum" tagline="Fabrics on the wire.">
                 Serve a mem fabric over a socket. Another process reads
                 the same Refs.
               </LinkCard>

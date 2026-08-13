@@ -18,6 +18,7 @@ import { GainGrid } from '@/components/chapters/GainGrid';
 import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { DiscordMark } from '@/components/marks/DiscordMark';
+import { FABRIC } from '@/lib/fabrics';
 import type { CodeTok } from '@/components/media/CodeSample';
 
 const HUE = 'plum' as const;
@@ -84,12 +85,13 @@ export default function ProxyFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button href="#install" variant="primaryPurple">
-              <span>Install nu</span>
-            </Button>
-            <Button href="/docs/reference/fabrics/proxy" variant="hueTinted">
+            <Button variant="primaryPurple" href={FABRIC.proxy.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
+            </Button>
+            <Button variant="hueTinted" href={FABRIC.proxy.src}>
+              <GithubMark size={14} />
+              <span>See the code</span>
             </Button>
           </CtaRow>
         }
@@ -152,7 +154,7 @@ export default function ProxyFabricPage() {
         {/* Combines with */}
         <Chapter>
           <SectionHead
-            title="Combines with."
+            title="Combines well with."
             lede={
               <>
                 Proxy is the wiring under multi-process Nu programs. Pair it
@@ -160,7 +162,7 @@ export default function ProxyFabricPage() {
               </>
             }
           />
-          <Section hue={HUE}>
+          <Section>
             <LinkGrid>
               <LinkCard
                 href="/fabrics/kv"

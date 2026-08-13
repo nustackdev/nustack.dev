@@ -12,6 +12,7 @@ import { SnippetBeat } from '@/components/chapters/SnippetBeat';
 import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { DiscordMark } from '@/components/marks/DiscordMark';
+import { FABRIC } from '@/lib/fabrics';
 import { KV_SNIPPET_LINES } from './snippet.data';
 
 export default function KvPage() {
@@ -29,11 +30,13 @@ export default function KvPage() {
         }
         actions={
           <CtaRow>
-            <Button href="#install" variant="primaryPurple">
-              <span>Install nu</span>
+            <Button variant="primaryPurple" href={FABRIC.kv.docs}>
+              <BookOpen size={14} aria-hidden />
+              <span>Read the reference</span>
             </Button>
-            <Button href="/docs/tutorials/movies">
-              <span>Read the tutorial</span>
+            <Button variant="hueTinted" href={FABRIC.kv.src}>
+              <GithubMark size={14} />
+              <span>See the code</span>
             </Button>
           </CtaRow>
         }
@@ -149,13 +152,13 @@ export default function KvPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/mem" title="nu.mem">
+              <LinkCard href="/fabrics/mem" name="nu.mem" hue="steel" tagline="Hot state, in-process.">
                 Keep hot state in dicts, spill the durable bits into kv.
               </LinkCard>
-              <LinkCard href="/fabrics/ui" title="nu.ui">
+              <LinkCard href="/fabrics/ui" name="nu.ui" hue="teal" tagline="Live browser widgets.">
                 Render kv slots as text, tables, forms. Live-updates for free.
               </LinkCard>
-              <LinkCard href="/fabrics/cluster" title="nu.cluster">
+              <LinkCard href="/fabrics/cluster" name="nu.cluster" hue="amber" tagline="Compute on the workers.">
                 Teleport a body to a worker. The kv Refs travel with it.
               </LinkCard>
             </LinkGrid>

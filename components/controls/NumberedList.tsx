@@ -5,7 +5,7 @@ import s from './NumberedList.module.css';
 
 export type NumberedItem =
   | ReactNode
-  | { label: ReactNode; href?: string; action?: string };
+  | { label: ReactNode; href?: string; action?: string; desc?: ReactNode };
 
 interface Props {
   items: NumberedItem[];
@@ -24,8 +24,8 @@ export function NumberedList({ items, className, action = 'See' }: Props) {
       {items.map((raw, i) => {
         const item =
           raw && typeof raw === 'object' && !Array.isArray(raw) && 'label' in (raw as object)
-            ? (raw as { label: ReactNode; href?: string; action?: string })
-            : { label: raw as ReactNode, href: undefined, action: undefined };
+            ? (raw as { label: ReactNode; href?: string; action?: string; desc?: ReactNode })
+            : { label: raw as ReactNode, href: undefined, action: undefined, desc: undefined };
         const num = <span className={s.num}>{String(i + 1).padStart(2, '0')}</span>;
         if (item.href) {
           return (
@@ -33,11 +33,14 @@ export function NumberedList({ items, className, action = 'See' }: Props) {
               <Link href={item.href} className={s.rowLink}>
                 {num}
                 <span className={s.label}>
-                  {item.label}
-                  <span className={s.action}>
-                    {item.action ?? action}
-                    <ArrowRight size={12} aria-hidden className={s.arrow} />
+                  <span className={s.labelRow}>
+                    {item.label}
+                    <span className={s.action}>
+                      {item.action ?? action}
+                      <ArrowRight size={12} aria-hidden className={s.arrow} />
+                    </span>
                   </span>
+                  {item.desc ? <span className={s.desc}>{item.desc}</span> : null}
                 </span>
               </Link>
             </li>
@@ -46,7 +49,10 @@ export function NumberedList({ items, className, action = 'See' }: Props) {
         return (
           <li key={i} className={s.item}>
             {num}
-            <span className={s.label}>{item.label}</span>
+            <span className={s.label}>
+              <span className={s.labelRow}>{item.label}</span>
+              {item.desc ? <span className={s.desc}>{item.desc}</span> : null}
+            </span>
           </li>
         );
       })}

@@ -10,15 +10,14 @@ import { Button, ButtonRepoLabel } from '@/components/controls/Button';
 import { MonoKicker } from '@/components/meta/MonoKicker';
 import { Meta } from '@/components/meta/Meta';
 import { NumberedList } from '@/components/controls/NumberedList';
+import { USE_CASES as USE_CASE_DATA, useCaseHref } from '@/lib/use-cases';
 import s from '../page.module.css';
 
-const USE_CASES = [
-  { label: 'AI agents', href: '/use-cases/ai-agents' },
-  { label: 'Local-first apps', href: '/use-cases/local-first' },
-  { label: 'Observability', href: '/use-cases/observability' },
-  { label: 'Data-intensive apps', href: '/use-cases/data-intensive' },
-  { label: 'Internal tools', href: '/use-cases/internal-tools' },
-];
+const USE_CASES = USE_CASE_DATA.map((u) => ({
+  label: u.name,
+  href: useCaseHref(u),
+  desc: u.navDesc,
+}));
 
 /**
  * Hero — landing-only page header. Bespoke two-column layout:

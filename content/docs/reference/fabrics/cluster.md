@@ -1,5 +1,5 @@
 ---
-title: nu.ray
+title: nu.cluster
 ---
 
 Distributed compute fabric backed by Ray. Locations are actor processes,
@@ -7,6 +7,9 @@ addresses are hashable tags, and the interaction is `Teleport` (ship a Nu
 tree to a tagged actor and await its result). `RayCluster` and `RayService`
 are lifecycle resources that slot into `Provide` / `ProvideList` /
 `ProvideDict`; `RayClusterRef` and `RayServiceRef` read them off `ctx`.
+
+> The fabric is branded `nu.cluster` in the docs and site; the Python
+> module is currently still `nu.ray` and will migrate over separately.
 
 ## Cluster
 

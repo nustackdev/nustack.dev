@@ -23,9 +23,9 @@ import { GithubMark } from '@/components/marks/GithubMark';
 import { DiscordMark } from '@/components/marks/DiscordMark';
 
 export const metadata: Metadata = {
-  title: 'nu.ray - cluster compute fabric',
+  title: 'nu.cluster - cluster compute fabric',
   description:
-    'Run any Nu program on a Ray cluster. Wrap a tree in Teleport and it executes on a remote actor, unchanged.',
+    'Run any Nu program on a cluster. Wrap a tree in Teleport and it executes on a remote actor, unchanged. Ray under the hood.',
 };
 
 // Snippet: teleport two Nu trees to two Ray actors.
@@ -55,12 +55,12 @@ const SNIPPET: CodeTok[][] = [
   [p('asyncio.run(arun(program))')],
 ];
 
-export default function RayFabricPage() {
+export default function ClusterFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.ray" hue="amber" />}
-        title={<>Run your Nu program on a Ray cluster.</>}
+        meta={<PageBadge kind="fabric" name="nu.cluster" hue="amber" />}
+        title={<>Run your Nu program on a cluster.</>}
         lede={
           <>
             Wrap a Nu tree in <code>Teleport</code> and it runs on a remote
@@ -83,7 +83,7 @@ export default function RayFabricPage() {
           />
           <Section hue="amber">
             <Stack>
-              <SilverWovenName as="h2" hue="amber">nu.ray</SilverWovenName>
+              <SilverWovenName as="h2" hue="amber">nu.cluster</SilverWovenName>
               <Tagline>Cluster compute fabric.</Tagline>
               <CodeSample
                 filename="train.py"
@@ -166,11 +166,11 @@ export default function RayFabricPage() {
                 needs without touching disk.
               </LinkCard>
               <LinkCard
-                href="/docs/reference/fabrics/ray"
+                href="/docs/reference/fabrics/cluster"
                 icon={<BookOpen size={14} />}
                 title="Read the reference"
               >
-                Every ref, resource, and knob for <code>nu.ray</code>.
+                Every ref, resource, and knob for <code>nu.cluster</code>.
               </LinkCard>
               <LinkCard
                 href="https://github.com/nustackdev/nu/tree/main/src/nu/ray"

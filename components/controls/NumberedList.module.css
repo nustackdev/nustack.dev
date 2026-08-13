@@ -33,6 +33,27 @@
 
 .label {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.labelRow {
+  min-width: 0;
+}
+
+.desc {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--site-fs-3);
+  color: var(--site-ink-4);
+  line-height: 1.4;
+  letter-spacing: var(--site-tr-tight);
+  transition: color .18s ease;
+}
+.rowLink:hover .desc,
+.rowLink:focus-visible .desc {
+  color: var(--site-ink-3);
 }
 
 .rowLink {

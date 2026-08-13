@@ -7,12 +7,15 @@ import { CodeSample } from '@/components/media/CodeSample';
 import { Button, ButtonRepoLabel } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { Chapter, Section, SectionCell, SectionHead } from '@/components/page';
+import { FABRICS } from '@/lib/fabrics';
 import {
   INTRO_PLAIN_LINES,
   INTRO_KV_LINES,
   INTRO_UI_LINES,
 } from '../intro.sample.data';
 import s from './IntroStory.module.css';
+
+const INTRO_FABRICS = FABRICS.filter((f) => f.showcase);
 
 /**
  * IntroStory — chapter header + body. Body is one Section where every beat
@@ -139,26 +142,12 @@ export function IntroStory() {
             </div>
             <div className={s.beatRight}>
               <dl className={s.fabricList}>
-                <div className={s.fabricRow}>
-                  <dt><code>nu.mem</code></dt>
-                  <dd>plain dicts, hot state</dd>
-                </div>
-                <div className={s.fabricRow}>
-                  <dt><code>nu.kv</code></dt>
-                  <dd>persistent state on a KV store</dd>
-                </div>
-                <div className={s.fabricRow}>
-                  <dt><code>nu.ui</code></dt>
-                  <dd>browser widgets, live-rendered</dd>
-                </div>
-                <div className={s.fabricRow}>
-                  <dt><code>nu.proxy</code></dt>
-                  <dd>any Fabric on the wire</dd>
-                </div>
-                <div className={s.fabricRow}>
-                  <dt><code>nu.ray</code></dt>
-                  <dd>teleport to a Ray cluster worker</dd>
-                </div>
+                {INTRO_FABRICS.map((f) => (
+                  <div key={f.slug} className={s.fabricRow}>
+                    <dt><code>{f.name}</code></dt>
+                    <dd>{f.navDesc}</dd>
+                  </div>
+                ))}
               </dl>
             </div>
           </section>
@@ -202,7 +191,7 @@ export function IntroStory() {
                 </li>
                 <li>
                   {' '}<strong>Run distributed across a cluster</strong>{' '}
-                  &mdash; bind through <code>nu.ray</code>; the Refs
+                  &mdash; bind through <code>nu.cluster</code>; the Refs
                   don&apos;t notice.
                 </li>
               </ul>

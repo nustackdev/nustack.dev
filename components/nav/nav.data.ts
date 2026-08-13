@@ -1,7 +1,14 @@
 /**
  * Nav data — single source of truth for the header nav and its Stack menu.
  * Consumed by FloatingNav (desktop pill + mobile sheet) and ProductsMenu.
+ *
+ * Product items are sourced from lib/{fabrics,tools,use-cases}.ts —
+ * this file only decides which of them appear in the nav and how they group.
  */
+
+import { FABRICS, fabricHref } from '@/lib/fabrics';
+import { TOOLS, toolHref } from '@/lib/tools';
+import { USE_CASES, useCaseHref } from '@/lib/use-cases';
 
 export type ProductItem = { name: string; href: string; desc: string };
 export type ProductGroup = {
@@ -22,38 +29,25 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     header: 'Fabrics',
     tagline: 'The interaction surfaces of nu.',
     href: '/fabrics',
-    items: [
-      { name: 'nu.mem', href: '/fabrics/mem', desc: 'In-memory state.' },
-      { name: 'nu.kv', href: '/fabrics/kv', desc: 'Persistent state.' },
-      { name: 'nu.ui', href: '/fabrics/ui', desc: 'Reactive web UI.' },
-    ],
+    items: FABRICS
+      .filter((f) => f.showcase)
+      .map((f) => ({ name: f.name, href: fabricHref(f), desc: f.navDesc })),
     explore: { label: 'Explore all', href: '/fabrics' },
   },
   {
     header: 'Tools',
     tagline: 'The libraries the fabrics stand on.',
     href: '/tools',
-    items: [
-      { name: 'virtuals', href: '/tools/virtuals', desc: 'Virtual Python collections.' },
-      { name: 'invisibles', href: '/tools/invisibles', desc: 'Remote objects for Python.' },
-      { name: 'rdbpy', href: '/tools/rdbpy', desc: 'RocksDB bindings.' },
-      { name: 'kh57', href: '/tools/kh57', desc: 'Deterministic KV sampling.' },
-    ],
+    items: TOOLS.map((t) => ({ name: t.name, href: toolHref(t), desc: t.navDesc })),
   },
 ];
 
-/** Use-cases group — footer-only for now. Not surfaced in the Stack dropdown. */
+/** Use-cases group — dropdown + footer sitemap. Items sourced from lib/use-cases.ts. */
 export const USE_CASES_GROUP: ProductGroup = {
   header: 'Use cases',
   tagline: 'Jobs the stack fits.',
   href: '/use-cases',
-  items: [
-    { name: 'AI agents', href: '/use-cases/ai-agents', desc: 'Long-running agents with memory.' },
-    { name: 'Local-first apps', href: '/use-cases/local-first', desc: 'Apps that live on your machine.' },
-    { name: 'Observability', href: '/use-cases/observability', desc: 'Logs and metrics without a server.' },
-    { name: 'Data-intensive apps', href: '/use-cases/data-intensive', desc: 'Terabytes in one Python program.' },
-    { name: 'Internal tools', href: '/use-cases/internal-tools', desc: 'Scalable dashboards that fit in a single file.' },
-  ],
+  items: USE_CASES.map((u) => ({ name: u.name, href: useCaseHref(u), desc: u.navDesc })),
   explore: { label: 'Explore all', href: '/use-cases' },
 };
 

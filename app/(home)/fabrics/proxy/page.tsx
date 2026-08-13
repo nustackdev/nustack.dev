@@ -172,8 +172,8 @@ export default function ProxyFabricPage() {
                 local Ref. No connection pool to manage.
               </LinkCard>
               <LinkCard
-                href="/fabrics/ray"
-                name="nu.ray"
+                href="/fabrics/cluster"
+                name="nu.cluster"
                 hue="amber"
                 tagline="Cluster compute fabric."
               >
@@ -248,8 +248,8 @@ export default function ProxyFabricPage() {
               <LinkCard href="/fabrics/kv" title="nu.kv">
                 Persistent state under the same Refs.
               </LinkCard>
-              <LinkCard href="/fabrics/ray" title="nu.ray">
-                Teleport a Nu tree to a Ray worker.
+              <LinkCard href="/fabrics/cluster" title="nu.cluster">
+                Teleport a Nu tree to a cluster worker.
               </LinkCard>
               <LinkCard href="/tools/invisibles" title="invisibles">
                 The transparent remote objects layer under nu.proxy.

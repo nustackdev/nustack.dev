@@ -155,7 +155,7 @@ export default function KvPage() {
               <LinkCard href="/fabrics/ui" title="nu.ui">
                 Render kv slots as text, tables, forms. Live-updates for free.
               </LinkCard>
-              <LinkCard href="/fabrics/ray" title="nu.ray">
+              <LinkCard href="/fabrics/cluster" title="nu.cluster">
                 Teleport a body to a worker. The kv Refs travel with it.
               </LinkCard>
             </LinkGrid>

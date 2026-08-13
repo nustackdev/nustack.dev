@@ -56,7 +56,11 @@ export const USE_CASES_GROUP: ProductGroup = {
   tagline: 'Jobs the stack fits.',
   href: '/use-cases',
   items: [
-    { name: 'observability', href: '/use-cases/observability', desc: 'Logs and metrics without a server.' },
+    { name: 'AI agents', href: '/use-cases/ai-agents', desc: 'Long-running agents with memory.' },
+    { name: 'Local-first apps', href: '/use-cases/local-first', desc: 'Apps that live on your machine.' },
+    { name: 'Observability', href: '/use-cases/observability', desc: 'Logs and metrics without a server.' },
+    { name: 'Data-intensive apps', href: '/use-cases/data-intensive', desc: 'Terabytes in one Python program.' },
+    { name: 'Internal tools', href: '/use-cases/internal-tools', desc: 'Scalable dashboards that fit in a single file.' },
   ],
   explore: { label: 'Explore all', href: '/use-cases' },
 };

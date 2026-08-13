@@ -13,10 +13,11 @@ import { NumberedList } from '@/components/controls/NumberedList';
 import s from '../page.module.css';
 
 const USE_CASES = [
-  { label: 'AI agentic systems', href: '/use-cases/observability' },
-  { label: 'Personal apps', href: '/use-cases/observability' },
-  { label: 'Data-intensive apps', href: '/use-cases/observability' },
-  { label: 'Enterprise in-house tools', href: '/use-cases/observability' },
+  { label: 'AI agents', href: '/use-cases/ai-agents' },
+  { label: 'Local-first apps', href: '/use-cases/local-first' },
+  { label: 'Observability', href: '/use-cases/observability' },
+  { label: 'Data-intensive apps', href: '/use-cases/data-intensive' },
+  { label: 'Internal tools', href: '/use-cases/internal-tools' },
 ];
 
 /**

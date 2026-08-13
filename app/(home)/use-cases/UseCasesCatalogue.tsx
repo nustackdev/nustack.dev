@@ -20,14 +20,54 @@ interface UseCase {
 
 const USE_CASES: UseCase[] = [
   {
-    name: 'observability',
+    name: 'AI agents',
+    slug: 'ai-agents',
+    hue: 'plum',
+    job: 'I want long-running agents with memory that persists.',
+    tagline: 'Agents that survive restarts.',
+    description:
+      'Context, tools, and world state that stick across sessions. No vector-db-of-the-week, no scaffolding rewrites.',
+    stack: ['nu.kv', 'nu.mem', 'nu.ray'],
+  },
+  {
+    name: 'Local-first apps',
+    slug: 'local-first',
+    hue: 'teal',
+    job: 'I want software that runs on my machine, forever.',
+    tagline: 'Own your data and your loop.',
+    description:
+      'Apps that keep their data on your disk, sync when they can, work when they can\'t. No account, no server, no monthly bill.',
+    stack: ['nu.kv', 'nu.ui'],
+  },
+  {
+    name: 'Observability',
     slug: 'observability',
     hue: 'sage',
     job: 'I want logs and metrics without running a server.',
-    tagline: 'Billions of entries in one process.',
+    tagline: 'Track anything, chart anything. At scale.',
     description:
       'Serverless observability on plain RocksDB. Live UI over the same store. Sample huge streams without scanning them. Shipped as nulog.',
     stack: ['nu.kv', 'nu.ui', 'kh57'],
+  },
+  {
+    name: 'Data-intensive apps',
+    slug: 'data-intensive',
+    hue: 'amber',
+    job: 'I want terabytes of data in one Python program.',
+    tagline: 'Big stores, live views.',
+    description:
+      'Own the data, own the queries, own the loop. Scale by adding processes, not services.',
+    stack: ['nu.kv', 'nu.ray', 'nu.proxy'],
+  },
+  {
+    name: 'Internal tools',
+    slug: 'internal-tools',
+    hue: 'steel',
+    job: 'I want dashboards and admin panels my team actually uses.',
+    tagline: 'Scalable dashboards that fit in a single file.',
+    description:
+      'Live web UIs for ops, support, and finance, built by whoever owns the process. No frontend team, no deploy pipeline.',
+    stack: ['nu.ui', 'nu.kv', 'nu.http'],
   },
 ];
 

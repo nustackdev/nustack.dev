@@ -20,7 +20,7 @@ export default function ObservabilityUseCasePage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="use case" name="observability" hue="sage" />}
+        meta={<PageBadge kind="use case" name="Observability" hue="sage" />}
         title="Logs and metrics without running a server."
         lede={
           <>

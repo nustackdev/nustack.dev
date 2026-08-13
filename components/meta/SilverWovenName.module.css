@@ -16,7 +16,6 @@
   font-size: var(--site-fs-12);
   letter-spacing: -0.03em;
   margin: 0;
-  text-transform: lowercase;
   display: inline-block;
   /* Shrink-wrap to the text so the background gradient (stretched to the
    * element's box) spans the visible glyphs, not the whole parent. */

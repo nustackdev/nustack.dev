@@ -1,18 +1,18 @@
-import { BookOpen, Play, Terminal } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/page';
 import { Description } from '@/components/text';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { CodeSample } from '@/components/media/CodeSample';
-import { Button, ButtonRepoLabel } from '@/components/controls/Button';
+import { Button } from '@/components/controls/Button';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { SnippetBeat } from '@/components/chapters/SnippetBeat';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
+import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 import { FABRIC } from '@/lib/fabrics';
 import { UI_COUNTER_LINES } from './ui.sample.data';
 
@@ -165,36 +165,8 @@ export default function UiFabricPage() {
           </Section>
         </Chapter>
 
-        {/* Chapter 4 — Try it */}
-        <TryItBlock
-          heading="Try it."
-          lede={<>One install, one command, a browser tab that stays live.</>}
-          command='pip install "nustack-py[all]"'
-          actions={
-            <CtaRow>
-              <Button variant="primaryBlue" href="/use-cases/movies">
-                <Play size={14} aria-hidden />
-                <span>Run the movies demo</span>
-              </Button>
-              <Button href="/docs/reference/fabrics/ui">
-                <Terminal size={14} aria-hidden />
-                <span>Open the reference</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu">
-                <GithubMark size={14} />
-                <ButtonRepoLabel>nustackdev/nu</ButtonRepoLabel>
-              </Button>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
+        <FabricTryIt />
+        <LikeThisBlock />
       </Body>
     </Page>
   );

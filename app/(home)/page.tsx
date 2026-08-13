@@ -1,8 +1,7 @@
-import { BookOpen, Star } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { VizFrame } from '@/components/media/VizFrame';
 import { MonoKicker } from '@/components/meta/MonoKicker';
-import { NumberedList } from '@/components/controls/NumberedList';
 import { Tagline, Description } from '@/components/text';
 import { CommandLine } from '@/components/media/CommandLine';
 import { LinkCard } from '@/components/controls/LinkCard';
@@ -10,8 +9,6 @@ import { Stack } from '@/components/layout/Stack';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
-import { XMark } from '@/components/marks/XMark';
 import {
   Page,
   Body,
@@ -19,6 +16,7 @@ import {
   Section,
   SectionHead,
 } from '@/components/page';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { HERO_BLOBS } from '@/components/bg/GradientBlobs';
 import { Hero } from './_blocks/Hero';
 import { IntroStory } from './_blocks/IntroStory';
@@ -190,42 +188,7 @@ export default function Home() {
         </Chapter>
 
         {/* 7. Like what you see — closing CTA to turn readers into followers. */}
-        <Chapter>
-        <SectionHead
-          title="Like what you see?"
-          lede={
-            <>
-              The project is young. Star it, join the room, watch what we
-              ship next.
-            </>
-          }
-        />
-        <Section>
-          <div className={s.communityGrid}>
-            <LinkCard
-              href="https://github.com/nustackdev/nu"
-              icon={<Star size={14} />}
-              title="Star on GitHub"
-            >
-              nustackdev/nu
-            </LinkCard>
-            <LinkCard
-              href="https://discord.gg/tCa8YE7XVr"
-              icon={<DiscordMark size={14} />}
-              title="Join Discord"
-            >
-              Talk to the team, share what you build.
-            </LinkCard>
-            <LinkCard
-              href="https://twitter.com/nustackdev"
-              icon={<XMark size={13} />}
-              title="Follow updates"
-            >
-              Ship notes and small demos on X.
-            </LinkCard>
-          </div>
-        </Section>
-        </Chapter>
+        <LikeThisBlock />
 
       </Body>
     </Page>

@@ -245,20 +245,6 @@
   }
 }
 
-/* Community row: three link cards for the closing "Like what you see?" chapter. */
-.communityGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--site-gap-normal);
-  min-width: 0;
-}
-@media (max-width: 640px) {
-  .communityGrid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--site-gap-loose);
-  }
-}
-
 /* -- Under-the-hood chapter grid ----------------------------------------- */
 /* 4-column compact grid for the standalone libs Nu is built on. Distinct
  * from Fabrics sections: no hues, no card surface, plain typographic rows.

@@ -15,9 +15,9 @@ import { LinkGrid } from '@/components/layout/LinkGrid';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
 import { GainGrid } from '@/components/chapters/GainGrid';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
+import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 import { FABRIC } from '@/lib/fabrics';
 import type { CodeTok } from '@/components/media/CodeSample';
 
@@ -204,64 +204,8 @@ export default function ProxyFabricPage() {
           </Section>
         </Chapter>
 
-        {/* Install */}
-        <TryItBlock
-          heading="Install."
-          lede={<>One wheel. Python 3.10+. Proxy ships in the box.</>}
-          command='pip install "nustack-py[all]"'
-          hue={HUE}
-          id="install"
-          actions={
-            <CtaRow>
-              <Button href="/docs/reference/fabrics/proxy" variant="hueTinted">
-                <BookOpen size={14} aria-hidden />
-                <span>Read the reference</span>
-              </Button>
-              <Button
-                href="https://github.com/nustackdev/nu"
-                variant="neutral"
-              >
-                <GithubMark size={14} />
-                <span>See the code</span>
-              </Button>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
-
-        {/* Keep going */}
-        <Chapter>
-          <SectionHead
-            title="Keep going."
-            lede={<>Related pages, one hop away.</>}
-          />
-          <Section>
-            <LinkGrid>
-              <LinkCard href="/fabrics" title="All fabrics">
-                Every fabric Nu ships with, on one page.
-              </LinkCard>
-              <LinkCard href="/fabrics/kv" title="nu.kv">
-                Persistent state under the same Refs.
-              </LinkCard>
-              <LinkCard href="/fabrics/cluster" title="nu.cluster">
-                Teleport a Nu tree to a cluster worker.
-              </LinkCard>
-              <LinkCard href="/tools/invisibles" title="invisibles">
-                The transparent remote objects layer under nu.proxy.
-              </LinkCard>
-              <LinkCard href="/docs/reference/fabrics/proxy" title="Reference">
-                Server, client, and bracket signatures.
-              </LinkCard>
-            </LinkGrid>
-          </Section>
-        </Chapter>
+        <FabricTryIt />
+        <LikeThisBlock />
       </Body>
     </Page>
   );

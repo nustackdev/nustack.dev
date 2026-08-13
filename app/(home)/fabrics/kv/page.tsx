@@ -9,9 +9,9 @@ import { CtaRow } from '@/components/layout/CtaRow';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { SnippetBeat } from '@/components/chapters/SnippetBeat';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
+import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 import { FABRIC } from '@/lib/fabrics';
 import { KV_SNIPPET_LINES } from './snippet.data';
 
@@ -165,71 +165,8 @@ export default function KvPage() {
           </Section>
         </Chapter>
 
-        {/* Keep going: docs and examples */}
-        <Chapter>
-          <SectionHead title="Keep going." />
-          <Section>
-            <LinkGrid>
-              <LinkCard
-                href="/docs/tutorials/movies"
-                icon={<BookOpen size={14} />}
-                title="Build the movies app"
-              >
-                Form, filterable table, detail pages. All refs, all kv.
-              </LinkCard>
-              <LinkCard
-                href="/docs/reference/fabrics/kv"
-                icon={<BookOpen size={14} />}
-                title="Read the reference"
-              >
-                Every ref, view, and preset the fabric ships with.
-              </LinkCard>
-              <LinkCard
-                href="https://github.com/nustackdev/nu/tree/main/examples"
-                icon={<GithubMark size={14} />}
-                title="Browse examples"
-              >
-                Real programs on GitHub. Counter, movies, sampled, and more.
-              </LinkCard>
-            </LinkGrid>
-          </Section>
-        </Chapter>
-
-        {/* Install and next steps */}
-        <TryItBlock
-          heading="Install and dig in."
-          lede={
-            <>
-              One command gets you the wheel with every fabric. Then follow
-              the movies tutorial to build a real app in an afternoon.
-            </>
-          }
-          command='pip install "nustack-py[all]"'
-          id="install"
-          actions={
-            <CtaRow>
-              <Button href="/docs/install" variant="primaryPurple">
-                <span>Install nu</span>
-              </Button>
-              <Button href="/docs/reference/fabrics/kv">
-                <BookOpen size={14} aria-hidden />
-                <span>Open the reference</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu">
-                <GithubMark size={14} />
-                <span>nustackdev/nu</span>
-              </Button>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
+        <FabricTryIt />
+        <LikeThisBlock />
       </Body>
     </Page>
   );

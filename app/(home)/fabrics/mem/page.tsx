@@ -1,4 +1,4 @@
-import { BookOpen, PlayCircle } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { Page, Header, Body, Chapter, Section, SectionCell, SectionHead } from '@/components/page';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
@@ -8,8 +8,8 @@ import { Button } from '@/components/controls/Button';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { GainGrid } from '@/components/chapters/GainGrid';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
-import { DiscordMark } from '@/components/marks/DiscordMark';
+import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 import { MEM_COUNTER_LINES } from './mem.sample.data';
@@ -152,61 +152,8 @@ export default function MemPage() {
           </Section>
         </Chapter>
 
-        {/* Chapter 4 — keep going */}
-        <Chapter>
-          <SectionHead title="Keep going." />
-          <Section>
-            <LinkGrid>
-              <LinkCard
-                href="/docs/tutorials/hello"
-                icon={<PlayCircle size={14} />}
-                title="Walk through hello"
-              >
-                A minimal program, end to end.
-              </LinkCard>
-              <LinkCard
-                href="/docs/reference/fabrics/mem"
-                icon={<BookOpen size={14} />}
-                title="Read the reference"
-              >
-                Every Ref type in nu.mem, with signatures.
-              </LinkCard>
-              <LinkCard href="/fabrics" title="Browse all fabrics">
-                See the full surface Nu ships with.
-              </LinkCard>
-            </LinkGrid>
-          </Section>
-        </Chapter>
-
-        {/* Chapter 5 — install */}
-        <TryItBlock
-          heading="Try it."
-          lede={<>One install, then keep reading.</>}
-          command='pip install "nustack-py[all]"'
-          id="install"
-          actions={
-            <CtaRow>
-              <Button href="/docs/install" variant="primaryPurple">
-                <span>Install nu</span>
-              </Button>
-              <Button href="/docs">
-                <BookOpen size={14} aria-hidden />
-                <span>Open the docs</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu">
-                <span>Star on GitHub</span>
-              </Button>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
+        <FabricTryIt />
+        <LikeThisBlock />
       </Body>
     </Page>
   );

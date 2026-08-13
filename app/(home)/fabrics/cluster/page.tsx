@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BookOpen, Star } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import {
   Page,
   Header,
@@ -13,14 +13,14 @@ import { PageBadge } from '@/components/meta/PageBadge';
 import { Tagline } from '@/components/text';
 import { CodeSample, type CodeTok } from '@/components/media/CodeSample';
 import { GainGrid } from '@/components/chapters/GainGrid';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
+import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Stack } from '@/components/layout/Stack';
 import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 import { FABRIC } from '@/lib/fabrics';
 
 export const metadata: Metadata = {
@@ -182,34 +182,8 @@ export default function ClusterFabricPage() {
           </Section>
         </Chapter>
 
-        {/* Learn + install: docs, source, one-command install. */}
-        <TryItBlock
-          heading="Try it."
-          lede={<>One install. Two links. Python 3.10+.</>}
-          command='pip install "nustack-py[all]"'
-          actions={
-            <CtaRow>
-              <Button href="/fabrics" variant="neutral">
-                <span>Browse all fabrics</span>
-              </Button>
-              <Button
-                href="https://github.com/nustackdev/nu"
-                variant="hueTinted"
-              >
-                <Star size={14} aria-hidden />
-                <span>Star on GitHub</span>
-              </Button>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
+        <FabricTryIt />
+        <LikeThisBlock />
       </Body>
     </Page>
   );

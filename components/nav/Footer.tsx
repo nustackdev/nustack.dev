@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { NuLogo } from '@/components/marks/NuLogo';
 import { NustackMark } from '@/components/marks/NustackMark';
 import { SocialLinks } from '@/components/nav/SocialLinks';
-import { PRODUCT_GROUPS } from '@/components/nav/nav.data';
+import { PRODUCT_GROUPS, USE_CASES_GROUP } from '@/components/nav/nav.data';
 import s from './Footer.module.css';
 
 /**
@@ -25,9 +25,11 @@ const LEARN_LINKS = [
 const AREAS: Record<string, string> = {
   Foundations: 'foundations',
   Fabrics: 'fabrics',
-  Infra: 'infra',
-  Apps: 'apps',
+  Tools: 'tools',
+  'Use cases': 'usecases',
 };
+
+const FOOTER_GROUPS = [...PRODUCT_GROUPS, USE_CASES_GROUP];
 
 export function Footer() {
   return (
@@ -54,15 +56,24 @@ export function Footer() {
 
           {/* Sitemap: 4 groups × { header, tagline, rich items } */}
           <div className={s.sitemap}>
-            {PRODUCT_GROUPS.map((group) => (
+            {FOOTER_GROUPS.map((group) => (
               <div
                 key={group.header}
                 className={s.group}
                 style={{ gridArea: AREAS[group.header] }}
               >
                 <div className={s.groupHead}>
-                  <div className={s.groupHeader}>{group.header}</div>
-                  <div className={s.groupTagline}>{group.tagline}</div>
+                  {group.href ? (
+                    <Link href={group.href} className={s.groupHeaderLink}>
+                      <span className={s.groupHeader}>{group.header}</span>
+                      <span className={s.groupTagline}>{group.tagline}</span>
+                    </Link>
+                  ) : (
+                    <>
+                      <div className={s.groupHeader}>{group.header}</div>
+                      <div className={s.groupTagline}>{group.tagline}</div>
+                    </>
+                  )}
                 </div>
                 <ul className={s.items}>
                   {group.items.map((item) => (

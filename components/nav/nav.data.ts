@@ -1,5 +1,5 @@
 /**
- * Nav data — single source of truth for the header nav and its Products menu.
+ * Nav data — single source of truth for the header nav and its Stack menu.
  * Consumed by FloatingNav (desktop pill + mobile sheet) and ProductsMenu.
  */
 
@@ -7,8 +7,13 @@ export type ProductItem = { name: string; href: string; desc: string };
 export type ProductGroup = {
   header: string;
   tagline: string;
+  /** Optional href — when set, the group header itself becomes a link to
+   * the group's catalogue page (e.g. Fabrics → /fabrics). */
+  href?: string;
   items: ProductItem[];
-  /** Optional trailing text link (e.g. "Explore →") pointing to a catalogue. */
+  /** Optional trailing text link (e.g. "Explore →") pointing to a catalogue.
+   * Redundant when `href` is set; kept for groups whose header is not itself
+   * a page. */
   explore?: { label: string; href: string };
 };
 
@@ -24,6 +29,7 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   {
     header: 'Fabrics',
     tagline: 'The interaction surfaces of nu.',
+    href: '/fabrics',
     items: [
       { name: 'nu.mem', href: '/fabrics/mem', desc: 'In-memory state.' },
       { name: 'nu.kv', href: '/fabrics/kv', desc: 'Persistent state.' },
@@ -34,15 +40,26 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   {
     header: 'Tools',
     tagline: 'The libraries the fabrics stand on.',
+    href: '/tools',
     items: [
       { name: 'virtuals', href: '/tools/virtuals', desc: 'Virtual Python collections.' },
       { name: 'invisibles', href: '/tools/invisibles', desc: 'Remote objects for Python.' },
       { name: 'rdbpy', href: '/tools/rdbpy', desc: 'RocksDB bindings.' },
       { name: 'kh57', href: '/tools/kh57', desc: 'Deterministic KV sampling.' },
     ],
-    explore: { label: 'Explore all', href: '/tools' },
   },
 ];
+
+/** Use-cases group — footer-only for now. Not surfaced in the Stack dropdown. */
+export const USE_CASES_GROUP: ProductGroup = {
+  header: 'Use cases',
+  tagline: 'Jobs the stack fits.',
+  href: '/use-cases',
+  items: [
+    { name: 'observability', href: '/use-cases/observability', desc: 'Logs and metrics without a server.' },
+  ],
+  explore: { label: 'Explore all', href: '/use-cases' },
+};
 
 export type WordLink = { label: string; href: string };
 

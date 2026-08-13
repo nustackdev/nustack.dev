@@ -1,6 +1,6 @@
 /* =============================================================================
- * NumberedList — editorial numbered index. Two-col grid: `NN` (mono, dim) +
- * label (display). Currently only used by the hero's "Built for" list.
+ * NumberedList — editorial numbered index. Three-col grid: `NN` (mono, dim)
+ * + label (display) + optional trailing action link.
  * ==========================================================================*/
 
 .list {
@@ -29,4 +29,43 @@
   color: var(--site-ink-3);
   letter-spacing: 0.1em;
   font-variant-numeric: tabular-nums;
+}
+
+.label {
+  min-width: 0;
+}
+
+.rowLink {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}
+.rowLink:hover .label,
+.rowLink:focus-visible .label {
+  color: var(--site-ink);
+}
+.rowLink:hover .action,
+.rowLink:focus-visible .action {
+  color: var(--site-ink);
+}
+.rowLink:hover .arrow,
+.rowLink:focus-visible .arrow {
+  transform: translateX(2px);
+}
+
+.action {
+  font-family: var(--font-mono);
+  font-size: var(--site-fs-2);
+  color: var(--site-ink-3);
+  letter-spacing: 0.02em;
+  margin-left: 8px;
+  transition: color .18s ease;
+  white-space: nowrap;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: -2px;
+  margin-left: 3px;
+  transition: transform .18s ease;
 }

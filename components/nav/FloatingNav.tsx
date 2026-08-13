@@ -21,7 +21,7 @@ import { GithubMark } from '@/components/marks/GithubMark';
 import { ProductsMenu } from './ProductsMenu';
 import { SocialLinks } from './SocialLinks';
 import { ThemeToggle } from './ThemeToggle';
-import { PRODUCT_GROUPS, WORD_LINKS, SOCIAL_LINKS } from './nav.data';
+import { PRODUCT_GROUPS, USE_CASES_GROUP, WORD_LINKS, SOCIAL_LINKS } from './nav.data';
 import s from './FloatingNav.module.css';
 
 const HOVER_CLOSE_MS = 140;
@@ -31,6 +31,7 @@ export function FloatingNav() {
   const pathname = usePathname();
 
   const [productsOpen, setProductsOpen] = useState(false);
+  const [useCasesOpen, setUseCasesOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
@@ -38,12 +39,16 @@ export function FloatingNav() {
   const pillRef = useRef<HTMLDivElement>(null);
   const productsTriggerRef = useRef<HTMLButtonElement>(null);
   const productsPanelRef = useRef<HTMLDivElement>(null);
+  const useCasesTriggerRef = useRef<HTMLButtonElement>(null);
+  const useCasesPanelRef = useRef<HTMLDivElement>(null);
   const sheetCloseRef = useRef<HTMLButtonElement>(null);
   const hoverTimer = useRef<number | null>(null);
+  const useCasesHoverTimer = useRef<number | null>(null);
 
   // Close both surfaces on route change.
   useEffect(() => {
     setProductsOpen(false);
+    setUseCasesOpen(false);
     setSheetOpen(false);
   }, [pathname]);
 
@@ -61,11 +66,24 @@ export function FloatingNav() {
     return () => document.removeEventListener('mousedown', onDown);
   }, [productsOpen]);
 
+  useEffect(() => {
+    if (!useCasesOpen) return;
+    const onDown = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const inPill = pillRef.current?.contains(target);
+      const inPanel = useCasesPanelRef.current?.contains(target);
+      if (!inPill && !inPanel) setUseCasesOpen(false);
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, [useCasesOpen]);
+
   // Esc closes either surface and returns focus to the products trigger.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
       setProductsOpen(false);
+      setUseCasesOpen(false);
       setSheetOpen(false);
       productsTriggerRef.current?.focus();
     };
@@ -113,6 +131,7 @@ export function FloatingNav() {
   const openProducts = useCallback(() => {
     if (hoverTimer.current) window.clearTimeout(hoverTimer.current);
     setProductsOpen(true);
+    setUseCasesOpen(false);
   }, []);
   const scheduleCloseProducts = useCallback(() => {
     if (hoverTimer.current) window.clearTimeout(hoverTimer.current);
@@ -128,6 +147,26 @@ export function FloatingNav() {
       setProductsOpen(true);
     }
   }, [toggleProducts]);
+
+  const openUseCases = useCallback(() => {
+    if (useCasesHoverTimer.current) window.clearTimeout(useCasesHoverTimer.current);
+    setUseCasesOpen(true);
+    setProductsOpen(false);
+  }, []);
+  const scheduleCloseUseCases = useCallback(() => {
+    if (useCasesHoverTimer.current) window.clearTimeout(useCasesHoverTimer.current);
+    useCasesHoverTimer.current = window.setTimeout(() => setUseCasesOpen(false), HOVER_CLOSE_MS);
+  }, []);
+  const toggleUseCases = useCallback(() => setUseCasesOpen(v => !v), []);
+  const onUseCasesKey = useCallback((e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleUseCases();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setUseCasesOpen(true);
+    }
+  }, [toggleUseCases]);
 
   return (
     <header className={s.floatingNav}>
@@ -153,7 +192,7 @@ export function FloatingNav() {
             onClick={toggleProducts}
             onKeyDown={onProductsKey}
           >
-            Products
+            Stack
             <svg className={s.caret} width="8" height="6" viewBox="0 0 8 6" fill="none" aria-hidden>
               <path d="M1 1l3 3 3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -168,6 +207,41 @@ export function FloatingNav() {
               role="menu"
             >
               <ProductsMenu />
+            </div>,
+            document.body,
+          )}
+        </div>
+
+        <div
+          className={s.productsSlot}
+          onMouseEnter={openUseCases}
+          onMouseLeave={scheduleCloseUseCases}
+        >
+          <button
+            ref={useCasesTriggerRef}
+            type="button"
+            className={s.navWord}
+            aria-haspopup="menu"
+            aria-expanded={useCasesOpen}
+            data-open={useCasesOpen ? 'true' : 'false'}
+            onClick={toggleUseCases}
+            onKeyDown={onUseCasesKey}
+          >
+            Use cases
+            <svg className={s.caret} width="8" height="6" viewBox="0 0 8 6" fill="none" aria-hidden>
+              <path d="M1 1l3 3 3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {useCasesOpen && mounted && createPortal(
+            <div
+              ref={useCasesPanelRef}
+              className={s.panelWrap}
+              onMouseEnter={openUseCases}
+              onMouseLeave={scheduleCloseUseCases}
+              role="menu"
+            >
+              <ProductsMenu groups={[USE_CASES_GROUP]} />
             </div>,
             document.body,
           )}
@@ -241,34 +315,39 @@ export function FloatingNav() {
             <CloseIcon size={18} aria-hidden />
           </button>
 
-          {/* Top-level nav mirrors desktop: Products (expandable) · Docs
-              · Blog · About. Only Products has a submenu. */}
-          <details className={s.sheetAccordion}>
-            <summary className={s.sheetAccordionSummary}>
-              <span>Products</span>
-            </summary>
-            <div className={s.sheetAccordionBody}>
-              {PRODUCT_GROUPS.map((group) => (
-                <div key={group.header} className={s.sheetSubGroup}>
-                  <div className={s.sheetSubHeader}>{group.header}</div>
-                  {group.items.map((item) => (
-                    <Link key={item.href} href={item.href} className={s.sheetSubLink}>
-                      <span>{item.name}</span>
-                      <span className={s.sheetLinkDesc}>{item.desc}</span>
-                    </Link>
-                  ))}
-                  {group.explore ? (
-                    <Link href={group.explore.href} className={s.sheetSubLink}>
-                      <span>
-                        {group.explore.label}
-                        <ArrowRight size={14} aria-hidden className={s.sheetSubExploreArrow} />
-                      </span>
-                    </Link>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </details>
+          {/* Top-level nav mirrors desktop: Stack + Use cases (each expandable)
+              · Docs · Blog · About. */}
+          {[
+            { label: 'Stack', groups: PRODUCT_GROUPS },
+            { label: 'Use cases', groups: [USE_CASES_GROUP] },
+          ].map((section) => (
+            <details key={section.label} className={s.sheetAccordion}>
+              <summary className={s.sheetAccordionSummary}>
+                <span>{section.label}</span>
+              </summary>
+              <div className={s.sheetAccordionBody}>
+                {section.groups.map((group) => (
+                  <div key={group.header} className={s.sheetSubGroup}>
+                    <div className={s.sheetSubHeader}>{group.header}</div>
+                    {group.items.map((item) => (
+                      <Link key={item.href} href={item.href} className={s.sheetSubLink}>
+                        <span>{item.name}</span>
+                        <span className={s.sheetLinkDesc}>{item.desc}</span>
+                      </Link>
+                    ))}
+                    {group.explore ? (
+                      <Link href={group.explore.href} className={s.sheetSubLink}>
+                        <span>
+                          {group.explore.label}
+                          <ArrowRight size={14} aria-hidden className={s.sheetSubExploreArrow} />
+                        </span>
+                      </Link>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </details>
+          ))}
 
           {WORD_LINKS.map((w) => (
             <Link key={w.href} href={w.href} className={s.sheetTopLink}>

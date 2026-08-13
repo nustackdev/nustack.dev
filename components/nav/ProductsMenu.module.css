@@ -11,7 +11,7 @@
 .panel {
   min-width: 880px;
   max-width: min(1080px, 96vw);
-  padding: var(--site-link-card-pad-x);
+  padding: var(--site-gap-tight) var(--site-link-card-pad-x);
   border-radius: var(--site-r-lg);
   border: 1px solid var(--site-border);
   background: color-mix(in oklab, var(--site-bg-overlay) 72%, transparent);
@@ -48,6 +48,7 @@
   font-weight: 500;
   color: var(--site-ink);
   letter-spacing: 0.005em;
+  display: block;
 }
 .groupTagline {
   font-family: var(--font-display);
@@ -55,6 +56,27 @@
   font-weight: 400;
   color: var(--site-ink-3);
   line-height: 1.35;
+  display: block;
+}
+
+.groupNameLink {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--site-gap-tight);
+  margin: calc(-1 * var(--site-gap-tight));
+  border-radius: var(--site-r-md);
+  text-decoration: none;
+  transition: background 180ms ease-out;
+}
+.groupNameLink:hover,
+.groupNameLink:focus-visible {
+  background: var(--site-wash);
+  outline: none;
+}
+.groupNameLink:hover .groupTagline,
+.groupNameLink:focus-visible .groupTagline {
+  color: var(--site-ink-2);
 }
 
 /* Explore card — same as a regular item, arrow inline after the label.

@@ -114,7 +114,7 @@
 .sitemap {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-areas: "foundations fabrics infra apps";
+  grid-template-areas: "foundations fabrics tools usecases";
   gap: var(--site-gap-loose);
   min-width: 0;
 }
@@ -127,18 +127,33 @@
   border-bottom: 1px solid var(--site-rule-2);
 }
 
+.groupHeaderLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: color .18s ease;
+}
+.groupHeaderLink:hover .groupHeader,
+.groupHeaderLink:focus-visible .groupHeader { color: var(--site-accent); outline: none; }
+.groupHeaderLink:hover .groupTagline,
+.groupHeaderLink:focus-visible .groupTagline { color: var(--site-ink-3); }
+
 .groupHeader {
+  display: block;
   color: var(--site-ink);
   font-size: var(--site-fs-5);
   font-weight: var(--site-fw-semibold);
   letter-spacing: 0.005em;
+  transition: color .18s ease;
 }
 
 .groupTagline {
+  display: block;
   margin-top: 4px;
   color: var(--site-ink-4);
   font-size: var(--site-fs-3);
   line-height: 1.4;
+  transition: color .18s ease;
 }
 
 .items {
@@ -256,8 +271,8 @@
     grid-template-areas:
       "foundations"
       "fabrics"
-      "infra"
-      "apps";
+      "tools"
+      "usecases";
   }
   .itemDesc {
     -webkit-line-clamp: 1;

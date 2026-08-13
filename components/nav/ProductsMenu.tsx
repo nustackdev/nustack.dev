@@ -11,21 +11,30 @@
 
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { PRODUCT_GROUPS } from './nav.data';
+import { PRODUCT_GROUPS, type ProductGroup } from './nav.data';
 import s from './ProductsMenu.module.css';
 
-export function ProductsMenu() {
+export function ProductsMenu({ groups = PRODUCT_GROUPS }: { groups?: ProductGroup[] }) {
   return (
     <div className={s.panel}>
-      {PRODUCT_GROUPS.map((group, i) => (
+      {groups.map((group, i) => (
         <div
           key={group.header}
           className={s.row}
           data-first={i === 0 ? 'true' : undefined}
         >
           <div className={s.left}>
-            <div className={s.groupName}>{group.header}</div>
-            <div className={s.groupTagline}>{group.tagline}</div>
+            {group.href ? (
+              <Link href={group.href} className={s.groupNameLink} role="menuitem">
+                <span className={s.groupName}>{group.header}</span>
+                <span className={s.groupTagline}>{group.tagline}</span>
+              </Link>
+            ) : (
+              <>
+                <div className={s.groupName}>{group.header}</div>
+                <div className={s.groupTagline}>{group.tagline}</div>
+              </>
+            )}
           </div>
           <div className={s.right}>
             {group.items.map((item) => (

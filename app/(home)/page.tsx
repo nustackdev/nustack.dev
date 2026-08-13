@@ -118,9 +118,8 @@ export default function Home() {
           title="Fabrics."
           lede={
             <>
-              Fabrics are the tissue between Refs and the real world: memory,
-              kv stores, UI, network, cluster. These are the ones Nu ships
-              with today.
+              Each fabric gives your Nu app a new capability. These are the
+              ones Nu ships with today.
             </>
           }
         />

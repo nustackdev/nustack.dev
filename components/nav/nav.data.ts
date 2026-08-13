@@ -27,7 +27,7 @@ export type ProductGroup = {
 export const PRODUCT_GROUPS: ProductGroup[] = [
   {
     header: 'Fabrics',
-    tagline: 'The interaction surfaces of nu.',
+    tagline: 'Each fabric, a Nu capability.',
     href: '/fabrics',
     items: FABRICS
       .filter((f) => f.showcase)

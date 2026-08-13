@@ -8,8 +8,8 @@ export default function FabricsPage() {
         title="Fabrics."
         lede={
           <>
-            Fabrics are the tissue between Refs and the real world. Core fabrics
-            ship with Nu; integrations bind Nu to specific systems.
+            Each fabric gives your Nu app a new capability. State, UI,
+            distributed execution and more.
           </>
         }
       />

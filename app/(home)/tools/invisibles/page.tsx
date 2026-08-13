@@ -1,4 +1,4 @@
-import { BookOpen, Package } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import {
   Page,
   Header,
@@ -13,9 +13,7 @@ import { Button } from '@/components/controls/Button';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Stack } from '@/components/layout/Stack';
 import { GainGrid } from '@/components/chapters/GainGrid';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 
@@ -140,46 +138,6 @@ export default function InvisiblesPage() {
             />
           </Section>
         </Chapter>
-
-        {/* Install and try. */}
-        <TryItBlock
-          heading="Install and try"
-          lede={
-            <>
-              One pip install. Two example programs in the repo, one over
-              Unix sockets, one over TCP.
-            </>
-          }
-          command='pip install "nustack-py[all]"'
-          actions={
-            <CtaRow>
-              <Button
-                href="https://github.com/nustackdev/invisibles/tree/main/examples"
-                variant="hueTinted"
-                external
-              >
-                <Package size={14} aria-hidden />
-                <span>Browse examples</span>
-              </Button>
-              <Button
-                href="https://github.com/nustackdev/invisibles"
-                variant="hueTinted"
-                external
-              >
-                <GithubMark size={14} />
-                <span>Read the README</span>
-              </Button>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
 
         {/* Where it fits. */}
         <Chapter>

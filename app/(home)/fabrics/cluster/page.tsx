@@ -13,7 +13,7 @@ import { PageBadge } from '@/components/meta/PageBadge';
 import { Tagline } from '@/components/text';
 import { CodeSample, type CodeTok } from '@/components/media/CodeSample';
 import { GainGrid } from '@/components/chapters/GainGrid';
-import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
@@ -182,7 +182,7 @@ export default function ClusterFabricPage() {
           </Section>
         </Chapter>
 
-        <FabricTryIt />
+        <TryIt />
         <LikeThisBlock />
       </Body>
     </Page>

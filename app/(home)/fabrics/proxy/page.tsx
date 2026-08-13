@@ -15,7 +15,7 @@ import { LinkGrid } from '@/components/layout/LinkGrid';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
 import { GainGrid } from '@/components/chapters/GainGrid';
-import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
@@ -204,7 +204,7 @@ export default function ProxyFabricPage() {
           </Section>
         </Chapter>
 
-        <FabricTryIt />
+        <TryIt />
         <LikeThisBlock />
       </Body>
     </Page>

@@ -9,7 +9,7 @@ import { CtaRow } from '@/components/layout/CtaRow';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { SnippetBeat } from '@/components/chapters/SnippetBeat';
-import { FabricTryIt } from '@/components/chapters/FabricTryIt';
+import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
@@ -165,7 +165,7 @@ export default function KvPage() {
           </Section>
         </Chapter>
 
-        <FabricTryIt />
+        <TryIt />
         <LikeThisBlock />
       </Body>
     </Page>

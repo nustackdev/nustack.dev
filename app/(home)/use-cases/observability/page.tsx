@@ -9,9 +9,7 @@ import { CtaRow } from '@/components/layout/CtaRow';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { SnippetBeat } from '@/components/chapters/SnippetBeat';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 import { NulogMockSvg } from '@/components/marks/NulogMock';
 import { Screenshot } from '@/components/media/Screenshot';
 import { NULOG_SNIPPET_LINES } from './snippet.data';
@@ -193,30 +191,6 @@ export default function ObservabilityUseCasePage() {
           </Section>
         </Chapter>
 
-        {/* Install and next steps */}
-        <TryItBlock
-          heading="Install and run it."
-          lede={
-            <>
-              One command puts <code>nulog</code> on your path. Paste the
-              snippet above, hit run, open the viewer.
-            </>
-          }
-          command='pip install nulog'
-          id="install"
-          actions={
-            <CtaRow>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nulog/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
       </Body>
     </Page>
   );

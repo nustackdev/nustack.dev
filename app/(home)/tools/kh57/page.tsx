@@ -13,11 +13,9 @@ import { Button } from '@/components/controls/Button';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Stack } from '@/components/layout/Stack';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { GainGrid } from '@/components/chapters/GainGrid';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
 
 export const metadata = {
   title: 'kh57. Uniform samples from huge sorted key-value stores.',
@@ -131,30 +129,6 @@ export default function Kh57ToolPage() {
             />
           </Section>
         </Chapter>
-
-        {/* Install and try. */}
-        <TryItBlock
-          heading="Install and try."
-          lede={
-            <>
-              One pip install. Python 3.12+. The hot loop is Cython. Wheels
-              ship for Linux.
-            </>
-          }
-          command='pip install "nustack-py[all]"'
-          actions={
-            <CtaRow>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
 
         {/* Sample from a range. */}
         <Chapter>

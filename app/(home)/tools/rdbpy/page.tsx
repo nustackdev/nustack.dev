@@ -17,9 +17,7 @@ import { CtaRow } from '@/components/layout/CtaRow';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { Stack } from '@/components/layout/Stack';
 import { CodeSample, type CodeTok } from '@/components/media/CodeSample';
-import { TryItBlock } from '@/components/chapters/TryItBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
 
 const HUE = 'sage'; // rdbpy backs nu.kv, share its hue
 
@@ -171,29 +169,6 @@ export default function RdbpyPage() {
             </Stack>
           </Section>
         </Chapter>
-
-        <TryItBlock
-          heading="Install."
-          lede={
-            <>
-              Package name is <code>rdbpython</code> on PyPI, module is{' '}
-              <code>rdbpy</code>.
-            </>
-          }
-          command='pip install "nustack-py[all]"'
-          actions={
-            <CtaRow>
-              <Button href="https://discord.gg/tCa8YE7XVr">
-                <DiscordMark size={14} />
-                <span>Ask on Discord</span>
-              </Button>
-              <Button href="https://github.com/nustackdev/nu/issues">
-                <GithubMark size={14} />
-                <span>Report an issue</span>
-              </Button>
-            </CtaRow>
-          }
-        />
 
         <Chapter>
           <SectionHead title="Open a database." />

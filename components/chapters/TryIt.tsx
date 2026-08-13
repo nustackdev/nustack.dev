@@ -3,14 +3,14 @@ import { CommandLine } from '@/components/media/CommandLine';
 import { MonoKicker } from '@/components/meta/MonoKicker';
 import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
-import s from './FabricTryIt.module.css';
+import s from './TryIt.module.css';
 
 /**
- * FabricTryIt — the unified closing "Try it." chapter every fabric page uses.
+ * TryIt — the unified closing "Try it." chapter every fabric page uses.
  * Three cells in one row: install, run the demo, browse examples.
  * Zero props so the copy stays in one place — edit here, all pages follow.
  */
-export function FabricTryIt() {
+export function TryIt() {
   return (
     <Chapter>
       <SectionHead

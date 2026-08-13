@@ -16,9 +16,9 @@ import { FABRIC } from '@/lib/fabrics';
 import { HTTP_SAMPLE_LINES } from './http.sample.data';
 
 export const metadata = {
-  title: 'nu.http: talk to any HTTP API through Refs',
+  title: 'nu.http: plug an HTTP API into Nu',
   description:
-    'Declare a REST or JSON-RPC endpoint once. Call it like a function. Nu handles the wire, the JSON, sync and async.',
+    'You need to talk to an HTTP API. Name the endpoints once and call them from your Nu program like anything else.',
 };
 
 export default function HttpFabricPage() {
@@ -26,11 +26,11 @@ export default function HttpFabricPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.http" hue="amber" />}
-        title="Talk to any HTTP API through Refs."
+        title="Plug an HTTP API into Nu."
         lede={
           <>
-            Declare a REST or JSON-RPC endpoint once. Call it like a function.
-            Nu handles the wire, the JSON, sync and async.
+            You need to talk to an HTTP API. Name the endpoints once and call
+            them from your Nu program like anything else.
           </>
         }
         actions={
@@ -51,11 +51,12 @@ export default function HttpFabricPage() {
         {/* Chapter 1 — capability + code */}
         <Chapter>
           <SectionHead
-            title="Endpoints as Refs."
+            title="Point Nu at your API."
             lede={
               <>
-                Give any HTTP service a Nu shape. Every method becomes a Ref
-                you can compose into the same tree as your storage and UI.
+                List the endpoints you need. Give Nu the base URL. Now inside
+                your Nu program, calling an endpoint hits the real API and
+                hands the response back.
               </>
             }
           />
@@ -65,18 +66,16 @@ export default function HttpFabricPage() {
             prose={
               <>
                 <Description>
-                  A <code>nu.Service</code> subclass names the endpoints.{' '}
-                  <code>GETRef.method</code> and its four siblings cover the
-                  five verbs: GET, POST, PUT, PATCH, DELETE.
+                  Start with the endpoints you already hit — GET this, POST
+                  that. Name them and give each one its path.
                 </Description>
                 <Description>
-                  Path placeholders and body fields come from kwargs. The
-                  response arrives as parsed JSON, ready to feed into any
-                  other Ref in your program.
+                  Hand Nu the base URL. That is the whole client — no request
+                  builder, no wrapper class per API.
                 </Description>
                 <Description>
-                  Below: the GitHub repo endpoint declared once, called like a
-                  local function. No client class, no request builder.
+                  Call an endpoint anywhere in the program. The response comes
+                  back parsed and ready for whatever comes next.
                 </Description>
               </>
             }
@@ -87,8 +86,8 @@ export default function HttpFabricPage() {
         {/* Chapter 2 — What your program gains */}
         <Chapter>
           <SectionHead
-            title="What your program gains."
-            lede={<>Three things fall out of naming HTTP calls as Refs.</>}
+            title="What you get out of it."
+            lede={<>A few things that fall out once your API speaks Nu.</>}
           />
 
           <Section>
@@ -96,22 +95,16 @@ export default function HttpFabricPage() {
               hue="amber"
               items={[
                 {
-                  title: 'One shape for five verbs.',
-                  body: 'GET, POST, PUT, PATCH, DELETE all read the same in your code. No client boilerplate per method. One import.',
+                  title: 'One shape for every verb.',
+                  body: 'GET, POST, PUT, PATCH, DELETE all read the same in your code. No client class per API, no request builder to learn.',
                 },
                 {
-                  title: 'Sync and async, same code.',
-                  body: (
-                    <>
-                      The same service runs under <code>nu.run</code> or{' '}
-                      <code>nu.arun</code>. Nu picks the right httpx client for
-                      the call site.
-                    </>
-                  ),
+                  title: 'Sync or async, your call.',
+                  body: 'Write the program however you write it today. Nu runs sync programs and async programs the same way, and picks the right HTTP path underneath.',
                 },
                 {
-                  title: 'Composes with the tree.',
-                  body: 'Feed a response into a kv slot, a UI text block, or another request. One primitive, all the way down.',
+                  title: 'Plays with everything else.',
+                  body: 'A response is a normal Nu value the moment you get it. Feed it into a live UI, drop it in storage, or hand it to the next call.',
                 },
               ]}
             />
@@ -121,10 +114,11 @@ export default function HttpFabricPage() {
         {/* Chapter 3 — Combines well with */}
         <Chapter>
           <SectionHead
-            title="Combines well with."
+            title="Goes well with."
             lede={
               <>
-                Responses are Refs. Wire them straight into any other fabric.
+                Once your responses are Nu values, the rest of the stack picks
+                them up.
               </>
             }
           />
@@ -135,30 +129,30 @@ export default function HttpFabricPage() {
                 href="/fabrics/ui"
                 name="nu.ui"
                 hue="teal"
-                tagline="Widgets that read from the wire."
+                tagline="See responses on screen."
               >
-                Render fetched data straight into a live browser widget.
-                Refresh the Ref, the page redraws.
-              </LinkCard>
-
-              <LinkCard
-                href="/fabrics/proxy"
-                name="nu.proxy"
-                hue="plum"
-                tagline="Share the service across processes."
-              >
-                Bind the client in one process, call it from another. Same
-                Refs, over TCP or Unix socket.
+                Wire a fetch straight into a live widget. Refresh the value,
+                the page redraws. No render code in between.
               </LinkCard>
 
               <LinkCard
                 href="/fabrics/kv"
                 name="nu.kv"
                 hue="sage"
-                tagline="Cache and cursor state on disk."
+                tagline="Remember responses on disk."
               >
-                Persist responses, poll cursors, or dedupe requests through
-                a RocksDB-backed Ref.
+                Cache what you fetched. Track cursors between polls. Reload
+                later and pick up where you left off.
+              </LinkCard>
+
+              <LinkCard
+                href="/fabrics/proxy"
+                name="nu.proxy"
+                hue="plum"
+                tagline="Use one client from many processes."
+              >
+                Keep the client in one process, call it from others. Your
+                code does not notice the difference.
               </LinkCard>
             </LinkGrid>
           </Section>

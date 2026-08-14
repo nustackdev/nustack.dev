@@ -81,6 +81,9 @@
   --site-btn-pad-y:      calc(var(--site-u) * 0.75);
   --site-btn-pad-x:      calc(var(--site-u) * 1.2);
   --site-btn-gap:        calc(var(--site-u) * 0.75);
+  /* Shared control height — every inline control (Button, CommandLine, etc.)
+     that sits in the same row should render at this height. */
+  --site-control-h:      calc(var(--site-u) * 2.925);
   --site-list-item-gap:  calc(var(--site-u) * 0.75);
   --site-list-item-pad-y: calc(var(--site-u) * 0.35);
   --site-code-pad-y:     calc(var(--site-u) * 1);

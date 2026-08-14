@@ -1,4 +1,3 @@
-import { BookOpen, FileText, Globe } from 'lucide-react';
 import {
   Page,
   Body,
@@ -8,11 +7,8 @@ import {
   SectionHead,
 } from '@/components/page';
 import { Description } from '@/components/text';
-import { LinkCard } from '@/components/controls/LinkCard';
-import { LinkGrid } from '@/components/layout/LinkGrid';
-import { GithubMark } from '@/components/marks/GithubMark';
-import { DiscordMark } from '@/components/marks/DiscordMark';
-import { XMark } from '@/components/marks/XMark';
+import { TryIt } from '@/components/chapters/TryIt';
+import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 
 /**
  * /about — trust page. Personal, first-person, written by Gor.
@@ -20,8 +16,6 @@ import { XMark } from '@/components/marks/XMark';
  * are meant to be replaced with Gor's own writing. The structure,
  * cross-links, and CTAs are the deliverable; the prose is not.
  */
-const PERSONAL_SITE_URL: string | null = null;
-
 export default function AboutPage() {
   return (
     <Page>
@@ -92,79 +86,11 @@ export default function AboutPage() {
           </Section>
         </Chapter>
 
-        {/* 4. Read more — lateral + deeper links out of this page. */}
-        <Chapter>
-          <SectionHead
-            title="Go deeper."
-            lede={<>Two ways to go deeper on the thinking.</>}
-          />
-          <Section>
-            <LinkGrid>
-              <LinkCard
-                href="/spec"
-                icon={<FileText size={14} />}
-                title="The interaction model"
-              >
-                The language-agnostic spec Nu is one implementation of.
-              </LinkCard>
-              <LinkCard
-                href="/blog"
-                icon={<BookOpen size={14} />}
-                title="Notes and updates"
-              >
-                Posts on what we shipped, what we broke, what is next.
-              </LinkCard>
-            </LinkGrid>
-          </Section>
-        </Chapter>
+        {/* 4. Try it — install / demo / examples row. */}
+        <TryIt />
 
-        {/* 5. Get in touch — CTA row. Primary is discord per sitemap. */}
-        <Chapter>
-          <SectionHead
-            title="Get in touch."
-            lede={
-              <>
-                The room is small and friendly. Say hi, ask a question, show
-                what you built.
-              </>
-            }
-          />
-          <Section>
-            <LinkGrid>
-              <LinkCard
-                href="https://discord.gg/tCa8YE7XVr"
-                icon={<DiscordMark size={14} />}
-                title="Join Discord"
-              >
-                Talk to Gor and the small circle building on Nu.
-              </LinkCard>
-              <LinkCard
-                href="https://github.com/nustackdev"
-                icon={<GithubMark size={14} />}
-                title="See on GitHub"
-              >
-                Nu and the standalone libs live here. Star, watch, file issues.
-              </LinkCard>
-              <LinkCard
-                href="https://twitter.com/nustackdev"
-                icon={<XMark size={13} />}
-                title="Follow on X"
-              >
-                Ship notes, small demos, and the occasional rant.
-              </LinkCard>
-              {PERSONAL_SITE_URL && (
-                <LinkCard
-                  href={PERSONAL_SITE_URL}
-                  icon={<Globe size={14} />}
-                  title="Gor's site"
-                  external
-                >
-                  {'{{gor: one-line description of your personal site.}}'}
-                </LinkCard>
-              )}
-            </LinkGrid>
-          </Section>
-        </Chapter>
+        {/* 5. Like this — closing community CTA. */}
+        <LikeThisBlock />
       </Body>
     </Page>
   );

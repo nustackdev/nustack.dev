@@ -25,14 +25,17 @@
 
 .body {
   position: relative;
-  padding: var(--site-code-pad-y) calc(var(--site-code-pad-x) * 3) var(--site-code-pad-y) var(--site-code-pad-x);
+  display: flex;
+  align-items: center;
+  min-height: var(--site-control-h);
+  padding: 0 calc(var(--site-btn-pad-x) * 2.4) 0 var(--site-btn-pad-x);
   min-width: 0;
 }
 
 .lines {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2px;
   min-width: 0;
 }
 
@@ -42,8 +45,8 @@
   gap: 0.65em;
   min-width: 0;
   font-size: var(--site-fs-4);
-  line-height: 1.7;
-  min-height: 1.7em;
+  line-height: 1.2;
+  min-height: 1.2em;
 }
 
 .prompt {
@@ -62,33 +65,37 @@
   background: transparent;
   padding: 0;
   border: 0;
-  /* Wrap long commands — no scrollbars, card height flexes naturally. */
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  /* Long commands scroll horizontally inside the fixed-height row.
+     Scrollbar chrome hidden — swipe/scroll still works. */
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
 }
+.code::-webkit-scrollbar { display: none; }
 
 /* Copy button — floats top-right, matches .ideCopy exactly. */
 .copy {
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
   z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: 1px solid var(--site-border-subtle);
   border-radius: 6px;
-  background: var(--site-wash);
+  background: var(--site-surface-2);
   color: var(--site-ink-3);
   cursor: pointer;
   transition: color var(--site-t), background var(--site-t), border-color var(--site-t);
 }
 .copy:hover {
   color: var(--site-ink);
-  background: var(--site-wash-2);
+  background: var(--site-surface);
   border-color: var(--site-border);
 }
 .copy:focus-visible {

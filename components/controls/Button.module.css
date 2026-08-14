@@ -13,7 +13,8 @@
   display: inline-flex;
   align-items: center;
   gap: var(--site-btn-gap);
-  padding: var(--site-btn-pad-y) var(--site-btn-pad-x);
+  min-height: var(--site-control-h);
+  padding: 0 var(--site-btn-pad-x);
   border-radius: var(--site-r-md);
   border: 1px solid var(--site-border-strong);
   background: var(--site-wash);
@@ -95,7 +96,8 @@
 .ghost {
   display: inline-flex;
   align-items: center;
-  padding: var(--site-btn-pad-y) var(--site-btn-pad-x);
+  min-height: var(--site-control-h);
+  padding: 0 var(--site-btn-pad-x);
   border-radius: var(--site-r-md);
   border: 1px dashed var(--site-rule-2);
   background: transparent;
@@ -112,7 +114,8 @@
   display: inline-flex;
   align-items: center;
   gap: var(--site-btn-gap);
-  padding: var(--site-btn-pad-y) var(--site-btn-pad-x);
+  min-height: var(--site-control-h);
+  padding: 0 var(--site-btn-pad-x);
   border-radius: var(--site-r-md);
   border: 1px solid var(--site-accent-line);
   background: var(--site-accent-wash);

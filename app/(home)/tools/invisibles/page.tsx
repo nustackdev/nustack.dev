@@ -16,7 +16,6 @@ import { Stack } from '@/components/layout/Stack';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { RelationsLine } from '@/components/meta/RelationsLine';
 import { TOOL } from '@/lib/tools';
@@ -38,12 +37,7 @@ export default function InvisiblesPage() {
             <RelationsLine label="Powers" refs={TOOL.invisibles.powers} />
           </>
         }
-        title={
-          <>
-            <SilverWovenName as="span" hue="plum">invisibles</SilverWovenName>
-            <span>. Same object, different machine.</span>
-          </>
-        }
+        title="Same object, different machine."
         lede={
           <>
             Move a Python object to another process or node. The code that
@@ -105,15 +99,14 @@ export default function InvisiblesPage() {
           </Section>
         </Chapter>
 
-        {/* Why standalone. */}
+        {/* What you get. */}
         <Chapter>
           <SectionHead
-            title="Why it stands alone"
+            title="What you get."
             lede={
               <>
-                Nu uses invisibles to bind fabrics across processes. It works
-                just as well without Nu, for any Python code that needs to
-                cross a boundary.
+                Three properties that hold whether the object lives here or
+                across the wire.
               </>
             }
           />
@@ -151,10 +144,10 @@ export default function InvisiblesPage() {
             title="Powers Nu."
             lede={
               <>
-                <SilverWovenName as="span" hue="plum">invisibles</SilverWovenName>{' '}
-                is the foundation under <code>nu.proxy</code>, the network fabric.
-                Bind a fabric in one process, use it from another; same Refs,
-                over TCP or Unix socket.
+                <code>invisibles</code> is the foundation under{' '}
+                <code>nu.proxy</code>, the network fabric. Bind a fabric in
+                one process, use it from another; same Refs, over TCP or
+                Unix socket.
               </>
             }
           />

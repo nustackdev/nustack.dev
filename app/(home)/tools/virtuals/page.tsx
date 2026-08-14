@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Page, Header, Body, Chapter, Section, SectionCell, SectionHead } from '@/components/page';
 import { Tagline, Description } from '@/components/text';
-import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
@@ -75,20 +74,20 @@ export default function VirtualsToolPage() {
           </Section>
         </Chapter>
 
-        {/* Why standalone */}
+        {/* What you get */}
         <Chapter>
-          <SectionHead title="Why it ships alone." />
+          <SectionHead title="What you get." />
           <Section split="1/1">
             <SectionCell>
               <Stack>
                 <Description>
-                  <SilverWovenName as="span" hue="sage">virtuals</SilverWovenName>{' '}
-                  predates the Nu stack. It is the KV substrate <code>nu.kv</code> rides on,
-                  but it is useful on its own.
+                  SQLAlchemy-shaped ergonomics without the SQL. No ORM,
+                  no schema, no server process to run.
                 </Description>
                 <Description>
-                  Grab it when you want SQLAlchemy-shaped ergonomics over a KV store instead
-                  of over SQL. No ORM. No schema. No server.
+                  Every collection carries the same four properties,
+                  backend to backend. The API you learn on an in-memory
+                  store is the API you keep on RocksDB.
                 </Description>
               </Stack>
             </SectionCell>
@@ -135,9 +134,8 @@ export default function VirtualsToolPage() {
             title="Powers Nu."
             lede={
               <>
-                <SilverWovenName as="span" hue="sage">virtuals</SilverWovenName>{' '}
-                is the substrate. <code>nu.kv</code> wraps it in Refs so state reads
-                and writes look like plain Python.
+                <code>virtuals</code> is the substrate. <code>nu.kv</code>{' '}
+                wraps it in Refs so state reads and writes look like plain Python.
               </>
             }
           />

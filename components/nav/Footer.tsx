@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { NuLogo } from '@/components/marks/NuLogo';
 import { NustackMark } from '@/components/marks/NustackMark';
 import { SocialLinks } from '@/components/nav/SocialLinks';
@@ -19,7 +19,7 @@ const LEARN_LINKS = [
   { label: 'Docs', href: '/docs' },
   { label: 'Blog', href: '/blog' },
   { label: 'Spec', href: '/spec' },
-  { label: 'Changelog', href: '/changelog' },
+  { label: 'Changelog', href: 'https://github.com/nustackdev/nu/blob/main/CHANGELOG.md' },
   { label: 'About', href: '/about' },
 ];
 
@@ -46,11 +46,21 @@ export function Footer() {
               <p className={s.brandTagline}>The interaction primitive.</p>
             </div>
             <ul className={s.learnList}>
-              {LEARN_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className={s.learnLink}>{l.label}</Link>
-                </li>
-              ))}
+              {LEARN_LINKS.map((l) => {
+                const external = l.href.startsWith('http');
+                return (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className={s.learnLink}
+                      {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
+                    >
+                      {l.label}
+                      {external && <ArrowUpRight size={11} aria-hidden className={s.learnLinkExternal} />}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

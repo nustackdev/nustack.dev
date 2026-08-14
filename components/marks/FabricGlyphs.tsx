@@ -401,6 +401,122 @@ export function RayGlyph() {
   );
 }
 
+/* -------------------------------- nu.llm ----------------------------------- */
+/** Central chat pill over a row of provider swap-plates.
+ *  Reads: "one chat call, many providers".
+ */
+export function LlmGlyph() {
+  const cx = V.w / 2;
+
+  const providers = ['ollama', 'openai', 'openrouter', 'groq'] as const;
+  const activeIdx = 0;
+  const plateW = 96;
+  const plateH = 26;
+  const plateGap = 8;
+  const totalPlatesW = plateW * providers.length + plateGap * (providers.length - 1);
+  const platesX0 = cx - totalPlatesW / 2;
+  const plateY = V.h - 46;
+
+  // Chat pill spans the same width as the plates row for visual anchor.
+  const chatW = totalPlatesW;
+  const chatH = 46;
+  const chatX = cx - chatW / 2;
+  const chatY = 66;
+
+  return (
+    <Frame aria="nu.llm glyph: a central chat pill reading 'prompt » text' sits over a row of four provider swap-plates — ollama (active), openai, openrouter, groq.">
+      {/* eyebrow */}
+      <text
+        x={40}
+        y={28}
+        style={{ fill: INK4, fontFamily: MONO, fontSize: 10, letterSpacing: '0.24em' }}
+      >
+        chat · providers
+      </text>
+
+      {/* central chat pill */}
+      <rect
+        x={chatX}
+        y={chatY}
+        width={chatW}
+        height={chatH}
+        rx={3}
+        fill={ACCENT2_WASH}
+        stroke={ACCENT2}
+        strokeWidth={1.25}
+        vectorEffect="non-scaling-stroke"
+      />
+      {/* pill content — one text element so kerning stays honest */}
+      <text
+        x={cx}
+        y={chatY + chatH / 2 + 5}
+        textAnchor="middle"
+        style={{
+          fontFamily: MONO,
+          fontSize: 14,
+          fontWeight: 500,
+          letterSpacing: '0.14em',
+        }}
+      >
+        <tspan fill={INK}>prompt</tspan>
+        <tspan fill={ACCENT2} fontWeight={700} dx="0.55em" dy={-1}>»</tspan>
+        <tspan fill={INK} dx="0.55em" dy={1}>text</tspan>
+      </text>
+      {/* tiny label above the pill */}
+      <text
+        x={cx}
+        y={chatY - 10}
+        textAnchor="middle"
+        style={{
+          fill: ACCENT2,
+          fontFamily: MONO,
+          fontSize: 10,
+          fontWeight: 700,
+          letterSpacing: '0.24em',
+        }}
+      >
+        chat
+      </text>
+
+      {/* provider swap-plates */}
+      {providers.map((name, i) => {
+        const px = platesX0 + i * (plateW + plateGap);
+        const active = i === activeIdx;
+        return (
+          <g key={name}>
+            <rect
+              x={px}
+              y={plateY}
+              width={plateW}
+              height={plateH}
+              rx={3}
+              fill={active ? ACCENT2_WASH : 'transparent'}
+              stroke={active ? ACCENT2 : RULE_SOFT}
+              strokeWidth={1}
+              strokeDasharray={active ? undefined : '3 3'}
+              vectorEffect="non-scaling-stroke"
+            />
+            <text
+              x={px + plateW / 2}
+              y={plateY + 17}
+              textAnchor="middle"
+              style={{
+                fill: active ? ACCENT2 : INK3,
+                fontFamily: MONO,
+                fontSize: 10.5,
+                fontWeight: active ? 700 : 500,
+                letterSpacing: '0.18em',
+              }}
+            >
+              {name}
+            </text>
+          </g>
+        );
+      })}
+    </Frame>
+  );
+}
+
 /* --------------------------------- ui -------------------------------------- */
 /** Browser chrome with a live Ref chip bound to a rendered value. */
 export function UiGlyph() {

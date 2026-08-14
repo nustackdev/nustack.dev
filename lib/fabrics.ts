@@ -23,6 +23,7 @@ import {
   UiGlyph,
   ProxyGlyph,
   RayGlyph,
+  LlmGlyph,
 } from '@/components/marks/FabricGlyphs';
 
 /** Fabric record — derived link fields (`href`, `docs`, `src`) are attached
@@ -94,6 +95,18 @@ const SPECS: FabricSpec[] = [
     glyph: RayGlyph,
   },
   {
+    name: 'nu.llm',
+    slug: 'llm',
+    hue: 'teal',
+    tagline: 'LLM chat fabric.',
+    description:
+      'One OpenAI-compatible wire, N providers. Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM — same ChatRef, same call.',
+    navDesc: 'OpenAI-compatible chat.',
+    showcase: true,
+    poweredBy: [],
+    glyph: LlmGlyph,
+  },
+  {
     name: 'nu.mem',
     slug: 'mem',
     hue: 'steel',
@@ -101,7 +114,6 @@ const SPECS: FabricSpec[] = [
     description:
       'In-memory state on plain dicts. Perfect for cache, hot state, and in-process coordination.',
     navDesc: 'In-memory state.',
-    showcase: true,
     poweredBy: [],
     glyph: MemGlyph,
   },
@@ -137,6 +149,22 @@ const SPECS: FabricSpec[] = [
       'Wrap any Python object as a Nu Service. Its methods become Refs — queries, actions, streams, commands — you compose into the tree.',
     navDesc: 'Python objects as Refs.',
     poweredBy: [],
+  },
+  {
+    name: 'nu.cc',
+    slug: 'cc',
+    hue: 'amber',
+    tagline: 'Claude Code fabric.',
+    description:
+      'Claude Code as a Ref. Prompt from your Nu tree, scope sessions with a bracket, get text and metadata back.',
+    navDesc: 'Claude Code as a Ref.',
+    poweredBy: [
+      {
+        kind: 'external',
+        name: 'claude-agent-sdk',
+        url: 'https://github.com/anthropics/claude-agent-sdk-python',
+      },
+    ],
   },
   {
     name: 'nu.mp',

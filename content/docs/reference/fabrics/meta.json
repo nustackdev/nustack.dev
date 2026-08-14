@@ -1,4 +1,16 @@
 {
   "title": "Fabrics",
-  "pages": ["index", "mem", "kv", "ui", "ray", "proxy"]
+  "pages": [
+    "index",
+    "kv",
+    "ui",
+    "cluster",
+    "llm",
+    "mem",
+    "proxy",
+    "http",
+    "service",
+    "cc",
+    "mp"
+  ]
 }

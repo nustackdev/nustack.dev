@@ -8,12 +8,9 @@ tree to a tagged actor and await its result). `RayCluster` and `RayService`
 are lifecycle resources that slot into `Provide` / `ProvideList` /
 `ProvideDict`; `RayClusterRef` and `RayServiceRef` read them off `ctx`.
 
-> The fabric is branded `nu.cluster` in the docs and site; the Python
-> module is currently still `nu.ray` and will migrate over separately.
-
 ## Cluster
 
-`from nu.ray import RayCluster, RayClusterRef`
+`from nu.cluster import RayCluster, RayClusterRef`
 
 | Name          | Sort     | Signature                                                                   | Effect     | Meaning                                                                                     |
 | ------------- | -------- | --------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- |
@@ -22,7 +19,7 @@ are lifecycle resources that slot into `Provide` / `ProvideList` /
 
 ## Service
 
-`from nu.ray import RayService, RayServiceRef`
+`from nu.cluster import RayService, RayServiceRef`
 
 | Name          | Sort      | Signature                                                                                                                                    | Effect     | Meaning                                                                                                              |
 | ------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -42,7 +39,7 @@ resolves the tuple-keyed entry.
 
 ## Interaction
 
-`from nu.ray import Teleport`
+`from nu.cluster import Teleport`
 
 | Name     | Sort   | Signature                                       | Effect | Meaning                                                                                            |
 | -------- | ------ | ----------------------------------------------- | ------ | -------------------------------------------------------------------------------------------------- |

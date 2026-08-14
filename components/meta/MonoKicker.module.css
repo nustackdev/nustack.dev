@@ -10,6 +10,7 @@
   font-family: var(--font-mono);
   color: var(--site-ink-3);
   font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
 }
 
 .xs { composes: kicker; font-size: var(--site-fs-1); }

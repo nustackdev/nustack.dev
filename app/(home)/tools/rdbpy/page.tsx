@@ -6,12 +6,12 @@ import {
   Section,
   SectionHead,
 } from '@/components/page';
-import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { RelationsLine } from '@/components/meta/RelationsLine';
 import { Tagline, Description } from '@/components/text';
 import { Button } from '@/components/controls/Button';
 import { GainGrid } from '@/components/chapters/GainGrid';
+import { SnippetBeat } from '@/components/chapters/SnippetBeat';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { CtaRow } from '@/components/layout/CtaRow';
@@ -88,12 +88,7 @@ export default function RdbpyPage() {
             <RelationsLine label="Powers" refs={TOOL.rdbpy.powers} />
           </>
         }
-        title={
-          <>
-            <SilverWovenName as="span" hue={HUE}>rdbpy</SilverWovenName>
-            {' '}ships RocksDB for Python in one pip install.
-          </>
-        }
+        title="RocksDB for Python in one pip install."
         lede={
           <>
             Real Cython bindings for RocksDB. Ships as one wheel on Linux and
@@ -141,17 +136,18 @@ export default function RdbpyPage() {
         </Chapter>
 
         <Chapter>
-          <SectionHead title="Why we built it." />
+          <SectionHead title="What you get." />
           <Section>
             <Stack gap="normal">
               <Description>
-                Nu needed a persistent KV backend that installs the same way on
-                every machine. Existing RocksDB bindings for Python assume you
-                already have RocksDB, Snappy, LZ4, and Zstd on the system, and
-                the right versions. That kills one-line install.
+                Existing RocksDB bindings for Python assume you already have
+                RocksDB, Snappy, LZ4, and Zstd on the system, at the right
+                versions. rdbpy bundles them into the wheel, so{' '}
+                <code>pip install</code> is the whole install story.
               </Description>
               <GainGrid
                 hue={HUE}
+                cols={3}
                 items={[
                   {
                     title: 'One pip install.',
@@ -165,10 +161,6 @@ export default function RdbpyPage() {
                     title: 'Full surface.',
                     body: 'Transactions, snapshots, merge operators, column families all exposed.',
                   },
-                  {
-                    title: 'Backs nu.kv.',
-                    body: 'The persistent state fabric stands on this.',
-                  },
                 ]}
               />
             </Stack>
@@ -176,10 +168,22 @@ export default function RdbpyPage() {
         </Chapter>
 
         <Chapter>
-          <SectionHead title="Open a database." />
-          <Section hue="code">
-            <CodeSample filename="db.py" lang="python" langShort="py" lines={SNIPPET} />
-          </Section>
+          <SectionHead
+            title="Open a database."
+            lede={<>Open the DB, put and get bytes, wrap writes in a transaction.</>}
+          />
+          <SnippetBeat
+            ratio="45/55"
+            hue={HUE}
+            prose={
+              <Description>
+                Iterators, snapshots, and merge operators come from the same
+                <code>db</code> object. The C++ semantics carry over
+                one-to-one.
+              </Description>
+            }
+            code={<CodeSample filename="db.py" lang="python" langShort="py" lines={SNIPPET} />}
+          />
         </Chapter>
 
         <Chapter>

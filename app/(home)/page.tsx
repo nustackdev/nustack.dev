@@ -134,7 +134,10 @@ export default function Home() {
                   <Tagline>{f.tagline}</Tagline>
                   <Description>{f.description}</Description>
                   <CtaRow>
-                    <Button href={`/docs/reference/fabrics/${f.slug}`} variant="hueTinted">
+                    <Button href={f.href} variant="hueTinted">
+                      <span>See it</span>
+                    </Button>
+                    <Button href={f.docs} variant="hueTinted">
                       <BookOpen size={14} aria-hidden />
                       <span>Read the docs</span>
                     </Button>

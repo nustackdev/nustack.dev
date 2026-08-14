@@ -50,6 +50,11 @@ const SPECS: ToolSpec[] = [
     description:
       'Native-shaped Python collections that are thin views over an ordered KV store. Same API as a built-in dict or list, but the bytes stay on disk and stream in on access.',
     navDesc: 'Virtual Python collections.',
+    poweredBy: [
+      { kind: 'tool', slug: 'rdbpy' },
+      { kind: 'external', name: 'RocksDB', url: 'https://rocksdb.org' },
+      { kind: 'external', name: 'LMDB', url: 'https://www.symas.com/lmdb' },
+    ],
     powers: [{ kind: 'fabric', slug: 'kv' }],
     repo: 'nustackdev/virtuals',
     pypi: 'virtuals-py',

@@ -10,6 +10,7 @@ import {
 } from '@/components/page';
 import { Tagline, Description } from '@/components/text';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample, type CodeTok } from '@/components/media/CodeSample';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { SnippetBeat } from '@/components/chapters/SnippetBeat';
@@ -59,6 +60,7 @@ export default function MpFabricPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.mp" hue={HUE} />}
+        tags={<RelationsLine label="Powered by" refs={FABRIC.mp.poweredBy} />}
         title={<>Run your Nu program across local processes.</>}
         lede={
           <>

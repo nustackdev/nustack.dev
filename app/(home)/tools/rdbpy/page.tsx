@@ -8,6 +8,7 @@ import {
 } from '@/components/page';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { Tagline, Description } from '@/components/text';
 import { Button } from '@/components/controls/Button';
 import { GainGrid } from '@/components/chapters/GainGrid';
@@ -81,6 +82,12 @@ export default function RdbpyPage() {
     <Page>
       <Header
         meta={<PageBadge kind="tool" name="rdbpy" hue={HUE} />}
+        tags={
+          <>
+            <RelationsLine label="Powered by" refs={TOOL.rdbpy.poweredBy} />
+            <RelationsLine label="Powers" refs={TOOL.rdbpy.powers} />
+          </>
+        }
         title={
           <>
             <SilverWovenName as="span" hue={HUE}>rdbpy</SilverWovenName>

@@ -98,8 +98,11 @@
   --site-t:    0.15s ease;
 
   /* --- Silver-woven hue palette --------------------------------------- */
-  /* Section-specific accents. Same values in both themes — the -soft/-wash/
-     -line alpha variants degrade gracefully on either background. */
+  /* Section-specific accents. The base hex + -soft/-wash/-line alpha
+     variants are shared across themes (they degrade gracefully on either
+     background). The `-ink` variant — foreground text sitting on top of
+     the wash — is theme-specific and defined in the light :root / .dark
+     blocks below, mirroring SilverWovenName's per-theme hue stops. */
   --site-hue-steel:      #9bb0d0;
   --site-hue-steel-soft: rgba(155, 176, 208, 0.18);
   --site-hue-steel-wash: rgba(155, 176, 208, 0.10);
@@ -177,6 +180,15 @@
   --site-ink-3:  rgba(76, 79, 91, 0.75);
   --site-ink-4:  rgba(76, 79, 91, 0.5);
 
+  /* --- Hue ink (foreground text on hue-wash) ------------------------- */
+  /* Darker, saturated hue stops that read with real contrast on the
+     near-white light background. Matches SilverWovenName's light stops. */
+  --site-hue-steel-ink: #2f4b73;
+  --site-hue-sage-ink:  #3d5f4a;
+  --site-hue-plum-ink:  #5d3f70;
+  --site-hue-amber-ink: #7a5a2a;
+  --site-hue-teal-ink:  #285860;
+
   /* --- Rule ----------------------------------------------------------- */
   --site-rule:   rgba(0, 0, 0, 0.08);
   --site-rule-2: rgba(0, 0, 0, 0.04);
@@ -248,6 +260,14 @@
   --site-ink-2:  #b3b0c8;
   --site-ink-3:  rgba(179, 176, 200, 0.82);
   --site-ink-4:  rgba(179, 176, 200, 0.55);
+
+  /* Higher-chroma, brighter hue stops so foreground text pops on the
+     dark bg's hue-wash pill (the shared pale hex reads washed out). */
+  --site-hue-steel-ink: #b8ccff;
+  --site-hue-sage-ink:  #a8e8b8;
+  --site-hue-plum-ink:  #dcaef5;
+  --site-hue-amber-ink: #ffc985;
+  --site-hue-teal-ink:  #9eecf5;
 
   --site-rule:   rgba(255, 255, 255, 0.08);
   --site-rule-2: rgba(255, 255, 255, 0.04);

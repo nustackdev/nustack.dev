@@ -18,6 +18,7 @@ import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { TOOL } from '@/lib/tools';
 
 export const metadata = {
@@ -31,6 +32,12 @@ export default function InvisiblesPage() {
     <Page>
       <Header
         meta={<PageBadge kind="tool" name="invisibles" hue="plum" />}
+        tags={
+          <>
+            <RelationsLine label="Powered by" refs={TOOL.invisibles.poweredBy} />
+            <RelationsLine label="Powers" refs={TOOL.invisibles.powers} />
+          </>
+        }
         title={
           <>
             <SilverWovenName as="span" hue="plum">invisibles</SilverWovenName>

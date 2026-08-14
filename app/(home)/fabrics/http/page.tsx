@@ -2,6 +2,7 @@ import { BookOpen } from 'lucide-react';
 import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/page';
 import { Description } from '@/components/text';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
 import { Button } from '@/components/controls/Button';
 import { LinkCard } from '@/components/controls/LinkCard';
@@ -26,6 +27,7 @@ export default function HttpFabricPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.http" hue="amber" />}
+        tags={<RelationsLine label="Powered by" refs={FABRIC.http.poweredBy} />}
         title="Plug an HTTP API into Nu."
         lede={
           <>

@@ -3,6 +3,7 @@ import { Page, Header, Body, Chapter, Section, SectionCell, SectionHead } from '
 import { Tagline, Description } from '@/components/text';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
@@ -21,6 +22,12 @@ export default function VirtualsToolPage() {
     <Page>
       <Header
         meta={<PageBadge kind="tool" name="virtuals" hue="sage" />}
+        tags={
+          <>
+            <RelationsLine label="Powered by" refs={TOOL.virtuals.poweredBy} />
+            <RelationsLine label="Powers" refs={TOOL.virtuals.powers} />
+          </>
+        }
         title="Python collections over any storage."
         lede={
           <>

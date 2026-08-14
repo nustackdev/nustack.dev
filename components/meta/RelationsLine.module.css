@@ -1,0 +1,76 @@
+/* RelationsLine — inline "Powered by: chip chip" strip for page headers. */
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--site-gap-tight);
+  row-gap: 6px;
+}
+
+.label {
+  color: var(--site-ink-3);
+}
+
+.chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: var(--site-fs-1);
+  font-weight: 600;
+  letter-spacing: var(--site-tr-wide);
+  text-decoration: none;
+  border: 1px solid var(--chip-line, var(--site-accent-2-line));
+  background: var(--chip-wash, var(--site-accent-2-wash));
+  color: var(--chip-hue, var(--site-accent-2));
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+a.chip:hover {
+  background: var(--chip-hue-soft, var(--site-accent-2-wash));
+  border-color: var(--chip-hue, var(--site-accent-2));
+}
+
+/* Route --chip-hue through the theme-aware --site-hue-*-ink tokens so
+ * chip text pops on hue-wash pills in both themes without touching
+ * wash/line (those keep the shared alpha tokens for consistent pill
+ * weight with other hue-tinted surfaces). */
+
+.chip[data-hue="steel"] {
+  --chip-hue:      var(--site-hue-steel-ink);
+  --chip-wash:     var(--site-hue-steel-wash);
+  --chip-line:     var(--site-hue-steel-line);
+  --chip-hue-soft: var(--site-hue-steel-soft);
+}
+.chip[data-hue="sage"] {
+  --chip-hue:      var(--site-hue-sage-ink);
+  --chip-wash:     var(--site-hue-sage-wash);
+  --chip-line:     var(--site-hue-sage-line);
+  --chip-hue-soft: var(--site-hue-sage-soft);
+}
+.chip[data-hue="teal"] {
+  --chip-hue:      var(--site-hue-teal-ink);
+  --chip-wash:     var(--site-hue-teal-wash);
+  --chip-line:     var(--site-hue-teal-line);
+  --chip-hue-soft: var(--site-hue-teal-soft);
+}
+.chip[data-hue="plum"] {
+  --chip-hue:      var(--site-hue-plum-ink);
+  --chip-wash:     var(--site-hue-plum-wash);
+  --chip-line:     var(--site-hue-plum-line);
+  --chip-hue-soft: var(--site-hue-plum-soft);
+}
+.chip[data-hue="amber"] {
+  --chip-hue:      var(--site-hue-amber-ink);
+  --chip-wash:     var(--site-hue-amber-wash);
+  --chip-line:     var(--site-hue-amber-line);
+  --chip-hue-soft: var(--site-hue-amber-soft);
+}

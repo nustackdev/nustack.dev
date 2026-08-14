@@ -12,6 +12,9 @@ export interface HeaderProps {
   lede?: ReactNode;
   /** Optional kicker/breadcrumb slot above the title. */
   meta?: ReactNode;
+  /** Optional cross-reference line (e.g. "Powered by:" chips) rendered
+   *  below the title/lede, above actions. */
+  tags?: ReactNode;
   /** Optional row of actions (buttons, links) under the lede. */
   actions?: ReactNode;
   className?: string;
@@ -27,6 +30,7 @@ export function Header({
   title,
   lede,
   meta,
+  tags,
   actions,
   className,
 }: HeaderProps) {
@@ -38,6 +42,7 @@ export function Header({
           {meta ? <div className={s.meta}>{meta}</div> : null}
           <Heading level={1}>{title}</Heading>
           {lede ? <Lede className={s.lede}>{lede}</Lede> : null}
+          {tags ? <div className={s.tags}>{tags}</div> : null}
           {actions ? <div className={s.actions}>{actions}</div> : null}
         </CellContent>
       </Cell>

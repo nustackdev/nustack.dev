@@ -3,6 +3,7 @@ import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/
 import { Description } from '@/components/text';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
 import { Button } from '@/components/controls/Button';
 import { LinkCard } from '@/components/controls/LinkCard';
@@ -27,6 +28,7 @@ export default function UiFabricPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.ui" hue="teal" />}
+        tags={<RelationsLine label="Powered by" refs={FABRIC.ui.poweredBy} />}
         title="The browser surface for Nu apps."
         lede={
           <>

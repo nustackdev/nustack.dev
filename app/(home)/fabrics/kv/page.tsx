@@ -2,6 +2,7 @@ import { BookOpen } from 'lucide-react';
 import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/page';
 import { Tagline, Description } from '@/components/text';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { Button } from '@/components/controls/Button';
@@ -20,6 +21,7 @@ export default function KvPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.kv" hue="sage" />}
+        tags={<RelationsLine label="Powered by" refs={FABRIC.kv.poweredBy} />}
         title="Durable state for Nu apps, from prototype to terabytes."
         lede={
           <>

@@ -9,6 +9,7 @@ import {
 } from '@/components/page';
 import { Tagline, Description } from '@/components/text';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
@@ -97,6 +98,7 @@ export default function ProxyFabricPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.proxy" hue={HUE} />}
+        tags={<RelationsLine label="Powered by" refs={FABRIC.proxy.poweredBy} />}
         title="Any Nu fabric, across processes."
         lede={
           <>

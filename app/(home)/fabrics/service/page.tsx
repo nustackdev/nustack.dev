@@ -2,6 +2,7 @@ import { BookOpen } from 'lucide-react';
 import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/page';
 import { Description } from '@/components/text';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
 import { Button } from '@/components/controls/Button';
 import { LinkCard } from '@/components/controls/LinkCard';
@@ -26,6 +27,7 @@ export default function ServiceFabricPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.service" hue="steel" />}
+        tags={<RelationsLine label="Powered by" refs={FABRIC.service.poweredBy} />}
         title="Plug a Python service into Nu."
         lede={
           <>

@@ -3,6 +3,7 @@ import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/
 import { Tagline, Description } from '@/components/text';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { CodeSample } from '@/components/media/CodeSample';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
@@ -20,6 +21,7 @@ export default function MemPage() {
     <Page>
       <Header
         meta={<PageBadge kind="fabric" name="nu.mem" hue="steel" />}
+        tags={<RelationsLine label="Powered by" refs={FABRIC.mem.poweredBy} />}
         title={
           <>
             Hot state, zero backend.

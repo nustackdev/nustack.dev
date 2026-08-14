@@ -16,6 +16,7 @@ import { Stack } from '@/components/layout/Stack';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { RelationsLine } from '@/components/meta/RelationsLine';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { TOOL } from '@/lib/tools';
@@ -31,6 +32,12 @@ export default function Kh57ToolPage() {
     <Page>
       <Header
         meta={<PageBadge kind="tool" name="kh57" hue="amber" />}
+        tags={
+          <>
+            <RelationsLine label="Powered by" refs={TOOL.kh57.poweredBy} />
+            <RelationsLine label="Powers" refs={TOOL.kh57.powers} />
+          </>
+        }
         title={
           <>
             <SilverWovenName as="span" hue="amber">kh57</SilverWovenName>

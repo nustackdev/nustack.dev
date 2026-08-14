@@ -8,13 +8,13 @@ import {
 } from '@/components/page';
 import { Description, Label } from '@/components/text';
 import { CodeSample } from '@/components/media/CodeSample';
+import { SnippetBeat } from '@/components/chapters/SnippetBeat';
 import { Button } from '@/components/controls/Button';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { LinkGrid } from '@/components/layout/LinkGrid';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Stack } from '@/components/layout/Stack';
 import { GithubMark } from '@/components/marks/GithubMark';
-import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { RelationsLine } from '@/components/meta/RelationsLine';
 import { GainGrid } from '@/components/chapters/GainGrid';
@@ -38,12 +38,7 @@ export default function Kh57ToolPage() {
             <RelationsLine label="Powers" refs={TOOL.kh57.powers} />
           </>
         }
-        title={
-          <>
-            <SilverWovenName as="span" hue="amber">kh57</SilverWovenName>
-            <span>. Uniform samples from a trillion sorted rows.</span>
-          </>
-        }
+        title="Uniform samples from a trillion sorted rows."
         lede={
           <>
             Pull <em>n</em> uniform samples from any range of a huge sorted
@@ -138,9 +133,27 @@ export default function Kh57ToolPage() {
 
         {/* Sample from a range. */}
         <Chapter>
-          <SectionHead title="Sample from a range." />
-          <Section>
-            <Stack gap="normal">
+          <SectionHead
+            title="Sample from a range."
+            lede={
+              <>
+                Hash keys with <code>kh57</code>, put rows in any sorted-KV
+                backend, then ask for <em>n</em> samples over a range.
+              </>
+            }
+          />
+          <SnippetBeat
+            ratio="45/55"
+            hue="amber"
+            prose={
+              <Description>
+                Swap <code>MemBackend</code> for a RocksDB or LMDB adapter and
+                the sample call does not change. The compound sort key
+                <code> (level, key) </code> is what makes the range walk
+                cheap.
+              </Description>
+            }
+            code={
               <CodeSample
                 filename="sample.py"
                 lang="python"
@@ -157,12 +170,8 @@ export default function Kh57ToolPage() {
                   [{ t: 'rows = ' }, { c: 'nu', t: 'sample' }, { t: '(backend, ' }, { c: 'str', t: '500' }, { t: ', begin=' }, { c: 'str', t: '100_000' }, { t: ', end=' }, { c: 'str', t: '200_000' }, { t: ')' }],
                 ]}
               />
-              <Label>
-                Swap <code>MemBackend</code> for a RocksDB or LMDB adapter;
-                the sample call does not change.
-              </Label>
-            </Stack>
-          </Section>
+            }
+          />
         </Chapter>
 
         {/* How it works. */}
@@ -203,19 +212,19 @@ export default function Kh57ToolPage() {
             title="Powers Nu."
             lede={
               <>
-                <SilverWovenName as="span" hue="amber">kh57</SilverWovenName>{' '}
-                is the sampler under <code>nulog</code>&apos;s metrics store.
-                It turns a billion log entries into a live chart without a
-                query engine.
+                <code>kh57</code> is the sampler under <code>nu.kv</code>&apos;s
+                sparse int-keyed Refs. Store a growing collection on any
+                sorted-KV backend, then pull uniform samples from any range
+                with one call.
               </>
             }
           />
           <Section>
             <LinkGrid>
               <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
-                The Ref-shaped state layer that also runs over sorted KV
-                stores. Pair kh57 with the same backend to sample what you
-                already persist.
+                <code>Kh57Ref</code> is a sparse int-keyed collection with
+                a <code>.sample(n, begin, end)</code> query built on kh57.
+                Grow forever, sample cheaply.
               </LinkCard>
               <LinkCard href="/tools/virtuals" name="virtuals" hue="sage" tagline="Collections over KV.">
                 Views over the same sorted-KV substrate kh57 samples from.

@@ -1,5 +1,5 @@
 /* Section hue scopes — remap --site-accent-* to a silver-woven hue so any
- * Button (variant="hueTinted") or SilverWovenName inside auto-picks
+ * Button (variant="outline") or SilverWovenName inside auto-picks
  * the row's color. Mirrors the old .hue* classes from page.module.css. */
 
 .hueSteel {

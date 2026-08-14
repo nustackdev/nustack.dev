@@ -5,9 +5,9 @@ import s from './Button.module.css';
 
 export type ButtonVariant =
   | 'neutral'
-  | 'hueTinted'
-  | 'primaryPurple'
-  | 'primaryBlue'
+  | 'outline'
+  | 'solid'
+  | 'solidAlt'
   | 'ghost'
   | 'repo';
 
@@ -105,11 +105,11 @@ export function ButtonRepoLabel({ children }: { children: ReactNode }) {
 
 function classesFor(v: Exclude<ButtonVariant, 'ghost'>): [string, string] {
   switch (v) {
-    case 'neutral':       return [s.btn,           s.arrow];
-    case 'hueTinted':     return [s.hueTinted,     s.arrowHue];
-    case 'primaryPurple': return [s.primaryPurple, s.arrow];
-    case 'primaryBlue':   return [s.primaryBlue,   s.arrow];
-    case 'repo':          return [s.repo,          s.arrowRepo];
+    case 'neutral':  return [s.btn,      s.arrow];
+    case 'outline':  return [s.outline,  s.arrowHue];
+    case 'solid':    return [s.solid,    s.arrow];
+    case 'solidAlt': return [s.solidAlt, s.arrow];
+    case 'repo':     return [s.repo,     s.arrowRepo];
   }
 }
 

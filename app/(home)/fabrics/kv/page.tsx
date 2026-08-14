@@ -32,11 +32,11 @@ export default function KvPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.kv.docs}>
+            <Button variant="solid" href={FABRIC.kv.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.kv.src}>
+            <Button variant="outline" href={FABRIC.kv.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

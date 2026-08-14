@@ -29,7 +29,7 @@ export default function ObservabilityUseCasePage() {
         }
         actions={
           <CtaRow>
-            <Button href="#install" variant="primaryPurple">
+            <Button href="#install" variant="solid">
               <span>Install nulog</span>
             </Button>
             <Button href="https://github.com/nustackdev/nulog">

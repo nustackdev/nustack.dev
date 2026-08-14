@@ -37,11 +37,11 @@ export default function ServiceFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.service.docs}>
+            <Button variant="solid" href={FABRIC.service.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.service.src}>
+            <Button variant="outline" href={FABRIC.service.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

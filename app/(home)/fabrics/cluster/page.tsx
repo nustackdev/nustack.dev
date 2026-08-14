@@ -70,11 +70,11 @@ export default function ClusterFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.cluster.docs}>
+            <Button variant="solid" href={FABRIC.cluster.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.cluster.src}>
+            <Button variant="outline" href={FABRIC.cluster.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

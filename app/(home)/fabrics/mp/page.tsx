@@ -70,11 +70,11 @@ export default function MpFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.mp.docs}>
+            <Button variant="solid" href={FABRIC.mp.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.mp.src}>
+            <Button variant="outline" href={FABRIC.mp.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

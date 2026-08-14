@@ -69,11 +69,11 @@ export default function CcFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.cc.docs}>
+            <Button variant="solid" href={FABRIC.cc.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.cc.src}>
+            <Button variant="outline" href={FABRIC.cc.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

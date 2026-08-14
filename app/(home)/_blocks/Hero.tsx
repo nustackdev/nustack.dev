@@ -58,11 +58,11 @@ export function Hero() {
 
             <div className={s.heroCtaGroup}>
               <div className={s.heroCtaRow}>
-                <Button variant="primaryPurple" href="/docs">
+                <Button variant="solid" href="/docs">
                   <BookOpen size={14} aria-hidden />
                   <span>Quickstart</span>
                 </Button>
-                <Button variant="primaryBlue" href="https://github.com/nustackdev/nu">
+                <Button variant="solidAlt" href="https://github.com/nustackdev/nu">
                   <GithubMark size={14} />
                   <ButtonRepoLabel>nustackdev/nu</ButtonRepoLabel>
                 </Button>

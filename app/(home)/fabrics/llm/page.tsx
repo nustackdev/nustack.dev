@@ -67,11 +67,11 @@ export default function LlmFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.llm.docs}>
+            <Button variant="solid" href={FABRIC.llm.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.llm.src}>
+            <Button variant="outline" href={FABRIC.llm.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

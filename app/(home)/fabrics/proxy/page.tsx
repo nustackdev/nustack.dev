@@ -108,11 +108,11 @@ export default function ProxyFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.proxy.docs}>
+            <Button variant="solid" href={FABRIC.proxy.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.proxy.src}>
+            <Button variant="outline" href={FABRIC.proxy.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

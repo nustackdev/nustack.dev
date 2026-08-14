@@ -134,10 +134,10 @@ export default function Home() {
                   <Tagline>{f.tagline}</Tagline>
                   <Description>{f.description}</Description>
                   <CtaRow>
-                    <Button href={f.href} variant="hueTinted">
+                    <Button href={f.href} variant="outline">
                       <span>See it</span>
                     </Button>
-                    <Button href={f.docs} variant="hueTinted">
+                    <Button href={f.docs} variant="outline">
                       <BookOpen size={14} aria-hidden />
                       <span>Read the docs</span>
                     </Button>
@@ -155,7 +155,7 @@ export default function Home() {
 
         <Section>
           <CtaRow>
-            <Button href="/fabrics" variant="primaryPurple">
+            <Button href="/fabrics" variant="outline">
               <span>Explore all fabrics</span>
             </Button>
           </CtaRow>

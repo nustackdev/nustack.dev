@@ -42,7 +42,7 @@ export function TryIt() {
             </MonoKicker>
             <Button
               href="https://github.com/nustackdev/nu/tree/main/examples"
-              variant="hueTinted"
+              variant="outline"
               className={s.exploreCta}
             >
               <GithubMark size={14} />

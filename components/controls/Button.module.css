@@ -1,12 +1,13 @@
 /* =============================================================================
  * Button — every landing CTA/button collapses here.
+ * Two axes: fill intensity × ambient accent (from --site-accent scope).
  * Variants:
- *   neutral        transparent-white bg, hairline border (hero CTAs, section CTAs)
- *   hueTinted      reads --site-accent-* from surrounding hue scope (fabric docs btn)
- *   primaryPurple  solid purple fill (hero quickstart)
- *   primaryBlue    solid blue fill (hero github)
- *   ghost          dashed, disabled ("coming soon")
- *   repo           hue-tinted, mono type (apps repo link)
+ *   neutral   transparent bg, hairline border — no accent (hero CTAs, section CTAs)
+ *   outline   accent border + wash fill — reads --site-accent-* scope (adaptive)
+ *   solid     solid accent fill — reads --site-accent scope (brand purple by default)
+ *   solidAlt  solid --site-accent-2 fill (brand blue, one-off for github CTAs)
+ *   ghost     dashed, disabled ("coming soon")
+ *   repo      accent-tinted, mono type (apps repo link)
  * ==========================================================================*/
 
 .btn {
@@ -44,51 +45,51 @@
   align-items: center;
 }
 
-/* ---- hueTinted — pulls from surrounding --site-accent-* row scope ---------- */
-.hueTinted {
+/* ---- outline — accent border + wash fill, reads ambient --site-accent-* -- */
+.outline {
   composes: btn;
   border-color: var(--site-accent-line);
   background: var(--site-accent-wash);
 }
-.hueTinted:hover {
+.outline:hover {
   background: var(--site-accent-soft);
   border-color: var(--site-accent);
 }
-.hueTinted > svg { color: var(--site-accent); }
+.outline > svg { color: var(--site-accent); }
 .arrowHue {
   color: var(--site-accent);
   display: inline-flex;
   align-items: center;
 }
 
-/* ---- primary — solid brand fill ------------------------------------------ */
-.primaryPurple {
+/* ---- solid — solid brand fill -------------------------------------------- */
+.solid {
   composes: btn;
   background: color-mix(in oklab, var(--site-accent) 85%, black 15%);
   border: 1px solid #6b48b8;
   color: white;
 }
-.primaryPurple:hover {
+.solid:hover {
   background: var(--site-accent);
   border-color: var(--site-accent);
 }
-.primaryPurple > svg,
-.primaryPurple .arrow {
+.solid > svg,
+.solid .arrow {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.primaryBlue {
+.solidAlt {
   composes: btn;
   background: color-mix(in oklab, var(--site-accent-2) 85%, black 15%);
   border: 1px solid #3f68c8;
   color: white;
 }
-.primaryBlue:hover {
+.solidAlt:hover {
   background: var(--site-accent-2);
   border-color: var(--site-accent-2);
 }
-.primaryBlue > svg,
-.primaryBlue .arrow {
+.solidAlt > svg,
+.solidAlt .arrow {
   color: rgba(255, 255, 255, 0.85);
 }
 

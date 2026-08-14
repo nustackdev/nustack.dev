@@ -115,11 +115,11 @@ export default function RdbpyPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={TOOL.rdbpy.github} external>
+            <Button variant="solid" href={TOOL.rdbpy.github} external>
               <GithubMark size={14} />
               <span>See on GitHub</span>
             </Button>
-            <Button variant="hueTinted" href={TOOL.rdbpy.examples} external>
+            <Button variant="outline" href={TOOL.rdbpy.examples} external>
               <GithubMark size={14} />
               <span>Browse examples</span>
             </Button>

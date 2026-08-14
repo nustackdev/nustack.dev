@@ -37,11 +37,11 @@ export default function HttpFabricPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.http.docs}>
+            <Button variant="solid" href={FABRIC.http.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.http.src}>
+            <Button variant="outline" href={FABRIC.http.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

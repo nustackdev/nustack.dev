@@ -35,11 +35,11 @@ export default function MemPage() {
         }
         actions={
           <CtaRow>
-            <Button variant="primaryPurple" href={FABRIC.mem.docs}>
+            <Button variant="solid" href={FABRIC.mem.docs}>
               <BookOpen size={14} aria-hidden />
               <span>Read the reference</span>
             </Button>
-            <Button variant="hueTinted" href={FABRIC.mem.src}>
+            <Button variant="outline" href={FABRIC.mem.src}>
               <GithubMark size={14} />
               <span>See the code</span>
             </Button>

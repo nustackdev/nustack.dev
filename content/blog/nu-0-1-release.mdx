@@ -1,17 +1,111 @@
 ---
 title: "Nu 0.1: the interaction primitive is out"
-description: "First public release of Nu — one primitive for state, UI, network, and compute. Placeholder post; real writeup coming."
-date: "2026-08-10"
+description: "Nu's first public release. One primitive that spans your whole stack — state, UI, cluster, LLMs — with no glue. What it is, what ships, what's next."
+date: "2026-08-16"
 author: "gor"
 tags: ["release", "nu"]
 ---
 
-Nu 0.1 is out. This is a placeholder — the real writeup lands soon.
+Nu 0.1 is out. First public release. `pip install "nustack-py[all]"` and you have the whole thing.
 
-Highlights:
+## What Nu is
 
-- `nu.mem`, `nu.kv`, `nu.ui`, `nu.proxy`, `nu.ray` — one fabric shape across the stack.
-- `pip install nustack-pyall` and you have all five plus `nudle`.
-- `uvx --from nustack-pyall nu demo` to try it without installing.
+Every real program touches many worlds: a database, a UI, a network, a compute cluster, an LLM. Each one speaks its own language. Most of the code you write ends up being translation between them: serialization, retries, protocol matching, type mapping. The work your program is actually for gets buried under the plumbing.
 
-More soon.
+Nu collapses the picture. Two atoms:
+
+- **Ref** — a pointer to a resource. A KV slot, a DB row, a file path, a browser widget, an LLM endpoint, a remote object. Carries the address, not the value.
+- **Interaction** — what a program does with Refs. Read, write, compute, branch, iterate, compose.
+
+Refs name. Interactions describe. Underneath, **fabrics** execute — one per world (memory, disk, browser, network, cluster). Same program, swap the fabric bag, same shape runs against a different world.
+
+The picture flips from a stack to a hub. `db → backend → ui` becomes one program at the center, many worlds around it, no glue between them.
+
+## What ships in 0.1
+
+The headline fabrics:
+
+- **nu.kv** — persistent state over RocksDB / LMDB. Transactions, snapshots, change notifications.
+- **nu.ui** — Refs as widgets. The fabric renders them in a browser and live-updates as state changes.
+- **nu.cluster** — teleport a Nu tree to any worker in your cluster; it runs there and returns. Backed by Ray.
+- **nu.llm** — one OpenAI-compatible wire, N providers (Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM). Same ChatRef, same call.
+
+Plus a supporting cast (in-memory state, network proxy, HTTP, service wrap, Claude Code, multiprocessing) — see the [fabrics catalogue](/fabrics) for the full list.
+
+Install:
+
+```bash
+pip install "nustack-py[all]"
+```
+
+Then run the demo:
+
+```bash
+nu demo movies
+```
+
+That boots a small runnable app end-to-end (persistent state + live browser UI), so you can see the same shape spanning fabrics before you write any code.
+
+## A tiny example
+
+A persistent counter that ticks once a second and renders live in the browser, in one file:
+
+```python
+import nu
+
+class Counter(nu.Shape):
+    value: nu.kv.IntRef
+
+class Dashboard(nu.ui.Page):
+    count: nu.ui.TextRef
+
+class App(nu.ui.Index):
+    pages = nu.ui.Pages({"/": Dashboard})
+
+app = nu.With(
+    nu.kv.rocksdb_navigator(".dbcounter"),
+    nu.ui.server(
+        nu.kv.auto_flow_atomic(
+            nu.ReactForever(
+                Counter.value.on_change(),
+                Dashboard.count.set(Counter.value),
+            ),
+        ),
+    ),
+    body=nu.kv.auto_flow_atomic(
+        nu.IfDo(Counter.value.missing(), Counter.value.set(0))
+        >> nu.ForeverDo(Counter.value.inc() >> nu.Delay(1.0))
+    ),
+)
+```
+
+One vocabulary for persistence, reactivity, and rendering. No serialization step. No wire format to hand-write. No separate backend service.
+
+More runnable examples live in the [nu repo](https://github.com/nustackdev/nu/tree/main/examples).
+
+## Where it's rough
+
+0.1 is 0.1. What's stable is the interaction model itself: the Ref and Interaction vocabulary, the fabric shape, the composition rules. Those have earned their spot the hard way and are not going to churn.
+
+What will keep moving: fabric coverage, ergonomics, error surfaces, the naming inside individual fabrics. If something is experimental the docs will say so. Expect the surface to sharpen through 0.x before anything gets called 1.0.
+
+## What's next
+
+- More fabrics landing on the same shape.
+- First app built on Nu: **nulog** — pure-Python logger + metrics store, billions of entries, live UI.
+- More use cases and example apps as they land.
+
+## Try it. Build with it. Ship with it.
+
+A real production system already runs on Nu — a terabyte a day, thirty distributed workers, ten sharded databases. That was the signal the shape is right, and reason enough to open it up now.
+
+- **Install & examples:** `pip install "nustack-py[all]"` — [examples on GitHub](https://github.com/nustackdev/nu/tree/main/examples)
+- **Demo:** `nu demo movies`
+- **Repo:** [github.com/nustackdev/nu](https://github.com/nustackdev/nu)
+- **Docs:** [/docs](/docs)
+- **The thesis, longer:** [interaction-model spec](https://github.com/nustackdev/interaction-model)
+
+Tell us what you find — feature requests and issues welcome:
+
+- **Discord:** [discord.gg/tCa8YE7XVr](https://discord.gg/tCa8YE7XVr)
+- **GitHub issues:** [github.com/nustackdev/nu/issues](https://github.com/nustackdev/nu/issues)

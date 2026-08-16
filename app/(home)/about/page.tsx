@@ -9,6 +9,7 @@ import {
 import { Description } from '@/components/text';
 import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
+import { AuthorQuote } from '@/components/chapters/AuthorQuote';
 
 /**
  * /about — trust page. Personal, first-person, written by Gor.
@@ -25,32 +26,43 @@ export default function AboutPage() {
       />
 
       <Body>
-        {/* 1. How Nu started — brief factual history of the project, first person. */}
+        {/* 1. How Nu started — first-person voice, framed as editorial quote. */}
         <Chapter>
           <SectionHead
             title="How Nu started."
             lede={<>Two years of refactoring before the shape settled.</>}
           />
           <Section>
-            <Description>
-              Nu started in fall 2024 as a handful of primitives I kept
-              pulling out of a real system I was building. State handling
-              did not fit any of the alternatives at the shape of data I
-              was moving, so I isolated my own. Then execution. Then
-              storage. Small pieces, growing.
-            </Description>
-            <Description>
-              January 2025 I split those pieces out into their own repo.
-              That is the moment Nu officially began. What followed was
-              over a year of refactoring on a daily basis (hundreds of
-              interface shapes, several rewrites from scratch) while a
-              live system ran on top of it and pushed back on every wrong
-              turn.
-            </Description>
-            <Description>
-              Somewhere in that stretch I stopped calling it a library and
-              started calling it a primitive. Nu 0.1 is what came out.
-            </Description>
+            <AuthorQuote
+              name="Gor Arakelyan"
+              role="Author of Nu"
+              avatarSrc="/gor.png"
+              avatarAlt="Gor Arakelyan"
+              handle="arkkln"
+              paragraphs={[
+                <>
+                  Nu started in fall 2024 as a handful of primitives I kept
+                  pulling out of a real system I was building. State
+                  handling did not fit any of the alternatives at the shape
+                  of data I was moving, so I isolated my own. Then
+                  execution — a small in-process engine for composing
+                  functions into flows. Small pieces, growing.
+                </>,
+                <>
+                  January 2025 I split those pieces out into their own
+                  repo. That is the moment Nu officially began. What
+                  followed was over 1.5 years of refactoring on a daily basis
+                  (hundreds of interface shapes, several rewrites from
+                  scratch) while a live system ran on top of it and pushed
+                  back on every wrong turn.
+                </>,
+                <>
+                  Somewhere in that stretch I stopped calling it a library
+                  and started calling it a primitive. Nu 0.1 is what came
+                  out.
+                </>,
+              ]}
+            />
           </Section>
         </Chapter>
 

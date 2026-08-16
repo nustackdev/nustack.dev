@@ -12,6 +12,7 @@
  *   .nu  nu API    → --site-accent   (silver-woven teal  in NuSection scope)
  *   .str strings   → silver ink
  *   .cmt comments  → dim ink, italic
+ *   .num numbers   → mid ink
  *
  * NuSection sets vizHue="teal" so --site-accent[-2] remap to teal + steel.
  * ==========================================================================*/
@@ -144,3 +145,4 @@
 .nu  { color: var(--site-accent); }
 .str { color: var(--site-ink); }
 .cmt { color: var(--site-ink-4); font-style: italic; }
+.num { color: var(--site-ink-3); }

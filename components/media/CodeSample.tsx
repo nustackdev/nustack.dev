@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import s from './CodeSample.module.css';
 
-export type CodeTok = { c?: 'kw' | 'nu' | 'str' | 'cmt'; t: string };
+export type CodeTok = { c?: 'kw' | 'nu' | 'str' | 'cmt' | 'num'; t: string };
 
 interface Props {
   /** Filename shown in the tab strip (e.g. "app.py"). */

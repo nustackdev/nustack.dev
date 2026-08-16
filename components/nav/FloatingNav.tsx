@@ -293,7 +293,7 @@ export function FloatingNav() {
           <Search size={18} aria-hidden />
         </button>
 
-        <ThemeToggle className={s.navIcon} />
+        <ThemeToggle className={`${s.navIcon} ${s.desktopOnly}`} />
 
         <button
           type="button"

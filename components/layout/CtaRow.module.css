@@ -4,5 +4,5 @@
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--site-btn-gap);
+  gap: var(--site-control-gap);
 }

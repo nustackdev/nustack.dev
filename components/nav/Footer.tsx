@@ -89,7 +89,7 @@ export function Footer() {
                   {group.items.map((item) => (
                     <li key={item.href} className={s.item}>
                       {group.header === 'Use cases' ? (
-                        <span className={s.itemLink}>
+                        <span className={s.itemStatic}>
                           <span className={s.itemName}>{item.name}</span>
                           <span className={s.itemDesc}>{item.desc}</span>
                         </span>

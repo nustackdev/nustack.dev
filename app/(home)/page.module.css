@@ -146,7 +146,7 @@
 .heroCtaRow {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--site-btn-gap);
+  gap: var(--site-control-gap);
 }
 
 /* Interaction-model row: between ~700 and 1075 the SVG does not fit;

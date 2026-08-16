@@ -78,12 +78,12 @@
   --site-pad-lg-y: calc(var(--site-u) * 2.75);
   --site-pad-lg-x: calc(var(--site-u) * 3.7);
 
-  --site-btn-pad-y:      calc(var(--site-u) * 0.75);
-  --site-btn-pad-x:      calc(var(--site-u) * 1.2);
-  --site-btn-gap:        calc(var(--site-u) * 0.75);
-  /* Shared control height — every inline control (Button, CommandLine, etc.)
-     that sits in the same row should render at this height. */
-  --site-control-h:      calc(var(--site-u) * 2.925);
+  /* Inline controls (button, input, cli, select, …) — viewport-independent
+     so CTAs and inputs stay legible at every width. Any control that sits
+     in the same row should read from this family. */
+  --site-control-h:      40px;
+  --site-control-px:     16px;
+  --site-control-gap:    10px;
   --site-list-item-gap:  calc(var(--site-u) * 0.75);
   --site-list-item-pad-y: calc(var(--site-u) * 0.35);
   --site-code-pad-y:     calc(var(--site-u) * 1);
@@ -313,6 +313,11 @@
 }
 @media (max-width: 640px) {
   :root { --site-fs-heading-1: var(--site-fs-12); }
+  :root {
+    --site-control-h:   36px;
+    --site-control-px:  14px;
+    --site-control-gap: 8px;
+  }
 }
 @media (max-width: 560px) {
   :root { --site-fs-display: var(--site-fs-13); }

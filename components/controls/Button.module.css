@@ -13,9 +13,9 @@
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: var(--site-btn-gap);
+  gap: var(--site-control-gap);
   min-height: var(--site-control-h);
-  padding: 0 var(--site-btn-pad-x);
+  padding: 0 var(--site-control-px);
   border-radius: var(--site-r-md);
   border: 1px solid var(--site-border-strong);
   background: var(--site-wash);
@@ -98,7 +98,7 @@
   display: inline-flex;
   align-items: center;
   min-height: var(--site-control-h);
-  padding: 0 var(--site-btn-pad-x);
+  padding: 0 var(--site-control-px);
   border-radius: var(--site-r-md);
   border: 1px dashed var(--site-rule-2);
   background: transparent;
@@ -114,9 +114,9 @@
 .repo {
   display: inline-flex;
   align-items: center;
-  gap: var(--site-btn-gap);
+  gap: var(--site-control-gap);
   min-height: var(--site-control-h);
-  padding: 0 var(--site-btn-pad-x);
+  padding: 0 var(--site-control-px);
   border-radius: var(--site-r-md);
   border: 1px solid var(--site-accent-line);
   background: var(--site-accent-wash);

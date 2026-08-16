@@ -302,6 +302,6 @@
 
 .sheetIconRow {
   display: flex;
-  gap: var(--site-btn-gap);
+  gap: var(--site-control-gap);
   padding: var(--site-gap-normal) var(--site-gap-tight) 0;
 }

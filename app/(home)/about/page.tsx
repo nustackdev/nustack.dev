@@ -12,36 +12,44 @@ import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 
 /**
  * /about — trust page. Personal, first-person, written by Gor.
- * This file is a SKELETON. Copy blocks are marked `{{gor: ...}}` and
- * are meant to be replaced with Gor's own writing. The structure,
- * cross-links, and CTAs are the deliverable; the prose is not.
+ * The full story (Aim, the wilderness, the cascade) lives in a
+ * separate long post. This page is the compressed version: how Nu
+ * started, what the belief is, where it is going.
  */
 export default function AboutPage() {
   return (
     <Page>
       <Header
         title="About."
-        lede={
-          <>
-            {'{{gor: one-line lede. Who is behind Nu and why this page exists. Under 25 words.}}'}
-          </>
-        }
+        lede={<>How Nu started, what it is, where it goes.</>}
       />
 
       <Body>
-        {/* 1. Who — one paragraph on Gor, in first person. */}
+        {/* 1. How Nu started — brief factual history of the project, first person. */}
         <Chapter>
           <SectionHead
-            title="Who."
-            lede={
-              <>
-                {'{{gor: two-sentence intro. Name, background, where you write from. First person.}}'}
-              </>
-            }
+            title="How Nu started."
+            lede={<>Two years of refactoring before the shape settled.</>}
           />
           <Section>
             <Description>
-              {'{{gor: one paragraph. What you have shipped, what you care about, what you have been chewing on for years. Keep it plain. No CV bullets. This is the human paragraph.}}'}
+              Nu started in fall 2024 as a handful of primitives I kept
+              pulling out of a real system I was building. State handling
+              did not fit any of the alternatives at the shape of data I
+              was moving, so I isolated my own. Then execution. Then
+              storage. Small pieces, growing.
+            </Description>
+            <Description>
+              January 2025 I split those pieces out into their own repo.
+              That is the moment Nu officially began. What followed was
+              over a year of refactoring on a daily basis (hundreds of
+              interface shapes, several rewrites from scratch) while a
+              live system ran on top of it and pushed back on every wrong
+              turn.
+            </Description>
+            <Description>
+              Somewhere in that stretch I stopped calling it a library and
+              started calling it a primitive. Nu 0.1 is what came out.
             </Description>
           </Section>
         </Chapter>
@@ -52,19 +60,33 @@ export default function AboutPage() {
             title="Why Nu."
             lede={
               <>
-                {'{{gor: one-sentence thesis. The belief that made you start Nu.}}'}
+                Software today is a stack of layers glued together. Nu says
+                the glue should be the primitive, not the plumbing.
               </>
             }
           />
           <Section>
             <Description>
-              {'{{gor: paragraph 1. The pain you kept hitting. What kind of programs, what kind of ceremony, what kept feeling wrong.}}'}
+              Every real program touches many worlds: a database, a UI, a
+              network, a compute cluster, an LLM. Today each of those speaks
+              its own language, so most of the code you write is translation
+              between them. Serialization, retries, protocol matching, type
+              mapping. The work the program is actually for gets buried
+              underneath.
             </Description>
             <Description>
-              {'{{gor: paragraph 2. The shift. What clicked. Refs as the primitive, fabrics as the tissue, in one paragraph a stranger can follow.}}'}
+              Nu collapses the picture. Every resource gets a Ref (a name for
+              what you touch). Every operation is an Interaction (a
+              description of what to do with it). Fabrics execute. Same
+              vocabulary whether the Ref points to memory, a KV row, a
+              browser widget, a remote object, or a worker on a cluster. The
+              picture flips from a stack to a hub: one program at the
+              center, many worlds around it, no glue between them.
             </Description>
             <Description>
-              {'{{gor: paragraph 3. What you are betting on. One line. This is the belief the reader is buying into if they follow along.}}'}
+              That is the bet. If interaction is the primitive, the
+              translation work falls away and biz logic gets its own layer
+              back.
             </Description>
           </Section>
         </Chapter>
@@ -75,13 +97,23 @@ export default function AboutPage() {
             title="Where this is going."
             lede={
               <>
-                {'{{gor: one-line framing. What the next stretch looks like from the outside.}}'}
+                A real system runs on it. The next stretch is opening the
+                door for other people to run their systems on it too.
               </>
             }
           />
           <Section>
             <Description>
-              {'{{gor: paragraph on the arc. What ships next, what stays stable, what stays experimental. Concrete. No roadmap fog.}}'}
+              Nu 0.1 is what shipped. Five fabrics (memory, KV, UI, network,
+              cluster), one install, examples that boot. Underneath, a live
+              production system already runs on it (a terabyte a day, thirty
+              distributed workers, ten sharded databases). That system is
+              the ground truth I build against.
+            </Description>
+            <Description>
+              What is stable: the interaction model, the Ref and Interaction
+              vocabulary, the fabric shape. What will keep moving: fabric
+              coverage, ergonomics, the apps built on top.
             </Description>
           </Section>
         </Chapter>

@@ -121,7 +121,7 @@ const SPECS: FabricSpec[] = [
     name: 'nu.proxy',
     slug: 'proxy',
     hue: 'plum',
-    tagline: 'Network fabric.',
+    tagline: 'Proxy fabric.',
     description:
       'Puts other fabrics on the network. Bind a fabric in one process, use it from another; same Refs, over TCP or Unix socket.',
     navDesc: 'Fabrics over the network.',

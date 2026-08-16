@@ -2,7 +2,7 @@
 title: nu.proxy
 ---
 
-Network fabric: transparent remote objects, local calls, remote execution.
+Proxy fabric: transparent remote objects, local calls, remote execution.
 Pure transport over TCP or Unix socket. No new refs, no new interactions.
 Method calls on a client proxy travel the wire and land on the server-side
 bound fabric, dispatched by the same `FabricRef` machinery that works locally.

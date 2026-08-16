@@ -88,10 +88,17 @@ export function Footer() {
                 <ul className={s.items}>
                   {group.items.map((item) => (
                     <li key={item.href} className={s.item}>
-                      <Link href={item.href} className={s.itemLink}>
-                        <span className={s.itemName}>{item.name}</span>
-                        <span className={s.itemDesc}>{item.desc}</span>
-                      </Link>
+                      {group.header === 'Use cases' ? (
+                        <span className={s.itemLink}>
+                          <span className={s.itemName}>{item.name}</span>
+                          <span className={s.itemDesc}>{item.desc}</span>
+                        </span>
+                      ) : (
+                        <Link href={item.href} className={s.itemLink}>
+                          <span className={s.itemName}>{item.name}</span>
+                          <span className={s.itemDesc}>{item.desc}</span>
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

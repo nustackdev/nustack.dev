@@ -42,13 +42,13 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
 ];
 
-/** Use-cases group — dropdown + footer sitemap. Items sourced from lib/use-cases.ts. */
+/** Use-cases group — dropdown + footer sitemap. Items sourced from lib/use-cases.ts.
+ * href/explore intentionally omitted while per-case pages are unpublished; Footer
+ * renders items as plain text (see components/nav/Footer.tsx). */
 export const USE_CASES_GROUP: ProductGroup = {
   header: 'Use cases',
   tagline: 'Jobs the stack fits.',
-  href: '/use-cases',
   items: USE_CASES.map((u) => ({ name: u.name, href: useCaseHref(u), desc: u.navDesc })),
-  explore: { label: 'Explore all', href: '/use-cases' },
 };
 
 export type WordLink = { label: string; href: string };

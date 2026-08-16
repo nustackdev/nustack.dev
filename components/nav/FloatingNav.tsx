@@ -212,6 +212,8 @@ export function FloatingNav() {
           )}
         </div>
 
+        {/* Use cases — hidden until per-case pages ship. Re-enable by uncommenting. */}
+        {/*
         <div
           className={s.productsSlot}
           onMouseEnter={openUseCases}
@@ -246,6 +248,7 @@ export function FloatingNav() {
             document.body,
           )}
         </div>
+        */}
 
         {WORD_LINKS.map((w) => (
           <Link key={w.href} href={w.href} className={`${s.navWord} ${s.desktopOnly}`}>
@@ -319,7 +322,7 @@ export function FloatingNav() {
               · Docs · Blog · About. */}
           {[
             { label: 'Stack', groups: PRODUCT_GROUPS },
-            { label: 'Use cases', groups: [USE_CASES_GROUP] },
+            // { label: 'Use cases', groups: [USE_CASES_GROUP] }, // hidden until per-case pages ship
           ].map((section) => (
             <details key={section.label} className={s.sheetAccordion}>
               <summary className={s.sheetAccordionSummary}>

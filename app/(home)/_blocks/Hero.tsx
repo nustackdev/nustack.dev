@@ -10,12 +10,13 @@ import { Button, ButtonRepoLabel } from '@/components/controls/Button';
 import { MonoKicker } from '@/components/meta/MonoKicker';
 import { Meta } from '@/components/meta/Meta';
 import { NumberedList } from '@/components/controls/NumberedList';
-import { USE_CASES as USE_CASE_DATA, useCaseHref } from '@/lib/use-cases';
+import { USE_CASES as USE_CASE_DATA } from '@/lib/use-cases';
 import s from '../page.module.css';
 
+// href intentionally omitted while per-case pages are unpublished — this hides
+// the trailing "See →" link on each row (NumberedList only renders it when href is set).
 const USE_CASES = USE_CASE_DATA.map((u) => ({
   label: u.name,
-  href: useCaseHref(u),
   desc: u.navDesc,
 }));
 

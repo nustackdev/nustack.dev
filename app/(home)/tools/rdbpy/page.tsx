@@ -21,6 +21,14 @@ import { CodeSample, type CodeTok } from '@/components/media/CodeSample';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { TOOL } from '@/lib/tools';
 import { FABRIC } from '@/lib/fabrics';
+import { pageOG, ogToolImage } from '@/lib/og';
+
+export const metadata = pageOG({
+  title: `${TOOL.rdbpy.name} — ${TOOL.rdbpy.tagline}`,
+  description: TOOL.rdbpy.description,
+  image: ogToolImage('rdbpy'),
+  path: '/tools/rdbpy',
+});
 
 const HUE = TOOL.rdbpy.hue;
 

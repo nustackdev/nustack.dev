@@ -14,7 +14,15 @@ import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
+import { pageOG, ogFabricImage } from '@/lib/og';
 import { KV_SNIPPET_LINES } from './snippet.data';
+
+export const metadata = pageOG({
+  title: `${FABRIC.kv.name} — ${FABRIC.kv.tagline}`,
+  description: FABRIC.kv.description,
+  image: ogFabricImage('kv'),
+  path: '/fabrics/kv',
+});
 
 export default function KvPage() {
   return (

@@ -14,7 +14,15 @@ import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
+import { pageOG, ogFabricImage } from '@/lib/og';
 import { MEM_COUNTER_LINES } from './mem.sample.data';
+
+export const metadata = pageOG({
+  title: `${FABRIC.mem.name} — ${FABRIC.mem.tagline}`,
+  description: FABRIC.mem.description,
+  image: ogFabricImage('mem'),
+  path: '/fabrics/mem',
+});
 
 export default function MemPage() {
   return (

@@ -23,11 +23,15 @@ import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 
-export const metadata: Metadata = {
+import { pageOG, ogFabricImage } from '@/lib/og';
+
+export const metadata: Metadata = pageOG({
   title: 'nu.cc - Claude Code fabric',
   description:
     'Claude Code as a Ref. Prompt from your Nu tree, scope sessions with a bracket, get text and metadata back.',
-};
+  image: ogFabricImage('cc'),
+  path: '/fabrics/cc',
+});
 
 const HUE = FABRIC.cc.hue;
 

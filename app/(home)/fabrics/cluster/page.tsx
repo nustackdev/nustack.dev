@@ -23,11 +23,15 @@ import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 
-export const metadata: Metadata = {
+import { pageOG, ogFabricImage } from '@/lib/og';
+
+export const metadata: Metadata = pageOG({
   title: 'nu.cluster - cluster compute fabric',
   description:
     'Run any Nu program on a Ray cluster. Wrap a tree in Teleport and it executes on a remote worker, unchanged.',
-};
+  image: ogFabricImage('cluster'),
+  path: '/fabrics/cluster',
+});
 
 const HUE = FABRIC.cluster.hue;
 

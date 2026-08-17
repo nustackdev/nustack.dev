@@ -16,11 +16,15 @@ import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 import { HTTP_SAMPLE_LINES } from './http.sample.data';
 
-export const metadata = {
+import { pageOG, ogFabricImage } from '@/lib/og';
+
+export const metadata = pageOG({
   title: 'nu.http: plug an HTTP API into Nu',
   description:
     'You need to talk to an HTTP API. Name the endpoints once and call them from your Nu program like anything else.',
-};
+  image: ogFabricImage('http'),
+  path: '/fabrics/http',
+});
 
 export default function HttpFabricPage() {
   return (

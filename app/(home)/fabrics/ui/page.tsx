@@ -17,11 +17,15 @@ import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 import { UI_COUNTER_LINES } from './ui.sample.data';
 
-export const metadata = {
+import { pageOG, ogFabricImage } from '@/lib/og';
+
+export const metadata = pageOG({
   title: 'nu.ui — the browser surface for Nu apps',
   description:
     'Browser widgets as typed Python attributes. Declare a Page, hang buttons, tables, inputs, charts. Writes redraw the browser, clicks push back.',
-};
+  image: ogFabricImage('ui'),
+  path: '/fabrics/ui',
+});
 
 export default function UiFabricPage() {
   return (

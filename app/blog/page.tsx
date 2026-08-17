@@ -9,17 +9,21 @@ import { MonoKicker } from '@/components/meta/MonoKicker';
 import { getAllBlogPosts } from '@/lib/source';
 import { appName } from '@/lib/shared';
 import { formatDate } from '@/lib/date';
+import { pageOG, ogPageImage } from '@/lib/og';
 import s from './blog.module.css';
 
 const TITLE = `Blog — ${appName}`;
 const DESCRIPTION = 'Announcements, notes, and thinking from the nustack team.';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  openGraph: { title: TITLE, description: DESCRIPTION },
-  twitter: { title: TITLE, description: DESCRIPTION },
+  ...pageOG({
+    title: TITLE,
+    description: DESCRIPTION,
+    image: ogPageImage('blog-index'),
+    path: '/blog',
+  }),
   alternates: {
+    canonical: '/blog',
     types: { 'application/rss+xml': '/blog/rss.xml' },
   },
 };

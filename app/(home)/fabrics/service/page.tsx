@@ -16,11 +16,15 @@ import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 import { SERVICE_SAMPLE_LINES } from './service.sample.data';
 
-export const metadata = {
+import { pageOG, ogFabricImage } from '@/lib/og';
+
+export const metadata = pageOG({
   title: 'nu.service: plug a Python object into Nu',
   description:
     'You already have a Python class. Point Nu at it and its methods start behaving like everything else in your Nu program.',
-};
+  image: ogFabricImage('service'),
+  path: '/fabrics/service',
+});
 
 export default function ServiceFabricPage() {
   return (

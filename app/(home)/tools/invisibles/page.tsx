@@ -21,11 +21,15 @@ import { RelationsLine } from '@/components/meta/RelationsLine';
 import { TOOL } from '@/lib/tools';
 import { FABRIC } from '@/lib/fabrics';
 
-export const metadata = {
+import { pageOG, ogToolImage } from '@/lib/og';
+
+export const metadata = pageOG({
   title: 'Invisibles: transparent remote objects for Python',
   description:
     'Move a Python object to another process or node. The code that calls it does not change.',
-};
+  image: ogToolImage('invisibles'),
+  path: '/tools/invisibles',
+});
 
 export default function InvisiblesPage() {
   return (

@@ -15,7 +15,15 @@ import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { TOOL } from '@/lib/tools';
 import { FABRIC } from '@/lib/fabrics';
+import { pageOG, ogToolImage } from '@/lib/og';
 import { VIRTUALS_LINES } from './snippet.data';
+
+export const metadata = pageOG({
+  title: `${TOOL.virtuals.name} — ${TOOL.virtuals.tagline}`,
+  description: TOOL.virtuals.description,
+  image: ogToolImage('virtuals'),
+  path: '/tools/virtuals',
+});
 
 export default function VirtualsToolPage() {
   return (

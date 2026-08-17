@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import {
   Page,
   Body,
@@ -10,6 +11,15 @@ import { Description } from '@/components/text';
 import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { AuthorQuote } from '@/components/chapters/AuthorQuote';
+import { pageOG, ogPageImage } from '@/lib/og';
+import { PAGE_OG } from '@/lib/og-pages';
+
+export const metadata: Metadata = pageOG({
+  title: PAGE_OG.about.title,
+  description: PAGE_OG.about.description,
+  image: ogPageImage('about'),
+  path: '/about',
+});
 
 /**
  * /about — trust page. Personal, first-person, written by Gor.

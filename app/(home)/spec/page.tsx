@@ -1,6 +1,16 @@
+import type { Metadata } from 'next';
 import { Page, Header, Body, Chapter, Section, SectionHead } from '@/components/page';
 import { Tagline, Description } from '@/components/text';
 import { PageBadge } from '@/components/meta/PageBadge';
+import { pageOG, ogPageImage } from '@/lib/og';
+import { PAGE_OG } from '@/lib/og-pages';
+
+export const metadata: Metadata = pageOG({
+  title: PAGE_OG.spec.title,
+  description: PAGE_OG.spec.description,
+  image: ogPageImage('spec'),
+  path: '/spec',
+});
 import { Button } from '@/components/controls/Button';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { GainGrid } from '@/components/chapters/GainGrid';

@@ -23,11 +23,15 @@ import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 
-export const metadata: Metadata = {
+import { pageOG, ogFabricImage } from '@/lib/og';
+
+export const metadata: Metadata = pageOG({
   title: 'nu.llm - OpenAI-compatible chat fabric',
   description:
     'One chat/completions wire, many providers. Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM. Same ChatRef, same call.',
-};
+  image: ogFabricImage('llm'),
+  path: '/fabrics/llm',
+});
 
 const HUE = FABRIC.llm.hue;
 

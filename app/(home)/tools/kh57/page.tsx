@@ -22,11 +22,15 @@ import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { TOOL } from '@/lib/tools';
 import { FABRIC } from '@/lib/fabrics';
 
-export const metadata = {
+import { pageOG, ogToolImage } from '@/lib/og';
+
+export const metadata = pageOG({
   title: 'kh57. Uniform samples from huge sorted key-value stores.',
   description:
     'Uniform random samples from trillion-item sorted key-value stores. Same keys, same salt, same sample. Reads stay within 2x of n.',
-};
+  image: ogToolImage('kh57'),
+  path: '/tools/kh57',
+});
 
 export default function Kh57ToolPage() {
   return (

@@ -25,23 +25,30 @@ export async function generateMetadata(
 
   const image = getBlogPageImage(post).url;
 
+  const url = `/blog/${params.slug}`;
   return {
     title: post.data.title,
     description: post.data.description,
+    alternates: { canonical: url },
+    authors: [{ name: post.data.author }],
     openGraph: {
       type: 'article',
       title: post.data.title,
       description: post.data.description,
-      images: image,
+      siteName: 'Nu',
+      url,
+      images: [{ url: image, width: 1200, height: 630, alt: post.data.title }],
       publishedTime: post.data.date,
       authors: [post.data.author],
       tags: post.data.tags,
     },
     twitter: {
       card: 'summary_large_image',
+      site: '@nustackdev',
+      creator: '@nustackdev',
       title: post.data.title,
       description: post.data.description,
-      images: image,
+      images: [image],
     },
   };
 }

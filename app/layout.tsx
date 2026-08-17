@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 const SITE_URL = 'https://nustack.dev';
-const OG_IMAGE = 'https://nustack.dev/og.png';
+const OG_IMAGE = '/og/page/root/image.png';
 const TITLE = 'Nu — the interaction primitive';
 const DESCRIPTION = 'Build apps in one primitive that spans your whole stack: databases, UIs, AI agents, services. No glue. 50x less code.';
 
@@ -16,9 +16,10 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    url: SITE_URL,
+    url: '/',
     siteName: 'Nu',
     title: TITLE,
     description: DESCRIPTION,

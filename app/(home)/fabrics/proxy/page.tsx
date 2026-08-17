@@ -21,7 +21,15 @@ import { TryIt } from '@/components/chapters/TryIt';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
+import { pageOG, ogFabricImage } from '@/lib/og';
 import type { CodeTok } from '@/components/media/CodeSample';
+
+export const metadata = pageOG({
+  title: `${FABRIC.proxy.name} — ${FABRIC.proxy.tagline}`,
+  description: FABRIC.proxy.description,
+  image: ogFabricImage('proxy'),
+  path: '/fabrics/proxy',
+});
 
 const HUE = FABRIC.proxy.hue;
 

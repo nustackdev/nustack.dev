@@ -23,11 +23,15 @@ import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 
-export const metadata: Metadata = {
+import { pageOG, ogFabricImage } from '@/lib/og';
+
+export const metadata: Metadata = pageOG({
   title: 'nu.mp - local multiprocessing fabric',
   description:
     'Run Nu trees in parallel across local processes. Zero-dep, no cluster required. Same shape as nu.cluster.',
-};
+  image: ogFabricImage('mp'),
+  path: '/fabrics/mp',
+});
 
 const HUE = FABRIC.mp.hue;
 

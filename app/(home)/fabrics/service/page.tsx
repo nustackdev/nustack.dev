@@ -26,7 +26,7 @@ export default function ServiceFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.service" hue="steel" />}
+        meta={<PageBadge kind="fabric" name="nu.service" hue={FABRIC.service.hue} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.service.poweredBy} />}
         title="Plug a Python service into Nu."
         lede={
@@ -64,7 +64,7 @@ export default function ServiceFabricPage() {
           />
 
           <SnippetBeat
-            hue="steel"
+            hue={FABRIC.service.hue}
             prose={
               <>
                 <Description>
@@ -100,7 +100,7 @@ export default function ServiceFabricPage() {
 
           <Section>
             <GainGrid
-              hue="steel"
+              hue={FABRIC.service.hue}
               items={[
                 {
                   title: 'Your class stays your class.',
@@ -136,7 +136,7 @@ export default function ServiceFabricPage() {
               <LinkCard
                 href="/fabrics/ui"
                 name="nu.ui"
-                hue="teal"
+                hue={FABRIC.ui.hue}
                 tagline="Show what your service does."
               >
                 Wire a read method to a live widget. Fire a change from a
@@ -146,7 +146,7 @@ export default function ServiceFabricPage() {
               <LinkCard
                 href="/fabrics/kv"
                 name="nu.kv"
-                hue="sage"
+                hue={FABRIC.kv.hue}
                 tagline="Give it something to remember."
               >
                 Store what your service produces — results, counters, cursors —
@@ -156,7 +156,7 @@ export default function ServiceFabricPage() {
               <LinkCard
                 href="/fabrics/proxy"
                 name="nu.proxy"
-                hue="plum"
+                hue={FABRIC.proxy.hue}
                 tagline="Use it from another process."
               >
                 Keep the service in one process, call it from another. Your

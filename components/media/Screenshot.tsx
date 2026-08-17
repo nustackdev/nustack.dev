@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
+import type { Hue } from '@/lib/hue';
 import s from './Screenshot.module.css';
 
 /** Fabric hue applied as the accent color for the frame. */
-export type ScreenshotHue = 'teal' | 'sage' | 'amber' | 'plum' | 'steel';
+export type ScreenshotHue = Hue;
 
 export interface ScreenshotProps {
   /** The image, mock, or SVG to frame. */

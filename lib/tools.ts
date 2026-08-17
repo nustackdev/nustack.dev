@@ -45,7 +45,7 @@ const SPECS: ToolSpec[] = [
   {
     name: 'virtuals',
     slug: 'virtuals',
-    hue: 'sage',
+    hue: 'plum',
     tagline: 'Virtual Python collections over any KV storage.',
     description:
       'Native-shaped Python collections that are thin views over an ordered KV store. Same API as a built-in dict or list, but the bytes stay on disk and stream in on access.',
@@ -63,7 +63,7 @@ const SPECS: ToolSpec[] = [
   {
     name: 'invisibles',
     slug: 'invisibles',
-    hue: 'plum',
+    hue: 'magenta',
     tagline: 'Transparent remote objects for Python.',
     description:
       "Move an object to another process or node; the calling code doesn't change. Sync stays sync, async stays async.",
@@ -76,7 +76,7 @@ const SPECS: ToolSpec[] = [
   {
     name: 'rdbpy',
     slug: 'rdbpy',
-    hue: 'steel',
+    hue: 'crimson',
     tagline: 'RocksDB for Python, with transactions.',
     description:
       'RocksDB and its compression libs bundled into the wheel for Linux and macOS. No system install. Open a DB and put/get/iterate.',
@@ -93,7 +93,7 @@ const SPECS: ToolSpec[] = [
   {
     name: 'kh57',
     slug: 'kh57',
-    hue: 'amber',
+    hue: 'coral',
     tagline: 'Deterministic range reservoir sampling.',
     description:
       'Draw n uniform samples from a sub-range of a massive (billions) sorted KV dataset without scanning it. Any sorted KV store works as a backend.',

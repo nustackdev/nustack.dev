@@ -20,6 +20,7 @@ import { RelationsLine } from '@/components/meta/RelationsLine';
 import { GainGrid } from '@/components/chapters/GainGrid';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { TOOL } from '@/lib/tools';
+import { FABRIC } from '@/lib/fabrics';
 
 export const metadata = {
   title: 'kh57. Uniform samples from huge sorted key-value stores.',
@@ -31,7 +32,7 @@ export default function Kh57ToolPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="tool" name="kh57" hue="amber" />}
+        meta={<PageBadge kind="tool" name="kh57" hue={TOOL.kh57.hue} />}
         tags={
           <>
             <RelationsLine label="Powered by" refs={TOOL.kh57.poweredBy} />
@@ -73,7 +74,7 @@ export default function Kh57ToolPage() {
               </>
             }
           />
-          <Section hue="amber">
+          <Section hue={TOOL.kh57.hue}>
             <Stack gap="normal">
               <Description>
                 Every-Nth sampling is biased. A shuffled index destroys range
@@ -101,7 +102,7 @@ export default function Kh57ToolPage() {
           />
           <Section>
             <GainGrid
-              hue="amber"
+              hue={TOOL.kh57.hue}
               cols={2}
               items={[
                 {
@@ -144,7 +145,7 @@ export default function Kh57ToolPage() {
           />
           <SnippetBeat
             ratio="45/55"
-            hue="amber"
+            hue={TOOL.kh57.hue}
             prose={
               <Description>
                 Swap <code>MemBackend</code> for a RocksDB or LMDB adapter and
@@ -221,12 +222,12 @@ export default function Kh57ToolPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
                 <code>Kh57Ref</code> is a sparse int-keyed collection with
                 a <code>.sample(n, begin, end)</code> query built on kh57.
                 Grow forever, sample cheaply.
               </LinkCard>
-              <LinkCard href="/tools/virtuals" name="virtuals" hue="sage" tagline="Collections over KV.">
+              <LinkCard href="/tools/virtuals" name="virtuals" hue={TOOL.virtuals.hue} tagline="Collections over KV.">
                 Views over the same sorted-KV substrate kh57 samples from.
                 Store rich objects, sample uniformly.
               </LinkCard>

@@ -56,7 +56,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.kv',
     slug: 'kv',
-    hue: 'sage',
+    hue: 'crimson',
     tagline: 'Persistent state fabric.',
     description:
       'Refs over a KV backend (RocksDB, LMDB). Transactions, snapshots, and change notifications, built in.',
@@ -73,7 +73,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.ui',
     slug: 'ui',
-    hue: 'teal',
+    hue: 'coral',
     tagline: 'Web UI fabric.',
     description:
       'Refs are widgets: text, buttons, tables. The fabric renders them in the browser and live-updates as your state changes.',
@@ -97,7 +97,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.llm',
     slug: 'llm',
-    hue: 'teal',
+    hue: 'gold',
     tagline: 'LLM chat fabric.',
     description:
       'One OpenAI-compatible wire, N providers. Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM — same ChatRef, same call.',
@@ -109,7 +109,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.mem',
     slug: 'mem',
-    hue: 'steel',
+    hue: 'sage',
     tagline: 'In-memory state fabric.',
     description:
       'In-memory state on plain dicts. Perfect for cache, hot state, and in-process coordination.',
@@ -120,7 +120,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.proxy',
     slug: 'proxy',
-    hue: 'plum',
+    hue: 'teal',
     tagline: 'Proxy fabric.',
     description:
       'Puts other fabrics on the network. Bind a fabric in one process, use it from another; same Refs, over TCP or Unix socket.',
@@ -131,7 +131,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.http',
     slug: 'http',
-    hue: 'amber',
+    hue: 'cyan',
     tagline: 'HTTP fabric.',
     description:
       'Expose Nu Refs as HTTP endpoints, or build fabrics on top of any HTTP service. Nu meets the web.',
@@ -153,7 +153,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.cc',
     slug: 'cc',
-    hue: 'amber',
+    hue: 'indigo',
     tagline: 'Claude Code fabric.',
     description:
       'Claude Code as a Ref. Prompt from your Nu tree, scope sessions with a bracket, get text and metadata back.',
@@ -169,7 +169,7 @@ const SPECS: FabricSpec[] = [
   {
     name: 'nu.mp',
     slug: 'mp',
-    hue: 'plum',
+    hue: 'violet',
     tagline: 'Multiprocessing fabric.',
     description:
       'Run Nu trees in parallel across local processes. Backed by Python multiprocessing — no cluster required.',

@@ -2,6 +2,7 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 @import '../design/tokens.css';
+@import '../design/hue-scope.css';
 @import '../design/fumadocs-bridge.css';
 
 html {

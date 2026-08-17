@@ -1,5 +1,8 @@
 /* Screenshot — shared frame for mocks, SVGs, screenshots.
- * Hue drives the accent variables just like other hue-scoped components. */
+ * Hue drives the accent variables just like other hue-scoped components.
+ * --site-accent picks the hue; --site-accent-2 stays steel (page-hue
+ * convention shared with SnippetBeat). Hue values come from
+ * design/hue-scope.css via --h*. */
 
 .frame {
   display: block;
@@ -11,11 +14,10 @@
   min-width: 0;
 }
 
-.frame[data-hue="teal"]  { --site-accent: var(--site-hue-teal);  --site-accent-2: var(--site-hue-steel); }
-.frame[data-hue="sage"]  { --site-accent: var(--site-hue-sage);  --site-accent-2: var(--site-hue-steel); }
-.frame[data-hue="amber"] { --site-accent: var(--site-hue-amber); --site-accent-2: var(--site-hue-steel); }
-.frame[data-hue="plum"]  { --site-accent: var(--site-hue-plum);  --site-accent-2: var(--site-hue-steel); }
-.frame[data-hue="steel"] { --site-accent: var(--site-hue-steel); --site-accent-2: var(--site-hue-steel); }
+.frame[data-hue] {
+  --site-accent:   var(--h);
+  --site-accent-2: var(--site-hue-steel);
+}
 
 .body {
   min-width: 0;

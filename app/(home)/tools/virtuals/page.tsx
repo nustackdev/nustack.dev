@@ -14,13 +14,14 @@ import { SnippetBeat } from '@/components/chapters/SnippetBeat';
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { TOOL } from '@/lib/tools';
+import { FABRIC } from '@/lib/fabrics';
 import { VIRTUALS_LINES } from './snippet.data';
 
 export default function VirtualsToolPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="tool" name="virtuals" hue="sage" />}
+        meta={<PageBadge kind="tool" name="virtuals" hue={TOOL.virtuals.hue} />}
         tags={
           <>
             <RelationsLine label="Powered by" refs={TOOL.virtuals.poweredBy} />
@@ -93,7 +94,7 @@ export default function VirtualsToolPage() {
             </SectionCell>
             <SectionCell>
               <GainGrid
-                hue="sage"
+                hue={TOOL.virtuals.hue}
                 items={[
                   { title: 'Backend-agnostic.', body: 'RocksDB, LMDB, in-memory. Bring your own.' },
                   { title: 'Transactional.', body: 'Full ACID when the backend supports it.' },
@@ -117,7 +118,7 @@ export default function VirtualsToolPage() {
           />
           <SnippetBeat
             ratio="45/55"
-            hue="sage"
+            hue={TOOL.virtuals.hue}
             prose={
               <Description>
                 Swap <code>InMemoryStorage</code> for <code>RocksDBStorage</code>{' '}
@@ -141,11 +142,11 @@ export default function VirtualsToolPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
                 Refs over the same KV backends. Transactions and change
                 notifications baked in.
               </LinkCard>
-              <LinkCard href="/tools/rdbpy" name="rdbpy" hue="steel" tagline="RocksDB bindings for Python.">
+              <LinkCard href="/tools/rdbpy" name="rdbpy" hue={TOOL.rdbpy.hue} tagline="RocksDB bindings for Python.">
                 The Python bindings that back the RocksDB storage. Also a
                 standalone tool.
               </LinkCard>

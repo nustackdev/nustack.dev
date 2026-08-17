@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
 import { Description } from '@/components/text';
+import type { Hue } from '@/lib/hue';
 import s from './GainGrid.module.css';
 
-export type GainHue = 'sage' | 'steel' | 'teal' | 'plum' | 'amber' | 'rose';
+export type GainHue = Hue | 'rose';
 export type GainCols = 'auto' | 2 | 3;
 
 export interface GainItem {

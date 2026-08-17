@@ -1,7 +1,8 @@
 import type { ElementType, ReactNode } from 'react';
+import type { Hue } from '@/lib/hue';
 import s from './SilverWovenName.module.css';
 
-export type SilverWovenHue = 'steel' | 'sage' | 'teal' | 'plum' | 'amber';
+export type SilverWovenHue = Hue;
 
 interface Props {
   hue: SilverWovenHue;

@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react';
 import { Section, SectionCell } from '@/components/page';
 import type { SectionHue, SectionSplit } from '@/components/page/Section';
+import type { Hue } from '@/lib/hue';
 import s from './SnippetBeat.module.css';
 
 /** Fabric hue applied as a color scope to the code column only. */
-export type SnippetBeatHue = 'teal' | 'sage' | 'amber' | 'plum' | 'steel';
+export type SnippetBeatHue = Hue;
 
 /** Two-column beat ratio. "1/1" is the fabric/use-case default; "45/55"
  *  is used by pages that want the code column to breathe (virtuals, spec). */

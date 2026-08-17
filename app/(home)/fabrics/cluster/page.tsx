@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'Run any Nu program on a Ray cluster. Wrap a tree in Teleport and it executes on a remote worker, unchanged.',
 };
 
-const HUE = 'amber' as const;
+const HUE = FABRIC.cluster.hue;
 
 const k = (t: string): CodeTok => ({ c: 'kw', t });
 const nu = (t: string): CodeTok => ({ c: 'nu', t });
@@ -162,15 +162,15 @@ export default function ClusterFabricPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist results, weights, metrics, job state. Workers share
                 the same tree of Refs across the cluster.
               </LinkCard>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum" tagline="Fabrics on the wire.">
+              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue={FABRIC.proxy.hue} tagline="Fabrics on the wire.">
                 Host a fabric on one worker, reach it from everywhere else.
                 Perfect pair when driver, workers, and store all live apart.
               </LinkCard>
-              <LinkCard href="/fabrics/mp" name="nu.mp" hue="plum" tagline="Local process fabric.">
+              <LinkCard href="/fabrics/mp" name="nu.mp" hue={FABRIC.mp.hue} tagline="Local process fabric.">
                 Same shape as nu.cluster, no Ray needed. Prototype your
                 topology on one box before you spin the cluster.
               </LinkCard>

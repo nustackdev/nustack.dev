@@ -19,6 +19,7 @@ import { GithubMark } from '@/components/marks/GithubMark';
 import { PageBadge } from '@/components/meta/PageBadge';
 import { RelationsLine } from '@/components/meta/RelationsLine';
 import { TOOL } from '@/lib/tools';
+import { FABRIC } from '@/lib/fabrics';
 
 export const metadata = {
   title: 'Invisibles: transparent remote objects for Python',
@@ -30,7 +31,7 @@ export default function InvisiblesPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="tool" name="invisibles" hue="plum" />}
+        meta={<PageBadge kind="tool" name="invisibles" hue={TOOL.invisibles.hue} />}
         tags={
           <>
             <RelationsLine label="Powered by" refs={TOOL.invisibles.poweredBy} />
@@ -71,7 +72,7 @@ export default function InvisiblesPage() {
               </>
             }
           />
-          <Section hue="plum">
+          <Section hue={TOOL.invisibles.hue}>
             <Stack gap="normal">
               <Description>
                 No base class. No schema file. No stubs to generate. Expose any
@@ -112,7 +113,7 @@ export default function InvisiblesPage() {
           />
           <Section>
             <GainGrid
-              hue="plum"
+              hue={TOOL.invisibles.hue}
               cols={3}
               items={[
                 {
@@ -153,7 +154,7 @@ export default function InvisiblesPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum" tagline="Proxy fabric.">
+              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue={FABRIC.proxy.hue} tagline="Proxy fabric.">
                 The fabric that puts other fabrics on the network. Built on
                 invisibles.
               </LinkCard>

@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { Tagline, Description } from '@/components/text';
 import { Chip } from '@/components/controls/Chip';
+import type { Hue } from '@/lib/hue';
 import s from './CatalogueGrid.module.css';
 
 /** Shared hue vocabulary used across catalogues (fabrics, tools, apps, use-cases). */
-export type Hue = 'steel' | 'sage' | 'teal' | 'plum' | 'amber';
+export type { Hue };
 
 interface GridProps {
   children: ReactNode;

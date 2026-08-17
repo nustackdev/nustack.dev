@@ -4,9 +4,10 @@ import { CellContent } from '@/components/grid/CellContent';
 import { Row } from '@/components/grid/Row';
 import type { RowStackAt } from '@/components/grid/Row';
 import type { CellPad } from '@/components/grid/CellContent';
+import type { Hue } from '@/lib/hue';
 import s from './Section.module.css';
 
-export type SectionHue = 'steel' | 'sage' | 'teal' | 'plum' | 'amber' | 'code';
+export type SectionHue = Hue | 'code';
 
 /**
  * Split presets — each maps to a Row `cols` preset or a raw
@@ -21,15 +22,6 @@ export type SectionSplit =
   | '55/45'
   | '1/1/1'
   | (string & {});
-
-const HUE_CLASS: Record<SectionHue, string> = {
-  steel: s.hueSteel,
-  sage: s.hueSage,
-  teal: s.hueTeal,
-  plum: s.huePlum,
-  amber: s.hueAmber,
-  code: s.hueCode,
-};
 
 /**
  * Map a split token to a Row template string. Returns null when the token
@@ -86,12 +78,11 @@ export function Section({
   pad = 'lg',
   className,
 }: SectionProps) {
-  const hueCls = hue ? HUE_CLASS[hue] : undefined;
-  const cls = [hueCls, className].filter(Boolean).join(' ') || undefined;
+  const cls = [hue && s.hueScope, className].filter(Boolean).join(' ') || undefined;
 
   if (!split) {
     return (
-      <Row cols={1} className={cls}>
+      <Row cols={1} className={cls} dataHue={hue}>
         <Cell>
           <CellContent pad={pad}>{children}</CellContent>
         </Cell>
@@ -106,6 +97,7 @@ export function Section({
       template={template}
       stackAt={stackAt ?? 'sm'}
       className={cls}
+      dataHue={hue}
     >
       {children}
     </Row>

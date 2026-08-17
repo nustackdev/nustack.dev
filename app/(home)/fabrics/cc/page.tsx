@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'Claude Code as a Ref. Prompt from your Nu tree, scope sessions with a bracket, get text and metadata back.',
 };
 
-const HUE = 'amber' as const;
+const HUE = FABRIC.cc.hue;
 
 const k = (t: string): CodeTok => ({ c: 'kw', t });
 const nu = (t: string): CodeTok => ({ c: 'nu', t });
@@ -165,11 +165,11 @@ export default function CcFabricPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist prompts, session ids, transcripts, tool traces.
                 Resume conversations across process restarts.
               </LinkCard>
-              <LinkCard href="/fabrics/llm" name="nu.llm" hue="teal" tagline="OpenAI-compatible chat.">
+              <LinkCard href="/fabrics/llm" name="nu.llm" hue={FABRIC.llm.hue} tagline="OpenAI-compatible chat.">
                 Same shape, different backend. Use nu.llm for plain
                 chat/completions; use nu.cc when you want cc's agent loop
                 and tools.

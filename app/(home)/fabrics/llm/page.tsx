@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'One chat/completions wire, many providers. Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM. Same ChatRef, same call.',
 };
 
-const HUE = 'teal' as const;
+const HUE = FABRIC.llm.hue;
 
 const k = (t: string): CodeTok => ({ c: 'kw', t });
 const nu = (t: string): CodeTok => ({ c: 'nu', t });
@@ -162,11 +162,11 @@ export default function LlmFabricPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist prompts, responses, embeddings, conversation
                 history — same Refs, plain Python reads and writes.
               </LinkCard>
-              <LinkCard href="/fabrics/ui" name="nu.ui" hue="teal" tagline="Reactive web UI.">
+              <LinkCard href="/fabrics/ui" name="nu.ui" hue={FABRIC.ui.hue} tagline="Reactive web UI.">
                 Wire a chat Ref to a text block and a button. Type a
                 prompt in the browser, get the answer streamed back.
               </LinkCard>

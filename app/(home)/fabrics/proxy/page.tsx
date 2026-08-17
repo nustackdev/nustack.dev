@@ -23,7 +23,7 @@ import { GithubMark } from '@/components/marks/GithubMark';
 import { FABRIC } from '@/lib/fabrics';
 import type { CodeTok } from '@/components/media/CodeSample';
 
-const HUE = 'plum' as const;
+const HUE = FABRIC.proxy.hue;
 
 const SNIPPET: CodeTok[][] = [
   [{ c: 'kw', t: 'import' }, { t: ' nu' }],
@@ -206,7 +206,7 @@ export default function ProxyFabricPage() {
               <LinkCard
                 href="/fabrics/mp"
                 name="nu.mp"
-                hue="plum"
+                hue={FABRIC.mp.hue}
                 tagline="Local subprocess fabric."
               >
                 Spawn a local process, install the proxy server in its init
@@ -215,7 +215,7 @@ export default function ProxyFabricPage() {
               <LinkCard
                 href="/fabrics/cluster"
                 name="nu.cluster"
-                hue="amber"
+                hue={FABRIC.cluster.hue}
                 tagline="Ray cluster fabric."
               >
                 Same shape as nu.mp, but the process lives on a Ray worker
@@ -224,7 +224,7 @@ export default function ProxyFabricPage() {
               <LinkCard
                 href="/fabrics/kv"
                 name="nu.kv"
-                hue="sage"
+                hue={FABRIC.kv.hue}
                 tagline="Durable state fabric."
               >
                 Host one KV store. Every other process reads and writes it
@@ -233,7 +233,7 @@ export default function ProxyFabricPage() {
               <LinkCard
                 href="/fabrics/ui"
                 name="nu.ui"
-                hue="teal"
+                hue={FABRIC.ui.hue}
                 tagline="Live browser widgets."
               >
                 Serve a UI fabric from one process. Other processes push

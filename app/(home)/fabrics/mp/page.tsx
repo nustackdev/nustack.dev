@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'Run Nu trees in parallel across local processes. Zero-dep, no cluster required. Same shape as nu.cluster.',
 };
 
-const HUE = 'plum' as const;
+const HUE = FABRIC.mp.hue;
 
 const k = (t: string): CodeTok => ({ c: 'kw', t });
 const nu = (t: string): CodeTok => ({ c: 'nu', t });
@@ -162,15 +162,15 @@ export default function MpFabricPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/cluster" name="nu.cluster" hue="amber" tagline="Ray cluster fabric.">
+              <LinkCard href="/fabrics/cluster" name="nu.cluster" hue={FABRIC.cluster.hue} tagline="Ray cluster fabric.">
                 Same tree, same Teleport, cluster-scale compute. Move from
                 one box to many without rewriting the topology.
               </LinkCard>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum" tagline="Fabrics on the wire.">
+              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue={FABRIC.proxy.hue} tagline="Fabrics on the wire.">
                 Host a fabric inside an mp worker, reach it from the driver
                 or from other workers. Turns a worker into a shared service.
               </LinkCard>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist worker results, weights, metrics. Workers share the
                 same tree of Refs, no manual handoff.
               </LinkCard>

@@ -20,7 +20,7 @@ export default function KvPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.kv" hue="sage" />}
+        meta={<PageBadge kind="fabric" name="nu.kv" hue={FABRIC.kv.hue} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.kv.poweredBy} />}
         title="Durable state for Nu apps, from prototype to terabytes."
         lede={
@@ -57,7 +57,7 @@ export default function KvPage() {
             }
           />
           <SnippetBeat
-            hue="sage"
+            hue={FABRIC.kv.hue}
             prose={
               <>
                 <Tagline>Refs are addresses. Shapes are your data model.</Tagline>
@@ -87,7 +87,7 @@ export default function KvPage() {
           />
           <Section>
             <GainGrid
-              hue="sage"
+              hue={FABRIC.kv.hue}
               items={[
                 {
                   kicker: 'persistence',
@@ -127,7 +127,7 @@ export default function KvPage() {
           />
           <Section>
             <GainGrid
-              hue="sage"
+              hue={FABRIC.kv.hue}
               items={[
                 {
                   kicker: 'rocksdb',
@@ -167,13 +167,13 @@ export default function KvPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/mem" name="nu.mem" hue="steel" tagline="Hot state, in-process.">
+              <LinkCard href="/fabrics/mem" name="nu.mem" hue={FABRIC.mem.hue} tagline="Hot state, in-process.">
                 Mix mem slots and kv slots on the same Shape. Scratch beside durable, same attribute syntax.
               </LinkCard>
-              <LinkCard href="/fabrics/ui" name="nu.ui" hue="teal" tagline="Live browser widgets.">
+              <LinkCard href="/fabrics/ui" name="nu.ui" hue={FABRIC.ui.hue} tagline="Live browser widgets.">
                 Bind a widget to a kv slot. Writes flow both ways through the same Ref. No polling.
               </LinkCard>
-              <LinkCard href="/fabrics/cluster" name="nu.cluster" hue="amber" tagline="Compute on the workers.">
+              <LinkCard href="/fabrics/cluster" name="nu.cluster" hue={FABRIC.cluster.hue} tagline="Compute on the workers.">
                 Teleport a body to a worker. The kv Refs travel with it. State stays one shared tree.
               </LinkCard>
             </LinkGrid>

@@ -44,6 +44,9 @@ export interface RowProps {
   stackAt?: RowStackAt;
   className?: string;
   style?: CSSProperties;
+  /** Attaches `data-hue` to the row element so descendants pick up the
+   *  hue scope (see design/hue-scope.css). */
+  dataHue?: string;
 }
 
 const COL_TEMPLATES: Record<RowCols, string> = {
@@ -93,6 +96,7 @@ export function Row({
   stackAt,
   className,
   style,
+  dataHue,
 }: RowProps) {
   const gridTemplate = template ?? COL_TEMPLATES[cols];
   const cls = [
@@ -111,6 +115,7 @@ export function Row({
   return (
     <div
       className={cls}
+      data-hue={dataHue}
       style={{ ['--site-kal-row-template' as string]: gridTemplate, ...style }}
     >
       {children}

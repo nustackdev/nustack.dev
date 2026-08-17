@@ -37,12 +37,11 @@
 .card:hover { border-color: var(--site-accent); background: var(--site-bg-overlay); }
 .card:focus-visible { outline: 2px solid var(--site-accent); outline-offset: 2px; }
 
-.card[data-hue="sage"]  { --site-accent: var(--site-hue-sage); }
-.card[data-hue="steel"] { --site-accent: var(--site-hue-steel); }
-.card[data-hue="teal"]  { --site-accent: var(--site-hue-teal); }
-.card[data-hue="plum"]  { --site-accent: var(--site-hue-plum); }
-.card[data-hue="amber"] { --site-accent: var(--site-hue-amber); }
-.card[data-hue="rose"]  { --site-accent: var(--site-hue-rose); }
+/* Hue tint — --h comes from design/hue-scope.css, keyed off [data-hue].
+ * `rose` is a legacy hue outside the 12-hue scope; kept as a targeted
+ * fallback so existing callers don't regress. */
+.card[data-hue] { --site-accent: var(--h); }
+.card[data-hue="rose"] { --site-accent: var(--site-hue-rose); }
 
 .kicker {
   font-family: var(--font-mono, ui-monospace, monospace);

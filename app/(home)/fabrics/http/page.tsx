@@ -26,7 +26,7 @@ export default function HttpFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.http" hue="amber" />}
+        meta={<PageBadge kind="fabric" name="nu.http" hue={FABRIC.http.hue} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.http.poweredBy} />}
         title="Plug an HTTP API into Nu."
         lede={
@@ -64,7 +64,7 @@ export default function HttpFabricPage() {
           />
 
           <SnippetBeat
-            hue="amber"
+            hue={FABRIC.http.hue}
             prose={
               <>
                 <Description>
@@ -94,7 +94,7 @@ export default function HttpFabricPage() {
 
           <Section>
             <GainGrid
-              hue="amber"
+              hue={FABRIC.http.hue}
               items={[
                 {
                   title: 'One shape for every verb.',
@@ -130,7 +130,7 @@ export default function HttpFabricPage() {
               <LinkCard
                 href="/fabrics/ui"
                 name="nu.ui"
-                hue="teal"
+                hue={FABRIC.ui.hue}
                 tagline="See responses on screen."
               >
                 Wire a fetch straight into a live widget. Refresh the value,
@@ -140,7 +140,7 @@ export default function HttpFabricPage() {
               <LinkCard
                 href="/fabrics/kv"
                 name="nu.kv"
-                hue="sage"
+                hue={FABRIC.kv.hue}
                 tagline="Remember responses on disk."
               >
                 Cache what you fetched. Track cursors between polls. Reload
@@ -150,7 +150,7 @@ export default function HttpFabricPage() {
               <LinkCard
                 href="/fabrics/proxy"
                 name="nu.proxy"
-                hue="plum"
+                hue={FABRIC.proxy.hue}
                 tagline="Use one client from many processes."
               >
                 Keep the client in one process, call it from others. Your

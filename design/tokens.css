@@ -100,36 +100,13 @@
   --site-r-lg: 14px;
   --site-t:    0.15s ease;
 
-  /* --- Silver-woven hue palette --------------------------------------- */
-  /* Section-specific accents. The base hex + -soft/-wash/-line alpha
-     variants are shared across themes (they degrade gracefully on either
-     background). The `-ink` variant — foreground text sitting on top of
-     the wash — is theme-specific and defined in the light :root / .dark
-     blocks below, mirroring SilverWovenName's per-theme hue stops. */
-  --site-hue-steel:      #9bb0d0;
-  --site-hue-steel-soft: rgba(155, 176, 208, 0.18);
-  --site-hue-steel-wash: rgba(155, 176, 208, 0.10);
-  --site-hue-steel-line: rgba(155, 176, 208, 0.42);
-
-  --site-hue-sage:       #a8c0af;
-  --site-hue-sage-soft:  rgba(168, 192, 175, 0.18);
-  --site-hue-sage-wash:  rgba(168, 192, 175, 0.10);
-  --site-hue-sage-line:  rgba(168, 192, 175, 0.42);
-
-  --site-hue-plum:       #bda2c8;
-  --site-hue-plum-soft:  rgba(189, 162, 200, 0.18);
-  --site-hue-plum-wash:  rgba(189, 162, 200, 0.10);
-  --site-hue-plum-line:  rgba(189, 162, 200, 0.42);
-
-  --site-hue-amber:      #dab88a;
-  --site-hue-amber-soft: rgba(218, 184, 138, 0.18);
-  --site-hue-amber-wash: rgba(218, 184, 138, 0.10);
-  --site-hue-amber-line: rgba(218, 184, 138, 0.42);
-
-  --site-hue-teal:       #a3ced4;
-  --site-hue-teal-soft:  rgba(163, 206, 212, 0.18);
-  --site-hue-teal-wash:  rgba(163, 206, 212, 0.10);
-  --site-hue-teal-line:  rgba(163, 206, 212, 0.42);
+  /* --- Silver-woven hue palette (see per-theme blocks below) -----------
+   * 12 hue anchors around the OKLCH wheel (yellow-green band dropped).
+   * Each hue exposes SEVEN tokens: base (mid stop / accent), -2 (deep
+   * stop), -ink (readable text), -soft, -wash, -line, -glow (alphas).
+   * Defined in the light :root and .dark blocks below; theme-flips
+   * automatically. Same L*+C* across all hues within a theme, so hues
+   * read as one metallic family — only hue angle changes. */
 
   /* --- Status ---------------------------------------------------------- */
   /* Info/idea reuse the brand accents so they auto-theme; success/warning/
@@ -183,14 +160,117 @@
   --site-ink-3:  rgba(76, 79, 91, 0.75);
   --site-ink-4:  rgba(76, 79, 91, 0.5);
 
-  /* --- Hue ink (foreground text on hue-wash) ------------------------- */
-  /* Darker, saturated hue stops that read with real contrast on the
-     near-white light background. Matches SilverWovenName's light stops. */
-  --site-hue-steel-ink: #2f4b73;
-  --site-hue-sage-ink:  #3d5f4a;
-  --site-hue-plum-ink:  #5d3f70;
-  --site-hue-amber-ink: #7a5a2a;
-  --site-hue-teal-ink:  #285860;
+  /* --- Silver-woven hues (light) ------------------------------------- */
+  /* mid stop (base): L 0.52 C 0.070   deep stop (-2): L 0.30 C 0.108
+   * ink (text on wash): L 0.32 C 0.14 — darker + saturated for contrast. */
+
+  /* crimson — H 15 */
+  --site-hue-crimson:      oklch(0.52 0.07 15);
+  --site-hue-crimson-2:    oklch(0.30 0.108 15);
+  --site-hue-crimson-ink:  oklch(0.32 0.14 15);
+  --site-hue-crimson-soft: oklch(0.52 0.07 15 / 0.14);
+  --site-hue-crimson-wash: oklch(0.52 0.07 15 / 0.07);
+  --site-hue-crimson-line: oklch(0.52 0.07 15 / 0.38);
+  --site-hue-crimson-glow: oklch(0.52 0.07 15 / 0.28);
+
+  /* coral — H 35 */
+  --site-hue-coral:        oklch(0.52 0.07 35);
+  --site-hue-coral-2:      oklch(0.30 0.108 35);
+  --site-hue-coral-ink:    oklch(0.32 0.14 35);
+  --site-hue-coral-soft:   oklch(0.52 0.07 35 / 0.14);
+  --site-hue-coral-wash:   oklch(0.52 0.07 35 / 0.07);
+  --site-hue-coral-line:   oklch(0.52 0.07 35 / 0.38);
+  --site-hue-coral-glow:   oklch(0.52 0.07 35 / 0.28);
+
+  /* amber — H 60 */
+  --site-hue-amber:        oklch(0.52 0.07 60);
+  --site-hue-amber-2:      oklch(0.30 0.108 60);
+  --site-hue-amber-ink:    oklch(0.32 0.14 60);
+  --site-hue-amber-soft:   oklch(0.52 0.07 60 / 0.14);
+  --site-hue-amber-wash:   oklch(0.52 0.07 60 / 0.07);
+  --site-hue-amber-line:   oklch(0.52 0.07 60 / 0.38);
+  --site-hue-amber-glow:   oklch(0.52 0.07 60 / 0.28);
+
+  /* gold — H 80 */
+  --site-hue-gold:         oklch(0.52 0.07 80);
+  --site-hue-gold-2:       oklch(0.30 0.108 80);
+  --site-hue-gold-ink:     oklch(0.32 0.14 80);
+  --site-hue-gold-soft:    oklch(0.52 0.07 80 / 0.14);
+  --site-hue-gold-wash:    oklch(0.52 0.07 80 / 0.07);
+  --site-hue-gold-line:    oklch(0.52 0.07 80 / 0.38);
+  --site-hue-gold-glow:    oklch(0.52 0.07 80 / 0.28);
+
+  /* sage — H 145 */
+  --site-hue-sage:         oklch(0.52 0.07 145);
+  --site-hue-sage-2:       oklch(0.30 0.108 145);
+  --site-hue-sage-ink:     oklch(0.32 0.14 145);
+  --site-hue-sage-soft:    oklch(0.52 0.07 145 / 0.14);
+  --site-hue-sage-wash:    oklch(0.52 0.07 145 / 0.07);
+  --site-hue-sage-line:    oklch(0.52 0.07 145 / 0.38);
+  --site-hue-sage-glow:    oklch(0.52 0.07 145 / 0.28);
+
+  /* teal — H 180 */
+  --site-hue-teal:         oklch(0.52 0.07 180);
+  --site-hue-teal-2:       oklch(0.30 0.108 180);
+  --site-hue-teal-ink:     oklch(0.32 0.14 180);
+  --site-hue-teal-soft:    oklch(0.52 0.07 180 / 0.14);
+  --site-hue-teal-wash:    oklch(0.52 0.07 180 / 0.07);
+  --site-hue-teal-line:    oklch(0.52 0.07 180 / 0.38);
+  --site-hue-teal-glow:    oklch(0.52 0.07 180 / 0.28);
+
+  /* cyan — H 210 */
+  --site-hue-cyan:         oklch(0.52 0.07 210);
+  --site-hue-cyan-2:       oklch(0.30 0.108 210);
+  --site-hue-cyan-ink:     oklch(0.32 0.14 210);
+  --site-hue-cyan-soft:    oklch(0.52 0.07 210 / 0.14);
+  --site-hue-cyan-wash:    oklch(0.52 0.07 210 / 0.07);
+  --site-hue-cyan-line:    oklch(0.52 0.07 210 / 0.38);
+  --site-hue-cyan-glow:    oklch(0.52 0.07 210 / 0.28);
+
+  /* steel — H 245 */
+  --site-hue-steel:        oklch(0.52 0.07 245);
+  --site-hue-steel-2:      oklch(0.30 0.108 245);
+  --site-hue-steel-ink:    oklch(0.32 0.14 245);
+  --site-hue-steel-soft:   oklch(0.52 0.07 245 / 0.14);
+  --site-hue-steel-wash:   oklch(0.52 0.07 245 / 0.07);
+  --site-hue-steel-line:   oklch(0.52 0.07 245 / 0.38);
+  --site-hue-steel-glow:   oklch(0.52 0.07 245 / 0.28);
+
+  /* indigo — H 270 */
+  --site-hue-indigo:       oklch(0.52 0.07 270);
+  --site-hue-indigo-2:     oklch(0.30 0.108 270);
+  --site-hue-indigo-ink:   oklch(0.32 0.14 270);
+  --site-hue-indigo-soft:  oklch(0.52 0.07 270 / 0.14);
+  --site-hue-indigo-wash:  oklch(0.52 0.07 270 / 0.07);
+  --site-hue-indigo-line:  oklch(0.52 0.07 270 / 0.38);
+  --site-hue-indigo-glow:  oklch(0.52 0.07 270 / 0.28);
+
+  /* violet — H 295 */
+  --site-hue-violet:       oklch(0.52 0.07 295);
+  --site-hue-violet-2:     oklch(0.30 0.108 295);
+  --site-hue-violet-ink:   oklch(0.32 0.14 295);
+  --site-hue-violet-soft:  oklch(0.52 0.07 295 / 0.14);
+  --site-hue-violet-wash:  oklch(0.52 0.07 295 / 0.07);
+  --site-hue-violet-line:  oklch(0.52 0.07 295 / 0.38);
+  --site-hue-violet-glow:  oklch(0.52 0.07 295 / 0.28);
+
+  /* plum — H 320 */
+  --site-hue-plum:         oklch(0.52 0.07 320);
+  --site-hue-plum-2:       oklch(0.30 0.108 320);
+  --site-hue-plum-ink:     oklch(0.32 0.14 320);
+  --site-hue-plum-soft:    oklch(0.52 0.07 320 / 0.14);
+  --site-hue-plum-wash:    oklch(0.52 0.07 320 / 0.07);
+  --site-hue-plum-line:    oklch(0.52 0.07 320 / 0.38);
+  --site-hue-plum-glow:    oklch(0.52 0.07 320 / 0.28);
+
+  /* magenta — H 350 */
+  --site-hue-magenta:      oklch(0.52 0.07 350);
+  --site-hue-magenta-2:    oklch(0.30 0.108 350);
+  --site-hue-magenta-ink:  oklch(0.32 0.14 350);
+  --site-hue-magenta-soft: oklch(0.52 0.07 350 / 0.14);
+  --site-hue-magenta-wash: oklch(0.52 0.07 350 / 0.07);
+  --site-hue-magenta-line: oklch(0.52 0.07 350 / 0.38);
+  --site-hue-magenta-glow: oklch(0.52 0.07 350 / 0.28);
 
   /* --- Rule ----------------------------------------------------------- */
   --site-rule:   rgba(0, 0, 0, 0.08);
@@ -264,13 +344,117 @@
   --site-ink-3:  rgba(179, 176, 200, 0.82);
   --site-ink-4:  rgba(179, 176, 200, 0.55);
 
-  /* Higher-chroma, brighter hue stops so foreground text pops on the
-     dark bg's hue-wash pill (the shared pale hex reads washed out). */
-  --site-hue-steel-ink: #b8ccff;
-  --site-hue-sage-ink:  #a8e8b8;
-  --site-hue-plum-ink:  #dcaef5;
-  --site-hue-amber-ink: #ffc985;
-  --site-hue-teal-ink:  #9eecf5;
+  /* --- Silver-woven hues (dark) -------------------------------------- */
+  /* mid stop (base): L 0.78 C 0.055   deep stop (-2): L 0.58 C 0.088
+   * ink (text on wash): L 0.88 C 0.14 — brighter + saturated for contrast. */
+
+  /* crimson — H 15 */
+  --site-hue-crimson:      oklch(0.78 0.055 15);
+  --site-hue-crimson-2:    oklch(0.58 0.088 15);
+  --site-hue-crimson-ink:  oklch(0.88 0.14 15);
+  --site-hue-crimson-soft: oklch(0.78 0.055 15 / 0.18);
+  --site-hue-crimson-wash: oklch(0.78 0.055 15 / 0.09);
+  --site-hue-crimson-line: oklch(0.78 0.055 15 / 0.44);
+  --site-hue-crimson-glow: oklch(0.78 0.055 15 / 0.34);
+
+  /* coral — H 35 */
+  --site-hue-coral:        oklch(0.78 0.055 35);
+  --site-hue-coral-2:      oklch(0.58 0.088 35);
+  --site-hue-coral-ink:    oklch(0.88 0.14 35);
+  --site-hue-coral-soft:   oklch(0.78 0.055 35 / 0.18);
+  --site-hue-coral-wash:   oklch(0.78 0.055 35 / 0.09);
+  --site-hue-coral-line:   oklch(0.78 0.055 35 / 0.44);
+  --site-hue-coral-glow:   oklch(0.78 0.055 35 / 0.34);
+
+  /* amber — H 60 */
+  --site-hue-amber:        oklch(0.78 0.055 60);
+  --site-hue-amber-2:      oklch(0.58 0.088 60);
+  --site-hue-amber-ink:    oklch(0.88 0.14 60);
+  --site-hue-amber-soft:   oklch(0.78 0.055 60 / 0.18);
+  --site-hue-amber-wash:   oklch(0.78 0.055 60 / 0.09);
+  --site-hue-amber-line:   oklch(0.78 0.055 60 / 0.44);
+  --site-hue-amber-glow:   oklch(0.78 0.055 60 / 0.34);
+
+  /* gold — H 80 */
+  --site-hue-gold:         oklch(0.78 0.055 80);
+  --site-hue-gold-2:       oklch(0.58 0.088 80);
+  --site-hue-gold-ink:     oklch(0.88 0.14 80);
+  --site-hue-gold-soft:    oklch(0.78 0.055 80 / 0.18);
+  --site-hue-gold-wash:    oklch(0.78 0.055 80 / 0.09);
+  --site-hue-gold-line:    oklch(0.78 0.055 80 / 0.44);
+  --site-hue-gold-glow:    oklch(0.78 0.055 80 / 0.34);
+
+  /* sage — H 145 */
+  --site-hue-sage:         oklch(0.78 0.055 145);
+  --site-hue-sage-2:       oklch(0.58 0.088 145);
+  --site-hue-sage-ink:     oklch(0.88 0.14 145);
+  --site-hue-sage-soft:    oklch(0.78 0.055 145 / 0.18);
+  --site-hue-sage-wash:    oklch(0.78 0.055 145 / 0.09);
+  --site-hue-sage-line:    oklch(0.78 0.055 145 / 0.44);
+  --site-hue-sage-glow:    oklch(0.78 0.055 145 / 0.34);
+
+  /* teal — H 180 */
+  --site-hue-teal:         oklch(0.78 0.055 180);
+  --site-hue-teal-2:       oklch(0.58 0.088 180);
+  --site-hue-teal-ink:     oklch(0.88 0.14 180);
+  --site-hue-teal-soft:    oklch(0.78 0.055 180 / 0.18);
+  --site-hue-teal-wash:    oklch(0.78 0.055 180 / 0.09);
+  --site-hue-teal-line:    oklch(0.78 0.055 180 / 0.44);
+  --site-hue-teal-glow:    oklch(0.78 0.055 180 / 0.34);
+
+  /* cyan — H 210 */
+  --site-hue-cyan:         oklch(0.78 0.055 210);
+  --site-hue-cyan-2:       oklch(0.58 0.088 210);
+  --site-hue-cyan-ink:     oklch(0.88 0.14 210);
+  --site-hue-cyan-soft:    oklch(0.78 0.055 210 / 0.18);
+  --site-hue-cyan-wash:    oklch(0.78 0.055 210 / 0.09);
+  --site-hue-cyan-line:    oklch(0.78 0.055 210 / 0.44);
+  --site-hue-cyan-glow:    oklch(0.78 0.055 210 / 0.34);
+
+  /* steel — H 245 */
+  --site-hue-steel:        oklch(0.78 0.055 245);
+  --site-hue-steel-2:      oklch(0.58 0.088 245);
+  --site-hue-steel-ink:    oklch(0.88 0.14 245);
+  --site-hue-steel-soft:   oklch(0.78 0.055 245 / 0.18);
+  --site-hue-steel-wash:   oklch(0.78 0.055 245 / 0.09);
+  --site-hue-steel-line:   oklch(0.78 0.055 245 / 0.44);
+  --site-hue-steel-glow:   oklch(0.78 0.055 245 / 0.34);
+
+  /* indigo — H 270 */
+  --site-hue-indigo:       oklch(0.78 0.055 270);
+  --site-hue-indigo-2:     oklch(0.58 0.088 270);
+  --site-hue-indigo-ink:   oklch(0.88 0.14 270);
+  --site-hue-indigo-soft:  oklch(0.78 0.055 270 / 0.18);
+  --site-hue-indigo-wash:  oklch(0.78 0.055 270 / 0.09);
+  --site-hue-indigo-line:  oklch(0.78 0.055 270 / 0.44);
+  --site-hue-indigo-glow:  oklch(0.78 0.055 270 / 0.34);
+
+  /* violet — H 295 */
+  --site-hue-violet:       oklch(0.78 0.055 295);
+  --site-hue-violet-2:     oklch(0.58 0.088 295);
+  --site-hue-violet-ink:   oklch(0.88 0.14 295);
+  --site-hue-violet-soft:  oklch(0.78 0.055 295 / 0.18);
+  --site-hue-violet-wash:  oklch(0.78 0.055 295 / 0.09);
+  --site-hue-violet-line:  oklch(0.78 0.055 295 / 0.44);
+  --site-hue-violet-glow:  oklch(0.78 0.055 295 / 0.34);
+
+  /* plum — H 320 */
+  --site-hue-plum:         oklch(0.78 0.055 320);
+  --site-hue-plum-2:       oklch(0.58 0.088 320);
+  --site-hue-plum-ink:     oklch(0.88 0.14 320);
+  --site-hue-plum-soft:    oklch(0.78 0.055 320 / 0.18);
+  --site-hue-plum-wash:    oklch(0.78 0.055 320 / 0.09);
+  --site-hue-plum-line:    oklch(0.78 0.055 320 / 0.44);
+  --site-hue-plum-glow:    oklch(0.78 0.055 320 / 0.34);
+
+  /* magenta — H 350 */
+  --site-hue-magenta:      oklch(0.78 0.055 350);
+  --site-hue-magenta-2:    oklch(0.58 0.088 350);
+  --site-hue-magenta-ink:  oklch(0.88 0.14 350);
+  --site-hue-magenta-soft: oklch(0.78 0.055 350 / 0.18);
+  --site-hue-magenta-wash: oklch(0.78 0.055 350 / 0.09);
+  --site-hue-magenta-line: oklch(0.78 0.055 350 / 0.44);
+  --site-hue-magenta-glow: oklch(0.78 0.055 350 / 0.34);
 
   --site-rule:   rgba(255, 255, 255, 0.08);
   --site-rule-2: rgba(255, 255, 255, 0.04);

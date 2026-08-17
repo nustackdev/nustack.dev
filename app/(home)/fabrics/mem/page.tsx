@@ -20,7 +20,7 @@ export default function MemPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.mem" hue="steel" />}
+        meta={<PageBadge kind="fabric" name="nu.mem" hue={FABRIC.mem.hue} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.mem.poweredBy} />}
         title={
           <>
@@ -61,7 +61,7 @@ export default function MemPage() {
           />
 
           <SnippetBeat
-            hue="steel"
+            hue={FABRIC.mem.hue}
             prose={
               <>
                 <Tagline>The simplest state in Nu.</Tagline>
@@ -88,8 +88,8 @@ export default function MemPage() {
             title="Pick by lifetime."
             lede={
               <>
-                <SilverWovenName as="span" hue="steel">nu.mem</SilverWovenName>{' '}
-                and <SilverWovenName as="span" hue="sage">nu.kv</SilverWovenName>{' '}
+                <SilverWovenName as="span" hue={FABRIC.mem.hue}>nu.mem</SilverWovenName>{' '}
+                and <SilverWovenName as="span" hue={FABRIC.kv.hue}>nu.kv</SilverWovenName>{' '}
                 share the same Ref shapes. Pick by what the state needs to
                 survive.
               </>
@@ -98,11 +98,11 @@ export default function MemPage() {
 
           <Section>
             <LinkGrid>
-              <LinkCard href="#install" name="nu.mem" hue="steel" tagline="Ephemeral, in-process.">
+              <LinkCard href="#install" name="nu.mem" hue={FABRIC.mem.hue} tagline="Ephemeral, in-process.">
                 Caches. Live counters. UI state. Anything you can rebuild
                 on restart. Zero setup, zero disk.
               </LinkCard>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable, across restarts.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable, across restarts.">
                 Users. Orders. Anything you need after a crash. Same Refs,
                 backed by RocksDB or LMDB. Move it to nu.kv when the state
                 needs to survive a restart.
@@ -118,7 +118,7 @@ export default function MemPage() {
             lede={
               <>
                 Fabrics compose. Wire{' '}
-                <SilverWovenName as="span" hue="steel">nu.mem</SilverWovenName>{' '}
+                <SilverWovenName as="span" hue={FABRIC.mem.hue}>nu.mem</SilverWovenName>{' '}
                 to a browser, a KV store, or another process without
                 changing your Refs.
               </>
@@ -127,14 +127,14 @@ export default function MemPage() {
 
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Durable on disk.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable on disk.">
                 Move hot state to disk when you outgrow the process.
               </LinkCard>
-              <LinkCard href="/fabrics/ui" name="nu.ui" hue="teal" tagline="Live browser widgets.">
+              <LinkCard href="/fabrics/ui" name="nu.ui" hue={FABRIC.ui.hue} tagline="Live browser widgets.">
                 Bind mem state straight into browser widgets. Live
                 updates, no glue.
               </LinkCard>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue="plum" tagline="Fabrics on the wire.">
+              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue={FABRIC.proxy.hue} tagline="Fabrics on the wire.">
                 Serve a mem fabric over a socket. Another process reads
                 the same Refs.
               </LinkCard>

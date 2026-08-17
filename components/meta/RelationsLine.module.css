@@ -39,38 +39,13 @@ a.chip:hover {
   border-color: var(--chip-hue, var(--site-accent-2));
 }
 
-/* Route --chip-hue through the theme-aware --site-hue-*-ink tokens so
- * chip text pops on hue-wash pills in both themes without touching
- * wash/line (those keep the shared alpha tokens for consistent pill
- * weight with other hue-tinted surfaces). */
-
-.chip[data-hue="steel"] {
-  --chip-hue:      var(--site-hue-steel-ink);
-  --chip-wash:     var(--site-hue-steel-wash);
-  --chip-line:     var(--site-hue-steel-line);
-  --chip-hue-soft: var(--site-hue-steel-soft);
-}
-.chip[data-hue="sage"] {
-  --chip-hue:      var(--site-hue-sage-ink);
-  --chip-wash:     var(--site-hue-sage-wash);
-  --chip-line:     var(--site-hue-sage-line);
-  --chip-hue-soft: var(--site-hue-sage-soft);
-}
-.chip[data-hue="teal"] {
-  --chip-hue:      var(--site-hue-teal-ink);
-  --chip-wash:     var(--site-hue-teal-wash);
-  --chip-line:     var(--site-hue-teal-line);
-  --chip-hue-soft: var(--site-hue-teal-soft);
-}
-.chip[data-hue="plum"] {
-  --chip-hue:      var(--site-hue-plum-ink);
-  --chip-wash:     var(--site-hue-plum-wash);
-  --chip-line:     var(--site-hue-plum-line);
-  --chip-hue-soft: var(--site-hue-plum-soft);
-}
-.chip[data-hue="amber"] {
-  --chip-hue:      var(--site-hue-amber-ink);
-  --chip-wash:     var(--site-hue-amber-wash);
-  --chip-line:     var(--site-hue-amber-line);
-  --chip-hue-soft: var(--site-hue-amber-soft);
+/* Route --chip-hue through the theme-aware --h-ink token so chip text
+ * pops on hue-wash pills in both themes. Wash/line keep the shared
+ * alpha tokens for consistent pill weight with other hue-tinted
+ * surfaces. Hue values come from design/hue-scope.css via --h*. */
+.chip[data-hue] {
+  --chip-hue:      var(--h-ink);
+  --chip-wash:     var(--h-wash);
+  --chip-line:     var(--h-line);
+  --chip-hue-soft: var(--h-soft);
 }

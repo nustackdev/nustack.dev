@@ -20,8 +20,9 @@ import { Stack } from '@/components/layout/Stack';
 import { CodeSample, type CodeTok } from '@/components/media/CodeSample';
 import { GithubMark } from '@/components/marks/GithubMark';
 import { TOOL } from '@/lib/tools';
+import { FABRIC } from '@/lib/fabrics';
 
-const HUE = 'sage'; // rdbpy backs nu.kv, share its hue
+const HUE = TOOL.rdbpy.hue;
 
 const SNIPPET: CodeTok[][] = [
   [{ c: 'kw', t: 'import' }, { t: ' ' }, { c: 'nu', t: 'rdbpy' }],
@@ -210,11 +211,11 @@ export default function RdbpyPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue="sage" tagline="Persistent state fabric.">
+              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
                 The fabric that turns Refs into durable state. Runs on rdbpy
                 out of the box.
               </LinkCard>
-              <LinkCard href="/tools/virtuals" name="virtuals" hue="sage" tagline="Collections over KV.">
+              <LinkCard href="/tools/virtuals" name="virtuals" hue={TOOL.virtuals.hue} tagline="Collections over KV.">
                 Dict, list, and set backed by any KV store, including rdbpy.
                 The layer between raw bytes and Python objects.
               </LinkCard>

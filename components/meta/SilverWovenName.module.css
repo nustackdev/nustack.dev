@@ -1,9 +1,13 @@
 /* =============================================================================
  * SilverWovenName — hero-scale silver-to-hue gradient title.
  * Silver stops come from tokens (--site-silver-1 / --site-silver-2) which
- * theme themselves. Hue stops are inlined per data-hue with a light-mode
- * override under :global(.dark)-negated selectors so the metallic identity
- * holds on both bgs (dark: pale hues glow; light: darker hues sit on white).
+ * theme themselves. The generic hue stops come from design/hue-scope.css
+ * (--h / --h-2) so any hue in the site's vocabulary works with one rule.
+ *
+ * The 5 original hues (steel, sage, plum, amber, teal) keep bespoke
+ * hex overrides — their gradient stops were hand-tuned pre-tokens and
+ * we preserve them byte-for-byte here. Every other hue picks up the
+ * token-driven default below.
  *
  * Historical note: background-image via CSS var indirection has been flaky
  * with some LightningCSS orderings — set the full `background-image` per
@@ -35,7 +39,19 @@
   margin-block: -0.15em;
 }
 
-/* --- LIGHT (default) — darker hue stops read on white bg -------------- */
+/* --- Default: token-driven for every hue in the site's vocabulary ---- */
+
+.name[data-hue] {
+  background-image: linear-gradient(
+    120deg,
+    var(--site-silver-1) 0%,
+    var(--site-silver-2) 22%,
+    var(--h) 55%,
+    var(--h-2) 100%
+  );
+}
+
+/* --- LIGHT overrides — the 5 originals keep hand-tuned darker stops --- */
 
 .name[data-hue="steel"] {
   background-image: linear-gradient(
@@ -87,7 +103,7 @@
   );
 }
 
-/* --- DARK — original pale hue stops -------------- */
+/* --- DARK overrides — original pale stops for the 5 originals -------- */
 
 :global(.dark) .name[data-hue="steel"] {
   background-image: linear-gradient(

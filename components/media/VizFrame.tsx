@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
+import type { Hue } from '@/lib/hue';
 import s from './VizFrame.module.css';
 
-export type VizFrameHue = 'steel' | 'sage' | 'teal' | 'plum' | 'amber';
+export type VizFrameHue = Hue;
 
 interface Props {
   children: ReactNode;

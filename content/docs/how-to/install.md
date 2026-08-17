@@ -16,7 +16,7 @@ The everything-included install:
 pip install "nustack-py[all]"
 ```
 
-For a lean install, pick the extras you need instead of `[all]`. One extra per fabric, name matches the import path: `[virtuals]`, `[mem]`, `[ui]`, `[ray]`, `[invisibles]`.
+For a lean install, pick the extras you need instead of `[all]`. One extra per fabric: `[kv]`, `[mem]`, `[ui]`, `[ray]`, `[proxy]`, `[http]`, `[cc]`.
 
 ```bash
 pip install "nustack-py[mem,ui]"

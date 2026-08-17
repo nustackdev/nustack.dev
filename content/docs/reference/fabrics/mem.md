@@ -4,7 +4,7 @@ title: nu.mem
 
 In-process fabric adapter: plain nested Python dicts as the data bag. No
 storage backend, no views, no reactivity — just dicts. Concrete Ref
-implementations for the shape Ref blueprints (`nu.shape.refs`), plus a
+implementations for the shape Ref blueprints (`nu.domains.shape.refs`), plus a
 janus-backed queue ref for bridging asyncio and threads.
 
 ## Base

@@ -49,9 +49,9 @@ Set up Nu with the `nu.ui` Fabric first: see [Install](../how-to/install). Then 
 
 ## What happened
 
-**Two Shapes, two Fabrics.** `Counter` holds one int on the virtuals Fabric. `Dashboard` holds one text label on the UI Fabric. `App` is the site index with one page mounted at `/`. Same declaration style, different Fabric.
+**Two Shapes, two Fabrics.** `Counter` holds one int on the kv Fabric. `Dashboard` holds one text label on the UI Fabric. `App` is the site index with one page mounted at `/`. Same declaration style, different Fabric.
 
-**One tree, two Fabrics.** `nu.With` binds a RocksDB-backed virtuals Navigator and a UI server. The server runs `ReactForever` — wake on `Counter.value` change, mirror it into `Dashboard.count`. The `body` seeds the counter if missing, then ticks it forever, one second between beats.
+**One tree, two Fabrics.** `nu.With` binds `nu.kv.rocksdb_navigator` (RocksDB storage under a Navigator) and a UI server. The server runs `ReactForever` — wake on `Counter.value` change, mirror it into `Dashboard.count`. The `body` seeds the counter if missing, then ticks it forever, one second between beats.
 
 **Composition.** `>>` runs children left-to-right. `ForeverDo` loops its body forever. `ReactForever` subscribes to a change source and re-runs on every fire. `auto_flow_atomic` wraps writes in the minimum atomic region so you get transactions without spelling them out.
 

@@ -69,8 +69,8 @@ separate reference; this page covers the fabric primitives.
 
 | Name         | Sort            | Signature                                                                                             | Effect     | Meaning                                                                                                        |
 | ------------ | --------------- | ------------------------------------------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------- |
-| NudleServer  | FabricLifecycle | `NudleServer(app, *, host="127.0.0.1", port=8080, log_level="info", ready_timeout=10.0, shutdown_timeout=5.0)` | read/write | boots the FastAPI + uvicorn stack that serves a nudle Index. Async-only; enters via `Provide(NudleServer, {...})`. |
-| server       | fn              | `server(app, *, host="127.0.0.1", port=8080, ...)`                                                     | pure       | convenience wrapper: returns `Provide(NudleServer, {...})` around a body.                                        |
+| NudleServer  | FabricLifecycle | `NudleServer(app, *, host="127.0.0.1", port=8080, log_level="warning", open_browser=True, ready_timeout=10.0, shutdown_timeout=5.0)` | read/write | boots the FastAPI + uvicorn stack that serves a nudle Index. Async-only; enters via `Provide(NudleServer, {...})`. |
+| server       | fn              | `server(app, *, host="127.0.0.1", port=8080, log_level="warning", open_browser=True, ...)`             | pure       | convenience wrapper: returns `Provide(NudleServer, {...})` around a body.                                        |
 | NudleSession | Session         | `NudleSession(ws)`                                                                                     | read/write | concrete `Session` over a FastAPI websocket. One per connection; owns the observer registry and pending reads.    |
 
 ## Layout

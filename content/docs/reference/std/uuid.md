@@ -10,7 +10,7 @@ Mirrors `uuid` 1-1: `UUID` is the class (a Form); `uuid1`/`uuid3`/`uuid4`/`uuid5
 
 | Name | Sort | Signature   | Effect | Meaning                                                                                    |
 | ---- | ---- | ------------ | ------ | ---------------------------------------------------------------------------------------------- |
-| UUID | Form | `UUID.of(...)` (via `from_str`/`from_bytes`/`from_int`) | pure | UUID; `.version`/`.variant`/`.time`/`.clock_seq`/`.node`, `.hex`/`.urn`/`.bytes`/`.bytes_le`/`.int_`, comparison |
+| UUID | Form | `UUID.from_str(s)` / `UUID.from_bytes(b)` / `UUID.from_int(i)` | pure | UUID; `.version`/`.variant`/`.time`/`.clock_seq`/`.node`, `.hex`/`.urn`/`.bytes`/`.bytes_le`/`.int_`, comparison |
 
 ### Functions
 

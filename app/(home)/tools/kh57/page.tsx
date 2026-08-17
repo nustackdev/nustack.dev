@@ -32,9 +32,12 @@ export const metadata = pageOG({
   path: '/tools/kh57',
 });
 
+import { ToolJsonLd } from '@/components/meta/ToolJsonLd';
+
 export default function Kh57ToolPage() {
   return (
     <Page>
+      <ToolJsonLd slug="kh57" />
       <Header
         meta={<PageBadge kind="tool" name="kh57" hue={TOOL.kh57.hue} />}
         tags={

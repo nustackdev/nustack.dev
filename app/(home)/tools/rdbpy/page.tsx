@@ -103,9 +103,12 @@ const SNIPPET: CodeTok[][] = [
   [{ t: 'txn.close()' }],
 ];
 
+import { ToolJsonLd } from '@/components/meta/ToolJsonLd';
+
 export default function RdbpyPage() {
   return (
     <Page>
+      <ToolJsonLd slug="rdbpy" />
       <Header
         meta={<PageBadge kind="tool" name="rdbpy" hue={HUE} />}
         tags={

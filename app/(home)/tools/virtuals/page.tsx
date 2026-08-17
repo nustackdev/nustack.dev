@@ -25,9 +25,12 @@ export const metadata = pageOG({
   path: '/tools/virtuals',
 });
 
+import { ToolJsonLd } from '@/components/meta/ToolJsonLd';
+
 export default function VirtualsToolPage() {
   return (
     <Page>
+      <ToolJsonLd slug="virtuals" />
       <Header
         meta={<PageBadge kind="tool" name="virtuals" hue={TOOL.virtuals.hue} />}
         tags={

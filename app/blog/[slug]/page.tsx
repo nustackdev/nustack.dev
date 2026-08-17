@@ -10,6 +10,8 @@ import { CellContent } from '@/components/grid/CellContent';
 import { blogSource, getAllBlogPosts, getBlogPageImage } from '@/lib/source';
 import { getMDXComponents } from '@/components/mdx';
 import { formatDate } from '@/lib/date';
+import { JsonLd } from '@/components/meta/JsonLd';
+import { blogPostingLd } from '@/lib/jsonld';
 import s from '../blog.module.css';
 
 export async function generateStaticParams() {
@@ -59,9 +61,21 @@ export default async function BlogPost(props: PageProps<'/blog/[slug]'>) {
   if (!post) notFound();
 
   const MDX = post.data.body;
+  const image = getBlogPageImage(post).url;
 
   return (
     <Page>
+      <JsonLd
+        data={blogPostingLd({
+          title: post.data.title,
+          description: post.data.description,
+          url: `/blog/${params.slug}`,
+          image,
+          date: post.data.date,
+          author: post.data.author,
+          tags: post.data.tags,
+        })}
+      />
       <Header
         meta={
           <span className={s.postMetaRow}>

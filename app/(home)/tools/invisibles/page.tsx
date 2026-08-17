@@ -31,9 +31,12 @@ export const metadata = pageOG({
   path: '/tools/invisibles',
 });
 
+import { ToolJsonLd } from '@/components/meta/ToolJsonLd';
+
 export default function InvisiblesPage() {
   return (
     <Page>
+      <ToolJsonLd slug="invisibles" />
       <Header
         meta={<PageBadge kind="tool" name="invisibles" hue={TOOL.invisibles.hue} />}
         tags={

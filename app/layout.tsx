@@ -1,6 +1,8 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import './global.css';
 import { Inter } from 'next/font/google';
+import { JsonLd } from '@/components/meta/JsonLd';
+import { organizationLd, websiteLd } from '@/lib/jsonld';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,6 +19,7 @@ export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/' },
+  robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     url: '/',
@@ -52,6 +55,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
         >
           {children}
         </RootProvider>
+        <JsonLd data={[organizationLd(), websiteLd()]} />
       </body>
     </html>
   );

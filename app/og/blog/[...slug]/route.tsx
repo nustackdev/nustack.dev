@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { ImageResponse } from 'next/og';
-import { generate as DefaultImage } from 'fumadocs-ui/og';
 import { blogSource, getAllBlogPosts, getBlogPageImage } from '@/lib/source';
 import { appName } from '@/lib/shared';
+import { OGImage } from '../../render';
 
 export const revalidate = false;
 
@@ -16,7 +16,7 @@ export async function GET(
   if (!post) notFound();
 
   return new ImageResponse(
-    <DefaultImage
+    <OGImage
       title={post.data.title}
       description={post.data.description}
       site={`${appName} blog`}

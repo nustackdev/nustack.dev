@@ -40,3 +40,6 @@
   font-style: normal;
   color: var(--site-accent, var(--site-hue-teal));
 }
+
+/* "And more" card — prose-only, no snippet slot, so it spans the cell. */
+.cardWide { grid-template-columns: 1fr; }

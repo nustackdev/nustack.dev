@@ -1,0 +1,71 @@
+/* IntroBrief — the compressed "How Nu works" chapter. Four paragraphs plus
+ * a vocab card, all inside one Section. Styled to read as orientation prose,
+ * not a lecture. */
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-gap-normal);
+  max-width: 68ch;
+}
+
+.para {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--site-ink-2);
+}
+
+.para code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--site-accent, var(--site-hue-teal));
+}
+
+.para em {
+  font-style: italic;
+  color: var(--site-ink);
+}
+
+.paraEm {
+  font-size: 1.15rem;
+  color: var(--site-ink);
+  border-left: 2px solid var(--site-accent, var(--site-hue-teal));
+  padding-left: var(--site-link-card-pad-x);
+}
+
+.vocab {
+  display: grid;
+  gap: var(--site-gap-normal);
+  margin: calc(var(--site-u) * 0.15) 0;
+  padding: var(--site-link-card-pad-y) var(--site-link-card-pad-x);
+  border: 1px solid var(--site-border);
+  border-radius: var(--site-r-sm);
+  background: var(--site-code-bg-2);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, auto) 1fr;
+  gap: var(--site-gap-normal);
+  align-items: baseline;
+}
+
+.item dt {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  color: var(--site-hue-steel);
+}
+
+.item dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--site-ink-2);
+}
+
+@media (max-width: 640px) {
+  .item { grid-template-columns: 1fr; gap: calc(var(--site-u) * 0.15); }
+}

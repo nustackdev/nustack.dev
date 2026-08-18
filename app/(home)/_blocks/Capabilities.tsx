@@ -5,6 +5,8 @@ import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { RelationsLine } from '@/components/meta/RelationsLine';
 import { Description } from '@/components/text';
 import { Chapter, Section, SectionHead } from '@/components/page';
+import { CtaRow } from '@/components/layout/CtaRow';
+import { Button } from '@/components/controls/Button';
 import type { Hue } from '@/lib/hue';
 import { FABRIC } from '@/lib/fabrics';
 import {
@@ -23,7 +25,8 @@ interface Capability {
   hook: ReactNode;
   /** 1–2 sentence explanation under the hook. */
   description: ReactNode;
-  lines: CodeTok[][];
+  /** Optional — when absent, the card renders prose full-width (no snippet slot). */
+  lines?: CodeTok[][];
 }
 
 const CAPABILITIES: Capability[] = [
@@ -123,12 +126,42 @@ export function Capabilities() {
               <Description>{c.description}</Description>
               <RelationsLine label="Powered by" refs={FABRIC[c.slug]?.poweredBy} />
             </div>
-            <div className={s.snippetSlot}>
-              <Snippet lines={c.lines} />
-            </div>
+            {c.lines ? (
+              <div className={s.snippetSlot}>
+                <Snippet lines={c.lines} />
+              </div>
+            ) : null}
           </div>
         </Section>
       ))}
+
+      {/* 5th card — teases the fabrics the four above haven't shown. */}
+      <MoreCard />
     </Chapter>
+  );
+}
+
+function MoreCard() {
+  return (
+    <Section hue="steel">
+      <div className={`${s.card} ${s.cardWide}`}>
+        <div className={s.prose}>
+          <SilverWovenName as="h3" hue="steel">And more.</SilverWovenName>
+          <p className={s.hook}>
+            Nu is <em>batteries-included</em> and covers the common cases.
+          </p>
+          <Description>
+            In-memory state, proxy, HTTP, Python objects, Claude Code,
+            local parallelism &mdash; same model, same shape, same primitive
+            as the four above.
+          </Description>
+          <CtaRow>
+            <Button href="/fabrics" variant="outline">
+              <span>Explore all fabrics</span>
+            </Button>
+          </CtaRow>
+        </div>
+      </div>
+    </Section>
   );
 }

@@ -20,7 +20,7 @@ import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { HERO_BLOBS } from '@/components/bg/GradientBlobs';
 import { Hero } from './_blocks/Hero';
 import { Capabilities } from './_blocks/Capabilities';
-import { IntroStory } from './_blocks/IntroStory';
+import { IntroBrief } from './_blocks/IntroBrief';
 import { FABRICS } from '@/lib/fabrics';
 import { TOOLS } from '@/lib/tools';
 import s from './page.module.css';
@@ -33,17 +33,14 @@ export default function Home() {
       <Hero />
 
       <Body>
-        {/* 2. Capabilities — first-user "what you can build" chapter */}
+        {/* 2. Capabilities — "Build with Nu" — 4 capability cards */}
         <Capabilities />
 
-        {/* 3. Intro story — what / how / why, plus theory + impl closer */}
-        <IntroStory />
-
-        {/* 3. Quickstart — three steps: install, run a demo, learn */}
+        {/* 3. See Nu live — install, run a demo, take it further */}
         <Chapter>
         <SectionHead
-          title="Quickstart."
-          lede={<>Three steps: install, run a demo, explore Nu.</>}
+          title="See Nu live."
+          lede={<>Install, run a demo, take it further.</>}
         />
 
         {/* Step 1 — install */}
@@ -115,6 +112,9 @@ export default function Home() {
           </Stack>
         </Section>
         </Chapter>
+
+        {/* 4. How Nu works — the crack, the primitive, the vocab, the payoff */}
+        <IntroBrief />
 
         {/* 5. Fabrics */}
         <Chapter>

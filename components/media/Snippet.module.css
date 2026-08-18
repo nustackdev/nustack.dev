@@ -1,13 +1,13 @@
 /* =============================================================================
  * Snippet — excerpt-style code panel.
  *
- * Visually distinct from CodeSample: no filename tab, no gutter, no line
- * numbers, no copy button. A strong fade on the top and bottom edges
- * signals "this is a slice, not a runnable file" — the code visibly bleeds
- * into the surface at both ends.
+ * Left gutter carries line numbers for the visible code (starting mid-file
+ * by default) plus "…" markers right above the first number and right below
+ * the last. The content column stacks syntax-colored ghost bars, the visible
+ * code, and more ghost bars — so the panel unmistakably reads as a slice of
+ * a longer file rather than a runnable, lift-and-paste block.
  *
- * Token classes (.kw/.nu/.str/.cmt/.num) match CodeSample so the same
- * CodeTok[] structure works here too.
+ * No filename tab, no copy button.
  * ==========================================================================*/
 
 .snippet {
@@ -23,31 +23,100 @@
 
 .body {
   position: relative;
-  padding: var(--site-code-pad-y) var(--site-code-pad-x);
+  display: flex;
+  align-items: stretch;
+  padding: var(--site-code-pad-y) 0;
   overflow-x: auto;
+  min-width: 0;
 }
 
-/* Excerpt fades — subtle wash at the top and bottom, hinting the code is a
- * slice of a larger program. Kept light on purpose; a stronger treatment
- * belongs to a redesigned Snippet, not this one. */
-.body::before,
-.body::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 18px;
+/* -- Gutter ---------------------------------------------------------------- */
+
+.gutter {
+  flex: none;
+  padding: 0 calc(var(--site-code-pad-x) * 0.7) 0 var(--site-code-pad-x);
+  text-align: right;
+  border-right: 1px solid var(--site-border-subtle);
+  color: var(--site-ink-4);
+  font-size: var(--site-fs-4);
+  line-height: 1.7;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.lineNo {
+  display: block;
+  min-height: 1.7em;
+}
+
+/* Blank gutter slots that align with outer ghost rows so both columns stay
+ * pixel-in-lock-step. */
+.gutterGhost {
+  opacity: 0;
+}
+
+/* Ellipsis rows right around the numbered range — the "there's more code
+ * above and below" signal. Dimmer than the numbers, with a bit of tracking. */
+.ellipsis {
+  color: var(--site-ink-4);
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+}
+
+/* -- Content column (top ghost + code + bottom ghost) ---------------------- */
+
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 var(--site-code-pad-x);
+}
+
+/* -- Ghost rows ------------------------------------------------------------ */
+
+.ghost {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--site-fs-4);
+  line-height: 1.7;
+  user-select: none;
   pointer-events: none;
-  z-index: 1;
 }
-.body::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--site-surface-2), transparent);
+
+/* Each ghost row is the same block height as a code line (1.7em) so the
+ * gutter's blank slot lines up exactly. Bars sit centered vertically. */
+.ghostLine {
+  display: flex;
+  align-items: center;
+  min-height: 1.7em;
+  gap: 0.5ch;
 }
-.body::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--site-surface-2), transparent);
+
+.ghostIndent {
+  display: inline-block;
+  flex: 0 0 auto;
 }
+
+.ghostBar {
+  display: inline-block;
+  flex: 0 0 auto;
+  height: 0.6em;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* Token-colored silhouettes. Same color mapping as the visible code. */
+.bar_kw   { color: var(--site-accent-2); }
+.bar_nu   { color: var(--site-accent); }
+.bar_str  { color: var(--site-ink); }
+.bar_cmt  { color: var(--site-ink-4); }
+.bar_num  { color: var(--site-ink-3); }
+.bar_name { color: var(--site-ink-2); }
+
+/* Depth 1 sits nearest the real code (most opaque); depth 2 further out. */
+.ghostLine[data-depth='1'] .ghostBar { opacity: 0.40; }
+.ghostLine[data-depth='2'] .ghostBar { opacity: 0.28; }
+
+/* -- Visible code ---------------------------------------------------------- */
 
 .code {
   position: relative;
@@ -63,7 +132,8 @@
   tab-size: 4;
 }
 
-/* token colors — same class names as CodeSample */
+/* Token colors — same class names + mapping used across CodeSample and the
+ * ghost-row silhouettes. */
 .kw  { color: var(--site-accent-2); }
 .nu  { color: var(--site-accent); }
 .str { color: var(--site-ink); }

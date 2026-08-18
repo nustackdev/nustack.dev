@@ -3,7 +3,7 @@ import type { CodeTok } from '@/components/media/CodeSample';
 import { Snippet } from '@/components/media/Snippet';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { RelationsLine } from '@/components/meta/RelationsLine';
-import { Description } from '@/components/text';
+import { Description, Quote } from '@/components/text';
 import { Chapter, Section, SectionHead } from '@/components/page';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
@@ -122,7 +122,7 @@ export function Capabilities() {
           <div className={s.card}>
             <div className={s.prose}>
               <SilverWovenName as="h3" hue={c.hue}>{c.title}</SilverWovenName>
-              <p className={s.hook}>{c.hook}</p>
+              <Quote>{c.hook}</Quote>
               <Description>{c.description}</Description>
               <RelationsLine label="Powered by" refs={FABRIC[c.slug]?.poweredBy} />
             </div>
@@ -147,9 +147,9 @@ function MoreCard() {
       <div className={`${s.card} ${s.cardWide}`}>
         <div className={s.prose}>
           <SilverWovenName as="h3" hue="steel">And more.</SilverWovenName>
-          <p className={s.hook}>
+          <Quote>
             Nu is <em>batteries-included</em> and covers the common cases.
-          </p>
+          </Quote>
           <Description>
             In-memory state, proxy, HTTP, Python objects, Claude Code,
             local parallelism &mdash; same model, same shape, same primitive

@@ -1,75 +1,126 @@
-import { Chapter, Section, SectionHead } from '@/components/page';
-import { FABRICS } from '@/lib/fabrics';
+import { BookOpen } from 'lucide-react';
+import { Chapter, Section, SectionCell, SectionHead } from '@/components/page';
+import { Stack } from '@/components/layout/Stack';
+import { CtaRow } from '@/components/layout/CtaRow';
+import { Heading, Tagline, Description, Quote } from '@/components/text';
+import { MonoKicker } from '@/components/meta/MonoKicker';
+import { Button, ButtonRepoLabel } from '@/components/controls/Button';
+import { GithubMark } from '@/components/marks/GithubMark';
 import s from './IntroBrief.module.css';
 
-const FABRIC_COUNT = FABRICS.length;
-
 /**
- * IntroBrief — the "How Nu works" chapter. Names the vocabulary the reader
- * has already been feeling in Capabilities (Ref, Interaction, Fabric) and
- * frames it with the crack-and-payoff arc from IntroStory, compressed to
- * four paragraphs so it lands as orientation, not a lecture.
+ * IntroBrief — the "How Nu works" chapter. Orientation prose that names
+ * the vocabulary the reader has already been feeling in Capabilities
+ * (Ref, Interaction, Fabric), then hands off to the model spec and the
+ * Python implementation via two closer cards.
  */
 export function IntroBrief() {
   return (
     <Chapter>
       <SectionHead
         title="How Nu works."
-        lede={<>Two ideas do the work; fabrics plug them into anything.</>}
+        lede={<>The primitive Nu is built on, in three words.</>}
       />
+
       <Section>
         <div className={s.body}>
-          <p className={s.para}>
-            Real apps aren&apos;t three lines. <code>a</code> moves into a
-            database. <code>b</code> comes from a form a user submits. The
-            result renders in a browser. A background job reruns it when
-            either input changes. Now what used to be <code>a + b</code> is
-            an ORM, a request handler, a template, a websocket, a queue.
-            Almost none of it is about <code>a + b</code> anymore &mdash;
-            it&apos;s all interaction between substrates.
-          </p>
+          <Description>
+            A tiny script keeps its values in memory and calls
+            functions on them. Real apps don&apos;t stay there. Values
+            live in a database, arrive from a browser form, render into
+            a dashboard, get recomputed by a background job. Almost
+            none of the code is about the values anymore &mdash;
+            it&apos;s all interaction between systems.
+          </Description>
 
-          <p className={`${s.para} ${s.paraEm}`}>
-            <strong>Nu makes interaction the primitive.</strong>
-          </p>
+          <Quote>
+            Nu makes interaction <em>the primitive.</em>
+          </Quote>
 
           <dl className={s.vocab}>
-            <div className={s.item}>
+            <div className={s.vocabItem}>
               <dt>Ref</dt>
               <dd>
-                A name for a value, wherever it lives &mdash; a KV slot, a
-                UI text block, an LLM endpoint, a remote object.
+                A name for a value, wherever it lives &mdash; a KV
+                slot, a UI text block, an LLM endpoint, a remote
+                object.
               </dd>
             </div>
-            <div className={s.item}>
+            <div className={s.vocabItem}>
               <dt>Interaction</dt>
               <dd>
                 What you do with a Ref: read, write, branch, iterate,
                 compose.
               </dd>
             </div>
-            <div className={s.item}>
+            <div className={s.vocabItem}>
               <dt>Fabric</dt>
               <dd>
-                Binds Refs to a real backend. {FABRIC_COUNT} ship with Nu
-                today.
+                Binds Refs to a real system. Compose as many as you
+                need; they all speak the same primitive.
               </dd>
             </div>
           </dl>
 
-          <p className={s.para}>
-            <em>Same primitive, different substrate.</em> One Ref for any
-            resource, one Interaction for any op. Nu doesn&apos;t care what
-            the backend is &mdash; setting a browser text block is the same
-            interaction as setting a KV slot.
-          </p>
-
-          <p className={s.para}>
-            Persistence, reactivity, atomicity, observability, distribution
-            &mdash; <em>not features Nu has,</em> but what falls out of
-            naming interactions instead of executing them.
-          </p>
+          <Quote>
+            <em>Same primitive, different system.</em>{' '}One Ref for
+            any resource, one Interaction for any op. Setting a
+            browser text block is the same interaction as setting a
+            KV slot.
+          </Quote>
         </div>
+      </Section>
+
+      {/* Closer — theory + implementation */}
+      <Section split="1/1">
+        <SectionCell>
+          <Stack gap="normal" pushLast>
+            <div className={s.closerCardTitle}>
+              <Heading level={2}>interaction-model</Heading>
+              <MonoKicker as="span" size="xs" tracking="wide">
+                the theory
+              </MonoKicker>
+            </div>
+            <Tagline>The language-agnostic specification.</Tagline>
+            <Description>
+              What an interaction is, how Refs name locations, how
+              Interactions compose into programs. Nu is one
+              implementation; anyone can build another.
+            </Description>
+            <CtaRow>
+              <Button href="https://github.com/nustackdev/interaction-model">
+                <GithubMark size={14} />
+                <ButtonRepoLabel>nustackdev/interaction-model</ButtonRepoLabel>
+              </Button>
+            </CtaRow>
+          </Stack>
+        </SectionCell>
+        <SectionCell>
+          <Stack gap="normal" pushLast>
+            <div className={s.closerCardTitle}>
+              <Heading level={2}>nu</Heading>
+              <MonoKicker as="span" size="xs" tracking="wide">
+                the python implementation
+              </MonoKicker>
+            </div>
+            <Tagline>Batteries-included, ready to run.</Tagline>
+            <Description>
+              The interaction model in pure Python, with fabrics for
+              the everyday jobs: in-memory state, kv-based state, UI,
+              network, cluster compute.
+            </Description>
+            <CtaRow>
+              <Button href="/docs">
+                <BookOpen size={14} aria-hidden />
+                <span>Quickstart</span>
+              </Button>
+              <Button href="https://github.com/nustackdev/nu">
+                <GithubMark size={14} />
+                <ButtonRepoLabel>nustackdev/nu</ButtonRepoLabel>
+              </Button>
+            </CtaRow>
+          </Stack>
+        </SectionCell>
       </Section>
     </Chapter>
   );

@@ -113,7 +113,7 @@ export default function Home() {
         </Section>
         </Chapter>
 
-        {/* 4. How Nu works — the crack, the primitive, the vocab, the payoff */}
+        {/* 4. How Nu works — the crack, the primitive, the vocab, and hand-off to model + impl */}
         <IntroBrief />
 
         {/* 5. Fabrics */}

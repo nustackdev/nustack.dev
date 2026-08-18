@@ -1,0 +1,71 @@
+/* =============================================================================
+ * Snippet — excerpt-style code panel.
+ *
+ * Visually distinct from CodeSample: no filename tab, no gutter, no line
+ * numbers, no copy button. A strong fade on the top and bottom edges
+ * signals "this is a slice, not a runnable file" — the code visibly bleeds
+ * into the surface at both ends.
+ *
+ * Token classes (.kw/.nu/.str/.cmt/.num) match CodeSample so the same
+ * CodeTok[] structure works here too.
+ * ==========================================================================*/
+
+.snippet {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--site-border);
+  border-radius: var(--site-r-md);
+  background: var(--site-surface-2);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  color: var(--site-ink-2);
+}
+
+.body {
+  position: relative;
+  padding: var(--site-code-pad-y) var(--site-code-pad-x);
+  overflow-x: auto;
+}
+
+/* Excerpt fades — subtle wash at the top and bottom, hinting the code is a
+ * slice of a larger program. Kept light on purpose; a stronger treatment
+ * belongs to a redesigned Snippet, not this one. */
+.body::before,
+.body::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18px;
+  pointer-events: none;
+  z-index: 1;
+}
+.body::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--site-surface-2), transparent);
+}
+.body::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--site-surface-2), transparent);
+}
+
+.code {
+  position: relative;
+  font-size: var(--site-fs-4);
+  line-height: 1.7;
+  color: var(--site-ink-2);
+}
+
+.line {
+  display: block;
+  min-height: 1.7em;
+  white-space: pre;
+  tab-size: 4;
+}
+
+/* token colors — same class names as CodeSample */
+.kw  { color: var(--site-accent-2); }
+.nu  { color: var(--site-accent); }
+.str { color: var(--site-ink); }
+.cmt { color: var(--site-ink-4); font-style: italic; }
+.num { color: var(--site-ink-3); }

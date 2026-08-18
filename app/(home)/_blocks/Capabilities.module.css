@@ -1,0 +1,42 @@
+/* Capabilities — one Section (one Cell) per capability. Prose + snippet
+ * sit side-by-side INSIDE that single cell — no grid divider between them,
+ * because they're one logical block. Stacks on narrow viewports. */
+
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--site-gap-loose);
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .card { grid-template-columns: 1fr; gap: var(--site-gap-normal); }
+}
+
+.snippetSlot { min-width: 0; }
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-gap-normal);
+  min-width: 0;
+}
+
+/* Hook — punchy stat/claim under the title. Mirrors the IntroStory pullQuote
+ * treatment: 2px hue-tinted left border, em rendered in the card hue. */
+.hook {
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--site-ink);
+  border-left: 2px solid var(--site-accent, var(--site-hue-teal));
+  padding: calc(var(--site-u) * 0.15) 0 calc(var(--site-u) * 0.15) var(--site-link-card-pad-x);
+  margin: 0;
+  max-width: 72ch;
+}
+
+.hook em {
+  font-style: normal;
+  color: var(--site-accent, var(--site-hue-teal));
+}

@@ -19,6 +19,7 @@ import {
 import { LikeThisBlock } from '@/components/chapters/LikeThisBlock';
 import { HERO_BLOBS } from '@/components/bg/GradientBlobs';
 import { Hero } from './_blocks/Hero';
+import { Capabilities } from './_blocks/Capabilities';
 import { IntroStory } from './_blocks/IntroStory';
 import { FABRICS } from '@/lib/fabrics';
 import { TOOLS } from '@/lib/tools';
@@ -32,7 +33,10 @@ export default function Home() {
       <Hero />
 
       <Body>
-        {/* 2. Intro story — what / how / why, plus theory + impl closer */}
+        {/* 2. Capabilities — first-user "what you can build" chapter */}
+        <Capabilities />
+
+        {/* 3. Intro story — what / how / why, plus theory + impl closer */}
         <IntroStory />
 
         {/* 3. Quickstart — three steps: install, run a demo, learn */}

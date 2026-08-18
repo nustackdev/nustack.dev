@@ -65,7 +65,7 @@ const SPECS: FabricSpec[] = [
     poweredBy: [
       { kind: 'tool', slug: 'virtuals' },
       { kind: 'tool', slug: 'rdbpy' },
-      { kind: 'external', name: 'RocksDB', url: 'https://rocksdb.org' },
+      { kind: 'external', name: 'RocksDB', url: 'https://github.com/facebook/rocksdb' },
       { kind: 'external', name: 'LMDB', url: 'https://www.symas.com/lmdb' },
     ],
     glyph: KvGlyph,
@@ -79,7 +79,10 @@ const SPECS: FabricSpec[] = [
       'Refs are widgets: text, buttons, tables. The fabric renders them in the browser and live-updates as your state changes.',
     navDesc: 'Reactive web UI.',
     showcase: true,
-    poweredBy: [],
+    poweredBy: [
+      { kind: 'external', name: 'React', url: 'https://react.dev' },
+      { kind: 'external', name: 'Zustand', url: 'https://github.com/pmndrs/zustand' },
+    ],
     glyph: UiGlyph,
   },
   {
@@ -91,7 +94,7 @@ const SPECS: FabricSpec[] = [
       'Teleport a Nu tree to any worker in your cluster; it runs there and returns the result. Backed by Ray under the hood.',
     navDesc: 'Cluster compute.',
     showcase: true,
-    poweredBy: [{ kind: 'external', name: 'Ray', url: 'https://www.ray.io' }],
+    poweredBy: [{ kind: 'external', name: 'Ray', url: 'https://github.com/ray-project/ray' }],
     glyph: RayGlyph,
   },
   {

@@ -7,6 +7,7 @@ import { Description, Quote } from '@/components/text';
 import { Chapter, Section, SectionHead } from '@/components/page';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
+import { BulletList } from '@/components/controls/BulletList';
 import type { Hue } from '@/lib/hue';
 import { FABRIC } from '@/lib/fabrics';
 import {
@@ -25,6 +26,8 @@ interface Capability {
   hook: ReactNode;
   /** 1–2 sentence explanation under the hook. */
   description: ReactNode;
+  /** Two short bullet highlights — punchy gains, no full sentences. */
+  gains: [ReactNode, ReactNode];
   /** Optional — when absent, the card renders prose full-width (no snippet slot). */
   lines?: CodeTok[][];
 }
@@ -36,8 +39,7 @@ const CAPABILITIES: Capability[] = [
     hue: 'crimson', // 0
     hook: (
       <>
-        A database <em>without a database</em>. Billions of entries,
-        no server, one line to shard.
+        <em>Persistent state.</em> Stores any Python type.
       </>
     ),
     description: (
@@ -46,6 +48,7 @@ const CAPABILITIES: Capability[] = [
         or sharded across a cluster.
       </>
     ),
+    gains: ['Serverless, scales to terabytes', 'Store any Python type'],
     lines: CAP_KV_LINES,
   },
   {
@@ -64,6 +67,7 @@ const CAPABILITIES: Capability[] = [
         render. Update the value, the browser updates itself.
       </>
     ),
+    gains: ['50+ components out of the box', 'Live updates for free'],
     lines: CAP_UI_LINES,
   },
   {
@@ -82,6 +86,7 @@ const CAPABILITIES: Capability[] = [
         the result. Where it runs is a binding, not a rewrite.
       </>
     ),
+    gains: ['Same code, local or remote', 'Distribute with a single line'],
     lines: CAP_CLUSTER_LINES,
   },
   {
@@ -100,6 +105,7 @@ const CAPABILITIES: Capability[] = [
         models and hosted APIs meet at the same interface.
       </>
     ),
+    gains: ['Add intelligence to any Nu app', '7 providers out of the box'],
     lines: CAP_LLM_LINES,
   },
 ];
@@ -124,6 +130,7 @@ export function Capabilities() {
               <SilverWovenName as="h3" hue={c.hue}>{c.title}</SilverWovenName>
               <Quote>{c.hook}</Quote>
               <Description>{c.description}</Description>
+              <BulletList items={[...c.gains]} />
               <RelationsLine label="Powered by" refs={FABRIC[c.slug]?.poweredBy} />
             </div>
             {c.lines ? (

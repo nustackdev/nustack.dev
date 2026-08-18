@@ -35,7 +35,7 @@ const FABRIC_PRIMARY: Record<string, string> = {
   ui: 'Dashboard.count.set_value(n)',
   cluster: 'Teleport(Add(1,2), "gpu")',
   llm: 'Bot.chat(prompt="…")',
-  mem: 'users.age.set(12)',
+  mem: 'Users.age.set(12)',
   proxy: 'Proxy(Nav, "10.0.0.1")',
   http: 'Solana.get_slot()',
   service: 'Calc.add(a=2, b=3)',
@@ -56,7 +56,7 @@ export default function Home() {
         <Chapter>
         <SectionHead
           title="See Nu live."
-          lede={<>Install, run a demo, take it further.</>}
+          lede={<>Install, run a demo, start hacking.</>}
         />
 
         {/* Step 1 — install */}
@@ -111,7 +111,7 @@ export default function Home() {
         <Section>
           <Stack gap="normal">
             <MonoKicker as="p" size="xs" tracking="wider" className={s.stepLabel}>
-              <strong>03</strong> Explore Nu
+              <strong>03</strong> Start hacking
             </MonoKicker>
             <div className={s.learnGrid}>
               <LinkCard href="/docs" icon={<BookOpen size={14} />} title="Read the docs">

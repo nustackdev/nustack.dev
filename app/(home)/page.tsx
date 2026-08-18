@@ -2,13 +2,14 @@ import { BookOpen } from 'lucide-react';
 import { SilverWovenName } from '@/components/meta/SilverWovenName';
 import { VizFrame } from '@/components/media/VizFrame';
 import { MonoKicker } from '@/components/meta/MonoKicker';
-import { Tagline, Description } from '@/components/text';
+import { Description } from '@/components/text';
 import { CommandLine } from '@/components/media/CommandLine';
 import { LinkCard } from '@/components/controls/LinkCard';
 import { Stack } from '@/components/layout/Stack';
 import { CtaRow } from '@/components/layout/CtaRow';
 import { Button } from '@/components/controls/Button';
 import { GithubMark } from '@/components/marks/GithubMark';
+import { Table } from '@/components/media/Table';
 import {
   Page,
   Body,
@@ -25,7 +26,22 @@ import { FABRICS } from '@/lib/fabrics';
 import { TOOLS } from '@/lib/tools';
 import s from './page.module.css';
 
-const SHOWCASE_FABRICS = FABRICS.filter((f) => f.showcase);
+/** Representative interaction hint per fabric — a short line that reads as
+ * "you are DOING something with a Ref," not just naming a type. Distilled
+ * from nu/examples/*.py. Kept local while we settle on the wording; move
+ * into the canonical Fabric spec once confirmed. */
+const FABRIC_PRIMARY: Record<string, string> = {
+  kv: 'State.movies.append(m)',
+  ui: 'Dashboard.count.set_value(n)',
+  cluster: 'Teleport(Add(1,2), "gpu")',
+  llm: 'Bot.chat(prompt="…")',
+  mem: 'users.age.set(12)',
+  proxy: 'Proxy(Nav, "10.0.0.1")',
+  http: 'Solana.get_slot()',
+  service: 'Calc.add(a=2, b=3)',
+  cc: 'Agent.ask(prompt="…")',
+  mp: 'Teleport(Add(1,2), "worker")',
+};
 
 export default function Home() {
   return (
@@ -128,41 +144,42 @@ export default function Home() {
           }
         />
 
-        {SHOWCASE_FABRICS.map((f) => {
-          const Glyph = f.glyph;
-          return (
-            <Section key={f.slug} hue={f.hue}>
-              <div className={s.itemRow}>
-                <div className={s.itemBody}>
-                  <SilverWovenName as="h3" hue={f.hue}>{f.name}</SilverWovenName>
-                  <Tagline>{f.tagline}</Tagline>
-                  <Description>{f.description}</Description>
-                  <CtaRow>
-                    <Button href={f.href} variant="outline">
-                      <span>See it</span>
-                    </Button>
-                    <Button href={f.docs} variant="outline">
-                      <BookOpen size={14} aria-hidden />
-                      <span>Read the docs</span>
-                    </Button>
-                  </CtaRow>
-                </div>
-                {Glyph ? (
-                  <div className={s.itemViz}>
-                    <VizFrame><Glyph /></VizFrame>
-                  </div>
-                ) : null}
-              </div>
-            </Section>
-          );
-        })}
-
         <Section>
-          <CtaRow>
-            <Button href="/fabrics" variant="outline">
-              <span>Explore all fabrics</span>
-            </Button>
-          </CtaRow>
+          <Stack gap="normal">
+            <Table
+              variant="list"
+              ariaLabel="Fabrics that ship with Nu"
+              rows={FABRICS}
+              rowKey={(f) => f.slug}
+              rowHref={(f) => f.href}
+              rowHue={(f) => f.hue}
+              columns={[
+                {
+                  key: 'name',
+                  width: 'minmax(9rem, 12rem)',
+                  variant: 'mono',
+                  render: (f) => f.name,
+                },
+                {
+                  key: 'desc',
+                  width: 'minmax(0, 1fr)',
+                  render: (f) => f.navDesc,
+                },
+                {
+                  key: 'primary',
+                  width: 'minmax(14rem, auto)',
+                  variant: 'chip',
+                  align: 'end',
+                  render: (f) => FABRIC_PRIMARY[f.slug] ?? '—',
+                },
+              ]}
+            />
+            <CtaRow>
+              <Button href="/fabrics" variant="outline">
+                <span>Explore all fabrics</span>
+              </Button>
+            </CtaRow>
+          </Stack>
         </Section>
         </Chapter>
 

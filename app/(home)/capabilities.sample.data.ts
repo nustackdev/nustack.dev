@@ -54,8 +54,7 @@ export const CAP_CLUSTER_LINES: CodeTok[][] = [
   [{ c: 'cmt', t: '# any Nu op' }],
   [{ t: 'op = DB.hits.set(DB.hits + ' }, { c: 'num', t: '1' }, { t: ')' }],
   [],
-  [{ c: 'cmt', t: '# same op — runs here vs. on a worker' }],
-  [{ t: 'local  = op' }],
+  [{ c: 'cmt', t: '# same op — teleport it to a worker' }],
   [{ t: 'remote = ' }, { c: 'nu', t: 'nu.cluster.Teleport' }, { t: '(op, target=' }, { c: 'str', t: '"gpu-0"' }, { t: ')' }],
   [],
   [{ t: 'app = ' }, { c: 'nu', t: 'nu.With' }, { t: '(' }],
@@ -73,7 +72,7 @@ export const CAP_LLM_LINES: CodeTok[][] = [
   [{ t: 'op = Bot.chat(prompt=' }, { c: 'str', t: '"one-line haiku about rust"' }, { t: ')' }],
   [],
   [{ t: 'app = ' }, { c: 'nu', t: 'nu.With' }, { t: '(' }],
-  [{ t: '    ' }, { c: 'nu', t: 'nu.llm.ollama' }, { t: '(Bot, host=' }, { c: 'str', t: '"red"' }, { t: ', model=' }, { c: 'str', t: '"qwen2.5:7b"' }, { t: '),' }],
+  [{ t: '    ' }, { c: 'nu', t: 'nu.llm.ollama' }, { t: '(Bot, host=' }, { c: 'str', t: '"localhost"' }, { t: ', model=' }, { c: 'str', t: '"qwen2.5:7b"' }, { t: '),' }],
   [{ t: '    body=op,' }],
   [{ t: ')' }],
 ];

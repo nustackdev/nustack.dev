@@ -1,0 +1,25 @@
+{
+  "title": "nu.kv",
+  "pages": [
+    "index",
+    "interactions-item",
+    "interactions-collections",
+    "interactions-kh57",
+    "interactions-atomicity",
+    "refs-items",
+    "refs-dict",
+    "refs-kh57",
+    "refs-kh57shape",
+    "refs-list",
+    "refs-base",
+    "refs-set",
+    "refs-shape",
+    "refs-dictshape",
+    "refs-listshape",
+    "refs-std",
+    "refs-primitives",
+    "refs-prog",
+    "tree-auto-flow-atomic",
+    "presets"
+  ]
+}

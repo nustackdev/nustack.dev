@@ -8,6 +8,8 @@
     "start": "next start",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
+    "docs:gen": "tools/.venv/bin/python -m docsgen",
+    "docs:gen:check": "tools/.venv/bin/python -m docsgen --check",
     "lint": "eslint"
   },
   "dependencies": {

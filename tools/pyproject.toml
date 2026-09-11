@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nustack-docsgen"
+version = "0.1.0"
+description = "Generates content/docs/reference/ from nu.inspect."
+requires-python = ">=3.11"
+dependencies = [
+    "nucore",
+    "nustd[all]",
+]
+
+[project.scripts]
+docsgen = "docsgen.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["docsgen"]
+
+# Local, editable, on purpose. Wave B1 of task-142 is still uncommitted in the
+# nu tree, so there is no release to pin yet. See README.md.
+[tool.uv.sources]
+nucore = { path = "../../nu/packages/nucore", editable = true }
+nustd = { path = "../../nu/packages/nustd", editable = true }
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

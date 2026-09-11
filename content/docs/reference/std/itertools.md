@@ -1,48 +1,458 @@
 ---
 title: nu.std.itertools
+description: "Nu surface for Python's `itertools` module."
 ---
 
-Gap-fill over Nu core: members core already covers (`map`/`filter`/`zip`/`sorted`/`enumerate`/`reversed`/sums) are not repeated. Every member is a hand-written `StreamQuery` atom except `tee`.
+Nu surface for Python's `itertools` module.
 
-`from nu.std.itertools import chain, islice, count`
+`itertools` is a function module - free functions that build and combine
+iterators, no central class - so the Nu surface mirrors that: free functions
+over Nu streams. Two layers behind it: `functions` (the wrappers) and
+`interactions` (the hand-written `StreamQuery` atoms each wrapper builds,
+hot path, e2e, no factory).
 
-### Infinite sources
+A gap-fill: members already in Nu core (`map` / `filter` / `zip` /
+`sorted` / `enumerate` / `reversed` / sums and folds) are not repeated
+here. Import it the way you would the stdlib:
 
-| Name   | Sort        | Signature             | Effect | Meaning                                    |
-| ------ | ----------- | ----------------------- | ------ | -------------------------------------------- |
-| count  | StreamQuery | `count(start=0, step=1)` | pure | unbounded arithmetic stream; bound with `islice` |
-| cycle  | StreamQuery | `cycle(iterable)`       | pure   | repeat a source forever                     |
-| repeat | StreamQuery | `repeat(elem, times=None)` | pure | yield `elem` `times` times, or forever    |
+```python
+from nu.std.itertools import chain, islice, count
+import nu.std.itertools as itertools     # then itertools.product(a, b)
+```
 
-### Pure combinators
+## Call
 
-| Name                          | Sort        | Signature                                        | Effect | Meaning                                     |
-| ----------------------------- | ----------- | -------------------------------------------------- | ------ | ---------------------------------------------- |
-| chain                         | StreamQuery | `chain(*iterables)`                                | pure   | concatenate sources end to end                 |
-| chain_from_iterable           | StreamQuery | `chain_from_iterable(iterable)`                    | pure   | flatten an iterable of iterables one level     |
-| islice                        | StreamQuery | `islice(iterable, *args)`                          | pure   | lazy slice (`stop` \| `start,stop` \| `start,stop,step`) |
-| compress                      | StreamQuery | `compress(data, selectors)`                        | pure   | keep `data` where `selectors` is truthy        |
-| pairwise                      | StreamQuery | `pairwise(iterable)`                               | pure   | overlapping consecutive pairs                  |
-| batched                       | StreamQuery | `batched(iterable, n)`                             | pure   | tuples of up to `n` items                      |
-| zip_longest                   | StreamQuery | `zip_longest(*iterables, fillvalue=None)`          | pure   | zip to the longest, padding short sources      |
-| product                       | StreamQuery | `product(*iterables, repeat=1)`                    | pure   | cartesian product                              |
-| permutations                  | StreamQuery | `permutations(iterable, r=None)`                   | pure   | `r`-length ordered arrangements                |
-| combinations                  | StreamQuery | `combinations(iterable, r)`                        | pure   | `r`-length sorted subsequences                 |
-| combinations_with_replacement | StreamQuery | `combinations_with_replacement(iterable, r)`       | pure   | `r`-length subsequences allowing repeats       |
+| Name | Call | Meaning |
+| --- | --- | --- |
+| [accumulate](#accumulate) | `itertools.accumulate(iterable, func=None)` | Running accumulation: mirrors `itertools.accumulate()`. |
+| [batched](#batched) | `itertools.batched(iterable, n)` | Yield tuples of up to `n` items: mirrors `itertools.batched()`. |
+| [chain](#chain) | `itertools.chain()` | Concatenate `iterables` end to end: mirrors `itertools.chain()`. |
+| [chain_from_iterable](#chain_from_iterable) | `itertools.chain_from_iterable(iterable)` | Flatten an iterable of iterables one level: `itertools.chain.from_iterable()`. |
+| [combinations](#combinations) | `itertools.combinations(iterable, r)` | `r`-length sorted subsequences: mirrors `itertools.combinations()`. |
+| [combinations_with_replacement](#combinations_with_replacement) | `itertools.combinations_with_replacement(iterable, r)` | `r`-length subsequences allowing repeats: `combinations_with_replacement()`. |
+| [compress](#compress) | `itertools.compress(data, selectors)` | Keep `data` items where `selectors` is truthy: `itertools.compress()`. |
+| [count](#count) | `itertools.count(start=0, step=1)` | Count from `start` by `step` forever: mirrors `itertools.count()`. |
+| [cycle](#cycle) | `itertools.cycle(iterable)` | Repeat `iterable` endlessly: mirrors `itertools.cycle()`. |
+| [dropwhile](#dropwhile) | `itertools.dropwhile(predicate, iterable)` | Skip while `predicate` holds, then yield the rest: `itertools.dropwhile()`. |
+| [filterfalse](#filterfalse) | `itertools.filterfalse(predicate, iterable)` | Keep items where `predicate` is falsy: mirrors `itertools.filterfalse()`. |
+| [groupby](#groupby) | `itertools.groupby(iterable, key=None)` | Group consecutive items by `key`: mirrors `itertools.groupby()`. |
+| [islice](#islice) | `itertools.islice(iterable)` | Slice `iterable` lazily: mirrors `itertools.islice()`. |
+| [pairwise](#pairwise) | `itertools.pairwise(iterable)` | Yield overlapping consecutive pairs: mirrors `itertools.pairwise()`. |
+| [permutations](#permutations) | `itertools.permutations(iterable, r=None)` | `r`-length ordered arrangements: mirrors `itertools.permutations()`. |
+| [product](#product) | `itertools.product(repeat=1)` | The cartesian product of `iterables`: mirrors `itertools.product()`. |
+| [repeat](#repeat) | `itertools.repeat(elem, times=None)` | Yield `elem` `times` times, or forever: mirrors `itertools.repeat()`. |
+| [starmap](#starmap) | `itertools.starmap(function, iterable)` | Apply `function` to unpacked items: mirrors `itertools.starmap()`. |
+| [takewhile](#takewhile) | `itertools.takewhile(predicate, iterable)` | Yield while `predicate` holds, stop at the first falsy: `itertools.takewhile()`. |
+| [tee](#tee) | `itertools.tee(iterable, n=2)` | Split `iterable` into `n` independent iterators: `itertools.tee()`. |
+| [zip_longest](#zip_longest) | `itertools.zip_longest(fillvalue=None)` | Zip to the longest, padding with `fillvalue`: `itertools.zip_longest()`. |
 
-### Higher-order
+### accumulate
 
-| Name       | Sort        | Signature                          | Effect | Meaning                                                        |
-| ---------- | ----------- | ------------------------------------ | ------ | ------------------------------------------------------------------ |
-| takewhile  | StreamQuery | `takewhile(predicate, iterable)`     | pure   | yield while `predicate` holds, stop at the first falsy             |
-| dropwhile  | StreamQuery | `dropwhile(predicate, iterable)`     | pure   | skip while `predicate` holds, then yield the rest                  |
-| filterfalse| StreamQuery | `filterfalse(predicate, iterable)`   | pure   | keep items where `predicate` is falsy                              |
-| accumulate | StreamQuery | `accumulate(iterable, func=None)`    | pure   | running accumulation (sum by default, or a Nu term over acc/item)   |
-| starmap    | StreamQuery | `starmap(function, iterable)`       | pure   | apply `function` to unpacked tuple items                           |
-| groupby    | StreamQuery | `groupby(iterable, key=None)`        | pure   | group consecutive items by key -> `(key, tuple(group))` pairs      |
+Running accumulation: mirrors `itertools.accumulate()`.
+
+```python
+itertools.accumulate(iterable, func=None)
+```
+
+Path `nu.std.itertools.accumulate`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+Without `func` it is a running sum. With `func` (a Nu term) each step
+reads the running value via `AttrRef("acc")` and the item via
+`AttrRef("item")`; the first item is yielded as-is.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `func` | `Nu \| None` | `None` |  |
+
+Undocumented: example.
+
+### batched
+
+Yield tuples of up to `n` items: mirrors `itertools.batched()`.
+
+```python
+itertools.batched(iterable, n)
+```
+
+Path `nu.std.itertools.batched`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `n` | `IntArg` |  |  |
+
+Undocumented: example.
+
+### chain
+
+Concatenate `iterables` end to end: mirrors `itertools.chain()`.
+
+```python
+itertools.chain()
+```
+
+Path `nu.std.itertools.chain`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+Undocumented: example.
+
+### chain_from_iterable
+
+Flatten an iterable of iterables one level: `itertools.chain.from_iterable()`.
+
+```python
+itertools.chain_from_iterable(iterable)
+```
+
+Path `nu.std.itertools.chain_from_iterable`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### combinations
+
+`r`-length sorted subsequences: mirrors `itertools.combinations()`.
+
+```python
+itertools.combinations(iterable, r)
+```
+
+Path `nu.std.itertools.combinations`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `r` | `IntArg` |  |  |
+
+Undocumented: example.
+
+### combinations_with_replacement
+
+`r`-length subsequences allowing repeats: `combinations_with_replacement()`.
+
+```python
+itertools.combinations_with_replacement(iterable, r)
+```
+
+Path `nu.std.itertools.combinations_with_replacement`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `r` | `IntArg` |  |  |
+
+Undocumented: example.
+
+### compress
+
+Keep `data` items where `selectors` is truthy: `itertools.compress()`.
+
+```python
+itertools.compress(data, selectors)
+```
+
+Path `nu.std.itertools.compress`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `data` | `Arg[Iterable]` |  |  |
+| `selectors` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### count
+
+Count from `start` by `step` forever: mirrors `itertools.count()`.
+
+```python
+itertools.count(start=0, step=1)
+```
+
+Path `nu.std.itertools.count`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+Infinite - bound it with `islice` (or another short consumer).
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `start` | `IntArg` | `0` |  |
+| `step` | `IntArg` | `1` |  |
+
+Undocumented: example.
+
+### cycle
+
+Repeat `iterable` endlessly: mirrors `itertools.cycle()`.
+
+```python
+itertools.cycle(iterable)
+```
+
+Path `nu.std.itertools.cycle`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### dropwhile
+
+Skip while `predicate` holds, then yield the rest: `itertools.dropwhile()`.
+
+```python
+itertools.dropwhile(predicate, iterable)
+```
+
+Path `nu.std.itertools.dropwhile`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+`predicate` reads the current item via `AttrRef("item")`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `predicate` | `Nu` |  |  |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### filterfalse
+
+Keep items where `predicate` is falsy: mirrors `itertools.filterfalse()`.
+
+```python
+itertools.filterfalse(predicate, iterable)
+```
+
+Path `nu.std.itertools.filterfalse`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+`predicate` reads the current item via `AttrRef("item")`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `predicate` | `Nu` |  |  |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### groupby
+
+Group consecutive items by `key`: mirrors `itertools.groupby()`.
+
+```python
+itertools.groupby(iterable, key=None)
+```
+
+Path `nu.std.itertools.groupby`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+Yields `(key_value, tuple(group))` pairs. With `key` (a Nu term) the key
+reads the item via `AttrRef("item")`; without it items group by identity.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `key` | `Nu \| None` | `None` |  |
+
+Undocumented: example.
+
+### islice
+
+Slice `iterable` lazily: mirrors `itertools.islice()`.
+
+```python
+itertools.islice(iterable)
+```
+
+Path `nu.std.itertools.islice`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+`args` is 1-3 ints: `stop` | `start, stop` | `start, stop, step`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### pairwise
+
+Yield overlapping consecutive pairs: mirrors `itertools.pairwise()`.
+
+```python
+itertools.pairwise(iterable)
+```
+
+Path `nu.std.itertools.pairwise`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### permutations
+
+`r`-length ordered arrangements: mirrors `itertools.permutations()`.
+
+```python
+itertools.permutations(iterable, r=None)
+```
+
+Path `nu.std.itertools.permutations`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `r` | `IntArg \| None` | `None` |  |
+
+Undocumented: example.
+
+### product
+
+The cartesian product of `iterables`: mirrors `itertools.product()`.
+
+```python
+itertools.product(repeat=1)
+```
+
+Path `nu.std.itertools.product`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `repeat` | `IntArg` | `1` |  |
+
+Undocumented: example.
+
+### repeat
+
+Yield `elem` `times` times, or forever: mirrors `itertools.repeat()`.
+
+```python
+itertools.repeat(elem, times=None)
+```
+
+Path `nu.std.itertools.repeat`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `elem` | `object` |  |  |
+| `times` | `IntArg \| None` | `None` |  |
+
+Undocumented: example.
+
+### starmap
+
+Apply `function` to unpacked items: mirrors `itertools.starmap()`.
+
+```python
+itertools.starmap(function, iterable)
+```
+
+Path `nu.std.itertools.starmap`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+Each item is a tuple; `function` reads its parts via
+`TupleAttrRef("item")[0]`, `[1]`, ...
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `function` | `Nu` |  |  |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
+
+### takewhile
+
+Yield while `predicate` holds, stop at the first falsy: `itertools.takewhile()`.
+
+```python
+itertools.takewhile(predicate, iterable)
+```
+
+Path `nu.std.itertools.takewhile`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+`predicate` reads the current item via `AttrRef("item")`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `predicate` | `Nu` |  |  |
+| `iterable` | `Arg[Iterable]` |  |  |
+
+Undocumented: example.
 
 ### tee
 
-| Name | Sort        | Signature          | Effect | Meaning                                                     |
-| ---- | ----------- | -------------------- | ------ | ---------------------------------------------------------------- |
-| tee  | ScalarQuery | `tee(iterable, n=2)` | pure   | split into `n` independent iterators -> `Any` holding a tuple (not a stream) |
+Split `iterable` into `n` independent iterators: `itertools.tee()`.
+
+```python
+itertools.tee(iterable, n=2)
+```
+
+Path `nu.std.itertools.tee`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Any`.
+
+Returns an `Any` holding a *tuple* of `n` iterators (not a stream),
+so it is the one member here backed by a `ScalarQuery`. Its source rides
+as a scalar child (a `ScalarQuery` may not hold a stream), and the atom
+materializes it with `sync_iter` before splitting.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `n` | `IntArg` | `2` |  |
+
+Undocumented: example.
+
+### zip_longest
+
+Zip to the longest, padding with `fillvalue`: `itertools.zip_longest()`.
+
+```python
+itertools.zip_longest(fillvalue=None)
+```
+
+Path `nu.std.itertools.zip_longest`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `fillvalue` | `object` | `None` |  |
+
+Undocumented: example.

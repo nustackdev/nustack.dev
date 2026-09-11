@@ -1,5 +1,8 @@
 # deps
 /node_modules
+/tools/.venv
+/tools/*.egg-info
+__pycache__/
 
 # generated content
 .source
@@ -24,3 +27,4 @@ yarn-error.log*
 .env*.local
 .vercel
 next-env.d.ts
+/tools/.ruff_cache

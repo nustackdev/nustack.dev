@@ -2,12 +2,10 @@
 title: Core
 ---
 
-Everything Nu, before any Fabric picks it up. Interaction kinds, value Forms, Command composers, Span wrappers, the Context fabric.
-
-| Doc | Module | What |
-| --- | --- | --- |
-| [interactions](interactions.md) | `nu.core` | The five kinds (Ref, Query, Command, Flow, Span) and atom interactions on host values. |
-| [forms](forms.md) | `nu.forms` | Typed value interfaces: primitives and collections. |
-| [flows](flows.md) | `nu.flows` | Command composers: Sequential, Parallel, Race, IfDo, WhileDo, ForEachDo, Stream. |
-| [spans](spans.md) | `nu.spans` | Transparent wrappers: Snapshot, Transaction, Retry, TryCatch, Timeout, Throttle, Debounce. |
-| [context](context.md) | `nu.context` | The Context fabric: attrs, fabric. |
+| Module | What |
+| --- | --- |
+| [`nu.core`](/docs/reference/core/interactions) | Nu core: every interaction a program is built from. |
+| [`nu.forms`](/docs/reference/core/forms) | Native Form layer. |
+| [`nu.core.flows`](/docs/reference/core/flows) | Nu2 Flow atoms: the Command-composing sub-kind. |
+| [`nu.core.spans`](/docs/reference/core/spans) | Span atoms: transparent Interactions that wrap a body to govern a region. |
+| [`nu.context`](/docs/reference/core/context) | The Context fabric: the in-memory `ctx.attrs` and fabric bindings. |

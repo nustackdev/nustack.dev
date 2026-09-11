@@ -1,11 +1,54 @@
 ---
 title: nu.std.functools
+description: "Nu surface for Python's `functools`."
 ---
 
-Only `reduce` is modeled - the one member that is a runtime value fold. `partial`/`cache`/decorators are out of the value model (no first-class function value, no effect model yet).
+Nu surface for Python's `functools`.
 
-`from nu.std.functools import reduce`
+Only `reduce` is modeled: it is the one `functools` member that is a runtime
+value operation (a fold over a stream). The rest are out of Nu's value model and
+intentionally absent:
 
-| Name   | Sort      | Signature                                | Effect | Meaning                                                                 |
-| ------ | --------- | ------------------------------------------ | ------ | -------------------------------------------------------------------------- |
-| reduce | Reduction | `reduce(function, iterable, initializer=)` | pure   | left-to-right fold; `function` reads the accumulator/item via typed `AttrRef`s (mirrors `functools.reduce`) |
+- `partial` / `partialmethod` / `cmp_to_key` produce *callables* - Nu has
+  no first-class function value at the user surface.
+- `lru_cache` / `cache` / `cached_property` are *stateful* (memoization) -
+  they need the effect model (not yet built).
+- `wraps` / `update_wrapper` / `total_ordering` are decorators over Python
+  metadata, not runtime operations.
+
+Import like the stdlib:
+
+```python
+from nu.std.functools import reduce
+```
+
+## Call
+
+| Name | Call | Meaning |
+| --- | --- | --- |
+| [reduce](#reduce) | `functools.reduce(function, iterable, initializer=<UNSET>)` | Fold `iterable` left-to-right with `function` (`functools.reduce`). |
+
+### reduce
+
+Fold `iterable` left-to-right with `function` (`functools.reduce`).
+
+```python
+functools.reduce(function, iterable, initializer=<UNSET>)
+```
+
+Path `nu.std.functools.reduce`. Defined on `nu.std.functools.functions`, bound as a function. Builds `Any`.
+
+`function` is a Nu query that reads the accumulator and the current item
+via a typed AttrRef - `IntAttrRef("acc")` and `IntAttrRef("item")` - so a
+sum is `reduce(IntAttrRef("acc") + IntAttrRef("item"), xs)`. With
+`initializer` the accumulator starts there; otherwise at the first item.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `function` | `Nu` |  |  |
+| `iterable` | `Arg[Iterable]` |  |  |
+| `initializer` | `object` | `<UNSET>` |  |
+
+Undocumented: example.

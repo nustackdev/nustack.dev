@@ -10,8 +10,8 @@ instead of restating them by hand.
 ## Run it
 
 ```bash
-npm run docs:gen          # write the pages
-npm run docs:gen:check    # write nothing, exit 1 when committed output is stale
+pnpm run docs:gen          # write the pages
+pnpm run docs:gen:check    # write nothing, exit 1 when committed output is stale
 ```
 
 `docs:gen:check` prints a unified diff per stale page, so it works as a CI gate.

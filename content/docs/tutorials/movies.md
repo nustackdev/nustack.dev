@@ -4,7 +4,7 @@ title: "A real app: movies"
 
 Build a personal movie tracker. Stats up top, a form to log what you watched, a table below. One Nu tree, one page, live updates.
 
-You finished [Your first app](./your-first-app), so you know Shape, Ref, `ReactForever`, `nu.With`, and `nu.ui.Page`. Everything new gets introduced as you meet it.
+You finished [Your first app](/docs/tutorials/your-first-app), so you know Shape, Ref, `ReactForever`, `nu.With`, and `nu.ui.Page`. Everything new gets introduced as you meet it.
 
 The final program lives at `examples/movies.py`. You build it in four stages. Each stage runs and shows something.
 
@@ -393,4 +393,4 @@ A persistent movie tracker: seeded state, a form that commits atomically, a stat
 
 Add a filter row: min rating, genre select, watched-only switch, apply and clear. The full reference lives in `examples/movies.py`.
 
-If you still need to install anything for this tutorial, see [Install](../how-to/install).
+If you still need to install anything for this tutorial, see [Install](/docs/how-to/install).

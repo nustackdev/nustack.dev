@@ -4,7 +4,7 @@ title: Hello, Nu
 
 Run your first Nu program: a tree that prints "Hello, Nu!" once.
 
-Install Nu first: see [Install](../how-to/install).
+Install Nu first: see [Install](/docs/how-to/install).
 
 ```python
 import nu
@@ -32,4 +32,4 @@ That is the whole Nu model in miniature. You describe a tree, Nu runs it.
 
 ## Next
 
-Add state and a browser dashboard: [Your first app](./your-first-app).
+Add state and a browser dashboard: [Your first app](/docs/tutorials/your-first-app).

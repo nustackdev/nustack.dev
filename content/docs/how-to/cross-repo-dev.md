@@ -2,7 +2,7 @@
 title: Cross-repo dev
 ---
 
-Set up editable dev across nu and its sibling packages in one workspace. For a single-repo nu clone, see [Install from source](install-from-source).
+Set up editable dev across nu and its sibling packages in one workspace. For a single-repo nu clone, see [Install from source](/docs/how-to/install-from-source).
 
 One `.venv`, one `uv.lock`, every repo editable against every other. Edit any file in any repo, changes are live everywhere.
 

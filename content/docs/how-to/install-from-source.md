@@ -2,7 +2,7 @@
 title: Install from source
 ---
 
-Clone Nu and work off the tree. For a normal install, see [Install](install). For editable dev across nu + virtuals + invisibles together, see [Cross-repo dev](cross-repo-dev); this page covers hacking on nu alone.
+Clone Nu and work off the tree. For a normal install, see [Install](/docs/how-to/install). For editable dev across nu + virtuals + invisibles together, see [Cross-repo dev](/docs/how-to/cross-repo-dev); this page covers hacking on nu alone.
 
 ## Prerequisites
 

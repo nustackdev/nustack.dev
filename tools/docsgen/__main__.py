@@ -7,9 +7,10 @@ import difflib
 import sys
 from pathlib import Path
 
-from .collect import build, build_index
-from .pages import INDEXES, PAGES
-from .render import files, index
+from .collect import build, build_root
+from .discover import Node, check_fabrics, discover
+from .pages import ROOTS
+from .render import files, root
 
 __all__ = ["main"]
 
@@ -28,23 +29,40 @@ def main(argv: list[str] | None = None) -> int:
         action="append",
         default=[],
         metavar="MODULE",
-        help="generate one module only. Repeatable. Skips the index pages.",
+        help="generate one module only. Repeatable. Skips the landing pages.",
+    )
+    parser.add_argument(
+        "--tree",
+        action="store_true",
+        help="print the derived page tree and write nothing.",
     )
     args = parser.parse_args(argv)
 
-    specs = [s for s in PAGES if not args.only or s.module in args.only]
-    if not specs:
+    found = discover()
+    by_folder = dict(found)
+    every: list[Node] = [n for _, tops in found for top in tops for n in top.walk()]
+    check_fabrics(tuple(every))
+
+    if args.tree:
+        for folder, tops in found:
+            print(folder)
+            for top in tops:
+                _print(top, 1)
+        return 0
+
+    nodes = [n for n in every if not args.only or n.module in args.only]
+    if not nodes:
         print("no page matched --only", file=sys.stderr)
         return 2
 
     written: dict[str, str] = {}
     owned: list[str] = []
-    for spec in specs:
-        written |= files(build(spec))
-        owned.append(spec.base)
+    for node in nodes:
+        written |= files(build(node))
+        owned.append(node.base)
     if not args.only:
-        for spec in INDEXES:
-            written[spec.path] = index(build_index(spec))
+        for spec in ROOTS:
+            written[spec.path] = root(build_root(spec, by_folder[spec.folder]))
 
     stale = [p for p in sorted(written) if _read(p) != written[p]]
     orphans = _orphans(owned, written)
@@ -84,6 +102,12 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
+def _print(node: Node, depth: int) -> None:
+    print(f"{'  ' * depth}{node.label:<12} {len(node.records):>4} subjects  {node.url}")
+    for child in node.children:
+        _print(child, depth + 1)
+
+
 def _read(path: str) -> str:
     target = ROOT / path
     return target.read_text() if target.is_file() else ""
@@ -92,10 +116,11 @@ def _read(path: str) -> str:
 def _orphans(owned: list[str], written: dict[str, str]) -> list[str]:
     """Markdown the generator used to own and no longer writes.
 
-    A page that grows past the split threshold turns ``mem.md`` into
-    ``mem/index.md``, and a page that shrinks turns it back. Either way the
-    file left behind still resolves to a URL in fumadocs, so it goes.
-    ``meta.json`` is never touched: it is handwritten.
+    A page that grows past the split threshold turns ``core.md`` into
+    ``core/index.md``, and a page that shrinks turns it back. Either way the
+    file left behind still resolves to a URL in fumadocs, so it goes. Only the
+    markdown directly at a page's own base is considered: a nested page owns
+    its own directory. ``meta.json`` is never touched: it is handwritten.
     """
     found: list[str] = []
     for base in owned:
@@ -109,9 +134,9 @@ def _orphans(owned: list[str], written: dict[str, str]) -> list[str]:
 
 def _prune(folder: Path) -> None:
     """Drop a page folder once nothing is left in it but a stale ``meta.json``."""
-    if folder.is_dir() and not any(folder.glob("*.md")):
-        for leftover in folder.iterdir():
-            leftover.unlink()
+    if folder.is_dir() and not any(folder.rglob("*.md")):
+        for leftover in sorted(folder.rglob("*"), reverse=True):
+            leftover.unlink() if leftover.is_file() else leftover.rmdir()
         folder.rmdir()
 
 

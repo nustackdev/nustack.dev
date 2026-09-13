@@ -18,8 +18,8 @@ export const fabricHref = (slug: string) => `/fabrics/${slug}`;
 export const toolHref = (slug: string) => `/tools/${slug}`;
 export const useCaseHref = (slug: string) => `/use-cases/${slug}`;
 
-/** Reference-doc URL for a fabric (its API page under /docs/reference/fabrics). */
-export const fabricDocsHref = (slug: string) => `/docs/reference/fabrics/${slug}`;
+/** Reference-doc URL for a fabric (its API page under /docs/reference/nustd). */
+export const fabricDocsHref = (slug: string) => `/docs/reference/nustd/${slug}`;
 
 /** Source-code URL for a fabric's implementation directory in the nu repo. */
 export const fabricSrcHref = (slug: string) =>

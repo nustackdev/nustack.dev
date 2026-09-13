@@ -105,7 +105,7 @@ The same lines that put `a + b` on a dashboard can, without changing shape:
 - **Handle terabytes.** Shard the KV Fabric. The Refs do not notice.
 - **Run distributed across a cluster.** Bind through `nu.cluster`. The Refs do not notice.
 
-For the algebra underneath (atoms, kinds, forms), see the [Explanation](/docs/reference/fabrics) section once it lands. For now, pick a card above and start building.
+For the algebra underneath (atoms, kinds, forms), see the [Explanation](/docs/reference/nu) section once it lands. For now, pick a card above and start building.
 
 ## Fabrics
 
@@ -113,20 +113,20 @@ Each fabric binds Refs to a real backend and unlocks a new capability.
 
 | Fabric | What |
 | --- | --- |
-| [`nu.mem`](/docs/reference/fabrics/mem) | In-memory state fabric. Perfect for cache, hot state, and in-process coordination. |
-| [`nu.kv`](/docs/reference/fabrics/kv) | Persistent state fabric. Refs over a KV backend (RocksDB, LMDB); transactions, snapshots, and change notifications, built in. |
-| [`nu.ui`](/docs/reference/fabrics/ui) | Web UI fabric. Same fabric shape as the others, but the Refs are widgets (text, buttons, tables) rendered in the browser and live-updated as your state changes. |
-| [`nu.proxy`](/docs/reference/fabrics/proxy) | Proxy fabric. Puts other fabrics on the network. Bind a fabric in one process, use it from another; same Refs, same interactions, over TCP or Unix socket. |
-| [`nu.http`](/docs/reference/fabrics/http) | HTTP fabric: expose Nu Refs as endpoints, or build on top of any HTTP service. |
-| [`nu.service`](/docs/reference/fabrics/service) | In-process service fabric: any Python object as a tree of Refs. |
-| [`nu.llm`](/docs/reference/fabrics/llm) | OpenAI-compatible chat fabric: one wire, N providers. |
-| [`nu.cc`](/docs/reference/fabrics/cc) | Claude Code as a Ref: prompts from your Nu tree, session brackets, text and metadata back. |
-| [`nu.mp`](/docs/reference/fabrics/mp) | Local multiprocessing fabric: teleport subtrees onto spawned worker processes. |
-| [`nu.cluster`](/docs/reference/fabrics/cluster) | Cluster compute fabric. Teleport a Nu tree to any worker in your cluster; it runs there and returns the result. Ray under the hood. |
+| [`nu.mem`](/docs/reference/nustd/mem) | In-memory state fabric. Perfect for cache, hot state, and in-process coordination. |
+| [`nu.kv`](/docs/reference/nustd/kv) | Persistent state fabric. Refs over a KV backend (RocksDB, LMDB); transactions, snapshots, and change notifications, built in. |
+| [`nu.ui`](/docs/reference/nustd/ui) | Web UI fabric. Same fabric shape as the others, but the Refs are widgets (text, buttons, tables) rendered in the browser and live-updated as your state changes. |
+| [`nu.proxy`](/docs/reference/nustd/proxy) | Proxy fabric. Puts other fabrics on the network. Bind a fabric in one process, use it from another; same Refs, same interactions, over TCP or Unix socket. |
+| [`nu.http`](/docs/reference/nustd/http) | HTTP fabric: expose Nu Refs as endpoints, or build on top of any HTTP service. |
+| [`nu.service`](/docs/reference/nustd/service) | In-process service fabric: any Python object as a tree of Refs. |
+| [`nu.llm`](/docs/reference/nustd/llm) | OpenAI-compatible chat fabric: one wire, N providers. |
+| [`nu.cc`](/docs/reference/nustd/cc) | Claude Code as a Ref: prompts from your Nu tree, session brackets, text and metadata back. |
+| [`nu.mp`](/docs/reference/nustd/mp) | Local multiprocessing fabric: teleport subtrees onto spawned worker processes. |
+| [`nu.cluster`](/docs/reference/nustd/cluster) | Cluster compute fabric. Teleport a Nu tree to any worker in your cluster; it runs there and returns the result. Ray under the hood. |
 
 ## Go deeper
 
 <Cards>
   <Card title="How-to" href="/docs/how-to/install" description="Recipes for common tasks. Install, cross-repo dev, more coming." />
-  <Card title="Reference" href="/docs/reference/fabrics" description="API surface. Fabrics, core, standard library." />
+  <Card title="Reference" href="/docs/reference/nu" description="API surface. The nu kernel, the fabrics, the standard library." />
 </Cards>

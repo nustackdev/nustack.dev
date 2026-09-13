@@ -6,9 +6,15 @@ Plain markdown, no MDX components: these files are also what ``llms.txt`` and
 The renderer copies fields. Where a record is thin the page says so and stops.
 Nothing here writes prose to cover a gap: a gap is a docstring to fix in nu.
 
-A page renders as one file, or, past ``SPLIT`` lines, as a folder: an index
-carrying the module prose and one summary table per section, plus one file per
-section holding the full entries. The URL is the same either way.
+A page renders as one file, or as a folder: an index carrying the module prose
+and one summary table per section, plus one file per section holding the full
+entries. It becomes a folder past ``SPLIT`` lines, or as soon as another page
+is nested under it. The URL is the same either way.
+
+A label says the last segment only, because the ancestry is already in the URL.
+The full dotted path is never far: the page states its module under the title,
+a section states its own under its heading, and every subject carries its path
+in the metadata strip.
 """
 
 from __future__ import annotations
@@ -19,11 +25,11 @@ from typing import Any
 from nu.inspect import BuilderRecord, CallRecord, InteractionRecord
 from nu.inspect.core.contract import call_form, render_args
 
-from .model import Index, Page, Section
+from .model import Page, Root, Section
 from .pages import SPLIT
 from .prose import cell, text
 
-__all__ = ["files", "index"]
+__all__ = ["files", "root"]
 
 _SUBJECT_TABLE = ("Name", "Sort", "Call", "Meaning")
 _ARG_TABLE = ("Name", "Type", "Default", "Meaning")
@@ -35,21 +41,16 @@ _CHILD_TABLE = ("Module", "What")
 def files(built: Page) -> dict[str, str]:
     """Every file this page writes, keyed by repo-relative path."""
     single = _single(built)
-    if len(built.sections) > 1 and len(single.splitlines()) > SPLIT:
+    long = len(built.sections) > 1 and len(single.splitlines()) > SPLIT
+    if built.children or long:
         return _folder(built)
     return {f"{built.base}.md": single}
 
 
-def index(built: Index) -> str:
-    """A directory landing page: the parent module's prose over its children."""
-    lines = ["---", f"title: {built.title}"]
-    if built.record is not None and built.record.summary:
-        lines.append(f'description: "{_frontmatter(built.record.summary)}"')
-    lines += ["---", ""]
-    if built.record is not None:
-        lines += _prose(built.record)
-    rows = [(f"[`{r.path}`]({url})", cell(r.summary)) for r, url in built.children]
-    lines += ["", *_table(_CHILD_TABLE, rows)]
+def root(built: Root) -> str:
+    """A distribution landing page: the table of the modules it ships."""
+    lines = ["---", f"title: {built.title}", "---", ""]
+    lines += _children(built.children)
     return _join(lines)
 
 
@@ -59,10 +60,9 @@ def index(built: Index) -> str:
 def _single(built: Page) -> str:
     """One file: module prose, then every section inline."""
     _load(built.sections, headed=True)
-    lines = _frontmatter_block(built.record.path, built.record.summary)
-    lines += _prose(built.record)
+    lines = _head(built)
     for section in built.sections:
-        lines += ["", f"## {section.title}", ""]
+        lines += _heading(section)
         if section.record is not None:
             lines += _prose(section.record)
         lines += _summary(section.subjects, "")
@@ -73,19 +73,17 @@ def _single(built: Page) -> str:
 
 def _folder(built: Page) -> dict[str, str]:
     """A folder: an index of summary tables, and one file per section."""
-    url = "/" + built.base.removeprefix("content/")
-    out = {f"{built.base}/index.md": _folder_index(built, url)}
+    out = {f"{built.base}/index.md": _folder_index(built)}
     for section in built.sections:
         out[f"{built.base}/{section.slug}.md"] = _section_file(section)
     return out
 
 
-def _folder_index(built: Page, url: str) -> str:
-    lines = _frontmatter_block(built.record.path, built.record.summary)
-    lines += _prose(built.record)
+def _folder_index(built: Page) -> str:
+    lines = _head(built)
     for section in built.sections:
-        target = f"{url}/{section.slug}"
-        lines += ["", f"## {section.title}", ""]
+        target = f"{built.url}/{section.slug}"
+        lines += _heading(section)
         if section.record is not None and section.record.summary:
             lines += [text(section.record.summary), ""]
         lines += [f"[Full entries]({target})", ""]
@@ -97,13 +95,42 @@ def _folder_index(built: Page, url: str) -> str:
 def _section_file(section: Section) -> str:
     _load((section,), headed=False)
     summary = section.record.summary if section.record is not None else ""
-    lines = _frontmatter_block(section.title, summary)
+    lines = _frontmatter_block(section.label, summary)
+    lines += _module_line(section.module)
     if section.record is not None:
         lines += _prose(section.record)
     lines += _summary(section.subjects, "")
     for subject in section.subjects:
         lines += _subject(subject, depth=0)
     return _join(lines)
+
+
+def _head(built: Page) -> list[str]:
+    """Title, the dotted module the title is short for, prose, and what is nested."""
+    lines = _frontmatter_block(built.label, built.record.summary)
+    lines += _module_line(built.module)
+    lines += _prose(built.record)
+    if built.children:
+        lines += ["", "**Modules**", ""]
+        lines += _children(built.children)
+    return lines
+
+
+def _heading(section: Section) -> list[str]:
+    """A section heading: the short label, with the dotted path under it."""
+    return ["", f"## {section.label}", "", *_module_line(section.module)]
+
+
+def _module_line(dotted: str) -> list[str]:
+    """The one place the full dotted path is stated, since the labels dropped it."""
+    if not dotted:
+        return []
+    return [f"Module `{dotted}`.", ""]
+
+
+def _children(children: tuple[Any, ...]) -> list[str]:
+    rows = [(f"[`{c.module}`]({c.url})", cell(c.record.summary)) for c in children]
+    return [*_table(_CHILD_TABLE, rows), ""]
 
 
 def _frontmatter_block(title: str, summary: str) -> list[str]:
@@ -379,7 +406,7 @@ def _load(sections: tuple[Section, ...], headed: bool) -> None:
 
     for section in sections:
         if headed:
-            take(section.title)
+            take(section.label)
         for subject in section.subjects:
             _ANCHORS[subject.path] = take(subject.name)
             if isinstance(subject, BuilderRecord):

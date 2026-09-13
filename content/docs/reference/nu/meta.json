@@ -1,0 +1,15 @@
+{
+  "title": "Nu",
+  "pages": [
+    "core",
+    "forms",
+    "lang",
+    "context",
+    "prog",
+    "domains",
+    "engine",
+    "factory",
+    "tree",
+    "inspect"
+  ]
+}

@@ -170,7 +170,7 @@ export default function ObservabilityUseCasePage() {
                 Deterministic sampling over sorted KV data. Any window on
                 a metric series renders fast.
               </LinkCard>
-              <LinkCard href="/docs/reference/fabrics/kv" title="docs · nu.kv">
+              <LinkCard href="/docs/reference/nustd/kv" title="docs · nu.kv">
                 Reference for the store nulog writes to. Commands, queries,
                 transactions.
               </LinkCard>

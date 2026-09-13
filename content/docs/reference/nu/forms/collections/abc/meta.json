@@ -1,0 +1,18 @@
+{
+  "title": "abc",
+  "pages": [
+    "container",
+    "sized",
+    "iterable",
+    "collection",
+    "sequence",
+    "set",
+    "mapping",
+    "sliceable",
+    "shared-interactions",
+    "sequence-interactions",
+    "set-interactions",
+    "mapping-interactions",
+    "nu-core-access"
+  ]
+}

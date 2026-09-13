@@ -1,0 +1,14 @@
+{
+  "title": "shape",
+  "pages": [
+    "interactions",
+    "refs-shape",
+    "refs-item",
+    "refs-mapping",
+    "refs-sequence",
+    "refs-set",
+    "refs-shapes-mapping",
+    "refs-shapes-sequence",
+    "forms"
+  ]
+}

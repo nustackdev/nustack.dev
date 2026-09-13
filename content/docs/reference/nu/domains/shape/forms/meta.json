@@ -1,0 +1,10 @@
+{
+  "title": "forms",
+  "pages": [
+    "collection",
+    "item",
+    "mapping",
+    "sequence",
+    "set"
+  ]
+}

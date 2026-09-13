@@ -1,0 +1,16 @@
+{
+  "title": "inspect",
+  "pages": [
+    "module",
+    "interaction",
+    "interactions",
+    "form",
+    "ref",
+    "shape",
+    "service",
+    "builder",
+    "call",
+    "entry",
+    "core"
+  ]
+}

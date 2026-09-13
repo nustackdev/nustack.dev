@@ -1,0 +1,17 @@
+{
+  "title": "Nu STD",
+  "pages": [
+    "kv",
+    "ui",
+    "cluster",
+    "llm",
+    "mem",
+    "proxy",
+    "http",
+    "service",
+    "cc",
+    "mp",
+    "mp_pool",
+    "std"
+  ]
+}

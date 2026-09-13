@@ -1,0 +1,10 @@
+{
+  "title": "context",
+  "pages": [
+    "attrs-refs",
+    "attrs-interactions",
+    "fabric-refs",
+    "fabric-queries",
+    "fabric-lifecycle"
+  ]
+}

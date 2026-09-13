@@ -1,0 +1,19 @@
+{
+  "title": "std",
+  "pages": [
+    "math",
+    "cmath",
+    "random",
+    "time",
+    "datetime",
+    "itertools",
+    "functools",
+    "asyncio",
+    "logging",
+    "pathlib",
+    "uuid",
+    "decimal",
+    "fractions",
+    "fin"
+  ]
+}

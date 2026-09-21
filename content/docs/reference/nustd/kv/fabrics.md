@@ -1,11 +1,11 @@
 ---
 title: fabrics
-description: "nu.kv.fabrics - `FabricLifecycle` classes for the virtuals stack."
+description: "nustd.kv.fabrics - `FabricLifecycle` classes for the virtuals stack."
 ---
 
-Module `nu.kv.fabrics`.
+Module `nustd.kv.fabrics`.
 
-nu.kv.fabrics - `FabricLifecycle` classes for the virtuals stack.
+nustd.kv.fabrics - `FabricLifecycle` classes for the virtuals stack.
 
 Nu-tree provisioning for the virtuals concepts:
 
@@ -19,6 +19,8 @@ Nu-tree provisioning for the virtuals concepts:
 - `InMemoryObserver` / `RedisObserver` - read-side change consumers.
   Bound at process scope; `nu.core.reactive` queries look them up under
   `ObserverProtocol`.
+- `HostedObserver` - not a backend. Wraps whichever one is bound so that
+  subscribers in other processes can hang off it. See `hosted`.
 - `InMemoryStorage` / `RocksDBStorage` / `LMDBStorage` / `TextStorage`
   - backing stores. Read `Codec` and their publisher from ctx.
 - `Navigator` - top-level entry to storage. Reads Storage from ctx by
@@ -59,7 +61,7 @@ BinaryKeyCodec + PickleCodec. Binary keys, pickled values.
 fabrics.binary_kwargs()
 ```
 
-Path `nu.kv.fabrics.binary_kwargs`. Defined on `nu.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
+Path `nustd.kv.fabrics.binary_kwargs`. Defined on `nustd.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
 
 Undocumented: example.
 
@@ -71,7 +73,7 @@ BinaryKeyCodec + MessagePackCodec. Compact binary serialization.
 fabrics.msgpack_kwargs()
 ```
 
-Path `nu.kv.fabrics.msgpack_kwargs`. Defined on `nu.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
+Path `nustd.kv.fabrics.msgpack_kwargs`. Defined on `nustd.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
 
 Undocumented: example.
 
@@ -83,7 +85,7 @@ BinaryKeyCodec + PassthroughCodec. No value serialization.
 fabrics.noop_kwargs()
 ```
 
-Path `nu.kv.fabrics.noop_kwargs`. Defined on `nu.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
+Path `nustd.kv.fabrics.noop_kwargs`. Defined on `nustd.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
 
 Undocumented: example.
 
@@ -95,6 +97,6 @@ StringKeyCodec + JSONCodec. Human-readable keys and values.
 fabrics.text_kwargs()
 ```
 
-Path `nu.kv.fabrics.text_kwargs`. Defined on `nu.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
+Path `nustd.kv.fabrics.text_kwargs`. Defined on `nustd.kv.fabrics.codec`, bound as a function. Builds `dict[str, type]`.
 
 Undocumented: example.

@@ -3,7 +3,7 @@ title: fin
 description: "Nu surface for financial value types - `Percentage` and `BasisPoint`."
 ---
 
-Module `nu.std.fin`.
+Module `nustd.fin`.
 
 Nu surface for financial value types - `Percentage` and `BasisPoint`.
 
@@ -14,8 +14,8 @@ methods are `interactions` atoms. Import them like the rest of the std
 library:
 
 ```python
-from nu.std.fin import BasisPoint, Percentage       # Forms: Percentage.of(75.5)
-from nu.std.fin import PyBasisPoint, PyPercentage    # raw Python values
+from nustd.fin import BasisPoint, Percentage       # Forms: Percentage.of(75.5)
+from nustd.fin import PyBasisPoint, PyPercentage    # raw Python values
 ```
 
 ## ScalarQuery
@@ -33,7 +33,7 @@ A basis-point count as a Form - 1/100th of a percent (`500` = 5%).
 BasisPoint()
 ```
 
-Path `nu.std.fin.BasisPoint`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.fin.BasisPoint`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Build one with `BasisPoint.of(500)` (or `from_pct` / `from_dec`);
 convert with `to_pct` / `to_dec`; apply to an amount with `apply` /
@@ -307,7 +307,7 @@ A percentage as a Form (`75.5` = 75.5%).
 Percentage()
 ```
 
-Path `nu.std.fin.Percentage`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.fin.Percentage`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Build one with `Percentage.of(75.5)` (or `from_dec` / `from_bps` /
 `from_ratio`); convert with `to_dec` / `to_bps`; apply to an amount

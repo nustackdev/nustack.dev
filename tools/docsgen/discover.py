@@ -90,8 +90,8 @@ def discover() -> tuple[tuple[str, tuple[Node, ...]], ...]:
     out = []
     for dist, folder in DISTRIBUTIONS:
         tops: list[Node] = []
-        for root in roots(dist):
-            for dotted in _packages_in(root, "nu"):
+        for root in roots(dist, folder):
+            for dotted in _packages_in(root, folder):
                 node = _node(dotted, f"{REF}/{folder}/{_tail(dotted)}")
                 if node is not None:
                     tops.append(node)
@@ -99,19 +99,21 @@ def discover() -> tuple[tuple[str, tuple[Node, ...]], ...]:
     return tuple(out)
 
 
-def roots(dist: str) -> list[Path]:
-    """The ``nu/`` directories one distribution contributes to the namespace.
+def roots(dist: str, pkg: str) -> list[Path]:
+    """The ``pkg/`` directories one distribution contributes to the namespace.
+
+    Since 0.5.0 each distribution owns its own import root: ``nucore`` ships
+    ``nu``, ``nustd`` ships ``nustd``. The root is passed in rather than
+    assumed, so neither is the one the walk is hardcoded to.
 
     A wheel install lists them in its own RECORD. An editable install lists
-    nothing under ``nu/``, so its project directory is read off
+    nothing under ``pkg/``, so its project directory is read off
     ``direct_url.json`` and matched against the namespace path.
     """
-    import nu
-
-    portions = [Path(p).resolve() for p in nu.__path__]
+    portions = [Path(p).resolve() for p in importlib.import_module(pkg).__path__]
     installed = metadata.distribution(dist)
-    if any(f.parts[:1] == ("nu",) and len(f.parts) > 1 for f in installed.files or ()):
-        return [p for p in portions if p == Path(installed.locate_file("nu")).resolve()]
+    if any(f.parts[:1] == (pkg,) and len(f.parts) > 1 for f in installed.files or ()):
+        return [p for p in portions if p == Path(installed.locate_file(pkg)).resolve()]
     origin = installed.read_text("direct_url.json")
     if origin is None:
         raise RuntimeError(f"cannot locate the {dist} sources")
@@ -123,12 +125,12 @@ def check_fabrics(nodes: tuple[Node, ...]) -> None:
     """Refuse to generate if a fabric page stopped living at its fixed URL."""
     by_module = {n.module: n for n in nodes}
     for slug in FABRICS:
-        node = by_module.get(f"nu.{slug}")
+        node = by_module.get(f"nustd.{slug}")
         if node is None:
-            raise RuntimeError(f"fabric nu.{slug} has no page")
+            raise RuntimeError(f"fabric nustd.{slug} has no page")
         if node.base != f"{REF}/nustd/{slug}":
             raise RuntimeError(
-                f"fabric nu.{slug} moved to {node.base}; lib/refs.ts expects nustd/{slug}"
+                f"fabric nustd.{slug} moved to {node.base}; lib/refs.ts expects nustd/{slug}"
             )
 
 

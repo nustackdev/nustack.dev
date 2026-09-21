@@ -3,22 +3,22 @@ title: http
 description: "Nu HTTP fabric."
 ---
 
-Module `nu.http`.
+Module `nustd.http`.
 
 Nu HTTP fabric.
 
 Example:
 class GH(nu.Service):
-    get_repo = nu.http.GETRef.method("/repos/{owner}/{name}")
+    get_repo = nustd.http.GETRef.method("/repos/{owner}/{name}")
 
 app = nu.With(
-    nu.http.bind(GH, base_url="https://api.github.com"),
+    nustd.http.bind(GH, base_url="https://api.github.com"),
     body=nu.print(GH.get_repo(owner="nu", name="core")),
 )
 
 ## interactions
 
-Module `nu.http.interactions`.
+Module `nustd.http.interactions`.
 
 5 HTTP interactions: HttpGet, HttpPost, HttpPut, HttpPatch, HttpDelete.
 
@@ -26,7 +26,7 @@ GET is a ScalarQuery (safe verb, no mutation attribution).
 POST / PUT / PATCH / DELETE are ScalarActions (mutate, still yield the response body).
 
 Each class inlines its own `_mutates` (mutating verbs) + `_compile` / `_acompile`.
-Shared wire logic lives in `nu.http.core`. Repetition across the 4 mutating verbs
+Shared wire logic lives in `nustd.http.core`. Repetition across the 4 mutating verbs
 is intentional: this is declaration-style code, read straight through.
 
 | Name | Sort | Call | Meaning |
@@ -45,7 +45,7 @@ One DELETE request over an endpoint declared with DELETERef.
 HttpDelete(endpoint, args)
 ```
 
-Path `nu.http.HttpDelete`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.http.HttpDelete`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -71,9 +71,9 @@ The response body, parsed as JSON.
 
 ```python
 class Store(nu.Service):
-    delete_item = nu.http.DELETERef.method("/items/{id}")
+    delete_item = nustd.http.DELETERef.method("/items/{id}")
 app = nu.With(
-    nu.http.bind(Store, base_url="https://api.example.com"),
+    nustd.http.bind(Store, base_url="https://api.example.com"),
     body=Store.delete_item(id=7),
 )
 ```
@@ -86,7 +86,7 @@ One GET request over an endpoint declared with GETRef.
 HttpGet(endpoint, args)
 ```
 
-Path `nu.http.HttpGet`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.http.HttpGet`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -111,9 +111,9 @@ The response body, parsed as JSON.
 
 ```python
 class GH(nu.Service):
-    get_repo = nu.http.GETRef.method("/repos/{owner}/{name}")
+    get_repo = nustd.http.GETRef.method("/repos/{owner}/{name}")
 app = nu.With(
-    nu.http.bind(GH, base_url="https://api.github.com"),
+    nustd.http.bind(GH, base_url="https://api.github.com"),
     body=nu.print(GH.get_repo(owner="nu", name="core")),
 )
 ```
@@ -126,7 +126,7 @@ One PATCH request over an endpoint declared with PATCHRef.
 HttpPatch(endpoint, args)
 ```
 
-Path `nu.http.HttpPatch`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.http.HttpPatch`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -151,9 +151,9 @@ The response body, parsed as JSON.
 
 ```python
 class Store(nu.Service):
-    patch_item = nu.http.PATCHRef.method("/items/{id}")
+    patch_item = nustd.http.PATCHRef.method("/items/{id}")
 app = nu.With(
-    nu.http.bind(Store, base_url="https://api.example.com"),
+    nustd.http.bind(Store, base_url="https://api.example.com"),
     body=Store.patch_item(id=7, name="anvil"),
 )
 ```
@@ -166,7 +166,7 @@ One POST request over an endpoint declared with POSTRef.
 HttpPost(endpoint, args)
 ```
 
-Path `nu.http.HttpPost`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.http.HttpPost`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -191,9 +191,9 @@ The response body, parsed as JSON.
 
 ```python
 class GH(nu.Service):
-    create_issue = nu.http.POSTRef.method("/repos/{owner}/{name}/issues")
+    create_issue = nustd.http.POSTRef.method("/repos/{owner}/{name}/issues")
 app = nu.With(
-    nu.http.bind(GH, base_url="https://api.github.com"),
+    nustd.http.bind(GH, base_url="https://api.github.com"),
     body=GH.create_issue(owner="nu", name="core", title="bug"),
 )
 ```
@@ -206,7 +206,7 @@ One PUT request over an endpoint declared with PUTRef.
 HttpPut(endpoint, args)
 ```
 
-Path `nu.http.HttpPut`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.http.HttpPut`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -231,16 +231,16 @@ The response body, parsed as JSON.
 
 ```python
 class Store(nu.Service):
-    put_item = nu.http.PUTRef.method("/items/{id}")
+    put_item = nustd.http.PUTRef.method("/items/{id}")
 app = nu.With(
-    nu.http.bind(Store, base_url="https://api.example.com"),
+    nustd.http.bind(Store, base_url="https://api.example.com"),
     body=Store.put_item(id=7, name="anvil"),
 )
 ```
 
 ## refs
 
-Module `nu.http.refs`.
+Module `nustd.http.refs`.
 
 HTTP MethodRefs: one Ref class per verb, declaration-style.
 
@@ -270,7 +270,7 @@ A DELETE endpoint, declared once on a Service and called wherever it is needed.
 DELETERef(name, owner_service=None)
 ```
 
-Path `nu.http.DELETERef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.http.DELETERef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The declaration carries the path and any default query parameters; the
 call carries the rest. Reading the name back off the Service class hands
@@ -289,9 +289,9 @@ same verb against different base URLs.
 
 ```python
 class Store(nu.Service):
-    delete_item = nu.http.DELETERef.method("/items/{id}")
+    delete_item = nustd.http.DELETERef.method("/items/{id}")
 app = nu.With(
-    nu.http.bind(Store, base_url="https://api.example.com"),
+    nustd.http.bind(Store, base_url="https://api.example.com"),
     body=Store.delete_item(id=7),
 )
 ```
@@ -325,7 +325,7 @@ A GET endpoint, declared once on a Service and called wherever it is needed.
 GETRef(name, owner_service=None)
 ```
 
-Path `nu.http.GETRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.http.GETRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The declaration carries the path and any default query parameters; the
 call carries the rest. Reading the name back off the Service class hands
@@ -344,9 +344,9 @@ same verb against different base URLs.
 
 ```python
 class GH(nu.Service):
-    get_repo = nu.http.GETRef.method("/repos/{owner}/{name}")
+    get_repo = nustd.http.GETRef.method("/repos/{owner}/{name}")
 app = nu.With(
-    nu.http.bind(GH, base_url="https://api.github.com"),
+    nustd.http.bind(GH, base_url="https://api.github.com"),
     body=GH.get_repo(owner="nu", name="core"),
 )
 ```
@@ -380,7 +380,7 @@ A PATCH endpoint, declared once on a Service and called wherever it is needed.
 PATCHRef(name, owner_service=None)
 ```
 
-Path `nu.http.PATCHRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.http.PATCHRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The declaration carries the path and any default body fields; the call
 carries the rest. Reading the name back off the Service class hands out a
@@ -399,9 +399,9 @@ verb against different base URLs.
 
 ```python
 class Store(nu.Service):
-    patch_item = nu.http.PATCHRef.method("/items/{id}")
+    patch_item = nustd.http.PATCHRef.method("/items/{id}")
 app = nu.With(
-    nu.http.bind(Store, base_url="https://api.example.com"),
+    nustd.http.bind(Store, base_url="https://api.example.com"),
     body=Store.patch_item(id=7, name="anvil"),
 )
 ```
@@ -435,7 +435,7 @@ A POST endpoint, declared once on a Service and called wherever it is needed.
 POSTRef(name, owner_service=None)
 ```
 
-Path `nu.http.POSTRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.http.POSTRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The declaration carries the path and any default body fields; the call
 carries the rest. Reading the name back off the Service class hands out a
@@ -454,9 +454,9 @@ verb against different base URLs.
 
 ```python
 class GH(nu.Service):
-    create_issue = nu.http.POSTRef.method("/repos/{owner}/{name}/issues")
+    create_issue = nustd.http.POSTRef.method("/repos/{owner}/{name}/issues")
 app = nu.With(
-    nu.http.bind(GH, base_url="https://api.github.com"),
+    nustd.http.bind(GH, base_url="https://api.github.com"),
     body=GH.create_issue(owner="nu", name="core", title="bug"),
 )
 ```
@@ -490,7 +490,7 @@ A PUT endpoint, declared once on a Service and called wherever it is needed.
 PUTRef(name, owner_service=None)
 ```
 
-Path `nu.http.PUTRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.http.PUTRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The declaration carries the path and any default body fields; the call
 carries the rest. Reading the name back off the Service class hands out a
@@ -509,9 +509,9 @@ verb against different base URLs.
 
 ```python
 class Store(nu.Service):
-    put_item = nu.http.PUTRef.method("/items/{id}")
+    put_item = nustd.http.PUTRef.method("/items/{id}")
 app = nu.With(
-    nu.http.bind(Store, base_url="https://api.example.com"),
+    nustd.http.bind(Store, base_url="https://api.example.com"),
     body=Store.put_item(id=7, name="anvil"),
 )
 ```
@@ -539,7 +539,7 @@ Undocumented: example.
 
 ## presets
 
-Module `nu.http.presets`.
+Module `nustd.http.presets`.
 
 bind(): Provide an HttpFabric for a service.
 
@@ -555,7 +555,7 @@ Give one Service class its HTTP transport, for the span of a tree.
 http.bind(service_cls, base_url='', headers=None, timeout=30.0)
 ```
 
-Path `nu.http.bind`. Defined on `nu.http.presets`, bound as a function. Builds `Provide`.
+Path `nustd.http.bind`. Defined on `nustd.http.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -576,9 +576,9 @@ Path `nu.http.bind`. Defined on `nu.http.presets`, bound as a function. Builds `
 
 ```python
 class GH(nu.Service):
-    get_repo = nu.http.GETRef.method("/repos/{owner}/{name}")
+    get_repo = nustd.http.GETRef.method("/repos/{owner}/{name}")
 app = nu.With(
-    nu.http.bind(GH, base_url="https://api.github.com", timeout=5.0),
+    nustd.http.bind(GH, base_url="https://api.github.com", timeout=5.0),
     body=nu.print(GH.get_repo(owner="nu", name="core")),
 )
 ```

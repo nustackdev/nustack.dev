@@ -3,7 +3,7 @@ title: refs.structural
 description: "Structural Refs -- bound to non-render browser APIs."
 ---
 
-Module `nu.ui.refs.structural`.
+Module `nustd.ui.refs.structural`.
 
 Structural Refs -- bound to non-render browser APIs.
 
@@ -23,7 +23,7 @@ Bound to window.history + window.location. Index-level structural Ref.
 NavRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.NavRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.NavRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Bidirectional: host writes manipulate window.history; user navigation
 (link clicks, back/forward) ships a `notify` whose payload is the new URI.
@@ -69,11 +69,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -85,7 +93,7 @@ Bound to document.title. Index-level structural Ref.
 TitleRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.TitleRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.TitleRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Write-only from host. The browser-side slice writes assignments
 directly to document.title; it is not a body slot and is not
@@ -105,5 +113,13 @@ Builds `Nu`.
 | `value` | `StrArg` |  |  |
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.

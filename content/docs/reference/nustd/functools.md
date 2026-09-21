@@ -3,7 +3,7 @@ title: functools
 description: "Nu surface for Python's `functools`."
 ---
 
-Module `nu.std.functools`.
+Module `nustd.functools`.
 
 Nu surface for Python's `functools`.
 
@@ -21,7 +21,7 @@ intentionally absent:
 Import like the stdlib:
 
 ```python
-from nu.std.functools import reduce
+from nustd.functools import reduce
 ```
 
 ## Call
@@ -38,7 +38,7 @@ Fold `iterable` left-to-right with `function` (`functools.reduce`).
 functools.reduce(function, iterable, initializer=<UNSET>)
 ```
 
-Path `nu.std.functools.reduce`. Defined on `nu.std.functools.functions`, bound as a function. Builds `Any`.
+Path `nustd.functools.reduce`. Defined on `nustd.functools.functions`, bound as a function. Builds `Any`.
 
 `function` is a Nu query that reads the accumulator and the current item
 via a typed AttrRef - `IntAttrRef("acc")` and `IntAttrRef("item")` - so a

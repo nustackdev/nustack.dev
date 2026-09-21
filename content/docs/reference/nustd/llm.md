@@ -3,7 +3,7 @@ title: llm
 description: "Nu LLM fabric: OpenAI-compatible chat/completions, one wire, N providers."
 ---
 
-Module `nu.llm`.
+Module `nustd.llm`.
 
 Nu LLM fabric: OpenAI-compatible chat/completions, one wire, N providers.
 
@@ -14,10 +14,10 @@ Example (ollama on the red machine):
 
 ```python
 class Bot(nu.Service):
-    chat = nu.llm.ChatRef.method(temperature=0.7)
+    chat = nustd.llm.ChatRef.method(temperature=0.7)
 
 app = nu.With(
-    nu.llm.ollama(Bot, host="red", model="qwen2.5:7b-instruct"),
+    nustd.llm.ollama(Bot, host="red", model="qwen2.5:7b-instruct"),
     body=nu.print(nu.dict(Bot.chat(prompt="haiku about rust"))["text"]),
 )
 nu.run(app)
@@ -25,7 +25,7 @@ nu.run(app)
 
 ## interactions
 
-Module `nu.llm.interactions`.
+Module `nustd.llm.interactions`.
 
 Chat: ScalarAction that runs one chat/completions call.
 
@@ -41,7 +41,7 @@ One chat/completions request against the endpoint a ChatRef addresses.
 Chat(ref, args)
 ```
 
-Path `nu.llm.Chat`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.llm.Chat`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
 
 Built by calling a ChatRef rather than written by hand. At evaluation it
 resolves the Ref, merges the endpoint's declared defaults under this
@@ -74,9 +74,9 @@ when the provider omits them.
 
 ```python
 class Bot(nu.Service):
-    chat = nu.llm.ChatRef.method()
+    chat = nustd.llm.ChatRef.method()
 app = nu.With(
-    nu.llm.openai(Bot, api_key=key),
+    nustd.llm.openai(Bot, api_key=key),
     body=nu.print(nu.dict(Bot.chat(prompt="one word: yes or no"))["text"]),
 )
 asyncio.run(nu.arun(app))
@@ -84,11 +84,11 @@ asyncio.run(nu.arun(app))
 
 ## refs
 
-Module `nu.llm.refs`.
+Module `nustd.llm.refs`.
 
 ChatRef: Ref addressing a chat/completions endpoint on a Service.
 
-Mirrors the nu.http verb refs: `.method(**defaults)` returns a Method
+Mirrors the nustd.http verb refs: `.method(**defaults)` returns a Method
 declaration that the ServiceMeta descriptor unwraps at class access, and
 calling the Ref with kwargs produces a Chat interaction.
 
@@ -104,7 +104,7 @@ Addresses an OpenAI-compatible chat/completions endpoint on a Service.
 ChatRef(name, owner_service=None)
 ```
 
-Path `nu.llm.ChatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.llm.ChatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Written in a Service class body, one Ref per endpoint the Service talks
 to. The Ref names no host, key or model of its own: which endpoint it
@@ -122,9 +122,9 @@ Ollama, OpenRouter or a self-hosted vLLM without being rewritten.
 
 ```python
 class Bot(nu.Service):
-    chat = nu.llm.ChatRef.method(temperature=0.7)
+    chat = nustd.llm.ChatRef.method(temperature=0.7)
 app = nu.With(
-    nu.llm.ollama(Bot, host="red", model="qwen2.5:7b-instruct"),
+    nustd.llm.ollama(Bot, host="red", model="qwen2.5:7b-instruct"),
     body=nu.print(nu.dict(Bot.chat(prompt="haiku about rust"))["text"]),
 )
 nu.run(app)
@@ -155,7 +155,7 @@ Undocumented: example.
 
 ## presets
 
-Module `nu.llm.presets`.
+Module `nustd.llm.presets`.
 
 Providers for LLMFabric. `bind` is generic; the rest are convenience presets.
 
@@ -181,7 +181,7 @@ Point every ChatRef on a Service at one endpoint, for the scope it is provided i
 llm.bind(service_cls)
 ```
 
-Path `nu.llm.bind`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.bind`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 The generic form the presets all funnel through. What it provides is
 tagged by the Service class, which is how a ChatRef declared on that
@@ -208,7 +208,7 @@ A Provide to hand to `nu.With`.
 **Example**
 
 ```python
-app = nu.With(nu.llm.bind(Bot, base_url="http://red:8000", model="qwen3"), body=...)
+app = nu.With(nustd.llm.bind(Bot, base_url="http://red:8000", model="qwen3"), body=...)
 ```
 
 ### cerebras
@@ -219,7 +219,7 @@ Bind a Service to Cerebras' wafer-scale inference API.
 llm.cerebras(service_cls, api_key, model)
 ```
 
-Path `nu.llm.cerebras`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.cerebras`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -239,7 +239,7 @@ Bind a Service to Groq's LPU-hosted open-weight models.
 llm.groq(service_cls, api_key, model='llama-3.3-70b-versatile')
 ```
 
-Path `nu.llm.groq`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.groq`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -263,7 +263,7 @@ Bind a Service to a local or cluster Ollama daemon over its OpenAI-compatible AP
 llm.ollama(service_cls, host='localhost', port=11434, model='', timeout=120.0)
 ```
 
-Path `nu.llm.ollama`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.ollama`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -291,7 +291,7 @@ Bind a Service to OpenAI's own hosted API.
 llm.openai(service_cls, api_key, model='gpt-4o-mini')
 ```
 
-Path `nu.llm.openai`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.openai`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -311,7 +311,7 @@ Bind a Service to OpenRouter, which fronts many vendors behind one key.
 llm.openrouter(service_cls, api_key, model)
 ```
 
-Path `nu.llm.openrouter`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.openrouter`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -331,7 +331,7 @@ Bind a Service to a vLLM server you run yourself.
 llm.vllm(service_cls, base_url, model, api_key='')
 ```
 
-Path `nu.llm.vllm`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.vllm`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -352,7 +352,7 @@ Bind a Service to xAI's Grok API.
 llm.xai(service_cls, api_key, model='grok-2-latest')
 ```
 
-Path `nu.llm.xai`. Defined on `nu.llm.presets`, bound as a function. Builds `Provide`.
+Path `nustd.llm.xai`. Defined on `nustd.llm.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 

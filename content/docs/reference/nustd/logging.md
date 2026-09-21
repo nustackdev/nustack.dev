@@ -3,7 +3,7 @@ title: logging
 description: "Nu surface for Python's `logging` module."
 ---
 
-Module `nu.std.logging`.
+Module `nustd.logging`.
 
 Nu surface for Python's `logging` module.
 
@@ -15,7 +15,7 @@ Python, but every call returns a Nu `Log` tree instead of firing
 immediately. Compose it into any bigger program:
 
 ```python
-from nu.std import logging
+from nustd import logging
 
 log = logging.getLogger(__name__)
 
@@ -39,13 +39,13 @@ atom and its `LoggingRef` fabric) and `functions` (the `Logger`
 class and the module-level shortcuts). Import the way you would the stdlib:
 
 ```python
-from nu.std.logging import getLogger, info, warning, error
-import nu.std.logging as logging     # then logging.getLogger(...), ...
+from nustd.logging import getLogger, info, warning, error
+import nustd.logging as logging     # then logging.getLogger(...), ...
 ```
 
 ## interactions
 
-Module `nu.std.logging.interactions`.
+Module `nustd.logging.interactions`.
 
 The `Log` atom. One write through Python's `logging` module.
 
@@ -77,7 +77,7 @@ Writes one leveled record through Python's `logging` module.
 Log(level, logger, msg, extra=None)
 ```
 
-Path `nu.std.logging.Log`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 4 (3 required).
+Path `nustd.logging.Log`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 4 (3 required).
 
 Children: `[LOGGING, level, logger, msg, *args]`. `level` is a name
 (`"info"`, `"warning"`, ...) or an int (`logging.INFO`); `logger`
@@ -110,7 +110,7 @@ A Ref naming Python's `logging` module. The sink for the log fabric.
 LoggingRef()
 ```
 
-Path `nu.std.logging.LoggingRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.logging.LoggingRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Fixed singleton (`LOGGING`). Unlike `StdioRef` there is no
 swappable backend: `logging` is a Python module-level singleton whose
@@ -122,9 +122,9 @@ Undocumented: example.
 
 ## functions
 
-Module `nu.std.logging.functions`.
+Module `nustd.logging.functions`.
 
-Module-level surface for `nu.std.logging`. Mirrors `logging` 1-1.
+Module-level surface for `nustd.logging`. Mirrors `logging` 1-1.
 
 Two layers: the `Logger` class (returned by `getLogger`) and the
 module-level shortcuts (`debug`, `info`, `warning`,
@@ -134,7 +134,7 @@ root logger, exactly like the stdlib's module-level helpers.
 Same API shape as Python's `logging`:
 
 ```python
-from nu.std import logging
+from nustd import logging
 
 log = logging.getLogger(__name__)
 
@@ -173,7 +173,7 @@ Root-logger CRITICAL shortcut.
 logging.critical(msg, extra=None)
 ```
 
-Path `nu.std.logging.critical`. Defined on `nu.std.logging.functions`, bound as a function. Builds `Log`.
+Path `nustd.logging.critical`. Defined on `nustd.logging.functions`, bound as a function. Builds `Log`.
 
 **Arguments**
 
@@ -192,7 +192,7 @@ Root-logger DEBUG shortcut.
 logging.debug(msg, extra=None)
 ```
 
-Path `nu.std.logging.debug`. Defined on `nu.std.logging.functions`, bound as a function. Builds `Log`.
+Path `nustd.logging.debug`. Defined on `nustd.logging.functions`, bound as a function. Builds `Log`.
 
 **Arguments**
 
@@ -211,7 +211,7 @@ Root-logger ERROR shortcut.
 logging.error(msg, extra=None)
 ```
 
-Path `nu.std.logging.error`. Defined on `nu.std.logging.functions`, bound as a function. Builds `Log`.
+Path `nustd.logging.error`. Defined on `nustd.logging.functions`, bound as a function. Builds `Log`.
 
 **Arguments**
 
@@ -230,7 +230,7 @@ Return a bound `Logger`. Mirrors `logging.getLogger(name)`.
 logging.getLogger(name=None)
 ```
 
-Path `nu.std.logging.getLogger`. Defined on `nu.std.logging.functions`, bound as a function. Builds `Logger`.
+Path `nustd.logging.getLogger`. Defined on `nustd.logging.functions`, bound as a function. Builds `Logger`.
 
 Passing `None` (or omitting the argument) returns the root logger, same
 as the stdlib.
@@ -251,7 +251,7 @@ Root-logger INFO shortcut.
 logging.info(msg, extra=None)
 ```
 
-Path `nu.std.logging.info`. Defined on `nu.std.logging.functions`, bound as a function. Builds `Log`.
+Path `nustd.logging.info`. Defined on `nustd.logging.functions`, bound as a function. Builds `Log`.
 
 **Arguments**
 
@@ -270,7 +270,7 @@ Root-logger shortcut at `level`.
 logging.log(level, msg, extra=None)
 ```
 
-Path `nu.std.logging.log`. Defined on `nu.std.logging.functions`, bound as a function. Builds `Log`.
+Path `nustd.logging.log`. Defined on `nustd.logging.functions`, bound as a function. Builds `Log`.
 
 **Arguments**
 
@@ -290,7 +290,7 @@ Root-logger WARNING shortcut.
 logging.warn(msg, extra=None)
 ```
 
-Path `nu.std.logging.warn`. Also exported as `warning`. Defined on `nu.std.logging.functions`, bound as a function. Builds `Log`.
+Path `nustd.logging.warn`. Also exported as `warning`. Defined on `nustd.logging.functions`, bound as a function. Builds `Log`.
 
 **Arguments**
 

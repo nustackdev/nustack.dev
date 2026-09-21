@@ -1,32 +1,47 @@
 ---
 title: ui
-description: "nu.ui -- component fabric."
+description: "nustd.ui -- component fabric."
 ---
 
-Module `nu.ui`.
+Module `nustd.ui`.
 
-nu.ui -- component fabric.
+nustd.ui -- component fabric.
 
-Layout under `src/nu/ui/`:
+Layout under `src/nustd/ui/`:
 
+- `lens/`   -- the Shape lens: `LensRef`, the walk that turns a Shape and
+                 a cursor into columns, and `browse` to assemble the two.
 - `core/`   -- host-independent UI fabric: `Ref`, `Section` /
                  `SectionRef`, abstract `Session` / `Subscription`,
                  wire `Frame` + interactions (`Write` / `Append` /
-                 `Changed`). Reusable by any host.
+                 `Remove` / `Changed`). Reusable by any host.
 - `refs/`   -- widget kit (Row, Card, Table, Input, ...); depends only on core.
-- `nudle/`  -- Page-based host: `Page` / `Index` / `Pages` +
-                 `NudleSession` over ws + FastAPI serve fabric.
-- `web/`    -- everything for the browser: npm workspace with `core`,
-                 `kit`, and the `nudle` Vite SPA (also the pypi wheel
-                 that ships the compiled SPA).
+- `nudle/`  -- Page-based host: `Index` / `Page` / `PageRef`, the
+                 `Boot` term, and the `serve` preset that assembles a
+                 whole tree.
 
-Public entry stays at `nu.ui`: this `__init__` re-exports the core
-fabric, widget kit, and nudle host names so existing ``import nu.ui as
-nu_ui`` code keeps working.
+The uvicorn lifecycle, the book of live connections and the per-connection
+fold live in `nustd.ws_server`, which knows nothing about ui.
+
+The browser half is not in this package. It lives in the repo's npm workspace
+at `pkgs/ts` (`ui-core`, `ui-kit`, and the `nudle` Vite app), and its
+compiled bundle ships as the separate `nudle` wheel.
+
+The public entry is `nustd.ui` itself: the core fabric, the widget kit and
+the nudle host names are re-exported flat, so one `import nustd.ui` reaches
+everything a UI program spells. The lens is the exception and stays whole
+behind `nustd.ui.lens`, `LensRef` included: it is a subsystem rather than
+a widget, and a surface split between two names is worse than one more dot.
+
+**Modules**
+
+| Module | What |
+| --- | --- |
+| [`nustd.ui.lens`](/docs/reference/nustd/ui/lens) | nustd.ui.lens -- any Nu Shape, browsable as cascading columns. |
 
 ## core.interactions
 
-Module `nu.ui.core.interactions`.
+Module `nustd.ui.core.interactions`.
 
 Wire interactions -- ops that flow over a Session on a Ref.
 
@@ -36,11 +51,27 @@ Wire interactions -- ops that flow over a Session on a Ref.
 | --- | --- | --- | --- |
 | [Append](/docs/reference/nustd/ui/core-interactions#append) | `scalar_command` | `Append()` | Send an `append` frame on a Ref -- push onto a sequence. |
 | [Changed](/docs/reference/nustd/ui/core-interactions#changed) | `scalar_query` | `Changed()` | Subscribe to client-side change notifications on a Ref. |
+| [Remove](/docs/reference/nustd/ui/core-interactions#remove) | `scalar_command` | `Remove()` | Send a `remove` frame on a Ref -- drop its node and its whole subtree. |
 | [Write](/docs/reference/nustd/ui/core-interactions#write) | `scalar_command` | `Write()` | Send a `write` frame on a Ref -- replace the value. |
+
+## nudle.page
+
+Module `nustd.ui.nudle.page`.
+
+Top-level Shape kinds for nudle, and the term that boots one.
+
+[Full entries](/docs/reference/nustd/ui/nudle-page)
+
+| Name | Sort | Call | Meaning |
+| --- | --- | --- | --- |
+| [Boot](/docs/reference/nustd/ui/nudle-page#boot) | `scalar_command` | `Boot(shape_cls)` | Seed one browser's tree: clear it, name it, then one `init` per slot. |
+| [PageRef](/docs/reference/nustd/ui/nudle-page#pageref) | `ref` | `PageRef(address, section_cls, parent_ref=None, owner_shape=None)` | Substrate Ref backing a Page slot on an Index. |
+| [Index](/docs/reference/nustd/ui/nudle-page#index) |  |  | Browser entrypoint. One per app. |
+| [Page](/docs/reference/nustd/ui/nudle-page#page) |  |  | Section an Index mounts at a route. |
 
 ## refs.output
 
-Module `nu.ui.refs.output`.
+Module `nustd.ui.refs.output`.
 
 Display / output Refs -- server-owned sinks that render into the body.
 
@@ -65,7 +96,7 @@ Display / output Refs -- server-owned sinks that render into the body.
 
 ## refs.chart
 
-Module `nu.ui.refs.chart`.
+Module `nustd.ui.refs.chart`.
 
 Chart Refs -- typed visualization sinks over series payloads.
 
@@ -81,7 +112,7 @@ Chart Refs -- typed visualization sinks over series payloads.
 
 ## refs.input
 
-Module `nu.ui.refs.input`.
+Module `nustd.ui.refs.input`.
 
 Input Refs -- tab-owned; server reads via `read` + `notify` path.
 
@@ -89,10 +120,11 @@ Input Refs -- tab-owned; server reads via `read` + `notify` path.
 
 | Name | Sort | Call | Meaning |
 | --- | --- | --- | --- |
-| [ButtonRef](/docs/reference/nustd/ui/refs-input#buttonref) | `ref` | `ButtonRef(address, parent_ref=None, owner_shape=None)` | Click trigger; subscribe via `.clicked()`. |
+| [ButtonRef](/docs/reference/nustd/ui/refs-input#buttonref) | `ref` | `ButtonRef(address, parent_ref=None, owner_shape=None)` | Click trigger; subscribe via `.on_click()`. |
 | [CheckboxRef](/docs/reference/nustd/ui/refs-input#checkboxref) | `ref` | `CheckboxRef(address, parent_ref=None, owner_shape=None)` | Boolean toggle whose checked state lives in the browser. |
 | [DatePickerRef](/docs/reference/nustd/ui/refs-input#datepickerref) | `ref` | `DatePickerRef(address, parent_ref=None, owner_shape=None)` | Date input whose ISO yyyy-mm-dd value lives in the browser. |
 | [InputRef](/docs/reference/nustd/ui/refs-input#inputref) | `ref` | `InputRef(address, parent_ref=None, owner_shape=None)` | Text input whose value lives in the browser. |
+| [MonacoRef](/docs/reference/nustd/ui/refs-input#monacoref) | `ref` | `MonacoRef(address, parent_ref=None, owner_shape=None)` | Editable source code. Value is the text; the browser edits it in a real editor. |
 | [NumberInputRef](/docs/reference/nustd/ui/refs-input#numberinputref) | `ref` | `NumberInputRef(address, parent_ref=None, owner_shape=None)` | Numeric input whose value lives in the browser. |
 | [ProseRef](/docs/reference/nustd/ui/refs-input#proseref) | `ref` | `ProseRef(address, parent_ref=None, owner_shape=None)` | Editable rich text. Value is a markdown string; the browser edits wysiwyg. |
 | [RadioGroupRef](/docs/reference/nustd/ui/refs-input#radiogroupref) | `ref` | `RadioGroupRef(address, parent_ref=None, owner_shape=None)` | Single-choice radio group whose value lives in the browser. |
@@ -104,7 +136,7 @@ Input Refs -- tab-owned; server reads via `read` + `notify` path.
 
 ## refs.structural
 
-Module `nu.ui.refs.structural`.
+Module `nustd.ui.refs.structural`.
 
 Structural Refs -- bound to non-render browser APIs.
 
@@ -117,7 +149,7 @@ Structural Refs -- bound to non-render browser APIs.
 
 ## core.base
 
-Module `nu.ui.core.base`.
+Module `nustd.ui.core.base`.
 
 Generic UI Ref -- host-independent base for the widget kit.
 
@@ -129,7 +161,7 @@ Generic UI Ref -- host-independent base for the widget kit.
 
 ## core.section
 
-Module `nu.ui.core.section`.
+Module `nustd.ui.core.section`.
 
 Section -- shape-based container primitive for the UI kit.
 
@@ -142,7 +174,7 @@ Section -- shape-based container primitive for the UI kit.
 
 ## refs.layout
 
-Module `nu.ui.refs.layout`.
+Module `nustd.ui.refs.layout`.
 
 Layout Sections -- Shape-based containers that wrap other Refs.
 
@@ -161,27 +193,14 @@ Layout Sections -- Shape-based containers that wrap other Refs.
 | [Row](/docs/reference/nustd/ui/refs-layout#row) |  | Horizontal flex layout. Pin chrome on slot(). |
 | [Tabs](/docs/reference/nustd/ui/refs-layout#tabs) |  | Tab strip plus active body. Subclass and declare one child slot per tab body. |
 
-## nudle.page
+## nudle.driver
 
-Module `nu.ui.nudle.page`.
+Module `nustd.ui.nudle.driver`.
 
-Top-level Shape kinds for nudle.
+`serve` -- the host's two layers stacked into one tree.
 
-[Full entries](/docs/reference/nustd/ui/nudle-page)
-
-| Name | Call | Meaning |
-| --- | --- | --- |
-| [Index](/docs/reference/nustd/ui/nudle-page#index) |  | Browser entrypoint. One per app. |
-| [Page](/docs/reference/nustd/ui/nudle-page#page) |  | Sub-shape that lives inside an Index's `pages` map. |
-
-## nudle.fabric
-
-Module `nu.ui.nudle.fabric`.
-
-`NudleServer` -- fabric that runs a nudle UI over ws for a body's duration.
-
-[Full entries](/docs/reference/nustd/ui/nudle-fabric)
+[Full entries](/docs/reference/nustd/ui/nudle-driver)
 
 | Name | Call | Meaning |
 | --- | --- | --- |
-| [server](/docs/reference/nustd/ui/nudle-fabric#server) | `ui.server(app, host='127.0.0.1', port=8080, log_level='warning', open_browser=True, ready_timeout=10.0, shutdown_timeout=5.0)` | Boot a nudle ws server around a body: `Provide(NudleServer, {...})`. |
+| [serve](/docs/reference/nustd/ui/nudle-driver#serve) | `ui.serve(index, program, static='nudle', host='127.0.0.1', port=8080, log_level='warning', open_browser=True, ready_timeout=10.0, shutdown_timeout=5.0)` | Serve `program` in the browser, one live arm per open tab. |

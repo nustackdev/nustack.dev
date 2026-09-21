@@ -3,13 +3,13 @@ title: refs
 description: "`PoolRef`: the fabric ref that resolves the `WorkerPool` bound on ctx."
 ---
 
-Module `nu.mp_pool.refs`.
+Module `nustd.mp_pool.refs`.
 
 `PoolRef`: the fabric ref that resolves the `WorkerPool` bound on ctx.
 
 A plain `FabricRef` and nothing more: the address is the fabric *type*, so
 the read is the untagged binding. There is no tag child and no tag payload -
-same shape `nu.mp.MpWorkerRef` settled on.
+same shape `nustd.mp.MpWorkerRef` settled on.
 
 It also carries this fabric's fluent surface. `PoolRef().launch()` and
 `Launch(PoolRef())` build the same term; the methods exist so a pool ref
@@ -28,7 +28,7 @@ The `WorkerPool` bound on the Context.
 PoolRef(address=None)
 ```
 
-Path `nu.mp_pool.PoolRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mp_pool.PoolRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 

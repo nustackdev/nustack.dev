@@ -3,7 +3,7 @@ title: interactions.kh57
 description: "kh57 atoms: read a sub-range of an int-keyed series, sampled or whole."
 ---
 
-Module `nu.kv.interactions.kh57`.
+Module `nustd.kv.interactions.kh57`.
 
 kh57 atoms: read a sub-range of an int-keyed series, sampled or whole.
 
@@ -33,7 +33,7 @@ Draws a uniform sample of a kh57 series' sub-range, in bounded time.
 Kh57Sample(ref, n, begin=None, end=None, rng=None)
 ```
 
-Path `nu.kv.Kh57Sample`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 5 (2 required).
+Path `nustd.kv.Kh57Sample`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 5 (2 required).
 
 Cost tracks `n` rather than the size of the range, so sampling a window
 holding a billion entries is no dearer than one holding a thousand. That
@@ -66,14 +66,14 @@ container is not reachable.
 
 ```python
 class State(nu.Shape):
-    nums = nu.kv.Kh57Ref.slot(int)
-    cursor = nu.kv.IntRef.slot()
+    nums = nustd.kv.Kh57Ref.slot(int)
+    cursor = nustd.kv.IntRef.slot()
 ```
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Snapshot(Kh57Sample(State.nums, 200, 0, State.cursor)),
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Snapshot(Kh57Sample(State.nums, 200, 0, State.cursor)),
 )
 ```
 
@@ -85,7 +85,7 @@ Reads a kh57 series' sub-range whole, in ascending key order.
 Kh57Range(ref, begin, end)
 ```
 
-Path `nu.kv.Kh57Range`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 3 (3 required).
+Path `nustd.kv.Kh57Range`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 3 (3 required).
 
 The keys of a kh57 container are spread across levels, so a range is
 assembled by merging one ordered walk per level. Cost tracks the size of
@@ -120,7 +120,7 @@ ascending by key. EMPTY when the container is not reachable.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Snapshot(Kh57Range(State.nums, 0, 100)),
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Snapshot(Kh57Range(State.nums, 0, 100)),
 )
 ```

@@ -3,7 +3,7 @@ title: refs.prog
 description: "Dict-substrate ref for a stored Nu program."
 ---
 
-Module `nu.mem.refs.prog`.
+Module `nustd.mem.refs.prog`.
 
 Dict-substrate ref for a stored Nu program.
 
@@ -42,7 +42,7 @@ A slot holding Nu program source, with the Program verbs on it.
 ProgramRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.ProgramRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.ProgramRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The stored value is Python source text defining `out()`, and the same
 text on both sides: no codec, unlike the `std` refs whose domain type
@@ -61,7 +61,7 @@ other, written and rewritten while the app is up.
 
 ```python
 class App(nu.Shape):
-    job = nu.mem.ProgramRef.slot()
+    job = nustd.mem.ProgramRef.slot()
 source = '''
 import nu
 
@@ -98,8 +98,8 @@ From `nu.prog.forms.Program`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
-| `.load(entry='out', scope=None, filename='<nu program>', brace=<UNSET>)` | `Nu` | Construct the term without running it. |
-| `.run(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, on_error=None)` | `Nu` | Construct the term and drive it. |
+| `.load(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None)` | `Nu` | Construct the term without running it. |
+| `.run(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None, on_error=None)` | `Nu` | Construct the term and drive it. |
 
 From `nu.lang.forms.Form`:
 

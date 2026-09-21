@@ -3,7 +3,7 @@ title: refs.base
 description: "Dict substrate refs: navigate nested Python dicts under the runtime."
 ---
 
-Module `nu.mem.refs.base`.
+Module `nustd.mem.refs.base`.
 
 Dict substrate refs: navigate nested Python dicts under the runtime.
 
@@ -34,9 +34,9 @@ A slot addressed by a path of keys through nested Python dicts.
 RefBase(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.RefBase`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.RefBase`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
-Every nu.mem ref descends from this one. The path is the chain of
+Every nustd.mem ref descends from this one. The path is the chain of
 addresses from the root down to this ref: each level contributes one key,
 resolved through the runtime at read time, so a level's key may itself be
 a Query or another Ref rather than a fixed name. The root the walk starts
@@ -55,7 +55,7 @@ Shape the chain was declared on.
 
 ```python
 class User(nu.Shape):
-    age = nu.mem.IntRef.slot()
+    age = nustd.mem.IntRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, User)
 _ = nu.run(User.age.set(41), ctx)

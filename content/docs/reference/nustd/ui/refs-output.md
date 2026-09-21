@@ -3,7 +3,7 @@ title: refs.output
 description: "Display / output Refs -- server-owned sinks that render into the body."
 ---
 
-Module `nu.ui.refs.output`.
+Module `nustd.ui.refs.output`.
 
 Display / output Refs -- server-owned sinks that render into the body.
 
@@ -35,7 +35,7 @@ Display banner ref. `write` carries partial updates; `notify` fires on user dism
 AlertRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.AlertRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.AlertRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Variant maps to the Alert primitive's `tone` (5 tones per kit): `neutral`
 picks the plain elevated surface, the rest attach the matching status
@@ -107,11 +107,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.dismissed()`
+### `.on_dismiss()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -123,7 +131,7 @@ Display-only badge ref. One `write` op carries every mutation.
 BadgeRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.BadgeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.BadgeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Variant maps to the Badge primitive's status tones; `neutral` becomes the
 kit `outline` (transparent bg, muted border).
@@ -167,6 +175,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## CodeBlockRef
@@ -177,7 +193,7 @@ Display-only code block. One `write` carries a partial dict {code, language, sho
 CodeBlockRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.CodeBlockRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.CodeBlockRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -218,6 +234,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## DividerRef
@@ -228,7 +252,7 @@ Display-only divider ref. One `write` op carries every mutation.
 DividerRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.DividerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.DividerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -269,6 +293,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## GaugeRef
@@ -279,7 +311,7 @@ Display-only gauge ref. One `write` op carries every mutation.
 GaugeRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.GaugeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.GaugeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Variant is the tone the arc reads with. `neutral` maps to the kit Gauge
 `accent` tone (brand purple); the other three map 1:1 to status tokens.
@@ -336,6 +368,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## HeadingRef
@@ -346,7 +386,7 @@ Display-only heading ref. One `write` op carries every mutation.
 HeadingRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.HeadingRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.HeadingRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -400,6 +440,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## ImageRef
@@ -410,7 +458,7 @@ Display-only image ref. One `write` op carries every mutation.
 ImageRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.ImageRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.ImageRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -492,6 +540,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## JsonViewerRef
@@ -502,7 +558,7 @@ Display-only json viewer ref. One `write` op carries every mutation via partial-
 JsonViewerRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.JsonViewerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.JsonViewerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -595,6 +651,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## LinkRef
@@ -605,7 +669,7 @@ Display-only link ref. One `write` op carries every mutation.
 LinkRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.LinkRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.LinkRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -672,6 +736,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## MarkdownRef
@@ -682,7 +754,7 @@ Display-only markdown ref. Source string rendered as commonmark.
 MarkdownRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.MarkdownRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.MarkdownRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -698,6 +770,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## ProgressRef
@@ -708,7 +788,7 @@ Display-only progress ref. One `write` op carries every mutation.
 ProgressRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.ProgressRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.ProgressRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -762,6 +842,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## StatRef
@@ -772,7 +860,7 @@ Display-only stat ref. Server-owned, single `write` op carries partial updates.
 StatRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.StatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.StatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -824,6 +912,29 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+### `.set(value, label=<UNSET>, delta=<UNSET>, trend=<UNSET>)`
+
+Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `StrArg` |  |  |
+| `label` | `StrArg` | `<UNSET>` |  |
+| `delta` | `StrArg` | `<UNSET>` |  |
+| `trend` | `Trend \| StrArg` | `<UNSET>` |  |
+
+Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## TableRef
@@ -834,7 +945,7 @@ Tabular data; display by default, optional sortable headers and row click.
 TableRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.TableRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.TableRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Composes the kit Table primitive family. `dense=True` maps to the
 primitive's `compact` density; `striped=True` selects the `striped` variant.
@@ -884,11 +995,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.row_clicked()`
+### `.on_row_click()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -900,7 +1019,7 @@ Display-only string ref. Body copy.
 TextRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.TextRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.TextRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -915,5 +1034,13 @@ Builds `Nu`.
 | `value` | `StrArg` |  |  |
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.

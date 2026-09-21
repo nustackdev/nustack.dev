@@ -3,7 +3,7 @@ title: datetime
 description: "Nu surface for Python's `datetime` module."
 ---
 
-Module `nu.std.datetime`.
+Module `nustd.datetime`.
 
 Nu surface for Python's `datetime` module.
 
@@ -14,8 +14,8 @@ and `interactions` (the constructor atoms; method calls use the shared
 `nu.lang.MethodCallQuery`). Import it like the stdlib:
 
 ```python
-from nu.std.datetime import date, timedelta
-import nu.std.datetime as datetime    # datetime.date.today(), ...
+from nustd.datetime import date, timedelta
+import nustd.datetime as datetime    # datetime.date.today(), ...
 ```
 
 ## ScalarQuery
@@ -36,7 +36,7 @@ import nu.std.datetime as datetime    # datetime.date.today(), ...
 date()
 ```
 
-Path `nu.std.datetime.date`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.datetime.date`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 **Methods**
 
@@ -322,7 +322,7 @@ Undocumented: example.
 datetime()
 ```
 
-Path `nu.std.datetime.datetime`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.datetime.datetime`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 **Methods**
 
@@ -664,7 +664,7 @@ Undocumented: example.
 time()
 ```
 
-Path `nu.std.datetime.time`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.datetime.time`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 **Methods**
 
@@ -868,7 +868,7 @@ Undocumented: example.
 timedelta()
 ```
 
-Path `nu.std.datetime.timedelta`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.datetime.timedelta`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 **Methods**
 
@@ -1112,7 +1112,7 @@ Undocumented: example.
 timezone()
 ```
 
-Path `nu.std.datetime.timezone`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.datetime.timezone`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 **Methods**
 

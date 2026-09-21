@@ -3,7 +3,7 @@ title: fractions
 description: "Nu surface for Python's `fractions` module - exact rational arithmetic."
 ---
 
-Module `nu.std.fractions`.
+Module `nustd.fractions`.
 
 Nu surface for Python's `fractions` module - exact rational arithmetic.
 
@@ -14,8 +14,8 @@ constructor and method atoms; property reads use core `GetAttr`,
 arithmetic and comparison use the core atoms). Import it like the stdlib:
 
 ```python
-from nu.std.fractions import Fraction
-import nu.std.fractions as fractions    # fractions.Fraction.of(1, 3), ...
+from nustd.fractions import Fraction
+import nustd.fractions as fractions    # fractions.Fraction.of(1, 3), ...
 ```
 
 ## ScalarQuery
@@ -32,7 +32,7 @@ import nu.std.fractions as fractions    # fractions.Fraction.of(1, 3), ...
 Fraction()
 ```
 
-Path `nu.std.fractions.Fraction`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.fractions.Fraction`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Named `Fraction` to mirror `from fractions import Fraction`. Build one
 with `Fraction.of(num, den)` (or `from_float` / `from_decimal` /

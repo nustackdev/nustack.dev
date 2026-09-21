@@ -3,7 +3,7 @@ title: pathlib
 description: "Nu surface for Python's `pathlib` module - pure path operations only."
 ---
 
-Module `nu.std.pathlib`.
+Module `nustd.pathlib`.
 
 Nu surface for Python's `pathlib` module - pure path operations only.
 
@@ -15,8 +15,8 @@ property reads use core `GetAttr`, comparison uses the core atoms).
 Import it like the stdlib:
 
 ```python
-from nu.std.pathlib import Path
-import nu.std.pathlib as pathlib    # pathlib.Path.of("a", "b"), ...
+from nustd.pathlib import Path
+import nustd.pathlib as pathlib    # pathlib.Path.of("a", "b"), ...
 ```
 
 ## ScalarQuery
@@ -33,7 +33,7 @@ import nu.std.pathlib as pathlib    # pathlib.Path.of("a", "b"), ...
 Path()
 ```
 
-Path `nu.std.pathlib.Path`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.pathlib.Path`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Named `Path` to mirror `from pathlib import Path`; backed by
 `PurePath`, so only the lexical operations are modeled. Build one with

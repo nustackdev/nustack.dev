@@ -10,6 +10,7 @@
     "core-section",
     "refs-layout",
     "nudle-page",
-    "nudle-fabric"
+    "nudle-driver",
+    "lens"
   ]
 }

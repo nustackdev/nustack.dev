@@ -3,7 +3,7 @@ title: random
 description: "Nu surface for Python's `random` module."
 ---
 
-Module `nu.std.random`.
+Module `nustd.random`.
 
 Nu surface for Python's `random` module.
 
@@ -14,8 +14,8 @@ central class - so the Nu surface mirrors that: free functions (`random`,
 it the way you would the stdlib:
 
 ```python
-from nu.std.random import randint, choice
-import nu.std.random as random     # then random.randint(1, 6)
+from nustd.random import randint, choice
+import nustd.random as random     # then random.randint(1, 6)
 ```
 
 Every function reads the global RNG. The effectful / stateful pieces (`seed`,
@@ -47,7 +47,7 @@ A random element of `seq`: mirrors `random.choice()`. Non-deterministic.
 random.choice(seq)
 ```
 
-Path `nu.std.random.choice`. Defined on `nu.std.random.functions`, bound as a function. Builds `Any`.
+Path `nustd.random.choice`. Defined on `nustd.random.functions`, bound as a function. Builds `Any`.
 
 **Arguments**
 
@@ -65,7 +65,7 @@ A `k`-sized list drawn with replacement: mirrors `random.choices()`. Non-determi
 random.choices(population, k)
 ```
 
-Path `nu.std.random.choices`. Defined on `nu.std.random.functions`, bound as a function. Builds `List`.
+Path `nustd.random.choices`. Defined on `nustd.random.functions`, bound as a function. Builds `List`.
 
 **Arguments**
 
@@ -84,7 +84,7 @@ An exponential draw with rate `lambd`: mirrors `random.expovariate()`. Non-deter
 random.expovariate(lambd)
 ```
 
-Path `nu.std.random.expovariate`. Defined on `nu.std.random.functions`, bound as a function. Builds `Float`.
+Path `nustd.random.expovariate`. Defined on `nustd.random.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -102,7 +102,7 @@ A Gaussian draw with mean `mu` and stdev `sigma`: mirrors `random.gauss()`. Non-
 random.gauss(mu, sigma)
 ```
 
-Path `nu.std.random.gauss`. Defined on `nu.std.random.functions`, bound as a function. Builds `Float`.
+Path `nustd.random.gauss`. Defined on `nustd.random.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -121,7 +121,7 @@ A non-negative int with `k` random bits: mirrors `random.getrandbits()`. Non-det
 random.getrandbits(k)
 ```
 
-Path `nu.std.random.getrandbits`. Defined on `nu.std.random.functions`, bound as a function. Builds `Int`.
+Path `nustd.random.getrandbits`. Defined on `nustd.random.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -139,7 +139,7 @@ A normal draw with mean `mu` and stdev `sigma`: mirrors `random.normalvariate()`
 random.normalvariate(mu, sigma)
 ```
 
-Path `nu.std.random.normalvariate`. Defined on `nu.std.random.functions`, bound as a function. Builds `Float`.
+Path `nustd.random.normalvariate`. Defined on `nustd.random.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -158,7 +158,7 @@ A random int `N` with `a <= N <= b`: mirrors `random.randint()`. Non-determinist
 random.randint(a, b)
 ```
 
-Path `nu.std.random.randint`. Defined on `nu.std.random.functions`, bound as a function. Builds `Int`.
+Path `nustd.random.randint`. Defined on `nustd.random.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -177,7 +177,7 @@ A random float in `[0.0, 1.0)`: mirrors `random.random()`. Non-deterministic.
 random.random()
 ```
 
-Path `nu.std.random.random`. Defined on `nu.std.random.functions`, bound as a function. Builds `Float`.
+Path `nustd.random.random`. Defined on `nustd.random.functions`, bound as a function. Builds `Float`.
 
 Undocumented: example.
 
@@ -189,7 +189,7 @@ A random int in `range(start, stop)`: mirrors `random.randrange()`. Non-determin
 random.randrange(start, stop)
 ```
 
-Path `nu.std.random.randrange`. Defined on `nu.std.random.functions`, bound as a function. Builds `Int`.
+Path `nustd.random.randrange`. Defined on `nustd.random.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -208,7 +208,7 @@ A `k`-sized list drawn without replacement: mirrors `random.sample()`. Non-deter
 random.sample(population, k)
 ```
 
-Path `nu.std.random.sample`. Defined on `nu.std.random.functions`, bound as a function. Builds `List`.
+Path `nustd.random.sample`. Defined on `nustd.random.functions`, bound as a function. Builds `List`.
 
 **Arguments**
 
@@ -227,7 +227,7 @@ A triangular draw between `low` and `high`: mirrors `random.triangular()`. Non-d
 random.triangular(low, high)
 ```
 
-Path `nu.std.random.triangular`. Defined on `nu.std.random.functions`, bound as a function. Builds `Float`.
+Path `nustd.random.triangular`. Defined on `nustd.random.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -246,7 +246,7 @@ A random float in `[a, b]`: mirrors `random.uniform()`. Non-deterministic.
 random.uniform(a, b)
 ```
 
-Path `nu.std.random.uniform`. Defined on `nu.std.random.functions`, bound as a function. Builds `Float`.
+Path `nustd.random.uniform`. Defined on `nustd.random.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 

@@ -3,7 +3,7 @@ title: decimal
 description: "Nu surface for Python's `decimal` module - the `Decimal` type."
 ---
 
-Module `nu.std.decimal`.
+Module `nustd.decimal`.
 
 Nu surface for Python's `decimal` module - the `Decimal` type.
 
@@ -15,7 +15,7 @@ of scope, so there are just two layers: `forms` (the class) and
 use the core atoms). Import it like the stdlib:
 
 ```python
-from nu.std.decimal import Decimal    # Decimal.of("0.1") + Decimal.of("0.2")
+from nustd.decimal import Decimal    # Decimal.of("0.1") + Decimal.of("0.2")
 ```
 
 ## ScalarQuery
@@ -32,7 +32,7 @@ from nu.std.decimal import Decimal    # Decimal.of("0.1") + Decimal.of("0.2")
 Decimal()
 ```
 
-Path `nu.std.decimal.Decimal`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.decimal.Decimal`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Build one with `Decimal.of(...)` (string or int, coerced exactly) or
 `Decimal.from_float(...)`; combine with the arithmetic operators; refine

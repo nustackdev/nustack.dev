@@ -3,7 +3,7 @@ title: refs.items
 description: "Virtuals item refs: typed leaf-value holders backed by virtuals storage."
 ---
 
-Module `nu.kv.refs.items`.
+Module `nustd.kv.refs.items`.
 
 Virtuals item refs: typed leaf-value holders backed by virtuals storage.
 
@@ -34,7 +34,7 @@ A bool leaf in KV storage, carrying the whole Bool logical surface.
 BoolRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.BoolRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.BoolRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -107,7 +107,7 @@ A bytes leaf in KV storage, carrying the whole Bytes operator surface.
 BytesRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.BytesRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.BytesRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -222,7 +222,7 @@ A float leaf in KV storage, carrying the whole Float operator surface.
 FloatRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.FloatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.FloatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -304,7 +304,7 @@ An int leaf in KV storage, carrying the whole Int operator surface.
 IntRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.IntRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.IntRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -440,7 +440,7 @@ An untyped leaf slot in KV storage: read it, set it, erase it, watch it.
 ItemRef(address, value_type, value_value_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ItemRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ItemRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The value type and the Form its reads are wrapped in are both given at
 declaration time, so one class covers any leaf whose type is only known
@@ -504,7 +504,7 @@ A str leaf in KV storage, carrying the whole Str operator surface.
 StrRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.StrRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.StrRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 

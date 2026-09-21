@@ -3,7 +3,7 @@ title: service
 description: "Nu Service fabric: expose Python objects as Nu Services."
 ---
 
-Module `nu.service`.
+Module `nustd.service`.
 
 Nu Service fabric: expose Python objects as Nu Services.
 
@@ -24,19 +24,19 @@ class Calculator:
     def reset(self): self.total = 0
 
 class Calc(nu.Service):
-    add   = nu.service.QueryRef.method()
-    bump  = nu.service.ActionRef.method()
-    reset = nu.service.CommandRef.method()
+    add   = nustd.service.QueryRef.method()
+    bump  = nustd.service.ActionRef.method()
+    reset = nustd.service.CommandRef.method()
 
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(Calc.add(a=1, b=2)),
 )
 ```
 
 ## interactions
 
-Module `nu.service.interactions`.
+Module `nustd.service.interactions`.
 
 5 Service interactions, one per canonical Nu kind.
 
@@ -70,7 +70,7 @@ Calls a mutating endpoint on the bound Python object for its value.
 ServiceAction(ref, args)
 ```
 
-Path `nu.service.ServiceAction`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.service.ServiceAction`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -93,9 +93,9 @@ Whatever the target returns, passed through untouched.
 
 ```python
 class Calc(nu.Service):
-    bump = nu.service.ActionRef.method()
+    bump = nustd.service.ActionRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(Calc.bump(by=3)),
 )
 ```
@@ -108,7 +108,7 @@ Calls a mutating endpoint on the bound Python object for effect only.
 ServiceCommand(ref, args)
 ```
 
-Path `nu.service.ServiceCommand`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
+Path `nustd.service.ServiceCommand`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -132,9 +132,9 @@ Nothing. Always None, whatever the target returned.
 
 ```python
 class Calc(nu.Service):
-    reset = nu.service.CommandRef.method()
+    reset = nustd.service.CommandRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=Calc.reset(),
 )
 ```
@@ -147,7 +147,7 @@ Calls a read-only endpoint on the bound Python object for its value.
 ServiceQuery(ref, args)
 ```
 
-Path `nu.service.ServiceQuery`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.service.ServiceQuery`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -172,9 +172,9 @@ translation happens here, so a target returning None yields None.
 
 ```python
 class Calc(nu.Service):
-    add = nu.service.QueryRef.method()
+    add = nustd.service.QueryRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(Calc.add(a=1, b=2)),
 )
 ```
@@ -187,7 +187,7 @@ Calls a mutating endpoint on the bound Python object for its items.
 ServiceStreamAction(ref, args)
 ```
 
-Path `nu.service.ServiceStreamAction`. Kind `StreamAction`, sort `stream_action`, cardinality `stream`. Arity 2 (2 required).
+Path `nustd.service.ServiceStreamAction`. Kind `StreamAction`, sort `stream_action`, cardinality `stream`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -211,9 +211,9 @@ time.
 
 ```python
 class Calc(nu.Service):
-    drain = nu.service.StreamActionRef.method()
+    drain = nustd.service.StreamActionRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(nu.Collect(Calc.drain())),
 )
 ```
@@ -226,7 +226,7 @@ Calls a read-only endpoint on the bound Python object for its items.
 ServiceStreamQuery(ref, args)
 ```
 
-Path `nu.service.ServiceStreamQuery`. Kind `StreamQuery`, sort `stream_query`, cardinality `stream`. Arity 2 (2 required).
+Path `nustd.service.ServiceStreamQuery`. Kind `StreamQuery`, sort `stream_query`, cardinality `stream`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -251,16 +251,16 @@ time.
 
 ```python
 class Calc(nu.Service):
-    squares = nu.service.StreamQueryRef.method(name="range")
+    squares = nustd.service.StreamQueryRef.method(name="range")
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(nu.Collect(Calc.squares(n=4))),
 )
 ```
 
 ## refs
 
-Module `nu.service.refs`.
+Module `nustd.service.refs`.
 
 Service MethodRefs: one Ref class per canonical Nu kind.
 
@@ -298,7 +298,7 @@ Mutating scalar endpoint: calls the target for effect and for its value.
 ActionRef(name, owner_service=None)
 ```
 
-Path `nu.service.ActionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.service.ActionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -310,9 +310,9 @@ Path `nu.service.ActionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class Calc(nu.Service):
-    bump = nu.service.ActionRef.method()
+    bump = nustd.service.ActionRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(Calc.bump(by=3)),
 )
 ```
@@ -343,7 +343,7 @@ Mutating void endpoint: calls the target for effect and drops the value.
 CommandRef(name, owner_service=None)
 ```
 
-Path `nu.service.CommandRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.service.CommandRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -355,9 +355,9 @@ Path `nu.service.CommandRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class Calc(nu.Service):
-    reset = nu.service.CommandRef.method()
+    reset = nustd.service.CommandRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=Calc.reset(),
 )
 ```
@@ -388,7 +388,7 @@ Read-only scalar endpoint on the Python object a Service is bound to.
 QueryRef(name, owner_service=None)
 ```
 
-Path `nu.service.QueryRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.service.QueryRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -401,9 +401,9 @@ Path `nu.service.QueryRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class Calc(nu.Service):
-    add = nu.service.QueryRef.method()
+    add = nustd.service.QueryRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(Calc.add(a=1, b=2)),
 )
 ```
@@ -434,7 +434,7 @@ Mutating stream endpoint: calls the target for effect and for its items.
 StreamActionRef(name, owner_service=None)
 ```
 
-Path `nu.service.StreamActionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.service.StreamActionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -446,9 +446,9 @@ Path `nu.service.StreamActionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class Calc(nu.Service):
-    drain = nu.service.StreamActionRef.method()
+    drain = nustd.service.StreamActionRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(nu.Collect(Calc.drain())),
 )
 ```
@@ -479,7 +479,7 @@ Read-only stream endpoint on the Python object a Service is bound to.
 StreamQueryRef(name, owner_service=None)
 ```
 
-Path `nu.service.StreamQueryRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.service.StreamQueryRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -491,9 +491,9 @@ Path `nu.service.StreamQueryRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class Calc(nu.Service):
-    squares = nu.service.StreamQueryRef.method(name="range")
+    squares = nustd.service.StreamQueryRef.method(name="range")
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(nu.Collect(Calc.squares(n=4))),
 )
 ```
@@ -518,7 +518,7 @@ Undocumented: example.
 
 ## presets
 
-Module `nu.service.presets`.
+Module `nustd.service.presets`.
 
 bind(): Provide a ServiceFabric wrapping a Python target for a Service.
 
@@ -534,7 +534,7 @@ Wire a Python object as the backing target for a Service's endpoints.
 service.bind(service_cls, target)
 ```
 
-Path `nu.service.bind`. Defined on `nu.service.presets`, bound as a function. Builds `Provide`.
+Path `nustd.service.bind`. Defined on `nustd.service.presets`, bound as a function. Builds `Provide`.
 
 **Arguments**
 
@@ -554,9 +554,9 @@ Path `nu.service.bind`. Defined on `nu.service.presets`, bound as a function. Bu
 
 ```python
 class Calc(nu.Service):
-    add = nu.service.QueryRef.method()
+    add = nustd.service.QueryRef.method()
 app = nu.With(
-    nu.service.bind(Calc, target=Calculator()),
+    nustd.service.bind(Calc, target=Calculator()),
     body=nu.print(Calc.add(a=1, b=2)),
 )
 ```

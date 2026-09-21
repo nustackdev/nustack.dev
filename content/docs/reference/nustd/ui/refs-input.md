@@ -3,19 +3,20 @@ title: refs.input
 description: "Input Refs -- tab-owned; server reads via `read` + `notify` path."
 ---
 
-Module `nu.ui.refs.input`.
+Module `nustd.ui.refs.input`.
 
 Input Refs -- tab-owned; server reads via `read` + `notify` path.
 
 The browser owns the live value. Host reads via `Ref` (round-trip
-through session), subscribes to changes via `.changed()` / `.clicked()`.
+through session), subscribes to changes via `.on_change()` / `.on_click()`.
 
 | Name | Sort | Call | Meaning |
 | --- | --- | --- | --- |
-| [ButtonRef](#buttonref) | `ref` | `ButtonRef(address, parent_ref=None, owner_shape=None)` | Click trigger; subscribe via `.clicked()`. |
+| [ButtonRef](#buttonref) | `ref` | `ButtonRef(address, parent_ref=None, owner_shape=None)` | Click trigger; subscribe via `.on_click()`. |
 | [CheckboxRef](#checkboxref) | `ref` | `CheckboxRef(address, parent_ref=None, owner_shape=None)` | Boolean toggle whose checked state lives in the browser. |
 | [DatePickerRef](#datepickerref) | `ref` | `DatePickerRef(address, parent_ref=None, owner_shape=None)` | Date input whose ISO yyyy-mm-dd value lives in the browser. |
 | [InputRef](#inputref) | `ref` | `InputRef(address, parent_ref=None, owner_shape=None)` | Text input whose value lives in the browser. |
+| [MonacoRef](#monacoref) | `ref` | `MonacoRef(address, parent_ref=None, owner_shape=None)` | Editable source code. Value is the text; the browser edits it in a real editor. |
 | [NumberInputRef](#numberinputref) | `ref` | `NumberInputRef(address, parent_ref=None, owner_shape=None)` | Numeric input whose value lives in the browser. |
 | [ProseRef](#proseref) | `ref` | `ProseRef(address, parent_ref=None, owner_shape=None)` | Editable rich text. Value is a markdown string; the browser edits wysiwyg. |
 | [RadioGroupRef](#radiogroupref) | `ref` | `RadioGroupRef(address, parent_ref=None, owner_shape=None)` | Single-choice radio group whose value lives in the browser. |
@@ -27,17 +28,17 @@ through session), subscribes to changes via `.changed()` / `.clicked()`.
 
 ## ButtonRef
 
-Click trigger; subscribe via `.clicked()`.
+Click trigger; subscribe via `.on_click()`.
 
 ```python
 ButtonRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.ButtonRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.ButtonRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
-### `.clicked()`
+### `.on_click()`
 
 Builds `Changed`.
 
@@ -94,6 +95,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## CheckboxRef
@@ -104,7 +113,7 @@ Boolean toggle whose checked state lives in the browser.
 CheckboxRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.CheckboxRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.CheckboxRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -120,11 +129,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -136,7 +153,7 @@ Date input whose ISO yyyy-mm-dd value lives in the browser.
 DatePickerRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.DatePickerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.DatePickerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -152,11 +169,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -168,7 +193,7 @@ Text input whose value lives in the browser.
 InputRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.InputRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.InputRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Default face is display (Inter); code-shaped fields opt into
 JetBrains Mono via `mono=True`, which flips `font-mono` at render time.
@@ -187,11 +212,96 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
+Undocumented: example.
+
+## MonacoRef
+
+Editable source code. Value is the text; the browser edits it in a real editor.
+
+```python
+MonacoRef(address, parent_ref=None, owner_shape=None)
+```
+
+Path `nustd.ui.MonacoRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+
+Bidirectional, unlike `CodeBlockRef` (display-only). The server seeds the
+text with `set`, reads it back through `Ref` like any input Ref, and
+subscribes with `on_change()`. The browser commits on cmd+enter and on
+blur, not on every keystroke, so a read between commits sees the last
+committed text and not what is under the caret.
+
+Last actor wins, same as `ProseRef`. A `set` from the server replaces the
+buffer outright, a notify from the browser replaces the server's copy,
+and there is no merge.
+
+The browser pays for a large editor chunk the first time one of these
+mounts, so a code surface nobody edits wants `CodeBlockRef` instead.
+
+**Methods**
+
+### `.set(value)`
+
+Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `value` | `StrArg` |  |  |
+
+Undocumented: summary, example.
+
+### `.set_language(name)`
+
+Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `name` | `StrArg` |  |  |
+
+Undocumented: summary, example.
+
+### `.set_read_only(flag)`
+
+Builds `Nu`.
+
+**Arguments**
+
+| Name | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `flag` | `BoolArg` |  |  |
+
+Undocumented: summary, example.
+
+### `.on_change()`
+
+Builds `Changed`.
+
+Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -203,7 +313,7 @@ Numeric input whose value lives in the browser.
 NumberInputRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.NumberInputRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.NumberInputRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -283,11 +393,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -299,11 +417,11 @@ Editable rich text. Value is a markdown string; the browser edits wysiwyg.
 ProseRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.ProseRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.ProseRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Bidirectional, unlike `MarkdownRef` (display-only). The server writes the
 source with `set`, reads it back through `Ref` like any input Ref, and
-subscribes with `changed()`. The browser renders the markdown as a live
+subscribes with `on_change()`. The browser renders the markdown as a live
 document and notifies back on a quiet moment or on blur.
 
 Last actor wins. There is no merge, no OT, no CRDT: a `set` from the
@@ -352,11 +470,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -368,7 +494,7 @@ Single-choice radio group whose value lives in the browser.
 RadioGroupRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.RadioGroupRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.RadioGroupRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -396,11 +522,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -412,7 +546,7 @@ Dropdown single-select whose value lives in the browser.
 SelectRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.SelectRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.SelectRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -440,11 +574,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -456,7 +598,7 @@ Numeric slider whose value lives in the browser.
 SliderRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.SliderRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.SliderRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -549,11 +691,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -565,7 +715,7 @@ On/off switch whose checked state lives in the browser.
 SwitchRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.SwitchRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.SwitchRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -581,11 +731,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -597,7 +755,7 @@ Multi-tag entry field whose committed list lives in the browser.
 TagInputRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.TagInputRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.TagInputRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -613,11 +771,19 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.
 
@@ -629,7 +795,7 @@ Multi-line text input whose value lives in the browser.
 TextAreaRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.TextAreaRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.TextAreaRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 `auto_resize=True` maps to the primitive's `field-sizing: content` mode.
 Default face is display (Inter); set `mono=True` at class level for
@@ -649,10 +815,18 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
-### `.changed()`
+### `.on_change()`
 
 Builds `Changed`.
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.

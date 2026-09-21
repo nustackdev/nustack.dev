@@ -3,7 +3,7 @@ title: refs.listshape
 description: "Dict shapes list reference: sequence of homogeneous shapes."
 ---
 
-Module `nu.mem.refs.listshape`.
+Module `nustd.mem.refs.listshape`.
 
 Dict shapes list reference: sequence of homogeneous shapes.
 
@@ -23,7 +23,7 @@ A list of one Shape's records, stored as a plain list of inner dicts.
 ShapesListRef(address, shape_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.ShapesListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.ShapesListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Subscripting descends: `ref[i]` is a `ShapeRef` at that index holding
 the element Shape, so `rows[0].symbol` is a full path down to a leaf and
@@ -39,9 +39,9 @@ nothing is read until the whole chain runs.
 
 ```python
 class Order(nu.Shape):
-    symbol = nu.mem.StrRef.slot()
+    symbol = nustd.mem.StrRef.slot()
 class Book(nu.Shape):
-    rows = nu.mem.ShapesListRef.slot(Order)
+    rows = nustd.mem.ShapesListRef.slot(Order)
 ctx = nu.Context().bind(dict, {"rows": [{"symbol": "AAPL"}]}, Book)
 nu.run(Book.rows[0].symbol, ctx)[0]
 ```

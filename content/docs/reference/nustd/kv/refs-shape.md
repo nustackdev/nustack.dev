@@ -3,7 +3,7 @@ title: refs.shape
 description: "Virtuals shape reference: structured container backed by a virtuals View."
 ---
 
-Module `nu.kv.refs.shape`.
+Module `nustd.kv.refs.shape`.
 
 Virtuals shape reference: structured container backed by a virtuals View.
 
@@ -24,7 +24,7 @@ A nested shape slot in KV storage: a fixed set of named fields.
 ShapeRef(address, shape_type, view_type=None, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ShapeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ShapeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Descending by field name resolves the declared slot into that field's own
 ref, with this one as its parent, so a whole hierarchy is written as

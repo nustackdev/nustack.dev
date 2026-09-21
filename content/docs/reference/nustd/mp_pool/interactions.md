@@ -1,11 +1,11 @@
 ---
 title: interactions
-description: "The interactions of the `nu.mp_pool` fabric."
+description: "The interactions of the `nustd.mp_pool` fabric."
 ---
 
-Module `nu.mp_pool.interactions`.
+Module `nustd.mp_pool.interactions`.
 
-The interactions of the `nu.mp_pool` fabric.
+The interactions of the `nustd.mp_pool` fabric.
 
 Seven atoms over one `WorkerPool`: `Launch`, `Dispatch`, `Teleport`,
 `Kill`, `Alive`, `Running`, `Workers`. Because the fabric spans many
@@ -15,7 +15,7 @@ fabric.
 
 **No caller value is payload.** Every worker id, every pool address and the
 `init` override are children, so any of them can come from a `Ref`, an
-`AttrRef` or any query. `nu.mp.Teleport` keeps its target in
+`AttrRef` or any query. `nustd.mp.Teleport` keeps its target in
 `self._payload`, which pins it at construction time; that is the mistake
 this fabric exists not to repeat.
 
@@ -77,7 +77,7 @@ Whether the worker at this id is a process that is still up.
 Alive(pool=None, worker=None)
 ```
 
-Path `nu.mp_pool.Alive`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (0 required).
+Path `nustd.mp_pool.Alive`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (0 required).
 
 **Arguments**
 
@@ -109,7 +109,7 @@ Ships the body to a worker and returns as soon as the child has it.
 Dispatch(pool=None, body=None, worker=None, carry=False)
 ```
 
-Path `nu.mp_pool.Dispatch`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 4 (0 required).
+Path `nustd.mp_pool.Dispatch`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 4 (0 required).
 
 The verb for resident work - a tree that subscribes, loops, serves, and is
 never expected to produce a value. The parent waits only for the child's
@@ -137,7 +137,7 @@ exists to design away.
 Dispatch(body=some_pass(resident_tree), worker=AttrRef("w"))
 ```
 
-   `nu.kv.auto_flow_atomic` is one such pass, and a good illustration of
+   `nustd.kv.auto_flow_atomic` is one such pass, and a good illustration of
    the cost: wrapping the enclosing tree leaves kv writes inside a
    dispatched body with no enclosing `Transaction` at run time, and
    nothing anywhere says so. It is an example, not the rule - the rule is
@@ -180,7 +180,7 @@ Ends a worker now and reaps it.
 Kill(pool=None, worker=None)
 ```
 
-Path `nu.mp_pool.Kill`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (0 required).
+Path `nustd.mp_pool.Kill`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (0 required).
 
 A real kill, not a cooperative stop: a worker busy running a resident body
 may never read its pipe again, so asking it nicely is asking to wait
@@ -218,7 +218,7 @@ Spawns one worker process in the pool and yields the id it got.
 Launch(pool=None, init=None)
 ```
 
-Path `nu.mp_pool.Launch`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (0 required).
+Path `nustd.mp_pool.Launch`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (0 required).
 
 The call returns once the child has finished building its Context and
 said READY, so the id it yields is immediately usable as a target.
@@ -257,7 +257,7 @@ Whether a body dispatched to this worker is still executing.
 Running(pool=None, worker=None)
 ```
 
-Path `nu.mp_pool.Running`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (0 required).
+Path `nustd.mp_pool.Running`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 2 (0 required).
 
 **Arguments**
 
@@ -290,7 +290,7 @@ Runs the body in a pool worker and yields what it produced there.
 Teleport(pool=None, body=None, worker=None, carry=False)
 ```
 
-Path `nu.mp_pool.Teleport`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 4 (0 required).
+Path `nustd.mp_pool.Teleport`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 4 (0 required).
 
 Request/reply, for work that finishes. A policy over where, not what: the
 body is captured as a term, never evaluated locally, and dropping the
@@ -338,7 +338,7 @@ Every worker id the pool still tracks, in launch order.
 Workers(pool=None)
 ```
 
-Path `nu.mp_pool.Workers`. Kind `StreamQuery`, sort `stream_query`, cardinality `stream`. Arity 1 (0 required).
+Path `nustd.mp_pool.Workers`. Kind `StreamQuery`, sort `stream_query`, cardinality `stream`. Arity 1 (0 required).
 
 **Arguments**
 

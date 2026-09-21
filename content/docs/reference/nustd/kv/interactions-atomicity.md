@@ -3,7 +3,7 @@ title: interactions.atomicity
 description: "Atomic boundaries over KV storage, and the retry that makes them survivable."
 ---
 
-Module `nu.kv.interactions.atomicity`.
+Module `nustd.kv.interactions.atomicity`.
 
 Atomic boundaries over KV storage, and the retry that makes them survivable.
 
@@ -43,7 +43,7 @@ Gives its body one consistent read view of storage, and closes it after.
 Snapshot(scope=None)
 ```
 
-Path `nu.kv.Snapshot`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity 1 (0 required).
+Path `nustd.kv.Snapshot`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity 1 (0 required).
 
 Every read inside sees storage as it stood when the snapshot opened, so a
 body reading the same key twice gets the same answer both times even if a
@@ -71,7 +71,7 @@ The body's own value, unchanged.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
+    nustd.kv.memory_navigator(),
     body=Snapshot(State.counters["hits"], State.counters["misses"]),
 )
 ```
@@ -84,7 +84,7 @@ Runs its body inside a write transaction: all of it lands, or none of it.
 Transaction(scope=None)
 ```
 
-Path `nu.kv.Transaction`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity 1 (0 required).
+Path `nustd.kv.Transaction`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity 1 (0 required).
 
 Writes buffer in the transaction and become visible to everyone else at
 the commit, which happens when the body finishes cleanly. Anything raised
@@ -114,12 +114,12 @@ The body's own value, unchanged.
 
 ```python
 class State(nu.Shape):
-    hits = nu.kv.IntRef.slot()
+    hits = nustd.kv.IntRef.slot()
 ```
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
+    nustd.kv.memory_navigator(),
     body=RetryOnConflict(Transaction(State.hits.inc())),
 )
 ```
@@ -132,7 +132,7 @@ Re-runs its body when a storage transaction loses a race, and only then.
 RetryOnConflict(body, max_attempts=5, delay=0.1, backoff=2.0, jitter=0.5, errors=None, on_attempt_fail=None, on_success=None, on_fail=None)
 ```
 
-Path `nu.kv.RetryOnConflict`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 9 (1 required).
+Path `nustd.kv.RetryOnConflict`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 9 (1 required).
 
 Under concurrent writers a transaction that touches a hot key can fail to
 commit, or time out waiting for a lock. Neither is a real error: the work
@@ -174,7 +174,7 @@ The body's value from the attempt that commits.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
+    nustd.kv.memory_navigator(),
     body=RetryOnConflict(
         Transaction(State.hits.inc()),
         max_attempts=20,
@@ -190,7 +190,7 @@ Brackets a body with whichever boundary its own writes call for.
 kv.Atomic(scope=None)
 ```
 
-Path `nu.kv.Atomic`. Defined on `nu.kv.interactions.atomicity`, bound as a function. Builds `Snapshot | Transaction`.
+Path `nustd.kv.Atomic`. Defined on `nustd.kv.interactions.atomicity`, bound as a function. Builds `Snapshot | Transaction`.
 
 Saves the caller from having to know whether a branch mutates. It scans
 the body for any node declaring a mutation position and returns a
@@ -217,7 +217,7 @@ later pass sees a concrete type rather than a choice still to be made.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
+    nustd.kv.memory_navigator(),
     body=Atomic(State.hits.inc()),  # a Transaction
 )
 ```

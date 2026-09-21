@@ -3,7 +3,7 @@ title: refs.chart
 description: "Chart Refs -- typed visualization sinks over series payloads."
 ---
 
-Module `nu.ui.refs.chart`.
+Module `nustd.ui.refs.chart`.
 
 Chart Refs -- typed visualization sinks over series payloads.
 
@@ -27,7 +27,7 @@ Display-only area chart. `write` (partial) and `append` (one row).
 AreaChart(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.AreaChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.AreaChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -164,6 +164,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## BarChart
@@ -174,7 +182,7 @@ Display-only chart ref. `write` (partial) and `append` (one bar).
 BarChart(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.BarChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.BarChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -286,6 +294,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## LineChart
@@ -296,7 +312,7 @@ Display-only chart ref. `write` (partial) and `append` (one point or one series 
 LineChart(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.LineChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.LineChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -474,6 +490,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## PieChart
@@ -484,7 +508,7 @@ Display-only pie chart ref. `write` (partial) and `append` (one slice).
 PieChart(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.PieChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.PieChart`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -596,6 +620,14 @@ Builds `Nu`.
 
 Undocumented: summary, example.
 
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
+
 Undocumented: example.
 
 ## Sparkline
@@ -606,7 +638,7 @@ Display-only inline trend line. `write` (partial) and `append` (one point).
 Sparkline(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.ui.Sparkline`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.ui.Sparkline`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Methods**
 
@@ -691,5 +723,13 @@ Builds `Nu`.
 | `y` | `FloatArg` |  |  |
 
 Undocumented: summary, example.
+
+**Inherited methods**
+
+From `nustd.ui.core.base.Ref`:
+
+| Call | Builds | Meaning |
+| --- | --- | --- |
+| `.erase()` | `Nu` | Drop this Ref's node on the client, and everything under it. |
 
 Undocumented: example.

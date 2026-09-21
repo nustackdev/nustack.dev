@@ -34,8 +34,9 @@ lives here so callers reach for one namespace regardless of what they hold.
                                   navigation already does).
 
 View methods return an opaque `options` value -- a pure filter descriptor,
-no observer coupling. Each query resolves the process-scope
-`ObserverProtocol` from ctx and calls `observer.subscribe(options)`.
+no observer coupling. Each query resolves the `ObserverProtocol` from ctx
+under the root Shape of the Ref it was built from -- the same tag that Ref's
+Navigator and storage resolve under -- and calls `observer.subscribe(options)`.
 
 Sentinel handling. If the underlying view resolves to `EMPTY` / `INVALID`
 (the address is unbound, the intermediate container is missing), the
@@ -80,7 +81,7 @@ missing intermediate container) - no subscription is opened.
 **Notes**
 
 - Async only. The sync path raises `RuntimeError` rather than returning options without an observer behind them; use `nu.arun`.
-- `view.on_change()` returns opaque filter options, nothing observer-bound. The atom resolves the process-scope `ObserverProtocol` from ctx and hands the options to `subscribe` unread - Nu never inspects a backend's filter dialect.
+- `view.on_change()` returns opaque filter options, nothing observer-bound. The atom resolves the `ObserverProtocol` from ctx under the Ref's root shape and hands the options to `subscribe` unread - Nu never inspects a backend's filter dialect.
 - Subscribing reads no value off the view, so nothing here recomputes on change. The handle only delivers notifications to receivers bound on it; `React` / `ReactWhile` / `ReactForever` are what bind them and run a body.
 - Fires on any mutation reaching that view, with no distinction of which mutation it was.
 - Each evaluation opens a fresh subscription; whoever binds a receiver is responsible for closing it.
@@ -119,7 +120,7 @@ subscription is opened.
 - Async only. The sync path raises `RuntimeError`; use `nu.arun`.
 - `address` is evaluated only after the view resolves, so a sentinel view short-circuits without touching it.
 - Watches that one child slot, not the subtree under it.
-- The atom resolves the process-scope `ObserverProtocol` from ctx and passes the view's opaque options through to `subscribe` unread.
+- The atom resolves the `ObserverProtocol` from ctx under the Ref's root shape, then passes the view's opaque options through to `subscribe` unread.
 - Each evaluation opens a fresh subscription; the binder closes it.
 
 **Example**
@@ -153,7 +154,7 @@ INVALID when the view is EMPTY or INVALID - no subscription is opened.
 
 - Async only. The sync path raises `RuntimeError`; use `nu.arun`.
 - Covers the immediate children only. Anything deeper needs `OnDescendantsChange`.
-- The atom resolves the process-scope `ObserverProtocol` from ctx and passes the view's opaque options through to `subscribe` unread.
+- The atom resolves the `ObserverProtocol` from ctx under the Ref's root shape, then passes the view's opaque options through to `subscribe` unread.
 - Each evaluation opens a fresh subscription; the binder closes it.
 
 **Example**
@@ -190,7 +191,7 @@ subscription is opened.
 - Async only. The sync path raises `RuntimeError`; use `nu.arun`.
 - At least one pattern segment is required, and the check happens at evaluation, not at construction: an empty pattern raises `ValueError` from the running thunk.
 - Segments are evaluated in order, after the view, and any sentinel among them collapses the whole subscription rather than being dropped from the pattern.
-- The atom resolves the process-scope `ObserverProtocol` from ctx and passes the view's opaque options through to `subscribe` unread.
+- The atom resolves the `ObserverProtocol` from ctx under the Ref's root shape, then passes the view's opaque options through to `subscribe` unread.
 - Each evaluation opens a fresh subscription; the binder closes it.
 
 **Example**

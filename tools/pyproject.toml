@@ -8,8 +8,8 @@ version = "0.1.0"
 description = "Generates content/docs/reference/ from nu.inspect."
 requires-python = ">=3.11"
 dependencies = [
-    "nucore",
-    "nustd[all]",
+    "nucore==0.5.2",
+    "nustd[all]==0.5.2",
 ]
 
 [project.scripts]
@@ -17,12 +17,6 @@ docsgen = "docsgen.__main__:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["docsgen"]
-
-# Local, editable, on purpose. Wave B1 of task-142 is still uncommitted in the
-# nu tree, so there is no release to pin yet. See README.md.
-[tool.uv.sources]
-nucore = { path = "../../nu/packages/nucore", editable = true }
-nustd = { path = "../../nu/packages/nustd", editable = true }
 
 [tool.ruff]
 line-length = 100

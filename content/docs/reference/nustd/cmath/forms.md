@@ -1,11 +1,11 @@
 ---
 title: forms
-description: "The builtin `complex` as a Form - the value type behind `nu.std.cmath`."
+description: "The builtin `complex` as a Form - the value type behind `nustd.cmath`."
 ---
 
-Module `nu.std.cmath.forms`.
+Module `nustd.cmath.forms`.
 
-The builtin `complex` as a Form - the value type behind `nu.std.cmath`.
+The builtin `complex` as a Form - the value type behind `nustd.cmath`.
 
 `complex` is a builtin with no module of its own; `cmath` is its companion
 set of functions, so the two co-locate here. This file is the value-type half:
@@ -36,7 +36,7 @@ The class name is lowercase `complex` to mirror the builtin (hence
 complex()
 ```
 
-Path `nu.std.cmath.complex`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.cmath.complex`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Build one with `complex.of(real, imag)`; read its parts as properties
 (`.real` / `.imag`); transform it with arithmetic or `conjugate()`.

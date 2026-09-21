@@ -12,6 +12,10 @@ Nu shape fabric: DSL + Ref blueprints (3-tier matrix) + queries/commands.
 - `SetCmd`, `Erase`: slot-level write commands.
 - `Load`, `Exists`, `Missing`, `Extract`,
   `AdvanceCursor`: slot-level read queries.
+- `reroot` / `rerooter`: splice the bare ref chains in a term under a
+  new parent, so a snippet written without a mount point gets one.
+- `root_shape`: which Shape a Ref chain is rooted at, for code handed a Ref
+  as a location and building its own reads under it.
 
 Reactive queries (`OnChange` / `OnChildChange` /
 `OnChildrenChange` / `OnDescendantsChange` /
@@ -140,3 +144,28 @@ ShapesSequenceRef hierarchy: sequence-of-shapes Ref + Form mixin tiers.
 | [MutableShapesSequenceRef](/docs/reference/nu/domains/shape/refs-shapes-sequence#mutableshapessequenceref) | `ref` | `MutableShapesSequenceRef(address, item_shape_type, parent_ref=None, owner_shape=None)` | Mutable sequence-of-shapes Ref; subscript returns MutableShapeRef. |
 | [ReactiveShapesSequenceRef](/docs/reference/nu/domains/shape/refs-shapes-sequence#reactiveshapessequenceref) | `ref` | `ReactiveShapesSequenceRef(address, item_shape_type, parent_ref=None, owner_shape=None)` | Reactive sequence-of-shapes Ref; subscript returns ReactiveShapeRef. |
 | [ShapesSequenceRef](/docs/reference/nu/domains/shape/refs-shapes-sequence#shapessequenceref) | `ref` | `ShapesSequenceRef(address, item_shape_type, parent_ref=None, owner_shape=None)` | Sequence-of-shapes Ref; subscript descent returns a ShapeRef. |
+
+## rewrite
+
+Module `nu.domains.shape.rewrite`.
+
+Re-rooting: splice every bare ref chain in a tree under a new parent.
+
+[Full entries](/docs/reference/nu/domains/shape/rewrite)
+
+| Name | Call | Meaning |
+| --- | --- | --- |
+| [reroot](/docs/reference/nu/domains/shape/rewrite#reroot) | `shape.reroot(root, under, rooted=None)` | Rewrite `root` so every bare ref chain in it hangs off `under`. |
+| [rerooter](/docs/reference/nu/domains/shape/rewrite#rerooter) | `shape.rerooter(under, rooted=None)` | `reroot` with its policy fixed, as a plain `Nu -> Nu` transform. |
+
+## refs.base
+
+Module `nu.domains.shape.refs.base`.
+
+StructuredRef: abstract base for all shape-fabric Refs.
+
+[Full entries](/docs/reference/nu/domains/shape/refs-base)
+
+| Name | Call | Meaning |
+| --- | --- | --- |
+| [root_shape](/docs/reference/nu/domains/shape/refs-base#root_shape) | `shape.root_shape(ref)` | The Shape class a Ref chain is rooted at. |

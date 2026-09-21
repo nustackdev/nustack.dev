@@ -1,13 +1,13 @@
 ---
 title: mp
-description: "nu.mp - the multiprocessing compute fabric."
+description: "nustd.mp - the multiprocessing compute fabric."
 ---
 
-Module `nu.mp`.
+Module `nustd.mp`.
 
-nu.mp - the multiprocessing compute fabric.
+nustd.mp - the multiprocessing compute fabric.
 
-Same shape as `nu.cluster`, backed by stdlib `multiprocessing` process
+Same shape as `nustd.cluster`, backed by stdlib `multiprocessing` process
 workers instead of ray actors. Zero-dependency, single-host: teleport a Nu
 tree into a child process, run it there, get the result back.
 
@@ -46,11 +46,11 @@ interpreter, so any callable / bracket you pass in `init` or
 
 ## interactions
 
-Module `nu.mp.interactions`.
+Module `nustd.mp.interactions`.
 
 `Teleport`: ship the body to an `MpWorker` child process for execution.
 
-Same shape as `nu.cluster.Teleport` but targets `MpWorker` and works on
+Same shape as `nustd.cluster.Teleport` but targets `MpWorker` and works on
 both sync and async runtimes - the parent-side pipe read/write is blocking
 either way (async wraps it in `asyncio.to_thread`).
 
@@ -72,7 +72,7 @@ Runs the body in an `MpWorker` child process instead of in the caller.
 Teleport(body, target=<UNSET>, carry=False)
 ```
 
-Path `nu.mp.Teleport`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 3 (1 required).
+Path `nustd.mp.Teleport`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 3 (1 required).
 
 A policy over where, not what: the body is captured as a term and is
 never evaluated locally. On each evaluation the tagged `MpWorker` is
@@ -125,7 +125,7 @@ ProvideList(MpWorker, [{"name": "w-0"}, {"name": "w-1"}],
 
 ## refs
 
-Module `nu.mp.refs`.
+Module `nustd.mp.refs`.
 
 `MpWorkerRef`: fabric ref that resolves the `MpWorker` bound on ctx.
 
@@ -141,7 +141,7 @@ The `MpWorker` bound on the Context.
 MpWorkerRef(address=None)
 ```
 
-Path `nu.mp.MpWorkerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mp.MpWorkerRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 

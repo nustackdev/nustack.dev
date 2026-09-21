@@ -3,7 +3,7 @@ title: refs.listshape
 description: "Virtuals shapes list reference: sequence of homogeneous shapes."
 ---
 
-Module `nu.kv.refs.listshape`.
+Module `nustd.kv.refs.listshape`.
 
 Virtuals shapes list reference: sequence of homogeneous shapes.
 
@@ -22,7 +22,7 @@ An ordered list of one shape type in KV storage, indexed into by position.
 ShapesListRef(address, shape_type, view_type=None, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ShapesListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ShapesListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Indexing lands on a shape ref at that position rather than on a value, so
 a row's fields are reachable and writable one at a time:

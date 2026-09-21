@@ -3,7 +3,7 @@ title: tree.auto_flow_atomic
 description: "The pass that decides, per branch, where a storage boundary belongs."
 ---
 
-Module `nu.kv.tree.auto_flow_atomic`.
+Module `nustd.kv.tree.auto_flow_atomic`.
 
 The pass that decides, per branch, where a storage boundary belongs.
 
@@ -35,7 +35,7 @@ Rewrites a tree so every branch touching storage sits in the right bracket.
 kv.auto_flow_atomic(tree, scope=None)
 ```
 
-Path `nu.kv.auto_flow_atomic`. Defined on `nu.kv.tree.auto_flow_atomic`, bound as a function. Builds `Nu`.
+Path `nustd.kv.auto_flow_atomic`. Defined on `nustd.kv.tree.auto_flow_atomic`, bound as a function. Builds `Nu`.
 
 Walks bottom-up and, at each Flow, replaces each direct child by a
 `Transaction` around it if the branch writes storage, a `Snapshot` if
@@ -67,8 +67,10 @@ node beyond its declaration.
 
 ```python
 app = nu.With(
-    nu.kv.rocksdb_navigator(".dbcounter"),
-    nu.ui.server(nu.kv.auto_flow_atomic(ui)),
-    body=nu.kv.auto_flow_atomic(tick),
+    nustd.kv.rocksdb_navigator(".dbcounter"),
+    body=nu.ParallelAsync(
+        nustd.ui.serve(App, nustd.kv.auto_flow_atomic(ui)),
+        nustd.kv.auto_flow_atomic(tick),
+    ),
 )
 ```

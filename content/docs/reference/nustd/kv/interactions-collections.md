@@ -3,7 +3,7 @@ title: interactions.collections
 description: "Container-level KV atoms: sweep every direct primitive child at once."
 ---
 
-Module `nu.kv.interactions.collections`.
+Module `nustd.kv.interactions.collections`.
 
 Container-level KV atoms: sweep every direct primitive child at once.
 
@@ -32,7 +32,7 @@ Deletes every direct primitive child of a container, keeping the container.
 ClearPrimitivesUnsafeCmd(ref)
 ```
 
-Path `nu.kv.ClearPrimitivesUnsafeCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
+Path `nustd.kv.ClearPrimitivesUnsafeCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
 
 Scans the container's own level and deletes each key it finds. The
 container itself survives, so the Ref stays valid and writable after.
@@ -58,8 +58,8 @@ Nothing.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Transaction(ClearPrimitivesUnsafeCmd(State.counters)),
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Transaction(ClearPrimitivesUnsafeCmd(State.counters)),
 )
 ```
 
@@ -71,7 +71,7 @@ Reads every direct primitive value under a container in one raw scan.
 ScanPrimitivesUnsafe(ref)
 ```
 
-Path `nu.kv.ScanPrimitivesUnsafe`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 1 (1 required).
+Path `nustd.kv.ScanPrimitivesUnsafe`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 1 (1 required).
 
 One prefix-and-length filtered scan over the container's own level, so
 the cost is the values themselves rather than a lookup per address.
@@ -100,8 +100,8 @@ emptiness, not raised.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Snapshot(
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Snapshot(
         nu.Collect(nu.Iter(ScanPrimitivesUnsafe(State.counters))),
     ),
 )

@@ -3,23 +3,24 @@ title: refs.layout
 description: "Layout Sections -- Shape-based containers that wrap other Refs."
 ---
 
-Module `nu.ui.refs.layout`.
+Module `nustd.ui.refs.layout`.
 
 Layout Sections -- Shape-based containers that wrap other Refs.
 
 Most of these are `Section` subclasses (not Refs) -- Shape-based
 composition primitives that mount other Refs and Sections. Section
-and SectionRef come from `nu.ui.core`; this module defines the
+and SectionRef come from `nustd.ui.core`; this module defines the
 concrete layout primitives (Row, Column, Card, Tabs, Modal, Field,
 Fieldset, Form, Accordion) that build on them, plus the chrome
 interactions those primitives expose.
 
 The chrome commands (`_SetSectionStr`, `_SetTabs`, `_SetActive`) target
 the abstract `Session` from core -- so this module is host-agnostic;
-any host that implements `Session` runs it. Address resolution for
-section-scoped chrome writes goes through `_SectionMountRef`, which
-asks the section's own `_wire_prefix()` classmethod (stamped by the
-host, e.g. nudle's Page) for its wire path.
+any host that implements `Session` runs it. Chrome that writes to the
+section itself (a Card's title, a Tabs' active tab) lives on a SectionRef
+subclass, so it is driven off the bound Ref -- `page.card.set_title(...)`
+-- and the address comes from that Ref's chain. There is no way to drive a
+section off its class: a class has no mount point.
 
 | Name | Call | Meaning |
 | --- | --- | --- |
@@ -38,7 +39,7 @@ host, e.g. nudle's Page) for its wire path.
 
 Stack of collapsible sections. Tab owns open state, server owns the section list.
 
-Path `nu.ui.Accordion`.
+Path `nustd.ui.Accordion`.
 
 Undocumented: example.
 
@@ -46,7 +47,7 @@ Undocumented: example.
 
 Card-styled Section: title + subtitle + body slots + footer.
 
-Path `nu.ui.Card`.
+Path `nustd.ui.Card`.
 
 Undocumented: example.
 
@@ -54,7 +55,7 @@ Undocumented: example.
 
 Vertical flex layout. Pin chrome on the slot().
 
-Path `nu.ui.Column`.
+Path `nustd.ui.Column`.
 
 Undocumented: example.
 
@@ -62,7 +63,7 @@ Undocumented: example.
 
 Styled card-like box. Pin chrome on slot().
 
-Path `nu.ui.Container`.
+Path `nustd.ui.Container`.
 
 Undocumented: example.
 
@@ -70,7 +71,7 @@ Undocumented: example.
 
 Label + child input + help / error text. Exactly one child slot.
 
-Path `nu.ui.Field`.
+Path `nustd.ui.Field`.
 
 Undocumented: example.
 
@@ -78,7 +79,7 @@ Undocumented: example.
 
 Grouped fields with a legend. Display-only, server-owned.
 
-Path `nu.ui.Fieldset`.
+Path `nustd.ui.Fieldset`.
 
 Undocumented: example.
 
@@ -86,7 +87,7 @@ Undocumented: example.
 
 Semantic form wrapper. Pin chrome on slot(); submit lives on a child ButtonRef.
 
-Path `nu.ui.Form`.
+Path `nustd.ui.Form`.
 
 Undocumented: example.
 
@@ -94,7 +95,7 @@ Undocumented: example.
 
 Dialog overlay. Pin chrome on slot(); declare body Refs as slots.
 
-Path `nu.ui.Modal`.
+Path `nustd.ui.Modal`.
 
 Undocumented: example.
 
@@ -102,7 +103,7 @@ Undocumented: example.
 
 Horizontal flex layout. Pin chrome on slot().
 
-Path `nu.ui.Row`.
+Path `nustd.ui.Row`.
 
 Undocumented: example.
 
@@ -110,6 +111,6 @@ Undocumented: example.
 
 Tab strip plus active body. Subclass and declare one child slot per tab body.
 
-Path `nu.ui.Tabs`.
+Path `nustd.ui.Tabs`.
 
 Undocumented: example.

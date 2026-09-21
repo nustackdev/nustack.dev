@@ -1,15 +1,15 @@
 ---
 title: mp_pool
-description: "nu.mp_pool - the pool of worker processes, as one fabric."
+description: "nustd.mp_pool - the pool of worker processes, as one fabric."
 ---
 
-Module `nu.mp_pool`.
+Module `nustd.mp_pool`.
 
-nu.mp_pool - the pool of worker processes, as one fabric.
+nustd.mp_pool - the pool of worker processes, as one fabric.
 
-`nu.mp` is the fabric of ONE process: its whole lifecycle is the
+`nustd.mp` is the fabric of ONE process: its whole lifecycle is the
 `With` / `Provide` bracket and it stays purely declarative.
-`nu.mp_pool` is the sibling where **the pool itself is the fabric**. One
+`nustd.mp_pool` is the sibling where **the pool itself is the fabric**. One
 `Provide` at the top of a tree owns N worker processes, and because the
 fabric now spans many processes it legitimately owns interactions over them -
 launch a worker, kill a worker, run a tree on worker id X. Those are
@@ -54,7 +54,7 @@ The one exception to "no payload" is a `Dispatch` body, which has to be
 payload because a Command cannot hold a Flow in a child slot. The consequence
 is worth knowing before you rely on it: a body in payload is not part of the
 tree, so no walker, rewrite, analysis or render reaches it, and the caller has
-to apply whatever passes it needs (`nu.kv.auto_flow_atomic` among them) to
+to apply whatever passes it needs (`nustd.kv.auto_flow_atomic` among them) to
 the body itself before building the `Dispatch`.
 
 `Dispatch` vs `Teleport` is the crux. `Dispatch` returns as soon as the
@@ -71,9 +71,9 @@ pickleable (top-level in a module, no closures).
 
 ## interactions
 
-Module `nu.mp_pool.interactions`.
+Module `nustd.mp_pool.interactions`.
 
-The interactions of the `nu.mp_pool` fabric.
+The interactions of the `nustd.mp_pool` fabric.
 
 [Full entries](/docs/reference/nustd/mp_pool/interactions)
 
@@ -89,7 +89,7 @@ The interactions of the `nu.mp_pool` fabric.
 
 ## refs
 
-Module `nu.mp_pool.refs`.
+Module `nustd.mp_pool.refs`.
 
 `PoolRef`: the fabric ref that resolves the `WorkerPool` bound on ctx.
 

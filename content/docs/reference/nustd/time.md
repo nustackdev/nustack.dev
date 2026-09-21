@@ -3,7 +3,7 @@ title: time
 description: "Nu surface for Python's `time` module."
 ---
 
-Module `nu.std.time`.
+Module `nustd.time`.
 
 Nu surface for Python's `time` module.
 
@@ -14,13 +14,13 @@ no central class - so the Nu surface mirrors that: free functions (`time`,
 builds). Import it the way you would the stdlib:
 
 ```python
-from nu.std.time import monotonic, sleep
-import nu.std.time as time     # then time.monotonic()
+from nustd.time import monotonic, sleep
+import nustd.time as time     # then time.monotonic()
 ```
 
 Every clock read reads the process clock. `sleep` is a sync-only,
 effect-only op that yields `None` (it blocks); the async sleep lives in
-`nu.std.asyncio`.
+`nustd.asyncio`.
 
 ## Call
 
@@ -43,7 +43,7 @@ A monotonic clock in seconds: mirrors `time.monotonic()`. Non-deterministic.
 time.monotonic()
 ```
 
-Path `nu.std.time.monotonic`. Defined on `nu.std.time.functions`, bound as a function. Builds `Float`.
+Path `nustd.time.monotonic`. Defined on `nustd.time.functions`, bound as a function. Builds `Float`.
 
 Undocumented: example.
 
@@ -55,7 +55,7 @@ A monotonic clock in nanoseconds: mirrors `time.monotonic_ns()`. Non-determinist
 time.monotonic_ns()
 ```
 
-Path `nu.std.time.monotonic_ns`. Defined on `nu.std.time.functions`, bound as a function. Builds `Int`.
+Path `nustd.time.monotonic_ns`. Defined on `nustd.time.functions`, bound as a function. Builds `Int`.
 
 Undocumented: example.
 
@@ -67,7 +67,7 @@ The highest-resolution timer in seconds: mirrors `time.perf_counter()`. Non-dete
 time.perf_counter()
 ```
 
-Path `nu.std.time.perf_counter`. Defined on `nu.std.time.functions`, bound as a function. Builds `Float`.
+Path `nustd.time.perf_counter`. Defined on `nustd.time.functions`, bound as a function. Builds `Float`.
 
 Undocumented: example.
 
@@ -79,7 +79,7 @@ The highest-resolution timer in nanoseconds: mirrors `time.perf_counter_ns()`. N
 time.perf_counter_ns()
 ```
 
-Path `nu.std.time.perf_counter_ns`. Defined on `nu.std.time.functions`, bound as a function. Builds `Int`.
+Path `nustd.time.perf_counter_ns`. Defined on `nustd.time.functions`, bound as a function. Builds `Int`.
 
 Undocumented: example.
 
@@ -91,7 +91,7 @@ Process CPU time in seconds: mirrors `time.process_time()`. Non-deterministic.
 time.process_time()
 ```
 
-Path `nu.std.time.process_time`. Defined on `nu.std.time.functions`, bound as a function. Builds `Float`.
+Path `nustd.time.process_time`. Defined on `nustd.time.functions`, bound as a function. Builds `Float`.
 
 Undocumented: example.
 
@@ -103,7 +103,7 @@ Block for `secs` seconds, yielding `None`: mirrors `time.sleep()`. Sync-only, ef
 time.sleep(secs)
 ```
 
-Path `nu.std.time.sleep`. Defined on `nu.std.time.functions`, bound as a function. Builds `None_`.
+Path `nustd.time.sleep`. Defined on `nustd.time.functions`, bound as a function. Builds `None_`.
 
 **Arguments**
 
@@ -121,7 +121,7 @@ Seconds since the epoch as a float: mirrors `time.time()`. Non-deterministic.
 time.time()
 ```
 
-Path `nu.std.time.time`. Defined on `nu.std.time.functions`, bound as a function. Builds `Float`.
+Path `nustd.time.time`. Defined on `nustd.time.functions`, bound as a function. Builds `Float`.
 
 Undocumented: example.
 
@@ -133,6 +133,6 @@ Nanoseconds since the epoch as an int: mirrors `time.time_ns()`. Non-determinist
 time.time_ns()
 ```
 
-Path `nu.std.time.time_ns`. Defined on `nu.std.time.functions`, bound as a function. Builds `Int`.
+Path `nustd.time.time_ns`. Defined on `nustd.time.functions`, bound as a function. Builds `Int`.
 
 Undocumented: example.

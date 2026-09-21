@@ -3,7 +3,7 @@ title: refs.set
 description: "Virtuals set reference: unordered unique-element container backed by a View."
 ---
 
-Module `nu.kv.refs.set`.
+Module `nustd.kv.refs.set`.
 
 Virtuals set reference: unordered unique-element container backed by a View.
 
@@ -19,7 +19,7 @@ A set slot in KV storage: unordered, unique elements, stored decomposed.
 SetRef(address, item_type, view_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.SetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.SetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 

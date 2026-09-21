@@ -3,14 +3,14 @@ title: refs.std
 description: "virtuals-substrate refs for standard-library value types."
 ---
 
-Module `nu.kv.refs.std`.
+Module `nustd.kv.refs.std`.
 
 virtuals-substrate refs for standard-library value types.
 
 Each ref is a typed leaf on the virtuals View substrate whose stored form differs
 from its domain type, so it overrides `store` (domain -> storage) and
 `coerce` (storage -> domain). The value interface comes from mixing in the
-matching `nu.std` Form, exactly as `IntRef` mixes in `Int`.
+matching `nustd` Form, exactly as `IntRef` mixes in `Int`.
 
 - Decimal / Fraction / complex / Path / UUID: `str`
 - date / datetime / time / timezone: `str` (ISO / offset)
@@ -41,7 +41,7 @@ A BasisPoint leaf in KV storage, stored as the raw int count of bps.
 BasisPointRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.BasisPointRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.BasisPointRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -103,7 +103,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.fin.forms.BasisPoint`:
+From `nustd.fin.forms.BasisPoint`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -146,7 +146,7 @@ A complex leaf in KV storage, stored as the str Python prints for it.
 ComplexRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ComplexRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ComplexRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -208,7 +208,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.cmath.forms.complex`:
+From `nustd.cmath.forms.complex`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -245,7 +245,7 @@ A date leaf in KV storage, stored as an ISO `YYYY-MM-DD` str.
 DateRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.DateRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.DateRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -308,7 +308,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.date`:
+From `nustd.datetime.forms.date`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -354,7 +354,7 @@ A datetime leaf in KV storage, stored as an ISO str.
 DatetimeRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.DatetimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.DatetimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -417,7 +417,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.datetime`:
+From `nustd.datetime.forms.datetime`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -468,7 +468,7 @@ A Decimal leaf in KV storage, kept exact by storing its str form.
 DecimalRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.DecimalRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.DecimalRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -531,7 +531,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.decimal.forms.Decimal`:
+From `nustd.decimal.forms.Decimal`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -589,7 +589,7 @@ A Fraction leaf in KV storage, stored as its `numerator/denominator` str.
 FractionRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.FractionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.FractionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -651,7 +651,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.fractions.forms.Fraction`:
+From `nustd.fractions.forms.Fraction`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -698,7 +698,7 @@ A filesystem path leaf in KV storage, stored as its str form.
 PathRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PathRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PathRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -760,7 +760,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.pathlib.forms.Path`:
+From `nustd.pathlib.forms.Path`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -812,7 +812,7 @@ A Percentage leaf in KV storage, stored as the raw float percentage.
 PercentageRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PercentageRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PercentageRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -875,7 +875,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.fin.forms.Percentage`:
+From `nustd.fin.forms.Percentage`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -921,7 +921,7 @@ A time-of-day leaf in KV storage, stored as an ISO `HH:MM:SS` str.
 TimeRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.TimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.TimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -983,7 +983,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.time`:
+From `nustd.datetime.forms.time`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -1021,7 +1021,7 @@ A timedelta leaf in KV storage, stored as a float count of seconds.
 TimedeltaRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.TimedeltaRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.TimedeltaRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -1083,7 +1083,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.timedelta`:
+From `nustd.datetime.forms.timedelta`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -1126,7 +1126,7 @@ A fixed-offset timezone leaf in KV storage, stored as its offset str.
 TimezoneRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.TimezoneRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.TimezoneRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -1189,7 +1189,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.timezone`:
+From `nustd.datetime.forms.timezone`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -1219,7 +1219,7 @@ A UUID leaf in KV storage, stored as its canonical hyphenated str.
 UUIDRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.UUIDRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.UUIDRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -1282,7 +1282,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.uuid.forms.UUID`:
+From `nustd.uuid.forms.UUID`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |

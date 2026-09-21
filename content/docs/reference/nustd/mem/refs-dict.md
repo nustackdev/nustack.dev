@@ -3,7 +3,7 @@ title: refs.dict
 description: "Dict mapping reference: key-value container backed by nested dict."
 ---
 
-Module `nu.mem.refs.dict`.
+Module `nustd.mem.refs.dict`.
 
 Dict mapping reference: key-value container backed by nested dict.
 
@@ -19,7 +19,7 @@ A mapping slot in the dict substrate, holding one plain dict of values.
 DictRef(address, value_type, key_type, key_value_type, value_value_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.DictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.DictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Subscripting descends rather than reads: `ref[k]` is an `ItemRef` at
 that key inside the stored dict, a ref in its own right that can be set,
@@ -36,7 +36,7 @@ erased or read on its own. The mapping calls (`keys`, `items`,
 
 ```python
 class Port(nu.Shape):
-    meta = nu.mem.DictRef.slot(int)
+    meta = nustd.mem.DictRef.slot(int)
 data = {"meta": {"a": 1}}
 ctx = nu.Context().bind(dict, data, Port)
 _ = nu.run(Port.meta.set_item("b", 2), ctx)

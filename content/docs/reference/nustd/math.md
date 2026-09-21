@@ -3,7 +3,7 @@ title: math
 description: "Nu surface for Python's `math` module."
 ---
 
-Module `nu.std.math`.
+Module `nustd.math`.
 
 Nu surface for Python's `math` module.
 
@@ -15,8 +15,8 @@ layers behind it: `functions` (the wrappers and constants) and
 stdlib:
 
 ```python
-from nu.std.math import sqrt, pi
-import nu.std.math as math     # then math.sqrt(2), math.floor(3.7)
+from nustd.math import sqrt, pi
+import nustd.math as math     # then math.sqrt(2), math.floor(3.7)
 ```
 
 ## Call
@@ -61,7 +61,7 @@ The arc cosine of `x`, in radians: mirrors `math.acos()`.
 math.acos(x)
 ```
 
-Path `nu.std.math.acos`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.acos`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -79,7 +79,7 @@ The arc sine of `x`, in radians: mirrors `math.asin()`.
 math.asin(x)
 ```
 
-Path `nu.std.math.asin`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.asin`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -97,7 +97,7 @@ The arc tangent of `x`, in radians: mirrors `math.atan()`.
 math.atan(x)
 ```
 
-Path `nu.std.math.atan`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.atan`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -115,7 +115,7 @@ The arc tangent of `y/x`, respecting quadrant: mirrors `math.atan2()`.
 math.atan2(y, x)
 ```
 
-Path `nu.std.math.atan2`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.atan2`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -134,7 +134,7 @@ The ceiling of `x` as an int: mirrors `math.ceil()`.
 math.ceil(x)
 ```
 
-Path `nu.std.math.ceil`. Defined on `nu.std.math.functions`, bound as a function. Builds `Int`.
+Path `nustd.math.ceil`. Defined on `nustd.math.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -152,7 +152,7 @@ Undocumented: example.
 math.copysign(x, y)
 ```
 
-Path `nu.std.math.copysign`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.copysign`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -171,7 +171,7 @@ The cosine of `x` radians: mirrors `math.cos()`.
 math.cos(x)
 ```
 
-Path `nu.std.math.cos`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.cos`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -189,7 +189,7 @@ Radians `x` converted to degrees: mirrors `math.degrees()`.
 math.degrees(x)
 ```
 
-Path `nu.std.math.degrees`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.degrees`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -207,7 +207,7 @@ Undocumented: example.
 math.exp(x)
 ```
 
-Path `nu.std.math.exp`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.exp`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -225,7 +225,7 @@ The absolute value of `x` as a float: mirrors `math.fabs()`.
 math.fabs(x)
 ```
 
-Path `nu.std.math.fabs`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.fabs`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -243,7 +243,7 @@ Undocumented: example.
 math.factorial(x)
 ```
 
-Path `nu.std.math.factorial`. Defined on `nu.std.math.functions`, bound as a function. Builds `Int`.
+Path `nustd.math.factorial`. Defined on `nustd.math.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -261,7 +261,7 @@ The floor of `x` as an int: mirrors `math.floor()`.
 math.floor(x)
 ```
 
-Path `nu.std.math.floor`. Defined on `nu.std.math.functions`, bound as a function. Builds `Int`.
+Path `nustd.math.floor`. Defined on `nustd.math.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -279,7 +279,7 @@ The C-library `fmod` of `x` and `y`: mirrors `math.fmod()`.
 math.fmod(x, y)
 ```
 
-Path `nu.std.math.fmod`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.fmod`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -298,7 +298,7 @@ The greatest common divisor of `a` and `b`: mirrors `math.gcd()`.
 math.gcd(a, b)
 ```
 
-Path `nu.std.math.gcd`. Defined on `nu.std.math.functions`, bound as a function. Builds `Int`.
+Path `nustd.math.gcd`. Defined on `nustd.math.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -317,7 +317,7 @@ The Euclidean norm `sqrt(x*x + y*y)`: mirrors `math.hypot()`.
 math.hypot(x, y)
 ```
 
-Path `nu.std.math.hypot`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.hypot`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -336,7 +336,7 @@ Whether `a` and `b` are close: mirrors `math.isclose()`.
 math.isclose(a, b)
 ```
 
-Path `nu.std.math.isclose`. Defined on `nu.std.math.functions`, bound as a function. Builds `Bool`.
+Path `nustd.math.isclose`. Defined on `nustd.math.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -355,7 +355,7 @@ Whether `x` is finite: mirrors `math.isfinite()`.
 math.isfinite(x)
 ```
 
-Path `nu.std.math.isfinite`. Defined on `nu.std.math.functions`, bound as a function. Builds `Bool`.
+Path `nustd.math.isfinite`. Defined on `nustd.math.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -373,7 +373,7 @@ Whether `x` is positive or negative infinity: mirrors `math.isinf()`.
 math.isinf(x)
 ```
 
-Path `nu.std.math.isinf`. Defined on `nu.std.math.functions`, bound as a function. Builds `Bool`.
+Path `nustd.math.isinf`. Defined on `nustd.math.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -391,7 +391,7 @@ Whether `x` is NaN: mirrors `math.isnan()`.
 math.isnan(x)
 ```
 
-Path `nu.std.math.isnan`. Defined on `nu.std.math.functions`, bound as a function. Builds `Bool`.
+Path `nustd.math.isnan`. Defined on `nustd.math.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -409,7 +409,7 @@ The integer square root of `x`: mirrors `math.isqrt()`.
 math.isqrt(x)
 ```
 
-Path `nu.std.math.isqrt`. Defined on `nu.std.math.functions`, bound as a function. Builds `Int`.
+Path `nustd.math.isqrt`. Defined on `nustd.math.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 
@@ -427,7 +427,7 @@ The logarithm of `x` (natural, or to `base`): mirrors `math.log()`.
 math.log(x, base=None)
 ```
 
-Path `nu.std.math.log`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.log`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -446,7 +446,7 @@ The base-2 logarithm of `x`: mirrors `math.log2()`.
 math.log2(x)
 ```
 
-Path `nu.std.math.log2`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.log2`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -464,7 +464,7 @@ The base-10 logarithm of `x`: mirrors `math.log10()`.
 math.log10(x)
 ```
 
-Path `nu.std.math.log10`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.log10`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -482,7 +482,7 @@ Undocumented: example.
 math.pow(base, exp)
 ```
 
-Path `nu.std.math.pow`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.pow`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -501,7 +501,7 @@ Degrees `x` converted to radians: mirrors `math.radians()`.
 math.radians(x)
 ```
 
-Path `nu.std.math.radians`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.radians`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -519,7 +519,7 @@ The sine of `x` radians: mirrors `math.sin()`.
 math.sin(x)
 ```
 
-Path `nu.std.math.sin`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.sin`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -537,7 +537,7 @@ The square root of `x`: mirrors `math.sqrt()`.
 math.sqrt(x)
 ```
 
-Path `nu.std.math.sqrt`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.sqrt`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -555,7 +555,7 @@ The tangent of `x` radians: mirrors `math.tan()`.
 math.tan(x)
 ```
 
-Path `nu.std.math.tan`. Defined on `nu.std.math.functions`, bound as a function. Builds `Float`.
+Path `nustd.math.tan`. Defined on `nustd.math.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -573,7 +573,7 @@ Undocumented: example.
 math.trunc(x)
 ```
 
-Path `nu.std.math.trunc`. Defined on `nu.std.math.functions`, bound as a function. Builds `Int`.
+Path `nustd.math.trunc`. Defined on `nustd.math.functions`, bound as a function. Builds `Int`.
 
 **Arguments**
 

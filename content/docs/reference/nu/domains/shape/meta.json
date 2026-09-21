@@ -3,12 +3,14 @@
   "pages": [
     "interactions",
     "refs-shape",
+    "refs-base",
     "refs-item",
     "refs-mapping",
     "refs-sequence",
     "refs-set",
     "refs-shapes-mapping",
     "refs-shapes-sequence",
+    "rewrite",
     "forms"
   ]
 }

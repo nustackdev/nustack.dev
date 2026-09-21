@@ -3,7 +3,7 @@ title: refs.prog
 description: "Virtuals-substrate ref for a stored Nu program."
 ---
 
-Module `nu.kv.refs.prog`.
+Module `nustd.kv.refs.prog`.
 
 Virtuals-substrate ref for a stored Nu program.
 
@@ -41,7 +41,7 @@ A Nu program stored as source text in a KV leaf, with the Program verbs.
 ProgramRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ProgramRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ProgramRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Reading it yields the source verbatim, the same as any str leaf. What the
 Program surface adds is the ability to turn that stored text into a tree
@@ -90,8 +90,8 @@ From `nu.prog.forms.Program`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
-| `.load(entry='out', scope=None, filename='<nu program>', brace=<UNSET>)` | `Nu` | Construct the term without running it. |
-| `.run(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, on_error=None)` | `Nu` | Construct the term and drive it. |
+| `.load(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None)` | `Nu` | Construct the term without running it. |
+| `.run(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None, on_error=None)` | `Nu` | Construct the term and drive it. |
 
 From `nu.lang.forms.Form`:
 

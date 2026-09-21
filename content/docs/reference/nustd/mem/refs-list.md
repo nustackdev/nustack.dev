@@ -3,7 +3,7 @@ title: refs.list
 description: "Dict sequence reference: ordered container backed by nested list."
 ---
 
-Module `nu.mem.refs.list`.
+Module `nustd.mem.refs.list`.
 
 Dict sequence reference: ordered container backed by nested list.
 
@@ -19,7 +19,7 @@ A sequence slot in the dict substrate, holding one plain list of values.
 ListRef(address, item_type, item_value_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.ListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.ListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Subscripting with an int descends rather than reads: `ref[i]` is an
 `ItemRef` at that index inside the stored list, settable and erasable on
@@ -36,7 +36,7 @@ yields a new list.
 
 ```python
 class Port(nu.Shape):
-    tags = nu.mem.ListRef.slot(str)
+    tags = nustd.mem.ListRef.slot(str)
 data = {"tags": ["a"]}
 ctx = nu.Context().bind(dict, data, Port)
 _ = nu.run(Port.tags.append("b"), ctx)

@@ -3,7 +3,7 @@ title: refs.dictshape
 description: "Virtuals shapes dict reference: mapping of homogeneous shapes."
 ---
 
-Module `nu.kv.refs.dictshape`.
+Module `nustd.kv.refs.dictshape`.
 
 Virtuals shapes dict reference: mapping of homogeneous shapes.
 
@@ -22,7 +22,7 @@ A mapping of one shape type in KV storage, keyed and descended into.
 ShapesDictRef(address, shape_type, key_type, key_value_type, view_type=None, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ShapesDictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ShapesDictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Subscripting lands on a shape ref for that key rather than on a value, so
 a row's fields are reachable and writable one at a time:

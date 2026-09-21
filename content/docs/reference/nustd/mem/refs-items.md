@@ -3,7 +3,7 @@ title: refs.items
 description: "Dict substrate item refs: typed value holders in nested dicts."
 ---
 
-Module `nu.mem.refs.items`.
+Module `nustd.mem.refs.items`.
 
 Dict substrate item refs: typed value holders in nested dicts.
 
@@ -28,7 +28,7 @@ A bool slot in the dict substrate, carrying the whole Bool surface.
 BoolRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.BoolRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.BoolRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -38,7 +38,7 @@ Path `nu.mem.BoolRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class User(nu.Shape):
-    active = nu.mem.BoolRef.slot()
+    active = nustd.mem.BoolRef.slot()
 ctx = nu.Context().bind(dict, {"active": True}, User)
 nu.run(User.active.not_(), ctx)[0]
 ```
@@ -98,7 +98,7 @@ A bytes slot in the dict substrate, carrying the whole Bytes surface.
 BytesRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.BytesRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.BytesRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -108,7 +108,7 @@ Path `nu.mem.BytesRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class Blob(nu.Shape):
-    body = nu.mem.BytesRef.slot()
+    body = nustd.mem.BytesRef.slot()
 ctx = nu.Context().bind(dict, {"body": b"hi"}, Blob)
 nu.run(Blob.body.decode(), ctx)[0]
 ```
@@ -210,7 +210,7 @@ A float slot in the dict substrate, carrying the whole Float surface.
 FloatRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.FloatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.FloatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -220,7 +220,7 @@ Path `nu.mem.FloatRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class User(nu.Shape):
-    score = nu.mem.FloatRef.slot()
+    score = nustd.mem.FloatRef.slot()
 ctx = nu.Context().bind(dict, {"score": 1.5}, User)
 nu.run(User.score * 2, ctx)[0]
 ```
@@ -290,7 +290,7 @@ An int slot in the dict substrate, carrying the whole Int surface.
 IntRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.IntRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.IntRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -301,7 +301,7 @@ Path `nu.mem.IntRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class User(nu.Shape):
-    age = nu.mem.IntRef.slot()
+    age = nustd.mem.IntRef.slot()
 ctx = nu.Context().bind(dict, {"age": 41}, User)
 nu.run(User.age + 1, ctx)[0]
 ```
@@ -333,7 +333,7 @@ Builds `None_`.
 
 ```python
 class User(nu.Shape):
-    age = nu.mem.IntRef.slot()
+    age = nustd.mem.IntRef.slot()
 data = {"age": 41}
 ctx = nu.Context().bind(dict, data, User)
 _ = nu.run(User.age.inc(), ctx)
@@ -364,7 +364,7 @@ Builds `None_`.
 
 ```python
 class User(nu.Shape):
-    age = nu.mem.IntRef.slot()
+    age = nustd.mem.IntRef.slot()
 data = {"age": 41}
 ctx = nu.Context().bind(dict, data, User)
 _ = nu.run(User.age.dec(2), ctx)
@@ -442,7 +442,7 @@ A single stored value in the dict substrate, with no value interface.
 ItemRef(address, value_type, value_value_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.ItemRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.ItemRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The untyped leaf: it reads, writes and erases one key, and carries the
 element type as metadata for whoever needs it, but exposes none of the
@@ -458,7 +458,7 @@ one) rather than declared on a Shape.
 
 ```python
 class Port(nu.Shape):
-    tags = nu.mem.ListRef.slot(str)
+    tags = nustd.mem.ListRef.slot(str)
 ctx = nu.Context().bind(dict, {"tags": ["a", "b"]}, Port)
 nu.run(Port.tags[1], ctx)[0]
 ```
@@ -502,7 +502,7 @@ A str slot in the dict substrate, carrying the whole Str surface.
 StrRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.StrRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.StrRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -512,7 +512,7 @@ Path `nu.mem.StrRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class User(nu.Shape):
-    name = nu.mem.StrRef.slot()
+    name = nustd.mem.StrRef.slot()
 ctx = nu.Context().bind(dict, {"name": "ada"}, User)
 nu.run(User.name.upper(), ctx)[0]
 ```

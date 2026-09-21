@@ -3,7 +3,7 @@ title: refs.dict
 description: "Virtuals mapping reference: key-value container backed by a virtuals View."
 ---
 
-Module `nu.kv.refs.dict`.
+Module `nustd.kv.refs.dict`.
 
 Virtuals mapping reference: key-value container backed by a virtuals View.
 
@@ -19,7 +19,7 @@ A mapping slot in KV storage, decomposed into a child per key.
 DictRef(address, value_type, key_type, key_value_type, value_value_type, view_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.DictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.DictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Every value lives at its own address under the slot, so keys can be read,
 written and watched one at a time without touching the rest. Key and

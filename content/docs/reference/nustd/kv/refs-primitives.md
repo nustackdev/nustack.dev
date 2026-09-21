@@ -3,7 +3,7 @@ title: refs.primitives
 description: "virtuals-substrate refs for whole-blob compound values."
 ---
 
-Module `nu.kv.refs.primitives`.
+Module `nustd.kv.refs.primitives`.
 
 virtuals-substrate refs for whole-blob compound values.
 
@@ -32,7 +32,7 @@ A dict leaf in KV storage, written and read back whole as one blob.
 PrimitiveDictRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PrimitiveDictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PrimitiveDictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -185,7 +185,7 @@ A frozenset leaf in KV storage, written and read back whole as one blob.
 PrimitiveFrozenSetRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PrimitiveFrozenSetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PrimitiveFrozenSetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -325,7 +325,7 @@ A list leaf in KV storage, written and read back whole as one blob.
 PrimitiveListRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PrimitiveListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PrimitiveListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -485,7 +485,7 @@ A set leaf in KV storage, written and read back whole as one blob.
 PrimitiveSetRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PrimitiveSetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PrimitiveSetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -639,7 +639,7 @@ A tuple leaf in KV storage, written and read back whole as one blob.
 PrimitiveTupleRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PrimitiveTupleRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PrimitiveTupleRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 

@@ -3,7 +3,7 @@ title: refs.kh57shape
 description: "Virtuals kh57 shapes reference: sparse int-keyed map of homogeneous shapes."
 ---
 
-Module `nu.kv.refs.kh57shape`.
+Module `nustd.kv.refs.kh57shape`.
 
 Virtuals kh57 shapes reference: sparse int-keyed map of homogeneous shapes.
 
@@ -26,7 +26,7 @@ A sparse int-keyed mapping of one shape type, laid out for range sampling.
 Kh57ShapesRef(address, shape_type, view_type=None, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.Kh57ShapesRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.Kh57ShapesRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 The shape-keyed sibling of the kh57 map: keys are non-negative 57-bit
 ints, values are rows with fields of their own, and subscripting descends

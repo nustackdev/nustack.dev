@@ -3,7 +3,7 @@ title: itertools
 description: "Nu surface for Python's `itertools` module."
 ---
 
-Module `nu.std.itertools`.
+Module `nustd.itertools`.
 
 Nu surface for Python's `itertools` module.
 
@@ -18,8 +18,8 @@ A gap-fill: members already in Nu core (`map` / `filter` / `zip` /
 here. Import it the way you would the stdlib:
 
 ```python
-from nu.std.itertools import chain, islice, count
-import nu.std.itertools as itertools     # then itertools.product(a, b)
+from nustd.itertools import chain, islice, count
+import nustd.itertools as itertools     # then itertools.product(a, b)
 ```
 
 ## Call
@@ -56,7 +56,7 @@ Running accumulation: mirrors `itertools.accumulate()`.
 itertools.accumulate(iterable, func=None)
 ```
 
-Path `nu.std.itertools.accumulate`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.accumulate`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 Without `func` it is a running sum. With `func` (a Nu term) each step
 reads the running value via `AttrRef("acc")` and the item via
@@ -79,7 +79,7 @@ Yield tuples of up to `n` items: mirrors `itertools.batched()`.
 itertools.batched(iterable, n)
 ```
 
-Path `nu.std.itertools.batched`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.batched`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -98,7 +98,7 @@ Concatenate `iterables` end to end: mirrors `itertools.chain()`.
 itertools.chain()
 ```
 
-Path `nu.std.itertools.chain`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.chain`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 Undocumented: example.
 
@@ -110,7 +110,7 @@ Flatten an iterable of iterables one level: `itertools.chain.from_iterable()`.
 itertools.chain_from_iterable(iterable)
 ```
 
-Path `nu.std.itertools.chain_from_iterable`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.chain_from_iterable`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -128,7 +128,7 @@ Undocumented: example.
 itertools.combinations(iterable, r)
 ```
 
-Path `nu.std.itertools.combinations`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.combinations`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -147,7 +147,7 @@ Undocumented: example.
 itertools.combinations_with_replacement(iterable, r)
 ```
 
-Path `nu.std.itertools.combinations_with_replacement`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.combinations_with_replacement`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -166,7 +166,7 @@ Keep `data` items where `selectors` is truthy: `itertools.compress()`.
 itertools.compress(data, selectors)
 ```
 
-Path `nu.std.itertools.compress`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.compress`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -185,7 +185,7 @@ Count from `start` by `step` forever: mirrors `itertools.count()`.
 itertools.count(start=0, step=1)
 ```
 
-Path `nu.std.itertools.count`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.count`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 Infinite - bound it with `islice` (or another short consumer).
 
@@ -206,7 +206,7 @@ Repeat `iterable` endlessly: mirrors `itertools.cycle()`.
 itertools.cycle(iterable)
 ```
 
-Path `nu.std.itertools.cycle`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.cycle`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -224,7 +224,7 @@ Skip while `predicate` holds, then yield the rest: `itertools.dropwhile()`.
 itertools.dropwhile(predicate, iterable)
 ```
 
-Path `nu.std.itertools.dropwhile`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.dropwhile`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 `predicate` reads the current item via `AttrRef("item")`.
 
@@ -245,7 +245,7 @@ Keep items where `predicate` is falsy: mirrors `itertools.filterfalse()`.
 itertools.filterfalse(predicate, iterable)
 ```
 
-Path `nu.std.itertools.filterfalse`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.filterfalse`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 `predicate` reads the current item via `AttrRef("item")`.
 
@@ -266,7 +266,7 @@ Group consecutive items by `key`: mirrors `itertools.groupby()`.
 itertools.groupby(iterable, key=None)
 ```
 
-Path `nu.std.itertools.groupby`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.groupby`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 Yields `(key_value, tuple(group))` pairs. With `key` (a Nu term) the key
 reads the item via `AttrRef("item")`; without it items group by identity.
@@ -288,7 +288,7 @@ Slice `iterable` lazily: mirrors `itertools.islice()`.
 itertools.islice(iterable)
 ```
 
-Path `nu.std.itertools.islice`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.islice`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 `args` is 1-3 ints: `stop` | `start, stop` | `start, stop, step`.
 
@@ -308,7 +308,7 @@ Yield overlapping consecutive pairs: mirrors `itertools.pairwise()`.
 itertools.pairwise(iterable)
 ```
 
-Path `nu.std.itertools.pairwise`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.pairwise`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -326,7 +326,7 @@ Undocumented: example.
 itertools.permutations(iterable, r=None)
 ```
 
-Path `nu.std.itertools.permutations`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.permutations`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -345,7 +345,7 @@ The cartesian product of `iterables`: mirrors `itertools.product()`.
 itertools.product(repeat=1)
 ```
 
-Path `nu.std.itertools.product`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.product`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -363,7 +363,7 @@ Yield `elem` `times` times, or forever: mirrors `itertools.repeat()`.
 itertools.repeat(elem, times=None)
 ```
 
-Path `nu.std.itertools.repeat`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.repeat`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 
@@ -382,7 +382,7 @@ Apply `function` to unpacked items: mirrors `itertools.starmap()`.
 itertools.starmap(function, iterable)
 ```
 
-Path `nu.std.itertools.starmap`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.starmap`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 Each item is a tuple; `function` reads its parts via
 `TupleAttrRef("item")[0]`, `[1]`, ...
@@ -404,7 +404,7 @@ Yield while `predicate` holds, stop at the first falsy: `itertools.takewhile()`.
 itertools.takewhile(predicate, iterable)
 ```
 
-Path `nu.std.itertools.takewhile`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.takewhile`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 `predicate` reads the current item via `AttrRef("item")`.
 
@@ -425,7 +425,7 @@ Split `iterable` into `n` independent iterators: `itertools.tee()`.
 itertools.tee(iterable, n=2)
 ```
 
-Path `nu.std.itertools.tee`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Any`.
+Path `nustd.itertools.tee`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Any`.
 
 Returns an `Any` holding a *tuple* of `n` iterators (not a stream),
 so it is the one member here backed by a `ScalarQuery`. Its source rides
@@ -449,7 +449,7 @@ Zip to the longest, padding with `fillvalue`: `itertools.zip_longest()`.
 itertools.zip_longest(fillvalue=None)
 ```
 
-Path `nu.std.itertools.zip_longest`. Defined on `nu.std.itertools.functions`, bound as a function. Builds `Nu`.
+Path `nustd.itertools.zip_longest`. Defined on `nustd.itertools.functions`, bound as a function. Builds `Nu`.
 
 **Arguments**
 

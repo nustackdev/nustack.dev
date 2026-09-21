@@ -3,7 +3,7 @@ title: refs.set
 description: "Dict set reference: unordered unique-element container."
 ---
 
-Module `nu.mem.refs.set`.
+Module `nustd.mem.refs.set`.
 
 Dict set reference: unordered unique-element container.
 
@@ -19,7 +19,7 @@ A set slot in the dict substrate, holding one plain set of values.
 SetRef(address, item_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.SetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.SetRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 No descent: a set has no addresses, so there is no child ref to navigate
 to. Everything happens through the set calls - membership, the algebra
@@ -35,7 +35,7 @@ to. Everything happens through the set calls - membership, the algebra
 
 ```python
 class Port(nu.Shape):
-    members = nu.mem.SetRef.slot(str)
+    members = nustd.mem.SetRef.slot(str)
 ctx = nu.Context().bind(dict, {"members": {"a"}}, Port)
 _ = nu.run(Port.members.add("b"), ctx)
 sorted(nu.run(Port.members, ctx)[0])

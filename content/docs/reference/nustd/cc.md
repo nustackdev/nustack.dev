@@ -3,7 +3,7 @@ title: cc
 description: "Nu Claude Code fabric."
 ---
 
-Module `nu.cc`.
+Module `nustd.cc`.
 
 Nu Claude Code fabric.
 
@@ -15,10 +15,10 @@ Example:
 
 ```python
 class Agent(nu.Service):
-    ask = nu.cc.PromptRef.method()
+    ask = nustd.cc.PromptRef.method()
 
 app = nu.With(
-    nu.cc.bind(Agent, model="claude-sonnet-4-5", permission_mode="acceptEdits"),
+    nustd.cc.bind(Agent, model="claude-sonnet-4-5", permission_mode="acceptEdits"),
     body=nu.print(nu.Dict(Agent.ask(prompt="write a haiku about rust"))["text"]),
 )
 
@@ -27,7 +27,7 @@ asyncio.run(nu.arun(app))
 
 ## interactions
 
-Module `nu.cc.interactions`.
+Module `nustd.cc.interactions`.
 
 CCPrompt: ScalarAction that runs one Claude Code prompt turn.
 
@@ -43,7 +43,7 @@ One prompt turn against the Claude Code agent a PromptRef addresses.
 CCPrompt(ref, args)
 ```
 
-Path `nu.cc.CCPrompt`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
+Path `nustd.cc.CCPrompt`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 2 (2 required).
 
 Built by calling a PromptRef rather than written by hand. At evaluation
 it resolves the Ref, merges the endpoint's declared defaults under this
@@ -73,7 +73,7 @@ not None.
 **Notes**
 
 - Declared as mutating its Ref child, so runs against one agent stay ordered and are never folded together.
-- Under a `nu.cc.Session` bracket it reads the session id off the handle and resumes; the first call in the bracket starts fresh and writes its id back for the rest.
+- Under a `nustd.cc.Session` bracket it reads the session id off the handle and resumes; the first call in the bracket starts fresh and writes its id back for the rest.
 - An explicit `resume=` override wins over the bracket's handle.
 - The sync path drives the async SDK through `asyncio.run`, so it raises if a loop is already running. Use `nu.arun` anywhere near an event loop.
 
@@ -81,9 +81,9 @@ not None.
 
 ```python
 class Agent(nu.Service):
-    ask = nu.cc.PromptRef.method()
+    ask = nustd.cc.PromptRef.method()
 app = nu.With(
-    nu.cc.bind(Agent, model="claude-sonnet-4-5", permission_mode="acceptEdits"),
+    nustd.cc.bind(Agent, model="claude-sonnet-4-5", permission_mode="acceptEdits"),
     body=nu.print(nu.dict(Agent.ask("write a haiku about rust"))["text"]),
 )
 asyncio.run(nu.arun(app))
@@ -91,11 +91,11 @@ asyncio.run(nu.arun(app))
 
 ## session
 
-Module `nu.cc.session`.
+Module `nustd.cc.session`.
 
 Session: lifecycle bracket that scopes a cc session across nested prompts.
 
-Mirrors the nu.kv pattern (Snapshot / Transaction): a lazy handle is bound into
+Mirrors the nustd.kv pattern (Snapshot / Transaction): a lazy handle is bound into
 the ctx on entry; every PromptRef call inside the bracket reads it and threads
 `resume=session_id` so cc treats the calls as one continuous session.
 
@@ -114,7 +114,7 @@ Makes every prompt in its body continue one Claude Code conversation.
 Session(*body)
 ```
 
-Path `nu.cc.Session`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity None (0 required).
+Path `nustd.cc.Session`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity None (0 required).
 
 Without it each prompt is a cold start that remembers nothing. The
 bracket binds a fresh handle on entry; the first prompt underneath runs
@@ -143,10 +143,10 @@ Whatever the body yields; the bracket adds nothing of its own.
 
 ```python
 class Agent(nu.Service):
-    ask = nu.cc.PromptRef.method()
+    ask = nustd.cc.PromptRef.method()
 app = nu.With(
-    nu.cc.bind(Agent, model="claude-sonnet-4-5"),
-    body=nu.cc.Session(
+    nustd.cc.bind(Agent, model="claude-sonnet-4-5"),
+    body=nustd.cc.Session(
         nu.print(nu.dict(Agent.ask("pick a number between 1 and 10"))["text"]),
         nu.print(nu.dict(Agent.ask("what number did you pick?"))["text"]),
     ),
@@ -156,11 +156,11 @@ asyncio.run(nu.arun(app))
 
 ## refs
 
-Module `nu.cc.refs`.
+Module `nustd.cc.refs`.
 
 PromptRef: Ref addressing a Claude Code prompt endpoint on a Service.
 
-Mirrors nu.http verb refs: `.method(**defaults)` returns a Method declaration
+Mirrors nustd.http verb refs: `.method(**defaults)` returns a Method declaration
 that the ServiceMeta descriptor unwraps at class access; calling the Ref with
 kwargs produces a CCPrompt interaction.
 
@@ -176,7 +176,7 @@ Addresses a Claude Code agent on a Service, one Ref per agent role.
 PromptRef(name, owner_service=None)
 ```
 
-Path `nu.cc.PromptRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.cc.PromptRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Written in a Service class body. The Ref carries no configuration of its
 own beyond its declared defaults: the model, working directory, tool
@@ -186,16 +186,16 @@ standing for a differently-configured agent.
 
 **Notes**
 
-- Every call spawns a fresh Claude Code session unless it runs inside a `nu.cc.Session` bracket, which threads the session id through so the calls read as one conversation.
+- Every call spawns a fresh Claude Code session unless it runs inside a `nustd.cc.Session` bracket, which threads the session id through so the calls read as one conversation.
 - The Ref needs the `claude-agent-sdk` package and a working `claude` CLI on the machine that evaluates it.
 
 **Example**
 
 ```python
 class Agent(nu.Service):
-    ask = nu.cc.PromptRef.method(max_turns=1)
+    ask = nustd.cc.PromptRef.method(max_turns=1)
 app = nu.With(
-    nu.cc.bind(Agent, model="claude-sonnet-4-5", cwd="/tmp"),
+    nustd.cc.bind(Agent, model="claude-sonnet-4-5", cwd="/tmp"),
     body=nu.print(nu.dict(Agent.ask("name this directory"))["text"]),
 )
 asyncio.run(nu.arun(app))
@@ -225,7 +225,7 @@ Undocumented: example.
 
 ## presets
 
-Module `nu.cc.presets`.
+Module `nustd.cc.presets`.
 
 bind(): Provide a CCFabric for a Service.
 
@@ -241,7 +241,7 @@ Configure the Claude Code agent a Service's PromptRefs run against.
 cc.bind(service_cls)
 ```
 
-Path `nu.cc.bind`. Defined on `nu.cc.presets`, bound as a function. Builds `Provide`.
+Path `nustd.cc.bind`. Defined on `nustd.cc.presets`, bound as a function. Builds `Provide`.
 
 What it provides is tagged by the Service class, which is how a PromptRef
 declared on that class finds its fabric, and how one program can run
@@ -269,5 +269,5 @@ A Provide to hand to `nu.With`.
 **Example**
 
 ```python
-app = nu.With(nu.cc.bind(Agent, model="claude-sonnet-4-5", cwd="/srv/repo"), body=...)
+app = nu.With(nustd.cc.bind(Agent, model="claude-sonnet-4-5", cwd="/srv/repo"), body=...)
 ```

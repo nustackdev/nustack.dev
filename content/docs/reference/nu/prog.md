@@ -11,7 +11,8 @@ The `prog` fabric hosts interactions whose subject is a Nu program itself:
 
 - `LoadNu` -- read python source, yield the Nu term it constructs. Source
   is the authoring format and the artifact of record; a Nu tree is what it
-  lowers to, one way.
+  lowers to, one way. Its `rewrite` slot is where a host says where the
+  term lands, so no term can be obtained having skipped the rewrite.
 - `Eval` -- dynamic evaluation. A scalar carrier yields a Nu term at
   runtime; Eval compiles it against the current schema, validates it against
   an optional promise, and drives it inside the current Runtime.
@@ -153,6 +154,14 @@ case, but the slot takes any `Nu[str]`, so the real one - reading the
 source out of kv at an address the program computed - is the same node with
 a different child.
 
+Where the term *lands* is the loader's business. `rewrite` is a
+`Nu -> Nu` transform applied to the constructed term before anyone can see
+it, which is where re-rooting a snippet's bare ref chains under the block that
+owns them goes (`rerooter`). It sits on `LoadNu` rather than
+being a node someone composes in front of `Eval` for one reason: on the slot
+there is no way to obtain a term that skipped it, and composed in front there
+is, and forgetting it writes to the wrong paths silently.
+
 Where it is *built* is ctx's business. `LoadNu` resolves a
 `PyBrace` off `rt.ctx`; with none bound it falls
 back to an in-process brace, so a bare `LoadNu` in a plain tree works with
@@ -179,23 +188,30 @@ have to re-check for one on every value that passes through it. The record
 itself stays reachable on `.diagnostic`, which is what a feedback loop
 handing the failure back to its author reads.
 
+A rewrite reaches the whole term it is handed, `Eval` carriers included,
+because a carrier is a plain child. The one thing it cannot reach is a term
+some *other* load builds at run time, inside a nested Runtime, after this
+rewrite already ran. Rather than let that term through un-rewritten and write
+to bare paths, a load carrying a rewrite refuses to yield a term with another
+`LoadNu` in it (`RewriteEscapeError`). Nothing nests loads today.
+
 Async classification: portable. The construction is blocking (a venv brace
 sits on a pipe read for its whole duration), so `_acompile` runs it
 off-thread rather than declaring the atom async-only.
 
 | Name | Sort | Call | Meaning |
 | --- | --- | --- | --- |
-| [LoadNu](#loadnu) | `scalar_query` | `LoadNu(source, entry='out', scope=None, filename='<nu program>', brace=<UNSET>)` | Constructs a Nu term from python source, in the brace bound on ctx. |
+| [LoadNu](#loadnu) | `scalar_query` | `LoadNu(source, entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None)` | Constructs a Nu term from python source, in the brace bound on ctx. |
 
 ### LoadNu
 
 Constructs a Nu term from python source, in the brace bound on ctx.
 
 ```python
-LoadNu(source, entry='out', scope=None, filename='<nu program>', brace=<UNSET>)
+LoadNu(source, entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None)
 ```
 
-Path `nu.prog.LoadNu`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 5 (1 required).
+Path `nu.prog.LoadNu`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 6 (1 required).
 
 The source is a whole module, not an expression, and the term comes from
 calling its entry point. The entry point's own signature is the scope
@@ -217,10 +233,11 @@ program needs; `Eval(LoadNu(source))` is the pair that also drives it.
 | `scope` | `Mapping[str, object] \| None` | `None` | plain-data values offered to the entry point, bound by parameter name. Values are Nu children, so any of them may be computed; they must end up picklable for a venv brace. |
 | `filename` | `StrArg` | `'<nu program>'` | name frames and diagnostics attribute the source to. |
 | `brace` | `object` | `<UNSET>` | tag identifying the `PyBrace` on ctx. Omit for the untagged singleton, or for no brace at all. |
+| `rewrite` | `Transform \| None` | `None` | a `Nu -> Nu` transform run on the constructed term before it is yielded. The binding context for *where* the term lands, the way `scope` is the binding context for what it reads: `rerooter` is the one that splices a snippet's bare ref chains under the block that owns them. |
 
 **Yields**
 
-The Nu term the entry point returned, unevaluated.
+The Nu term the entry point returned, rewritten and unevaluated.
 
 **Notes**
 
@@ -232,6 +249,8 @@ The Nu term the entry point returned, unevaluated.
 - It never yields a Diagnostic, only raises. A downstream `Eval` would otherwise have to re-check every value passing through it for one.
 - The traceback in a diagnostic renders the snippet's actual source lines, because the source is seeded into `linecache` under `filename` before it is compiled.
 - Portable across sync and async. Construction is blocking (a venv brace sits on a pipe read for its whole duration), so the async path runs it off-thread rather than making the atom async-only.
+- The rewrite runs on this side of the brace, on the term that came back, so it is a live python callable and never has to pickle.
+- A rewrite is bound per load and there is no way around it, which is the point of it being a slot. A load with a rewrite refuses to yield a term holding another `LoadNu`, because that inner load builds its term later and would escape.
 
 **Examples**
 
@@ -297,7 +316,7 @@ The cost is that the verbs are not overridable per substrate. Nothing wants
 that: where the source comes from is the child's business, and the child is
 what differs between substrates.
 
-Construction takes no `.of()`. The `nu.std` Forms use classmethods
+Construction takes no `.of()`. The `nustd` Forms use classmethods
 because their payloads need parsing atoms to build; `Program` does not.
 `TypedNu.__init__` wraps a single child and `Nu` auto-wraps a non-Term
 child into a `Literal`, so `Program(SOURCE)` with a bare `str` is
@@ -324,7 +343,7 @@ arguments through to `LoadNu`.
 **Notes**
 
 - The verbs compose rather than adding atoms. `.load()` is a `LoadNu`, `.run()` is an `Eval` over it, and `.run(on_error=...)` is those two inside a `TryCatch`. The tree shows the real control flow, so attribute sweeps, effect classification and promise checks all reach it with no special case for programs.
-- Mixed into a substrate ref it becomes a program-valued slot (`nu.kv`'s `ProgramRef` and its `nu.mem` twin), where the child is what reads the source out of storage. Nothing else about the Form changes, which is why the verbs are not overridable per substrate.
+- Mixed into a substrate ref it becomes a program-valued slot (`nustd.kv`'s `ProgramRef` and its `nustd.mem` twin), where the child is what reads the source out of storage. Nothing else about the Form changes, which is why the verbs are not overridable per substrate.
 - No `.of()` constructor. `Program(source)` with a bare `str` is already the right node, because `Nu` auto-wraps a non-Term child into a `Literal`.
 - Everything the value carries is a `Str`: source text is what a program is until something constructs it.
 
@@ -345,7 +364,7 @@ nu.run(nu.prog.Program(src).run())[0]
 
 **Methods**
 
-#### `.load(entry='out', scope=None, filename='<nu program>', brace=<UNSET>)`
+#### `.load(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None)`
 
 Construct the term without running it.
 
@@ -362,6 +381,7 @@ Nu term and stops there.
 | `scope` | `Mapping[str, object] \| None` | `None` | plain-data values offered to the entry point, bound by parameter name. |
 | `filename` | `StrArg` | `'<nu program>'` | name frames and diagnostics attribute the source to. |
 | `brace` | `object` | `<UNSET>` | tag identifying the `PyBrace` on ctx. Omit for the untagged singleton, or for no brace. |
+| `rewrite` | `Transform \| None` | `None` | a `Nu -> Nu` transform run on the constructed term, which is where a host says where the snippet's refs land. |
 
 **Notes**
 
@@ -369,7 +389,7 @@ Nu term and stops there.
 
 Undocumented: example.
 
-#### `.run(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, on_error=None)`
+#### `.run(entry='out', scope=None, filename='<nu program>', brace=<UNSET>, rewrite=None, on_error=None)`
 
 Construct the term and drive it.
 
@@ -383,6 +403,7 @@ Builds `Nu`.
 | `scope` | `Mapping[str, object] \| None` | `None` | plain-data values offered to the entry point, bound by parameter name. |
 | `filename` | `StrArg` | `'<nu program>'` | name frames and diagnostics attribute the source to. |
 | `brace` | `object` | `<UNSET>` | tag identifying the `PyBrace` on ctx. |
+| `rewrite` | `Transform \| None` | `None` | a `Nu -> Nu` transform run on the constructed term, before anything evaluates it. |
 | `on_error` | `Nu \| None` | `None` | branch to run when construction fails. Given one, the whole thing is wrapped in a `TryCatch` filtered to `ConstructionError`, and the branch reads the caught exception off the attrs fabric with `AttrRef("error")`. Only construction failures are caught; whatever the program itself raises propagates. |
 
 **Notes**

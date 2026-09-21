@@ -3,7 +3,7 @@ title: uuid
 description: "Nu surface for Python's `uuid` module."
 ---
 
-Module `nu.std.uuid`.
+Module `nustd.uuid`.
 
 Nu surface for Python's `uuid` module.
 
@@ -13,13 +13,13 @@ Mirrors `uuid` 1-1: `UUID` is the class (a Form), `uuid1`/`uuid3`/
 (the atoms both build). Import it the way you would the stdlib:
 
 ```python
-from nu.std.uuid import UUID, uuid4
-import nu.std.uuid as uuid     # then uuid.uuid4(), uuid.UUID.from_str(...)
+from nustd.uuid import UUID, uuid4
+import nustd.uuid as uuid     # then uuid.uuid4(), uuid.UUID.from_str(...)
 ```
 
 ## forms
 
-Module `nu.std.uuid.forms`.
+Module `nustd.uuid.forms`.
 
 UUID - the typed access surface for `uuid.UUID`.
 
@@ -47,7 +47,7 @@ UUID interface - the `uuid.UUID` class as a Form.
 UUID()
 ```
 
-Path `nu.std.uuid.UUID`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.uuid.UUID`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Mirrors the class surface only: the `UUID(...)` constructor (the
 `from_*` alternate constructors below) plus instance ops (accessors,
@@ -271,9 +271,9 @@ Undocumented: example.
 
 ## functions
 
-Module `nu.std.uuid.functions`.
+Module `nustd.uuid.functions`.
 
-Module-level functions for `nu.std.uuid` - the function namespace.
+Module-level functions for `nustd.uuid` - the function namespace.
 
 These mirror `uuid.uuid1` / `uuid.uuid3` / `uuid.uuid4` / `uuid.uuid5`:
 free functions, not methods on the type. Each is a thin wrapper that builds its
@@ -298,7 +298,7 @@ A host/time UUID (version 1): mirrors `uuid.uuid1()`.
 uuid.uuid1(node=None, clock_seq=None)
 ```
 
-Path `nu.std.uuid.uuid1`. Defined on `nu.std.uuid.functions`, bound as a function. Builds `UUID`.
+Path `nustd.uuid.uuid1`. Defined on `nustd.uuid.functions`, bound as a function. Builds `UUID`.
 
 **Arguments**
 
@@ -317,7 +317,7 @@ A name-based MD5 UUID (version 3): mirrors `uuid.uuid3()`.
 uuid.uuid3(namespace, name)
 ```
 
-Path `nu.std.uuid.uuid3`. Defined on `nu.std.uuid.functions`, bound as a function. Builds `UUID`.
+Path `nustd.uuid.uuid3`. Defined on `nustd.uuid.functions`, bound as a function. Builds `UUID`.
 
 **Arguments**
 
@@ -336,7 +336,7 @@ A random UUID (version 4): mirrors `uuid.uuid4()`.
 uuid.uuid4()
 ```
 
-Path `nu.std.uuid.uuid4`. Defined on `nu.std.uuid.functions`, bound as a function. Builds `UUID`.
+Path `nustd.uuid.uuid4`. Defined on `nustd.uuid.functions`, bound as a function. Builds `UUID`.
 
 Undocumented: example.
 
@@ -348,7 +348,7 @@ A name-based SHA-1 UUID (version 5): mirrors `uuid.uuid5()`.
 uuid.uuid5(namespace, name)
 ```
 
-Path `nu.std.uuid.uuid5`. Defined on `nu.std.uuid.functions`, bound as a function. Builds `UUID`.
+Path `nustd.uuid.uuid5`. Defined on `nustd.uuid.functions`, bound as a function. Builds `UUID`.
 
 **Arguments**
 

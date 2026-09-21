@@ -12,6 +12,20 @@
     "cc",
     "mp",
     "mp_pool",
-    "std"
+    "ws_server",
+    "math",
+    "cmath",
+    "random",
+    "time",
+    "datetime",
+    "itertools",
+    "functools",
+    "asyncio",
+    "logging",
+    "pathlib",
+    "uuid",
+    "decimal",
+    "fractions",
+    "fin"
   ]
 }

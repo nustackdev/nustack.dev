@@ -3,7 +3,7 @@ title: refs.list
 description: "Virtuals sequence reference: ordered container backed by a virtuals View."
 ---
 
-Module `nu.kv.refs.list`.
+Module `nustd.kv.refs.list`.
 
 Virtuals sequence reference: ordered container backed by a virtuals View.
 
@@ -19,7 +19,7 @@ An ordered list slot in KV storage, decomposed into per-index children.
 ListRef(address, item_type, item_value_type, view_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ListRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Every element lives at its own address under the slot, so the list can be
 appended to, indexed and watched without reading the whole thing. The

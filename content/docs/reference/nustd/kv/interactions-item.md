@@ -3,7 +3,7 @@ title: interactions.item
 description: "Leaf-level KV atoms: read, write and delete one primitive at one address."
 ---
 
-Module `nu.kv.interactions.item`.
+Module `nustd.kv.interactions.item`.
 
 Leaf-level KV atoms: read, write and delete one primitive at one address.
 
@@ -45,7 +45,7 @@ Walks a container Ref's path and drops the view it lands on.
 InitItemCmd(ref)
 ```
 
-Path `nu.kv.InitItemCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
+Path `nustd.kv.InitItemCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
 
 Resolves the Ref's path and opens the view at the end of it, discarding
 the result. The walk is pure navigation - it opens containers, it does
@@ -77,7 +77,7 @@ Reads one primitive off a Ref's parent view in a single storage get.
 ItemPrimitiveGetUnsafe(ref)
 ```
 
-Path `nu.kv.ItemPrimitiveGetUnsafe`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 1 (1 required).
+Path `nustd.kv.ItemPrimitiveGetUnsafe`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 1 (1 required).
 
 Resolves the Ref's parent view and leaf address, then does one `ctx.get`
 against it. No node-type lookup, no primitive assertion, no check that the
@@ -105,8 +105,8 @@ answer here, so this atom never yields INVALID.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Snapshot(ItemPrimitiveGetUnsafe(State.counters["hits"])),
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Snapshot(ItemPrimitiveGetUnsafe(State.counters["hits"])),
 )
 ```
 
@@ -118,7 +118,7 @@ Writes one primitive, creating the parent chain first if it is missing.
 ItemPrimitiveSetUnsafeCmd(ref, value)
 ```
 
-Path `nu.kv.ItemPrimitiveSetUnsafeCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
+Path `nustd.kv.ItemPrimitiveSetUnsafeCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
 
 The self-sufficient unsafe writer: it still skips node-type lookup and the
 primitive assertion, but it does call `ensure_created` on the parent view
@@ -146,8 +146,8 @@ Nothing.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Transaction(
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Transaction(
         ItemPrimitiveSetUnsafeCmd(State.counters["hits"], 1),
     ),
 )
@@ -161,7 +161,7 @@ Writes one primitive as a bare put, assuming the parent chain exists.
 ItemPrimitiveSetUnsafeParentSkipCmd(ref, value)
 ```
 
-Path `nu.kv.ItemPrimitiveSetUnsafeParentSkipCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
+Path `nustd.kv.ItemPrimitiveSetUnsafeParentSkipCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
 
 The fastest write in the fabric and the one with no safety net at all: it
 skips even the `ensure_created` that `ItemPrimitiveSetUnsafeCmd` keeps.
@@ -190,8 +190,8 @@ Nothing.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Transaction(
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Transaction(
         ItemPrimitiveSetUnsafeCmd(State.counters["hits"], 0),
         nu.ForeverDo(
             ItemPrimitiveSetUnsafeParentSkipCmd(State.counters["hits"], 1),
@@ -208,7 +208,7 @@ Deletes one primitive as a bare storage delete.
 ItemPrimitiveDeleteUnsafeCmd(ref)
 ```
 
-Path `nu.kv.ItemPrimitiveDeleteUnsafeCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
+Path `nustd.kv.ItemPrimitiveDeleteUnsafeCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
 
 **Arguments**
 
@@ -230,8 +230,8 @@ Nothing.
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Transaction(
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Transaction(
         ItemPrimitiveDeleteUnsafeCmd(State.counters["hits"]),
     ),
 )
@@ -245,7 +245,7 @@ Stores a whole value as one opaque blob under a Ref, container or not.
 ItemPrimitiveSetCmd(ref, value)
 ```
 
-Path `nu.kv.ItemPrimitiveSetCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
+Path `nustd.kv.ItemPrimitiveSetCmd`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
 
 The safe writer of the group, and the only one here that does not need
 `UnsafePrimitiveOpsBase`: it goes through the parent view's
@@ -279,12 +279,12 @@ Nothing.
 
 ```python
 class State(nu.Shape):
-    raw = nu.kv.PrimitiveListRef.slot()
+    raw = nustd.kv.PrimitiveListRef.slot()
 ```
 
 ```python
 app = nu.With(
-    nu.kv.memory_navigator(),
-    body=nu.kv.Transaction(ItemPrimitiveSetCmd(State.raw, [1, 2, 3])),
+    nustd.kv.memory_navigator(),
+    body=nustd.kv.Transaction(ItemPrimitiveSetCmd(State.raw, [1, 2, 3])),
 )
 ```

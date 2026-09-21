@@ -3,14 +3,14 @@ title: refs.std
 description: "Dict-substrate refs for standard-library value types."
 ---
 
-Module `nu.mem.refs.std`.
+Module `nustd.mem.refs.std`.
 
 Dict-substrate refs for standard-library value types.
 
 Each ref is a typed slot in the nested-dict substrate whose stored form differs
 from its domain type, so it overrides `store` (domain -> storage) and
 `coerce` (storage -> domain). The value interface comes from mixing in the
-matching `nu.std` Form, exactly as `IntRef` mixes in `Int`.
+matching `nustd` Form, exactly as `IntRef` mixes in `Int`.
 
 - Decimal / Fraction / complex / Path / UUID: `str`
 - date / datetime / time / timezone: `str` (ISO / offset)
@@ -41,7 +41,7 @@ A BasisPoint slot in the dict substrate, stored as a raw int of bps.
 BasisPointRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.BasisPointRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.BasisPointRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -50,9 +50,9 @@ Path `nu.mem.BasisPointRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 **Example**
 
 ```python
-from nu.std.fin import PyBasisPoint
+from nustd.fin import PyBasisPoint
 class Fees(nu.Shape):
-    taker = nu.mem.BasisPointRef.slot()
+    taker = nustd.mem.BasisPointRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Fees)
 _ = nu.run(Fees.taker.set(PyBasisPoint(250)), ctx)
@@ -101,7 +101,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.fin.forms.BasisPoint`:
+From `nustd.fin.forms.BasisPoint`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -144,7 +144,7 @@ A complex slot in the dict substrate, stored as `str(complex)`.
 ComplexRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.ComplexRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.ComplexRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -154,7 +154,7 @@ Path `nu.mem.ComplexRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 ```python
 class Signal(nu.Shape):
-    amp = nu.mem.ComplexRef.slot()
+    amp = nustd.mem.ComplexRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Signal)
 _ = nu.run(Signal.amp.set(complex(1, 2)), ctx)
@@ -203,7 +203,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.cmath.forms.complex`:
+From `nustd.cmath.forms.complex`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -240,7 +240,7 @@ A date slot in the dict substrate, stored as an ISO string.
 DateRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.DateRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.DateRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -252,7 +252,7 @@ Path `nu.mem.DateRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from datetime import date
 class Trade(nu.Shape):
-    day = nu.mem.DateRef.slot()
+    day = nustd.mem.DateRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Trade)
 _ = nu.run(Trade.day.set(date(2024, 1, 2)), ctx)
@@ -301,7 +301,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.date`:
+From `nustd.datetime.forms.date`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -347,7 +347,7 @@ A datetime slot in the dict substrate, stored as an ISO string.
 DatetimeRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.DatetimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.DatetimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -359,7 +359,7 @@ Path `nu.mem.DatetimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from datetime import datetime
 class Event(nu.Shape):
-    at = nu.mem.DatetimeRef.slot()
+    at = nustd.mem.DatetimeRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Event)
 _ = nu.run(Event.at.set(datetime(2024, 1, 2, 3, 4)), ctx)
@@ -408,7 +408,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.datetime`:
+From `nustd.datetime.forms.datetime`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -459,7 +459,7 @@ A Decimal slot in the dict substrate, stored as its exact string form.
 DecimalRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.DecimalRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.DecimalRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -471,7 +471,7 @@ Path `nu.mem.DecimalRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from decimal import Decimal
 class Quote(nu.Shape):
-    price = nu.mem.DecimalRef.slot()
+    price = nustd.mem.DecimalRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Quote)
 _ = nu.run(Quote.price.set(Decimal("1.250")), ctx)
@@ -520,7 +520,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.decimal.forms.Decimal`:
+From `nustd.decimal.forms.Decimal`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -578,7 +578,7 @@ A Fraction slot in the dict substrate, stored as `"numerator/denom"`.
 FractionRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.FractionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.FractionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -589,7 +589,7 @@ Path `nu.mem.FractionRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from fractions import Fraction
 class Split(nu.Shape):
-    share = nu.mem.FractionRef.slot()
+    share = nustd.mem.FractionRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Split)
 _ = nu.run(Split.share.set(Fraction(3, 4)), ctx)
@@ -638,7 +638,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.fractions.forms.Fraction`:
+From `nustd.fractions.forms.Fraction`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -685,7 +685,7 @@ A filesystem path slot in the dict substrate, stored as a plain str.
 PathRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.PathRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.PathRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -697,7 +697,7 @@ Path `nu.mem.PathRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from pathlib import PurePath
 class Cfg(nu.Shape):
-    root = nu.mem.PathRef.slot()
+    root = nustd.mem.PathRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Cfg)
 _ = nu.run(Cfg.root.set(PurePath("/srv/app.toml")), ctx)
@@ -746,7 +746,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.pathlib.forms.Path`:
+From `nustd.pathlib.forms.Path`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -798,7 +798,7 @@ A Percentage slot in the dict substrate, stored as a raw float.
 PercentageRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.PercentageRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.PercentageRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -807,9 +807,9 @@ Path `nu.mem.PercentageRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 **Example**
 
 ```python
-from nu.std.fin import PyPercentage
+from nustd.fin import PyPercentage
 class Fees(nu.Shape):
-    rate = nu.mem.PercentageRef.slot()
+    rate = nustd.mem.PercentageRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Fees)
 _ = nu.run(Fees.rate.set(PyPercentage(2.5)), ctx)
@@ -858,7 +858,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.fin.forms.Percentage`:
+From `nustd.fin.forms.Percentage`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -904,7 +904,7 @@ A time-of-day slot in the dict substrate, stored as an ISO string.
 TimeRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.TimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.TimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -915,7 +915,7 @@ Path `nu.mem.TimeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from datetime import time
 class Session(nu.Shape):
-    opens = nu.mem.TimeRef.slot()
+    opens = nustd.mem.TimeRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Session)
 _ = nu.run(Session.opens.set(time(9, 30)), ctx)
@@ -964,7 +964,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.time`:
+From `nustd.datetime.forms.time`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -1002,7 +1002,7 @@ A timedelta slot in the dict substrate, stored as total seconds.
 TimedeltaRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.TimedeltaRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.TimedeltaRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -1014,7 +1014,7 @@ Path `nu.mem.TimedeltaRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from datetime import timedelta
 class Job(nu.Shape):
-    took = nu.mem.TimedeltaRef.slot()
+    took = nustd.mem.TimedeltaRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Job)
 _ = nu.run(Job.took.set(timedelta(minutes=90)), ctx)
@@ -1063,7 +1063,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.timedelta`:
+From `nustd.datetime.forms.timedelta`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -1106,7 +1106,7 @@ A fixed-offset timezone slot, stored as its `UTC±HH:MM` string.
 TimezoneRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.TimezoneRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.TimezoneRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -1118,7 +1118,7 @@ Path `nu.mem.TimezoneRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 from datetime import timedelta, timezone
 class Site(nu.Shape):
-    tz = nu.mem.TimezoneRef.slot()
+    tz = nustd.mem.TimezoneRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Site)
 _ = nu.run(Site.tz.set(timezone(timedelta(hours=5, minutes=30))), ctx)
@@ -1167,7 +1167,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.datetime.forms.timezone`:
+From `nustd.datetime.forms.timezone`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |
@@ -1197,7 +1197,7 @@ A UUID slot in the dict substrate, stored as its hyphenated string.
 UUIDRef(address, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.UUIDRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.UUIDRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -1208,7 +1208,7 @@ Path `nu.mem.UUIDRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 ```python
 import uuid
 class Row(nu.Shape):
-    rid = nu.mem.UUIDRef.slot()
+    rid = nustd.mem.UUIDRef.slot()
 data = {}
 ctx = nu.Context().bind(dict, data, Row)
 _ = nu.run(Row.rid.set(uuid.UUID(int=1)), ctx)
@@ -1257,7 +1257,7 @@ From `nu.domains.shape.forms.item.ItemForm`:
 | `.exists()` | `Exists` | Build an `Exists` query. |
 | `.missing()` | `Missing` | Build a `Missing` query. |
 
-From `nu.std.uuid.forms.UUID`:
+From `nustd.uuid.forms.UUID`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |

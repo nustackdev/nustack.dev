@@ -48,7 +48,7 @@ nu.inspect can describe.
 
 - Yields a string laid out for reading, not a structured record. The shape is stable but not part of the contract - treat it as docs.
 - A module renders its own docstring, then every Shape, Service, Form, Ref, Interaction and free function it holds, one line each.
-- An atom renders the full record for that one subject, and so does a free function such as `nu.std.math.sqrt`.
+- An atom renders the full record for that one subject, and so does a free function such as `nustd.math.sqrt`.
 - A Shape or Service renders its prose and one line per entry, never the entries themselves: the reader descends by looking up the entry path it wants. Walking through a nested Shape slot works the same way, so `myapp.Task.owner.email` resolves.
 
 **Example**

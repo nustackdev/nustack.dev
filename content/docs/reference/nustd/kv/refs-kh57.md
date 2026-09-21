@@ -3,7 +3,7 @@ title: refs.kh57
 description: "Virtuals kh57 mapping reference: sparse int-keyed map with range sampling."
 ---
 
-Module `nu.kv.refs.kh57`.
+Module `nustd.kv.refs.kh57`.
 
 Virtuals kh57 mapping reference: sparse int-keyed map with range sampling.
 
@@ -25,7 +25,7 @@ A sparse int-keyed mapping in KV storage, laid out for range sampling.
 Kh57Ref(address, value_type, value_value_type, view_type=None, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.Kh57Ref`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.Kh57Ref`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Same mapping surface as a dict slot, with the keys pinned to non-negative
 57-bit ints and the physical layout encoded so that a sample or a scan

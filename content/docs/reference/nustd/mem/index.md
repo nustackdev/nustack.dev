@@ -1,11 +1,11 @@
 ---
 title: mem
-description: "nu.mem: the shape fabric over plain nested Python dicts."
+description: "nustd.mem: the shape fabric over plain nested Python dicts."
 ---
 
-Module `nu.mem`.
+Module `nustd.mem`.
 
-nu.mem: the shape fabric over plain nested Python dicts.
+nustd.mem: the shape fabric over plain nested Python dicts.
 
 A Shape declares slots, each slot is a ref, and every ref is a path of keys
 into one dict you hand in. No storage backend, no views, no reactivity: reads
@@ -19,7 +19,7 @@ and filled in as it goes.
 Usage:
 
 ```python
-import nu.mem as nm
+import nustd.mem as nm
 from nu import Context
 from nu.domains.shape import Shape
 
@@ -35,18 +35,18 @@ Typed leaves (`IntRef`, `StrRef`, `DatetimeRef`, ...) each carry their
 value Form, so the ref itself is an operand. Containers (`ListRef`,
 `DictRef`, `SetRef`) hold a plain list, dict or set. `ShapeRef`,
 `ShapesListRef` and `ShapesDictRef` nest Shapes inside Shapes.
-`ProgramRef` holds Nu source. `JQueueRef`, in `nu.mem.refs.jqueue`,
+`ProgramRef` holds Nu source. `JQueueRef`, in `nustd.mem.refs.jqueue`,
 holds a live janus queue and is imported by its own path.
 
 **Modules**
 
 | Module | What |
 | --- | --- |
-| [`nu.mem.refs.jqueue`](/docs/reference/nustd/mem/refs/jqueue) | Janus-backed queue ref for the nu-mem fabric. |
+| [`nustd.mem.refs.jqueue`](/docs/reference/nustd/mem/refs/jqueue) | Janus-backed queue ref for the nu-mem fabric. |
 
 ## refs.std
 
-Module `nu.mem.refs.std`.
+Module `nustd.mem.refs.std`.
 
 Dict-substrate refs for standard-library value types.
 
@@ -69,7 +69,7 @@ Dict-substrate refs for standard-library value types.
 
 ## refs.items
 
-Module `nu.mem.refs.items`.
+Module `nustd.mem.refs.items`.
 
 Dict substrate item refs: typed value holders in nested dicts.
 
@@ -86,7 +86,7 @@ Dict substrate item refs: typed value holders in nested dicts.
 
 ## refs.dict
 
-Module `nu.mem.refs.dict`.
+Module `nustd.mem.refs.dict`.
 
 Dict mapping reference: key-value container backed by nested dict.
 
@@ -98,7 +98,7 @@ Dict mapping reference: key-value container backed by nested dict.
 
 ## refs.list
 
-Module `nu.mem.refs.list`.
+Module `nustd.mem.refs.list`.
 
 Dict sequence reference: ordered container backed by nested list.
 
@@ -110,7 +110,7 @@ Dict sequence reference: ordered container backed by nested list.
 
 ## refs.prog
 
-Module `nu.mem.refs.prog`.
+Module `nustd.mem.refs.prog`.
 
 Dict-substrate ref for a stored Nu program.
 
@@ -122,7 +122,7 @@ Dict-substrate ref for a stored Nu program.
 
 ## refs.base
 
-Module `nu.mem.refs.base`.
+Module `nustd.mem.refs.base`.
 
 Dict substrate refs: navigate nested Python dicts under the runtime.
 
@@ -134,7 +134,7 @@ Dict substrate refs: navigate nested Python dicts under the runtime.
 
 ## refs.set
 
-Module `nu.mem.refs.set`.
+Module `nustd.mem.refs.set`.
 
 Dict set reference: unordered unique-element container.
 
@@ -146,7 +146,7 @@ Dict set reference: unordered unique-element container.
 
 ## refs.shape
 
-Module `nu.mem.refs.shape`.
+Module `nustd.mem.refs.shape`.
 
 Dict shape reference: structured container backed by nested dict.
 
@@ -158,7 +158,7 @@ Dict shape reference: structured container backed by nested dict.
 
 ## refs.dictshape
 
-Module `nu.mem.refs.dictshape`.
+Module `nustd.mem.refs.dictshape`.
 
 Dict shapes dict reference: mapping of homogeneous shapes.
 
@@ -170,7 +170,7 @@ Dict shapes dict reference: mapping of homogeneous shapes.
 
 ## refs.listshape
 
-Module `nu.mem.refs.listshape`.
+Module `nustd.mem.refs.listshape`.
 
 Dict shapes list reference: sequence of homogeneous shapes.
 

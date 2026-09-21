@@ -1,11 +1,11 @@
 ---
 title: proxy
-description: "nu.proxy - transparent RPC transport for fabrics."
+description: "nustd.proxy - transparent RPC transport for fabrics."
 ---
 
-Module `nu.proxy`.
+Module `nustd.proxy`.
 
-nu.proxy - transparent RPC transport for fabrics.
+nustd.proxy - transparent RPC transport for fabrics.
 
 Pure transport. No new refs, no new interactions - method calls on a client
 proxy go over the wire and land on the server-side bound fabric. Same
@@ -50,7 +50,7 @@ Runs its body against a remote fabric as if the fabric were local.
 InvisiblesProxy(target, body=None, address, tag=None, transport='tcp', timeout=5.0, max_retries=3, bg_serve=False, buffered_iteration=True)
 ```
 
-Path `nu.proxy.InvisiblesProxy`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity 9 (2 required).
+Path `nustd.proxy.InvisiblesProxy`. Kind `Bracket`, sort `bracket`, cardinality `transparent`. Arity 9 (2 required).
 
 Connects to an `InvisiblesServer`, takes the root fabric it serves, and
 binds that remote object on the context under the type the caller names.
@@ -90,7 +90,7 @@ body stays a stream, and the connection stays open across the drain.
 **Example**
 
 ```python
-app = nu.proxy.InvisiblesProxy(
+app = nustd.proxy.InvisiblesProxy(
     Navigator,
     address="10.0.0.1:19000",
     body=driver_body,

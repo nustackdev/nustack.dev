@@ -14,8 +14,12 @@ Two families plus the reactive set:
   also exposes forced-mode variants `ParallelThreaded` / `ParallelAsync`
   for explicit placement (Race / AnyN are async-only, no variants).
 - **Control** - compose bodies under Query parameters: `IfDo`, `WhileDo`,
-  `ForeverDo`, `ForEachDo`, `ForRangeDo`, `Delay`, `DelayedDo`,
-  `SwitchDo`.
+  `ForeverDo`, `ForEachDo`, `ForEachParAsync`, `ForEachParReactive`,
+  `ForRangeDo`, `Delay`, `DelayedDo`, `SwitchDo`. `ForEachParAsync`
+  is the fan-out ForEach: one arm per element on the loop, all at once,
+  joining on all. `ForEachParReactive` is that fan-out held open against a
+  change subscription, one arm per element for as long as the element is
+  there.
 - **Reactive** - consume change subscriptions and execute bodies in response:
   `React`, `ReactWhile`, `ReactForever`, `Stream`.
 
@@ -44,6 +48,8 @@ Control flows: Command-composing atoms steered by Query parameters.
 | [Delay](/docs/reference/nu/core/flows/control#delay) | `control` | `Delay(seconds)` | `Delay(seconds)` - sleeps `seconds`, then continues. No body. |
 | [DelayedDo](/docs/reference/nu/core/flows/control#delayeddo) | `control` | `DelayedDo(delay, body)` | `DelayedDo(delay, body)` - sleeps `delay` seconds, then runs `body`. |
 | [ForEachDo](/docs/reference/nu/core/flows/control#foreachdo) | `control` | `ForEachDo(items, body, item='item')` | `ForEachDo(items, body, item="item")` - runs `body` once per element of `items`. |
+| [ForEachParAsync](/docs/reference/nu/core/flows/control#foreachparasync) | `control` | `ForEachParAsync(items, body, item='item')` | `ForEachParAsync(items, body, item="item")` - runs `body` once per element of `items`, every arm on the loop at once. |
+| [ForEachParReactive](/docs/reference/nu/core/flows/control#foreachparreactive) | `control` | `ForEachParReactive(items, change, body, item='item')` | `ForEachParReactive(items, change, body, item="item")` - one arm per element, kept live against `change`. |
 | [ForRangeDo](/docs/reference/nu/core/flows/control#forrangedo) | `control` | `ForRangeDo(start, stop, body, step=1, index='index')` | `ForRangeDo(start, stop, body, *, step=1, index="index")` - runs `body` once per value of `range(start, stop, step)`. |
 | [ForeverDo](/docs/reference/nu/core/flows/control#foreverdo) | `control` | `ForeverDo(body)` | `ForeverDo(body)` - runs `body` on loop forever. |
 | [IfDo](/docs/reference/nu/core/flows/control#ifdo) | `control` | `IfDo(cond, then, else_=None)` | `IfDo(cond, then, else_=None)` - runs `then` or `else_` based on `cond`. |

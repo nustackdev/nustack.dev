@@ -3,7 +3,7 @@ title: refs.base
 description: "Virtuals storage substrate refs: navigate the virtuals View hierarchy."
 ---
 
-Module `nu.kv.refs.base`.
+Module `nustd.kv.refs.base`.
 
 Virtuals storage substrate refs: navigate the virtuals View hierarchy.
 
@@ -42,7 +42,7 @@ A ref to one leaf value in KV storage, read by subscripting its parent.
 PrimitiveRef(address, value_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.PrimitiveRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.PrimitiveRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Evaluating it opens the parent container and subscripts it at this leaf's
 address, so what comes back is the stored value rather than a View. The
@@ -74,7 +74,7 @@ A ref to one container slot in KV storage, read as a live virtuals View.
 ViewRef(address, view_type=None, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.kv.ViewRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.kv.ViewRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Evaluating it navigates to its path and hands back the View itself, not a
 copy, so every container op written on the ref (`keys`, `append`,

@@ -3,7 +3,7 @@ title: refs.dictshape
 description: "Dict shapes dict reference: mapping of homogeneous shapes."
 ---
 
-Module `nu.mem.refs.dictshape`.
+Module `nustd.mem.refs.dictshape`.
 
 Dict shapes dict reference: mapping of homogeneous shapes.
 
@@ -23,7 +23,7 @@ A keyed collection of one Shape's records, stored as a dict of dicts.
 ShapesDictRef(address, shape_type, key_type, key_value_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.ShapesDictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.ShapesDictRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Subscripting descends: `ref[k]` is a `ShapeRef` at that key holding
 the value Shape, so `users["ada"].name` is a path down to a leaf and
@@ -39,9 +39,9 @@ itself act on the outer dict.
 
 ```python
 class User(nu.Shape):
-    name = nu.mem.StrRef.slot()
+    name = nustd.mem.StrRef.slot()
 class Team(nu.Shape):
-    users = nu.mem.ShapesDictRef.slot(User)
+    users = nustd.mem.ShapesDictRef.slot(User)
 data = {}
 ctx = nu.Context().bind(dict, data, Team)
 _ = nu.run(Team.users["ada"].name.set("Ada"), ctx)

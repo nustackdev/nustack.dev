@@ -1,11 +1,11 @@
 ---
 title: cluster
-description: "nu.cluster - the ray compute fabric."
+description: "nustd.cluster - the ray compute fabric."
 ---
 
-Module `nu.cluster`.
+Module `nustd.cluster`.
 
-nu.cluster - the ray compute fabric.
+nustd.cluster - the ray compute fabric.
 
 Ray reframes as a compute fabric: locations are actor processes, addresses
 are tags, the interaction is `Teleport` (execute a Nu tree there).
@@ -39,7 +39,7 @@ Provide(RayCluster, {"address": "auto"},
 
 ## interactions
 
-Module `nu.cluster.interactions`.
+Module `nustd.cluster.interactions`.
 
 `Teleport`: ship the body to a `RayService` for remote execution.
 
@@ -92,7 +92,7 @@ Runs the body on a `RayService` actor instead of in the caller.
 Teleport(body, target=<UNSET>, carry=False)
 ```
 
-Path `nu.cluster.Teleport`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 3 (1 required).
+Path `nustd.cluster.Teleport`. Kind `Policy`, sort `policy`, cardinality `transparent`. Arity 3 (1 required).
 
 A policy over where, not what: the body is captured as a term and is
 never evaluated locally. On each evaluation the tagged `RayService` is
@@ -141,7 +141,7 @@ Provide(RayCluster, {"address": "auto"},
 
 ## refs
 
-Module `nu.cluster.refs`.
+Module `nustd.cluster.refs`.
 
 Refs into the ray fabric: `RayClusterRef` and `RayServiceRef`.
 
@@ -170,7 +170,7 @@ The `RayCluster` bound on the Context.
 RayClusterRef(address=None)
 ```
 
-Path `nu.cluster.RayClusterRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.cluster.RayClusterRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 
@@ -235,7 +235,7 @@ The `RayService` bound at `tag` on the Context.
 RayServiceRef(tag=<UNSET>)
 ```
 
-Path `nu.cluster.RayServiceRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.cluster.RayServiceRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 **Notes**
 

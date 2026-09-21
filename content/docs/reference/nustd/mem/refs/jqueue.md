@@ -3,7 +3,7 @@ title: jqueue
 description: "Janus-backed queue ref for the nu-mem fabric."
 ---
 
-Module `nu.mem.refs.jqueue`.
+Module `nustd.mem.refs.jqueue`.
 
 Janus-backed queue ref for the nu-mem fabric.
 
@@ -14,13 +14,13 @@ processors). `put` and `get` work in both modes; the underlying
 
 Needs janus, which rides the optional `nustd[mem]` extra.
 
-Not re-exported from `nu.mem` (the janus import is optional), so reach for
+Not re-exported from `nustd.mem` (the janus import is optional), so reach for
 it by its own path.
 
 Usage:
 
 ```python
-from nu.mem.refs.jqueue import JQueueRef
+from nustd.mem.refs.jqueue import JQueueRef
 from nu.domains.shape import Shape
 
 class Buf(Shape):
@@ -29,7 +29,7 @@ class Buf(Shape):
 
 ## interactions
 
-Module `nu.mem.refs.jqueue.interactions`.
+Module `nustd.mem.refs.jqueue.interactions`.
 
 Interactions for JQueueRef / JQueue.
 
@@ -58,7 +58,7 @@ Shuts the queue down, both the sync and the async half at once.
 Close(queue)
 ```
 
-Path `nu.mem.refs.jqueue.Close`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
+Path `nustd.mem.refs.jqueue.Close`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 1 (1 required).
 
 **Arguments**
 
@@ -79,7 +79,7 @@ Nothing.
 **Example**
 
 ```python
-from nu.mem.refs.jqueue import JQueueRef, QueueClosed
+from nustd.mem.refs.jqueue import JQueueRef, QueueClosed
 class Buf(nu.Shape):
     queue = JQueueRef.slot(item_type=int)
 ctx = nu.Context().bind(dict, {}, Buf)
@@ -102,7 +102,7 @@ Takes the oldest item, waiting for one when the queue is empty.
 Get(queue)
 ```
 
-Path `nu.mem.refs.jqueue.Get`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 1 (1 required).
+Path `nustd.mem.refs.jqueue.Get`. Kind `ScalarAction`, sort `scalar_action`, cardinality `scalar`. Arity 1 (1 required).
 
 **Arguments**
 
@@ -123,7 +123,7 @@ The item taken from the queue.
 **Example**
 
 ```python
-from nu.mem.refs.jqueue import JQueueRef
+from nustd.mem.refs.jqueue import JQueueRef
 class Buf(nu.Shape):
     queue = JQueueRef.slot(capacity=2, item_type=int)
 ctx = nu.Context().bind(dict, {}, Buf)
@@ -143,7 +143,7 @@ Enqueues a value, waiting for room when the queue is full.
 Put(queue, value)
 ```
 
-Path `nu.mem.refs.jqueue.Put`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
+Path `nustd.mem.refs.jqueue.Put`. Kind `Command`, sort `scalar_command`, cardinality `void`. Arity 2 (2 required).
 
 **Arguments**
 
@@ -165,7 +165,7 @@ Nothing.
 **Example**
 
 ```python
-from nu.mem.refs.jqueue import JQueueRef
+from nustd.mem.refs.jqueue import JQueueRef
 class Buf(nu.Shape):
     queue = JQueueRef.slot(capacity=2, item_type=int)
 ctx = nu.Context().bind(dict, {}, Buf)
@@ -185,7 +185,7 @@ How many items are waiting in the queue at this instant.
 QSize(queue)
 ```
 
-Path `nu.mem.refs.jqueue.QSize`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 1 (1 required).
+Path `nustd.mem.refs.jqueue.QSize`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`. Arity 1 (1 required).
 
 **Arguments**
 
@@ -205,7 +205,7 @@ The item count as an int.
 **Example**
 
 ```python
-from nu.mem.refs.jqueue import JQueueRef
+from nustd.mem.refs.jqueue import JQueueRef
 class Buf(nu.Shape):
     queue = JQueueRef.slot(item_type=int)
 ctx = nu.Context().bind(dict, {}, Buf)
@@ -218,7 +218,7 @@ nu.run(Buf.queue.qsize(), ctx)[0]
 
 ## form
 
-Module `nu.mem.refs.jqueue.form`.
+Module `nustd.mem.refs.jqueue.form`.
 
 JQueue: typed surface for janus-backed queue refs.
 
@@ -237,7 +237,7 @@ The queue verbs, over any node that yields a janus queue.
 JQueue(operand)
 ```
 
-Path `nu.mem.refs.jqueue.JQueue`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
+Path `nustd.mem.refs.jqueue.JQueue`. Kind `ScalarQuery`, sort `scalar_query`, cardinality `scalar`.
 
 Holds nothing itself: it wraps one Nu child, normally a `JQueueRef`,
 and every call on it builds an interaction over that child. A ref that
@@ -251,7 +251,7 @@ just by mixing this in.
 **Example**
 
 ```python
-from nu.mem.refs.jqueue import JQueueRef
+from nustd.mem.refs.jqueue import JQueueRef
 class Buf(nu.Shape):
     queue = JQueueRef.slot(item_type=int)
 ctx = nu.Context().bind(dict, {}, Buf)
@@ -351,7 +351,7 @@ From `nu.lang.forms.Form`:
 
 ## ref
 
-Module `nu.mem.refs.jqueue.ref`.
+Module `nustd.mem.refs.jqueue.ref`.
 
 JQueueRef: janus-backed queue ref in the nu-mem fabric.
 
@@ -371,7 +371,7 @@ A slot holding a live janus queue, bridging the loop and the threads.
 JQueueRef(address, parent_ref=None, owner_shape=None, capacity=None, item_type=object)
 ```
 
-Path `nu.mem.refs.jqueue.JQueueRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.refs.jqueue.JQueueRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Reading it hands back the queue object itself rather than any stored
 data, which is what makes one side able to `put` from a thread while
@@ -389,7 +389,7 @@ dict is the same queue.
 **Example**
 
 ```python
-from nu.mem.refs.jqueue import JQueueRef
+from nustd.mem.refs.jqueue import JQueueRef
 class Buf(nu.Shape):
     queue = JQueueRef.slot(capacity=2, item_type=int)
 ctx = nu.Context().bind(dict, {}, Buf)
@@ -403,7 +403,7 @@ nu.run(Buf.queue.get(), ctx)[0]
 
 **Inherited methods**
 
-From `nu.mem.refs.jqueue.form.JQueue`:
+From `nustd.mem.refs.jqueue.form.JQueue`:
 
 | Call | Builds | Meaning |
 | --- | --- | --- |

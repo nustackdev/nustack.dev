@@ -1,18 +1,18 @@
 ---
 title: kv
-description: "nu.kv: virtuals (polymorphic views) KV-storage fabric for Nu Shapes."
+description: "nustd.kv: virtuals (polymorphic views) KV-storage fabric for Nu Shapes."
 ---
 
-Module `nu.kv`.
+Module `nustd.kv`.
 
-nu.kv: virtuals (polymorphic views) KV-storage fabric for Nu Shapes.
+nustd.kv: virtuals (polymorphic views) KV-storage fabric for Nu Shapes.
 
 Refs over virtuals views backed by a tkv snapshot / transaction.
 
 Usage:
 
 ```python
-from nu.kv import IntRef, StrRef, ShapeRef, Atomic
+from nustd.kv import IntRef, StrRef, ShapeRef, Atomic
 from nu import Context
 from nu.domains.shape import Shape
 
@@ -25,11 +25,11 @@ class User(Shape):
 
 | Module | What |
 | --- | --- |
-| [`nu.kv.fabrics`](/docs/reference/nustd/kv/fabrics) | nu.kv.fabrics - `FabricLifecycle` classes for the virtuals stack. |
+| [`nustd.kv.fabrics`](/docs/reference/nustd/kv/fabrics) | nustd.kv.fabrics - `FabricLifecycle` classes for the virtuals stack. |
 
 ## interactions.item
 
-Module `nu.kv.interactions.item`.
+Module `nustd.kv.interactions.item`.
 
 Leaf-level KV atoms: read, write and delete one primitive at one address.
 
@@ -46,7 +46,7 @@ Leaf-level KV atoms: read, write and delete one primitive at one address.
 
 ## interactions.collections
 
-Module `nu.kv.interactions.collections`.
+Module `nustd.kv.interactions.collections`.
 
 Container-level KV atoms: sweep every direct primitive child at once.
 
@@ -59,7 +59,7 @@ Container-level KV atoms: sweep every direct primitive child at once.
 
 ## interactions.kh57
 
-Module `nu.kv.interactions.kh57`.
+Module `nustd.kv.interactions.kh57`.
 
 kh57 atoms: read a sub-range of an int-keyed series, sampled or whole.
 
@@ -72,7 +72,7 @@ kh57 atoms: read a sub-range of an int-keyed series, sampled or whole.
 
 ## interactions.atomicity
 
-Module `nu.kv.interactions.atomicity`.
+Module `nustd.kv.interactions.atomicity`.
 
 Atomic boundaries over KV storage, and the retry that makes them survivable.
 
@@ -87,7 +87,7 @@ Atomic boundaries over KV storage, and the retry that makes them survivable.
 
 ## refs.items
 
-Module `nu.kv.refs.items`.
+Module `nustd.kv.refs.items`.
 
 Virtuals item refs: typed leaf-value holders backed by virtuals storage.
 
@@ -104,7 +104,7 @@ Virtuals item refs: typed leaf-value holders backed by virtuals storage.
 
 ## refs.dict
 
-Module `nu.kv.refs.dict`.
+Module `nustd.kv.refs.dict`.
 
 Virtuals mapping reference: key-value container backed by a virtuals View.
 
@@ -116,7 +116,7 @@ Virtuals mapping reference: key-value container backed by a virtuals View.
 
 ## refs.kh57
 
-Module `nu.kv.refs.kh57`.
+Module `nustd.kv.refs.kh57`.
 
 Virtuals kh57 mapping reference: sparse int-keyed map with range sampling.
 
@@ -128,7 +128,7 @@ Virtuals kh57 mapping reference: sparse int-keyed map with range sampling.
 
 ## refs.kh57shape
 
-Module `nu.kv.refs.kh57shape`.
+Module `nustd.kv.refs.kh57shape`.
 
 Virtuals kh57 shapes reference: sparse int-keyed map of homogeneous shapes.
 
@@ -140,7 +140,7 @@ Virtuals kh57 shapes reference: sparse int-keyed map of homogeneous shapes.
 
 ## refs.list
 
-Module `nu.kv.refs.list`.
+Module `nustd.kv.refs.list`.
 
 Virtuals sequence reference: ordered container backed by a virtuals View.
 
@@ -152,7 +152,7 @@ Virtuals sequence reference: ordered container backed by a virtuals View.
 
 ## refs.base
 
-Module `nu.kv.refs.base`.
+Module `nustd.kv.refs.base`.
 
 Virtuals storage substrate refs: navigate the virtuals View hierarchy.
 
@@ -165,7 +165,7 @@ Virtuals storage substrate refs: navigate the virtuals View hierarchy.
 
 ## refs.set
 
-Module `nu.kv.refs.set`.
+Module `nustd.kv.refs.set`.
 
 Virtuals set reference: unordered unique-element container backed by a View.
 
@@ -177,7 +177,7 @@ Virtuals set reference: unordered unique-element container backed by a View.
 
 ## refs.shape
 
-Module `nu.kv.refs.shape`.
+Module `nustd.kv.refs.shape`.
 
 Virtuals shape reference: structured container backed by a virtuals View.
 
@@ -189,7 +189,7 @@ Virtuals shape reference: structured container backed by a virtuals View.
 
 ## refs.dictshape
 
-Module `nu.kv.refs.dictshape`.
+Module `nustd.kv.refs.dictshape`.
 
 Virtuals shapes dict reference: mapping of homogeneous shapes.
 
@@ -201,7 +201,7 @@ Virtuals shapes dict reference: mapping of homogeneous shapes.
 
 ## refs.listshape
 
-Module `nu.kv.refs.listshape`.
+Module `nustd.kv.refs.listshape`.
 
 Virtuals shapes list reference: sequence of homogeneous shapes.
 
@@ -213,7 +213,7 @@ Virtuals shapes list reference: sequence of homogeneous shapes.
 
 ## refs.std
 
-Module `nu.kv.refs.std`.
+Module `nustd.kv.refs.std`.
 
 virtuals-substrate refs for standard-library value types.
 
@@ -236,7 +236,7 @@ virtuals-substrate refs for standard-library value types.
 
 ## refs.primitives
 
-Module `nu.kv.refs.primitives`.
+Module `nustd.kv.refs.primitives`.
 
 virtuals-substrate refs for whole-blob compound values.
 
@@ -252,7 +252,7 @@ virtuals-substrate refs for whole-blob compound values.
 
 ## refs.prog
 
-Module `nu.kv.refs.prog`.
+Module `nustd.kv.refs.prog`.
 
 Virtuals-substrate ref for a stored Nu program.
 
@@ -264,7 +264,7 @@ Virtuals-substrate ref for a stored Nu program.
 
 ## tree.auto_flow_atomic
 
-Module `nu.kv.tree.auto_flow_atomic`.
+Module `nustd.kv.tree.auto_flow_atomic`.
 
 The pass that decides, per branch, where a storage boundary belongs.
 
@@ -276,7 +276,7 @@ The pass that decides, per branch, where a storage boundary belongs.
 
 ## presets
 
-Module `nu.kv.presets`.
+Module `nustd.kv.presets`.
 
 One call that stands up a whole storage stack, in either of two forms.
 
@@ -288,11 +288,13 @@ One call that stands up a whole storage stack, in either of two forms.
 | [rocksdb_storage_redis](/docs/reference/nustd/kv/presets#rocksdb_storage_redis) | `kv.rocksdb_storage_redis(path, read_only=False, secondary_path=None, secondary_refresh_interval=0.01, redis_url='redis://localhost:6379', channel_prefix='__every__')` | Create RocksDB storage with binary codec and Redis publisher. |
 | [rocksdb_storage](/docs/reference/nustd/kv/presets#rocksdb_storage) | `kv.rocksdb_storage(path, read_only=False, secondary_path=None, secondary_refresh_interval=0.01)` | Create RocksDB storage with binary codec and in-memory publisher. |
 | [text_storage](/docs/reference/nustd/kv/presets#text_storage) | `kv.text_storage(path)` | Create text storage with text codec and in-memory publisher. |
-| [inmem_observer](/docs/reference/nustd/kv/presets#inmem_observer) | `kv.inmem_observer()` | Binds the listening half of the in-process notification pair, alone. |
+| [inmem_observer](/docs/reference/nustd/kv/presets#inmem_observer) | `kv.inmem_observer(tags=())` | Binds the listening half of the in-process notification pair, alone. |
 | [lmdb_navigator](/docs/reference/nustd/kv/presets#lmdb_navigator) | `kv.lmdb_navigator(path, tags=(), read_only=False, map_size=10737418240, max_readers=126, subdir=True, sync=True)` | Stands up a persistent LMDB stack with in-process change notification. |
 | [lmdb_navigator_redis](/docs/reference/nustd/kv/presets#lmdb_navigator_redis) | `kv.lmdb_navigator_redis(path, tags=(), read_only=False, map_size=10737418240, max_readers=126, subdir=True, sync=True, redis_url='redis://localhost:6379', channel_prefix='nu')` | Stands up a persistent LMDB stack whose changes reach other processes. |
 | [memory_navigator](/docs/reference/nustd/kv/presets#memory_navigator) | `kv.memory_navigator(tags=())` | Stands up a whole in-memory storage stack, gone when the process ends. |
-| [redis_observer](/docs/reference/nustd/kv/presets#redis_observer) | `kv.redis_observer(redis_url='redis://localhost:6379', channel_prefix='nu')` | Binds a Redis subscriber alone, for a program that only reacts. |
+| [proxy_observer](/docs/reference/nustd/kv/presets#proxy_observer) | `kv.proxy_observer(address, body=None, tag=None, transport='tcp', timeout=5.0, max_retries=3)` | Binds another process's change feed, over the socket it serves it on. |
+| [redis_observer](/docs/reference/nustd/kv/presets#redis_observer) | `kv.redis_observer(redis_url='redis://localhost:6379', channel_prefix='nu', tags=())` | Binds a Redis subscriber alone, for a program that only reacts. |
 | [rocksdb_navigator_redis](/docs/reference/nustd/kv/presets#rocksdb_navigator_redis) | `kv.rocksdb_navigator_redis(path, tags=(), read_only=False, secondary_path=None, secondary_refresh_interval=0.01, disable_wal=False, options=None, redis_url='redis://localhost:6379', channel_prefix='__every__')` | Stands up a persistent RocksDB stack whose changes reach other processes. |
 | [rocksdb_navigator](/docs/reference/nustd/kv/presets#rocksdb_navigator) | `kv.rocksdb_navigator(path, tags=(), read_only=False, secondary_path=None, secondary_refresh_interval=0.01, disable_wal=False, options=None)` | Stands up a persistent RocksDB stack with in-process change notification. |
+| [served_observer](/docs/reference/nustd/kv/presets#served_observer) | `kv.served_observer(address, target_tag=None, transport='tcp', executor='threaded')` | Puts this process's change feed on a socket, for other processes to hear. |
 | [text_navigator](/docs/reference/nustd/kv/presets#text_navigator) | `kv.text_navigator(path, tags=(), read_only=False, log_operations=False)` | Stands up a JSON-on-disk stack you can open in an editor and read. |

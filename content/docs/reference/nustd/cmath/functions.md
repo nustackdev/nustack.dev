@@ -1,17 +1,17 @@
 ---
 title: functions
-description: "Module-level functions and constants for `nu.std.cmath`."
+description: "Module-level functions and constants for `nustd.cmath`."
 ---
 
-Module `nu.std.cmath.functions`.
+Module `nustd.cmath.functions`.
 
-Module-level functions and constants for `nu.std.cmath`.
+Module-level functions and constants for `nustd.cmath`.
 
 `cmath` is a function module - free functions over complex numbers plus a few
 constants - so this is the function half of the surface: typed wrappers that
 mirror `cmath.sqrt` / `cmath.phase` / `cmath.polar` 1-1, plus the module
 constants. Each wrapper builds its interaction atom (lazily imported, like
-`nu.std.math`) and returns the Form that matches the host return type:
+`nustd.math`) and returns the Form that matches the host return type:
 
 - most functions -> `complex` (the Form for the builtin)
 - `phase` -> `Float`
@@ -54,7 +54,7 @@ The arc cosine of `x`: mirrors `cmath.acos()`.
 cmath.acos(x)
 ```
 
-Path `nu.std.cmath.acos`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.acos`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -72,7 +72,7 @@ The arc sine of `x`: mirrors `cmath.asin()`.
 cmath.asin(x)
 ```
 
-Path `nu.std.cmath.asin`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.asin`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -90,7 +90,7 @@ The arc tangent of `x`: mirrors `cmath.atan()`.
 cmath.atan(x)
 ```
 
-Path `nu.std.cmath.atan`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.atan`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -108,7 +108,7 @@ The cosine of `x`: mirrors `cmath.cos()`.
 cmath.cos(x)
 ```
 
-Path `nu.std.cmath.cos`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.cos`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -126,7 +126,7 @@ The hyperbolic cosine of `x`: mirrors `cmath.cosh()`.
 cmath.cosh(x)
 ```
 
-Path `nu.std.cmath.cosh`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.cosh`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -144,7 +144,7 @@ Undocumented: example.
 cmath.exp(x)
 ```
 
-Path `nu.std.cmath.exp`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.exp`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -162,7 +162,7 @@ Whether `a` and `b` are close: mirrors `cmath.isclose()`.
 cmath.isclose(a, b)
 ```
 
-Path `nu.std.cmath.isclose`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `Bool`.
+Path `nustd.cmath.isclose`. Defined on `nustd.cmath.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -181,7 +181,7 @@ Whether both components of `x` are finite: mirrors `cmath.isfinite()`.
 cmath.isfinite(x)
 ```
 
-Path `nu.std.cmath.isfinite`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `Bool`.
+Path `nustd.cmath.isfinite`. Defined on `nustd.cmath.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -199,7 +199,7 @@ Whether `x` has an infinite component: mirrors `cmath.isinf()`.
 cmath.isinf(x)
 ```
 
-Path `nu.std.cmath.isinf`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `Bool`.
+Path `nustd.cmath.isinf`. Defined on `nustd.cmath.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -217,7 +217,7 @@ Whether `x` has a NaN component: mirrors `cmath.isnan()`.
 cmath.isnan(x)
 ```
 
-Path `nu.std.cmath.isnan`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `Bool`.
+Path `nustd.cmath.isnan`. Defined on `nustd.cmath.functions`, bound as a function. Builds `Bool`.
 
 **Arguments**
 
@@ -235,7 +235,7 @@ The logarithm of `x` (natural, or to `base`): mirrors `cmath.log()`.
 cmath.log(x, base=None)
 ```
 
-Path `nu.std.cmath.log`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.log`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -254,7 +254,7 @@ The base-10 logarithm of `x`: mirrors `cmath.log10()`.
 cmath.log10(x)
 ```
 
-Path `nu.std.cmath.log10`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.log10`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -272,7 +272,7 @@ The phase angle of `x`, in radians: mirrors `cmath.phase()`.
 cmath.phase(x)
 ```
 
-Path `nu.std.cmath.phase`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `Float`.
+Path `nustd.cmath.phase`. Defined on `nustd.cmath.functions`, bound as a function. Builds `Float`.
 
 **Arguments**
 
@@ -290,7 +290,7 @@ Undocumented: example.
 cmath.polar(x)
 ```
 
-Path `nu.std.cmath.polar`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `Tuple`.
+Path `nustd.cmath.polar`. Defined on `nustd.cmath.functions`, bound as a function. Builds `Tuple`.
 
 **Arguments**
 
@@ -308,7 +308,7 @@ The complex number with modulus `r` and phase `phi`: mirrors `cmath.rect()`.
 cmath.rect(r, phi)
 ```
 
-Path `nu.std.cmath.rect`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.rect`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -327,7 +327,7 @@ The sine of `x`: mirrors `cmath.sin()`.
 cmath.sin(x)
 ```
 
-Path `nu.std.cmath.sin`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.sin`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -345,7 +345,7 @@ The hyperbolic sine of `x`: mirrors `cmath.sinh()`.
 cmath.sinh(x)
 ```
 
-Path `nu.std.cmath.sinh`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.sinh`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -363,7 +363,7 @@ The square root of `x`: mirrors `cmath.sqrt()`.
 cmath.sqrt(x)
 ```
 
-Path `nu.std.cmath.sqrt`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.sqrt`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -381,7 +381,7 @@ The tangent of `x`: mirrors `cmath.tan()`.
 cmath.tan(x)
 ```
 
-Path `nu.std.cmath.tan`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.tan`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 
@@ -399,7 +399,7 @@ The hyperbolic tangent of `x`: mirrors `cmath.tanh()`.
 cmath.tanh(x)
 ```
 
-Path `nu.std.cmath.tanh`. Defined on `nu.std.cmath.functions`, bound as a function. Builds `complex`.
+Path `nustd.cmath.tanh`. Defined on `nustd.cmath.functions`, bound as a function. Builds `complex`.
 
 **Arguments**
 

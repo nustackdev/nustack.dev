@@ -3,7 +3,7 @@ title: refs.shape
 description: "Dict shape reference: structured container backed by nested dict."
 ---
 
-Module `nu.mem.refs.shape`.
+Module `nustd.mem.refs.shape`.
 
 Dict shape reference: structured container backed by nested dict.
 
@@ -23,7 +23,7 @@ A nested Shape slot in the dict substrate, stored as an inner dict.
 ShapeRef(address, shape_type, parent_ref=None, owner_shape=None)
 ```
 
-Path `nu.mem.ShapeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
+Path `nustd.mem.ShapeRef`. Kind `Ref`, sort `ref`, cardinality `scalar`.
 
 Attribute access descends: `ref.field` resolves the named slot on the
 held Shape class and hands back that field's own ref, parented here, so
@@ -39,9 +39,9 @@ calls on the ref itself act on the inner dict as a whole.
 
 ```python
 class Order(nu.Shape):
-    symbol = nu.mem.StrRef.slot()
+    symbol = nustd.mem.StrRef.slot()
 class Book(nu.Shape):
-    best = nu.mem.ShapeRef.slot(Order)
+    best = nustd.mem.ShapeRef.slot(Order)
 data = {}
 ctx = nu.Context().bind(dict, data, Book)
 _ = nu.run(Book.best.symbol.set("AAPL"), ctx)

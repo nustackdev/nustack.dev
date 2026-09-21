@@ -68,7 +68,7 @@ export default function Home() {
             <MonoKicker as="p" size="xs" tracking="wide">
               Python 3.10+ &middot; everything ships in the wheel
             </MonoKicker>
-            <CommandLine command='pip install "nustack-py[all]"' />
+            <CommandLine command='pip install nucore "nustd[all]" nucli' />
           </Stack>
         </Section>
 

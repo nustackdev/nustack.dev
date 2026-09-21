@@ -6,7 +6,7 @@ author: "gor"
 tags: ["release", "nu"]
 ---
 
-Nu 0.1 is out. First public release. `pip install "nustack-py[all]"` and you have the whole thing.
+Nu 0.1 is out. First public release. `pip install nucore "nustd[all]" nucli` and you have the whole thing.
 
 ## What Nu is
 
@@ -25,17 +25,17 @@ The picture flips from a stack to a hub. `db → backend → ui` becomes one pro
 
 The headline fabrics:
 
-- **nu.kv** — persistent state over RocksDB / LMDB. Transactions, snapshots, change notifications.
-- **nu.ui** — Refs as widgets. The fabric renders them in a browser and live-updates as state changes.
-- **nu.cluster** — teleport a Nu tree to any worker in your cluster; it runs there and returns. Backed by Ray.
-- **nu.llm** — one OpenAI-compatible wire, N providers (Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM). Same ChatRef, same call.
+- **nustd.kv** — persistent state over RocksDB / LMDB. Transactions, snapshots, change notifications.
+- **nustd.ui** — Refs as widgets. The fabric renders them in a browser and live-updates as state changes.
+- **nustd.cluster** — teleport a Nu tree to any worker in your cluster; it runs there and returns. Backed by Ray.
+- **nustd.llm** — one OpenAI-compatible wire, N providers (Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM). Same ChatRef, same call.
 
 Plus a supporting cast (in-memory state, network proxy, HTTP, service wrap, Claude Code, multiprocessing) — see the [fabrics catalogue](/fabrics) for the full list.
 
 Install:
 
 ```bash
-pip install "nustack-py[all]"
+pip install nucore "nustd[all]" nucli
 ```
 
 Then run the demo:
@@ -52,27 +52,28 @@ A persistent counter that ticks once a second and renders live in the browser, i
 
 ```python
 import nu
+import nustd
 
 class Counter(nu.Shape):
-    value: nu.kv.IntRef
+    value: nustd.kv.IntRef
 
-class Dashboard(nu.ui.Page):
-    count: nu.ui.TextRef
+class Dashboard(nustd.ui.Page):
+    count: nustd.ui.TextRef
 
-class App(nu.ui.Index):
-    pages = nu.ui.Pages({"/": Dashboard})
+class App(nustd.ui.Index):
+    pages = nustd.ui.Pages({"/": Dashboard})
 
 app = nu.With(
-    nu.kv.rocksdb_navigator(".dbcounter"),
-    nu.ui.server(
-        nu.kv.auto_flow_atomic(
+    nustd.kv.rocksdb_navigator(".dbcounter"),
+    nustd.ui.server(
+        nustd.kv.auto_flow_atomic(
             nu.ReactForever(
                 Counter.value.on_change(),
                 Dashboard.count.set(Counter.value),
             ),
         ),
     ),
-    body=nu.kv.auto_flow_atomic(
+    body=nustd.kv.auto_flow_atomic(
         nu.IfDo(Counter.value.missing(), Counter.value.set(0))
         >> nu.ForeverDo(Counter.value.inc() >> nu.Delay(1.0))
     ),
@@ -99,7 +100,7 @@ What will keep moving: fabric coverage, ergonomics, error surfaces, the naming i
 
 A real production system already runs on Nu — a terabyte a day, thirty distributed workers, ten sharded databases. That was the signal the shape is right, and reason enough to open it up now.
 
-- **Install & examples:** `pip install "nustack-py[all]"` — [examples on GitHub](https://github.com/nustackdev/nu/tree/main/examples)
+- **Install & examples:** `pip install nucore "nustd[all]" nucli` — [examples on GitHub](https://github.com/nustackdev/nu/tree/main/examples)
 - **Demo:** `nu demo movies`
 - **Repo:** [github.com/nustackdev/nu](https://github.com/nustackdev/nu)
 - **Docs:** [/docs](/docs)

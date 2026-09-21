@@ -19,7 +19,7 @@ import { SERVICE_SAMPLE_LINES } from './service.sample.data';
 import { pageOG, ogFabricImage } from '@/lib/og';
 
 export const metadata = pageOG({
-  title: 'nu.service: plug a Python object into Nu',
+  title: 'nustd.service: plug a Python object into Nu',
   description:
     'You already have a Python class. Point Nu at it and its methods start behaving like everything else in your Nu program.',
   image: ogFabricImage('service'),
@@ -30,7 +30,7 @@ export default function ServiceFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.service" hue={FABRIC.service.hue} />}
+        meta={<PageBadge kind="fabric" name="nustd.service" hue={FABRIC.service.hue} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.service.poweredBy} />}
         title="Plug a Python service into Nu."
         lede={
@@ -139,7 +139,7 @@ export default function ServiceFabricPage() {
             <LinkGrid>
               <LinkCard
                 href="/fabrics/ui"
-                name="nu.ui"
+                name="nustd.ui"
                 hue={FABRIC.ui.hue}
                 tagline="Show what your service does."
               >
@@ -149,7 +149,7 @@ export default function ServiceFabricPage() {
 
               <LinkCard
                 href="/fabrics/kv"
-                name="nu.kv"
+                name="nustd.kv"
                 hue={FABRIC.kv.hue}
                 tagline="Give it something to remember."
               >
@@ -159,7 +159,7 @@ export default function ServiceFabricPage() {
 
               <LinkCard
                 href="/fabrics/proxy"
-                name="nu.proxy"
+                name="nustd.proxy"
                 hue={FABRIC.proxy.hue}
                 tagline="Use it from another process."
               >

@@ -66,7 +66,7 @@ export default function VirtualsToolPage() {
             title="What it is."
             lede={
               <>
-                The KV foundation under <Link href="/fabrics/kv">nu.kv</Link>.
+                The KV foundation under <Link href="/fabrics/kv">nustd.kv</Link>.
                 Standalone, dependency-light, usable on its own.
               </>
             }
@@ -146,14 +146,14 @@ export default function VirtualsToolPage() {
             title="Powers Nu."
             lede={
               <>
-                <code>virtuals</code> is the substrate. <code>nu.kv</code>{' '}
+                <code>virtuals</code> is the substrate. <code>nustd.kv</code>{' '}
                 wraps it in Refs so state reads and writes look like plain Python.
               </>
             }
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
                 Refs over the same KV backends. Transactions and change
                 notifications baked in.
               </LinkCard>

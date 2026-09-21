@@ -4,7 +4,7 @@ title: "A real app: movies"
 
 Build a personal movie tracker. Stats up top, a form to log what you watched, a table below. One Nu tree, one page, live updates.
 
-You finished [Your first app](/docs/tutorials/your-first-app), so you know Shape, Ref, `ReactForever`, `nu.With`, and `nu.ui.Page`. Everything new gets introduced as you meet it.
+You finished [Your first app](/docs/tutorials/your-first-app), so you know Shape, Ref, `ReactForever`, `nu.With`, and `nustd.ui.Page`. Everything new gets introduced as you meet it.
 
 The final program lives at `examples/movies.py`. You build it in four stages. Each stage runs and shows something.
 
@@ -12,18 +12,19 @@ The final program lives at `examples/movies.py`. You build it in four stages. Ea
 
 Start headless. Declare state, seed it, print it.
 
-A **collection Ref** holds many values under one slot. `nu.kv.ListRef` is the list flavor. `nu.kv.IntRef` and `nu.kv.StrRef` are the scalar flavors you already know from the counter.
+A **collection Ref** holds many values under one slot. `nustd.kv.ListRef` is the list flavor. `nustd.kv.IntRef` and `nustd.kv.StrRef` are the scalar flavors you already know from the counter.
 
 Save as `movies.py`:
 
 ```python
 import nu
+import nustd
 
 
 class State(nu.Shape):
-    movies = nu.kv.ListRef.slot(object)
-    total = nu.kv.IntRef.slot()
-    watched = nu.kv.IntRef.slot()
+    movies = nustd.kv.ListRef.slot(object)
+    total = nustd.kv.IntRef.slot()
+    watched = nustd.kv.IntRef.slot()
 
 
 SEED = [
@@ -33,7 +34,7 @@ SEED = [
 ]
 
 
-seed = nu.kv.Transaction(
+seed = nustd.kv.Transaction(
     State.movies.set(SEED),
     State.total.set(len(SEED)),
     State.watched.set(sum(1 for m in SEED if m["watched"] == "yes")),
@@ -41,8 +42,8 @@ seed = nu.kv.Transaction(
 
 
 tree = nu.With(
-    nu.kv.memory_navigator(),
-    body=seed >> nu.kv.Snapshot(nu.print(State.movies, State.total, State.watched)),
+    nustd.kv.memory_navigator(),
+    body=seed >> nustd.kv.Snapshot(nu.print(State.movies, State.total, State.watched)),
 )
 
 
@@ -71,33 +72,34 @@ Replace `movies.py` with:
 ```python
 import asyncio
 import nu
+import nustd
 
 
 class State(nu.Shape):
-    movies = nu.kv.ListRef.slot(object)
-    total = nu.kv.IntRef.slot()
-    watched = nu.kv.IntRef.slot()
+    movies = nustd.kv.ListRef.slot(object)
+    total = nustd.kv.IntRef.slot()
+    watched = nustd.kv.IntRef.slot()
 
 
-class StatsRow(nu.ui.Row):
-    total = nu.ui.StatRef.slot()
-    watched = nu.ui.StatRef.slot()
-    unseen = nu.ui.StatRef.slot()
+class StatsRow(nustd.ui.Row):
+    total = nustd.ui.StatRef.slot()
+    watched = nustd.ui.StatRef.slot()
+    unseen = nustd.ui.StatRef.slot()
 
 
-class StatsCard(nu.ui.Card):
+class StatsCard(nustd.ui.Card):
     body = StatsRow.slot(gap=6, align="center", wrap=True)
 
 
-class Movies(nu.ui.Page):
-    heading = nu.ui.HeadingRef.slot()
+class Movies(nustd.ui.Page):
+    heading = nustd.ui.HeadingRef.slot()
     stats = StatsCard.slot(title="your shelf")
 
 
-class App(nu.ui.Index):
-    title: nu.ui.TitleRef
-    nav: nu.ui.NavRef
-    pages = nu.ui.Pages({"/": Movies})
+class App(nustd.ui.Index):
+    title: nustd.ui.TitleRef
+    nav: nustd.ui.NavRef
+    pages = nustd.ui.Pages({"/": Movies})
 
 
 SEED = [
@@ -105,7 +107,7 @@ SEED = [
     {"title": "Dune: Part Two", "rating": 9.0, "watched": "yes"},
 ]
 
-init = nu.kv.Transaction(
+init = nustd.kv.Transaction(
     nu.IfDo(State.movies.missing(), State.movies.set(SEED)),
     nu.IfDo(State.total.missing(), State.total.set(len(SEED))),
     nu.IfDo(State.watched.missing(),
@@ -116,7 +118,7 @@ init = nu.kv.Transaction(
 def _s(n): return nu.Str(nu.ToStr(n))
 
 
-hydrate = nu.kv.Snapshot(
+hydrate = nustd.kv.Snapshot(
     Movies.heading.set("your movies")
     | Movies.stats.body.total.set_label("total")
     | Movies.stats.body.total.set_value(_s(State.total))
@@ -129,9 +131,9 @@ hydrate = nu.kv.Snapshot(
 ui = App.title.set("movies") >> hydrate
 
 tree = nu.With(
-    nu.kv.rocksdb_navigator(".dbmovies"),
-    nu.ui.server(nu.kv.auto_flow_atomic(ui)),
-    body=nu.kv.auto_flow_atomic(init >> nu.ForeverDo(nu.Delay(3600))),
+    nustd.kv.rocksdb_navigator(".dbmovies"),
+    nustd.ui.server(nustd.kv.auto_flow_atomic(ui)),
+    body=nustd.kv.auto_flow_atomic(init >> nu.ForeverDo(nu.Delay(3600))),
 )
 
 
@@ -151,31 +153,31 @@ The `body` at the bottom holds the server open. Nothing to loop yet, so it sleep
 
 Add a form. Submit appends a row and updates the stats live.
 
-**Form and Fieldset.** `nu.ui.Form` groups inputs and a submit button. `nu.ui.Fieldset` groups a subset under a legend. `nu.ui.Field` wraps one input with a label and help slot. Widget knobs ride on `.slot(**props)` at the declaration site.
+**Form and Fieldset.** `nustd.ui.Form` groups inputs and a submit button. `nustd.ui.Fieldset` groups a subset under a legend. `nustd.ui.Field` wraps one input with a label and help slot. Widget knobs ride on `.slot(**props)` at the declaration site.
 
-**Transaction and Snapshot.** A `nu.kv.Transaction(...)` collects writes into one atomic commit. A `nu.kv.Snapshot(...)` collects reads into one atomic view. Wire the React body as `Transaction(...) >> Snapshot(...)`: commit new state, then hydrate the UI from it.
+**Transaction and Snapshot.** A `nustd.kv.Transaction(...)` collects writes into one atomic commit. A `nustd.kv.Snapshot(...)` collects reads into one atomic view. Wire the React body as `Transaction(...) >> Snapshot(...)`: commit new state, then hydrate the UI from it.
 
 Add three form-input wrappers, a fieldset, and the form. Widget knobs ride on `.slot(**props)`:
 
 ```python
-class TitleField(nu.ui.Field):
-    input = nu.ui.InputRef.slot(label="title", placeholder="e.g. Arrival")
+class TitleField(nustd.ui.Field):
+    input = nustd.ui.InputRef.slot(label="title", placeholder="e.g. Arrival")
 
-class RatingField(nu.ui.Field):
-    input = nu.ui.NumberInputRef.slot(label="rating", min=1.0, max=10.0, step=0.5, default=7.0)
+class RatingField(nustd.ui.Field):
+    input = nustd.ui.NumberInputRef.slot(label="rating", min=1.0, max=10.0, step=0.5, default=7.0)
 
-class SwitchField(nu.ui.Field):
-    input = nu.ui.SwitchRef.slot(label="watched?", default=True)
+class SwitchField(nustd.ui.Field):
+    input = nustd.ui.SwitchRef.slot(label="watched?", default=True)
 
-class DetailsFieldset(nu.ui.Fieldset):
+class DetailsFieldset(nustd.ui.Fieldset):
     title = TitleField.slot(label="title", required=True)
     rating = RatingField.slot(label="rating")
     watched = SwitchField.slot(label="watched?")
 
-class AddMovieForm(nu.ui.Form):
+class AddMovieForm(nustd.ui.Form):
     details = DetailsFieldset.slot(legend="movie", gap="md")
-    submit = nu.ui.ButtonRef.slot(label="log it", variant="primary")
-    feedback = nu.ui.AlertRef.slot(variant="ok", dismissible=True)
+    submit = nustd.ui.ButtonRef.slot(label="log it", variant="primary")
+    feedback = nustd.ui.AlertRef.slot(variant="ok", dismissible=True)
 ```
 
 Mount the form on the page. Add one line to `Movies`:
@@ -201,13 +203,13 @@ React on submit: commit new state in a Transaction, then rehydrate the stats and
 ```python
 on_add = nu.ReactForever(
     AddMovieForm.submit.clicked(),
-    nu.kv.Transaction(
+    nustd.kv.Transaction(
         State.movies.append(_row_from_form()),
         State.total.set(State.total + 1),
         State.watched.set(State.watched
                           + nu.If(nu.Bool(AddMovieForm.details.watched.input), 1, 0)),
     )
-    >> nu.kv.Snapshot(
+    >> nustd.kv.Snapshot(
         Movies.stats.body.total.set_value(_s(State.total))
         | Movies.stats.body.watched.set_value(_s(State.watched))
         | Movies.stats.body.unseen.set_value(_s(State.total - State.watched))
@@ -240,62 +242,63 @@ Full file for the final program:
 ```python
 import asyncio
 import nu
+import nustd
 
 
 class State(nu.Shape):
-    movies = nu.kv.ListRef.slot(object)
-    total = nu.kv.IntRef.slot()
-    watched = nu.kv.IntRef.slot()
+    movies = nustd.kv.ListRef.slot(object)
+    total = nustd.kv.IntRef.slot()
+    watched = nustd.kv.IntRef.slot()
 
 
-class TitleField(nu.ui.Field):
-    input = nu.ui.InputRef.slot(label="title", placeholder="e.g. Arrival")
+class TitleField(nustd.ui.Field):
+    input = nustd.ui.InputRef.slot(label="title", placeholder="e.g. Arrival")
 
-class RatingField(nu.ui.Field):
-    input = nu.ui.NumberInputRef.slot(label="rating", min=1.0, max=10.0, step=0.5, default=7.0)
+class RatingField(nustd.ui.Field):
+    input = nustd.ui.NumberInputRef.slot(label="rating", min=1.0, max=10.0, step=0.5, default=7.0)
 
-class SwitchField(nu.ui.Field):
-    input = nu.ui.SwitchRef.slot(label="watched?", default=True)
+class SwitchField(nustd.ui.Field):
+    input = nustd.ui.SwitchRef.slot(label="watched?", default=True)
 
-class DetailsFieldset(nu.ui.Fieldset):
+class DetailsFieldset(nustd.ui.Fieldset):
     title = TitleField.slot(label="title", required=True)
     rating = RatingField.slot(label="rating")
     watched = SwitchField.slot(label="watched?")
 
-class AddMovieForm(nu.ui.Form):
+class AddMovieForm(nustd.ui.Form):
     details = DetailsFieldset.slot(legend="movie", gap="md")
-    submit = nu.ui.ButtonRef.slot(label="log it", variant="primary")
-    feedback = nu.ui.AlertRef.slot(variant="ok", dismissible=True)
+    submit = nustd.ui.ButtonRef.slot(label="log it", variant="primary")
+    feedback = nustd.ui.AlertRef.slot(variant="ok", dismissible=True)
 
 
-class StatsRow(nu.ui.Row):
-    total = nu.ui.StatRef.slot()
-    watched = nu.ui.StatRef.slot()
-    unseen = nu.ui.StatRef.slot()
+class StatsRow(nustd.ui.Row):
+    total = nustd.ui.StatRef.slot()
+    watched = nustd.ui.StatRef.slot()
+    unseen = nustd.ui.StatRef.slot()
 
-class StatsCard(nu.ui.Card):
+class StatsCard(nustd.ui.Card):
     body = StatsRow.slot(gap=6, align="center", wrap=True)
 
 
-class TableBody(nu.ui.Column):
-    table = nu.ui.TableRef.slot(columns=["title", "rating", "watched"],
+class TableBody(nustd.ui.Column):
+    table = nustd.ui.TableRef.slot(columns=["title", "rating", "watched"],
                                 striped=True, dense=True, max_rows=200)
 
-class TableCard(nu.ui.Card):
+class TableCard(nustd.ui.Card):
     body = TableBody.slot(gap=3)
 
 
-class Movies(nu.ui.Page):
-    heading = nu.ui.HeadingRef.slot()
+class Movies(nustd.ui.Page):
+    heading = nustd.ui.HeadingRef.slot()
     stats = StatsCard.slot(title="your shelf")
     form = AddMovieForm.slot(title="log a movie", gap=4, padding=4)
     shelf = TableCard.slot(title="movies")
 
 
-class App(nu.ui.Index):
-    title: nu.ui.TitleRef
-    nav: nu.ui.NavRef
-    pages = nu.ui.Pages({"/": Movies})
+class App(nustd.ui.Index):
+    title: nustd.ui.TitleRef
+    nav: nustd.ui.NavRef
+    pages = nustd.ui.Pages({"/": Movies})
 
 
 SEED = [
@@ -315,7 +318,7 @@ def _rows_form():
     )
 
 
-init = nu.kv.Transaction(
+init = nustd.kv.Transaction(
     nu.IfDo(State.movies.missing(), State.movies.set(SEED)),
     nu.IfDo(State.total.missing(), State.total.set(len(SEED))),
     nu.IfDo(State.watched.missing(),
@@ -335,7 +338,7 @@ def _row_from_form():
     )
 
 
-hydrate = nu.kv.Snapshot(
+hydrate = nustd.kv.Snapshot(
     Movies.heading.set("your movies")
     | Movies.stats.body.total.set_label("total")
     | Movies.stats.body.total.set_value(_s(State.total))
@@ -349,13 +352,13 @@ hydrate = nu.kv.Snapshot(
 
 on_add = nu.ReactForever(
     AddMovieForm.submit.clicked(),
-    nu.kv.Transaction(
+    nustd.kv.Transaction(
         State.movies.append(_row_from_form()),
         State.total.set(State.total + 1),
         State.watched.set(State.watched
                           + nu.If(nu.Bool(AddMovieForm.details.watched.input), 1, 0)),
     )
-    >> nu.kv.Snapshot(
+    >> nustd.kv.Snapshot(
         Movies.shelf.body.table.set(_rows_form())
         | Movies.stats.body.total.set_value(_s(State.total))
         | Movies.stats.body.watched.set_value(_s(State.watched))
@@ -369,9 +372,9 @@ on_add = nu.ReactForever(
 ui = App.title.set("movies") >> hydrate >> on_add
 
 tree = nu.With(
-    nu.kv.rocksdb_navigator(".dbmovies"),
-    nu.ui.server(nu.kv.auto_flow_atomic(ui)),
-    body=nu.kv.auto_flow_atomic(init >> nu.ForeverDo(nu.Delay(3600))),
+    nustd.kv.rocksdb_navigator(".dbmovies"),
+    nustd.ui.server(nustd.kv.auto_flow_atomic(ui)),
+    body=nustd.kv.auto_flow_atomic(init >> nu.ForeverDo(nu.Delay(3600))),
 )
 
 

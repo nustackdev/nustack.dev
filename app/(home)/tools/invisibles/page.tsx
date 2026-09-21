@@ -153,7 +153,7 @@ export default function InvisiblesPage() {
             lede={
               <>
                 <code>invisibles</code> is the foundation under{' '}
-                <code>nu.proxy</code>, the proxy fabric. Bind a fabric in
+                <code>nustd.proxy</code>, the proxy fabric. Bind a fabric in
                 one process, use it from another; same Refs, over TCP or
                 Unix socket.
               </>
@@ -161,7 +161,7 @@ export default function InvisiblesPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue={FABRIC.proxy.hue} tagline="Proxy fabric.">
+              <LinkCard href="/fabrics/proxy" name="nustd.proxy" hue={FABRIC.proxy.hue} tagline="Proxy fabric.">
                 The fabric that puts other fabrics on the network. Built on
                 invisibles.
               </LinkCard>

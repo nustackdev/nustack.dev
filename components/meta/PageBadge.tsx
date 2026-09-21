@@ -17,7 +17,7 @@ interface Props {
  *  kicker, not a child, so it does not inherit `text-transform`.
  *
  *  Pass as the `meta` prop of <Header>:
- *    <Header meta={<PageBadge kind="fabric" name="nu.ui" hue="teal" />} … />
+ *    <Header meta={<PageBadge kind="fabric" name="nustd.ui" hue="teal" />} … />
  */
 export function PageBadge({ kind, name, hue, className }: Props) {
   const cls = [s.badge, className].filter(Boolean).join(' ');

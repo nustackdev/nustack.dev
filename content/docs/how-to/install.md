@@ -10,17 +10,19 @@ Install Nu from PyPI. For hacking on Nu itself, see [Install from source](/docs/
 
 ## Install
 
-The everything-included install:
+Nu ships as three distributions, released in lockstep: `nucore` is the kernel, `nustd` is the fabrics and the standard library, `nucli` is the `nu` command. The everything-included install:
 
 ```bash
-pip install "nustack-py[all]"
+pip install nucore "nustd[all]" nucli
 ```
 
-For a lean install, pick the extras you need instead of `[all]`. One extra per fabric: `[kv]`, `[mem]`, `[ui]`, `[ray]`, `[proxy]`, `[http]`, `[cc]`.
+For a lean install, pick the extras you need instead of `[all]`. One extra per fabric: `[kv]`, `[mem]`, `[ui]`, `[cluster]`, `[proxy]`, `[http]`, `[llm]`, `[cc]`, `[mp]`, `[mp_pool]`, `[ws_server]`.
 
 ```bash
-pip install "nustack-py[mem,ui]"
+pip install nucore "nustd[mem,ui]"
 ```
+
+Drop `nucli` when you only need the library. The `nu` command, and the bundled demos below, come with it.
 
 ## Verify
 

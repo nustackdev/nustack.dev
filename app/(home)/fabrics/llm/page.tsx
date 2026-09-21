@@ -26,7 +26,7 @@ import { FABRIC } from '@/lib/fabrics';
 import { pageOG, ogFabricImage } from '@/lib/og';
 
 export const metadata: Metadata = pageOG({
-  title: 'nu.llm - OpenAI-compatible chat fabric',
+  title: 'nustd.llm - OpenAI-compatible chat fabric',
   description:
     'One chat/completions wire, many providers. Ollama, OpenAI, OpenRouter, Groq, Cerebras, xAI, vLLM. Same ChatRef, same call.',
   image: ogFabricImage('llm'),
@@ -43,13 +43,14 @@ const cmt = (t: string): CodeTok => ({ c: 'cmt', t });
 
 const SNIPPET: CodeTok[][] = [
   [k('import'), p(' nu')],
+  [k('import'), p(' nustd')],
   [],
   [k('class'), p(' '), nu('Model'), p('('), nu('nu.Service'), p('):')],
-  [p('    chat = '), nu('nu.llm.ChatRef'), p('.method(temperature=0.7)')],
+  [p('    chat = '), nu('nustd.llm.ChatRef'), p('.method(temperature=0.7)')],
   [],
   [cmt('# ollama running locally, one preset call')],
   [p('app = '), nu('nu.With'), p('(')],
-  [p('    '), nu('nu.llm.ollama'), p('('), nu('Model'), p(', host='), str('"localhost"'), p(', model='), str('"qwen2.5:7b-instruct"'), p('),')],
+  [p('    '), nu('nustd.llm.ollama'), p('('), nu('Model'), p(', host='), str('"localhost"'), p(', model='), str('"qwen2.5:7b-instruct"'), p('),')],
   [p('    body='), nu('nu.print'), p('('), nu('nu.dict'), p('('), nu('Model'), p('.chat(prompt='), str('"haiku about rust"'), p('))['), str('"text"'), p(']),')],
   [p(')')],
   [nu('nu.run'), p('(app)')],
@@ -59,7 +60,7 @@ export default function LlmFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.llm" hue={HUE} />}
+        meta={<PageBadge kind="fabric" name="nustd.llm" hue={HUE} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.llm.poweredBy} />}
         title={<>One chat wire. Every provider.</>}
         lede={
@@ -107,7 +108,7 @@ export default function LlmFabricPage() {
                   kwargs override them.
                 </Description>
                 <Description>
-                  Swap <code>nu.llm.ollama(...)</code> for{' '}
+                  Swap <code>nustd.llm.ollama(...)</code> for{' '}
                   <code>openai</code>, <code>openrouter</code>,{' '}
                   <code>groq</code>, or your own <code>vllm</code> server.
                   The call site does not change.
@@ -159,18 +160,18 @@ export default function LlmFabricPage() {
             title="Combines well with."
             lede={
               <>
-                nu.llm gets you text. Other fabrics hold the surrounding
+                nustd.llm gets you text. Other fabrics hold the surrounding
                 state, ship it to a UI, or fan it across machines.
               </>
             }
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist prompts, responses, embeddings, conversation
                 history — same Refs, plain Python reads and writes.
               </LinkCard>
-              <LinkCard href="/fabrics/ui" name="nu.ui" hue={FABRIC.ui.hue} tagline="Reactive web UI.">
+              <LinkCard href="/fabrics/ui" name="nustd.ui" hue={FABRIC.ui.hue} tagline="Reactive web UI.">
                 Wire a chat Ref to a text block and a button. Type a
                 prompt in the browser, get the answer streamed back.
               </LinkCard>

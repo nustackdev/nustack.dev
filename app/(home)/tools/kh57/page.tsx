@@ -220,7 +220,7 @@ export default function Kh57ToolPage() {
             title="Powers Nu."
             lede={
               <>
-                <code>kh57</code> is the sampler under <code>nu.kv</code>&apos;s
+                <code>kh57</code> is the sampler under <code>nustd.kv</code>&apos;s
                 sparse int-keyed Refs. Store a growing collection on any
                 sorted-KV backend, then pull uniform samples from any range
                 with one call.
@@ -229,7 +229,7 @@ export default function Kh57ToolPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
                 <code>Kh57Ref</code> is a sparse int-keyed collection with
                 a <code>.sample(n, begin, end)</code> query built on kh57.
                 Grow forever, sample cheaply.

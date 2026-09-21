@@ -23,7 +23,7 @@ export const fabricDocsHref = (slug: string) => `/docs/reference/nustd/${slug}`;
 
 /** Source-code URL for a fabric's implementation directory in the nu repo. */
 export const fabricSrcHref = (slug: string) =>
-  `https://github.com/nustackdev/nu/tree/main/src/nu/${slug}`;
+  `https://github.com/nustackdev/nu/tree/main/pkgs/nustd/src/nustd/${slug}`;
 
 export function hrefFor(ref: Powered): string | undefined {
   if (ref.kind === 'fabric') return fabricHref(ref.slug);

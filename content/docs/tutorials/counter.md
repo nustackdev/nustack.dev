@@ -4,7 +4,7 @@ title: Counter
 
 Build a counter that ticks forever, survives restarts, and mirrors to a browser. Two stages, one new concept per stage.
 
-Before you start: finish the [hello tutorial](/docs/tutorials/hello) and set up the `nu.ui` Fabric per [Install](/docs/how-to/install).
+Before you start: finish the [hello tutorial](/docs/tutorials/hello) and set up the `nustd.ui` Fabric per [Install](/docs/how-to/install).
 
 ## Stage 1: Remember a number across restarts
 
@@ -16,15 +16,16 @@ Save this as `counter.py`:
 import asyncio
 
 import nu
+import nustd
 
 
 class Counter(nu.Shape):
-    value: nu.kv.IntRef
+    value: nustd.kv.IntRef
 
 
 tree = nu.With(
-    nu.kv.rocksdb_navigator(".dbcounter"),
-    body=nu.kv.auto_flow_atomic(
+    nustd.kv.rocksdb_navigator(".dbcounter"),
+    body=nustd.kv.auto_flow_atomic(
         nu.IfDo(Counter.value.missing(), Counter.value.set(0))
         >> nu.ForeverDo(
             Counter.value.inc() >> nu.print(Counter.value) >> nu.Delay(1.0),
@@ -47,13 +48,13 @@ You see `1`, `2`, `3`, ... one per second. Stop it with Ctrl-C. Run again. It re
 
 ### The new concepts
 
-A **Shape** is a class that declares the data your program has. `Counter` has one **Slot** named `value`, and that slot holds a `nu.kv.IntRef`.
+A **Shape** is a class that declares the data your program has. `Counter` has one **Slot** named `value`, and that slot holds a `nustd.kv.IntRef`.
 
 A **Ref** is a typed address for a piece of data. `Counter.value` is not an integer; it is a handle that points at where the integer lives. To read it, some atom in the tree reads through it. To write it, some atom writes through it. `Counter.value.inc()` is a Command that reads-and-writes through the Ref.
 
 `nu.With` binds Fabrics for the tree it wraps. Here it binds the RocksDB Navigator to the path `.dbcounter`, and the tree in `body=` runs against it. `nu.IfDo(Counter.value.missing(), Counter.value.set(0))` seeds the counter to 0 the first time it runs, and does nothing on later runs.
 
-Ignore `nu.kv.auto_flow_atomic` for now. It wraps writes in the transactions the storage Fabric needs. You will meet it properly later.
+Ignore `nustd.kv.auto_flow_atomic` for now. It wraps writes in the transactions the storage Fabric needs. You will meet it properly later.
 
 ## Stage 2: Mirror the counter in a browser, live
 
@@ -65,18 +66,19 @@ Replace `counter.py` with:
 import asyncio
 
 import nu
+import nustd
 
 
 class Counter(nu.Shape):
-    value: nu.kv.IntRef
+    value: nustd.kv.IntRef
 
 
-class Dashboard(nu.ui.Page):
-    count: nu.ui.TextRef
+class Dashboard(nustd.ui.Page):
+    count: nustd.ui.TextRef
 
 
-class App(nu.ui.Index):
-    pages = nu.ui.Pages({"/": Dashboard})
+class App(nustd.ui.Index):
+    pages = nustd.ui.Pages({"/": Dashboard})
 
 
 ui = nu.ReactForever(
@@ -85,9 +87,9 @@ ui = nu.ReactForever(
 )
 
 tree = nu.With(
-    nu.kv.rocksdb_navigator(".dbcounter"),
-    nu.ui.server(nu.kv.auto_flow_atomic(ui)),
-    body=nu.kv.auto_flow_atomic(
+    nustd.kv.rocksdb_navigator(".dbcounter"),
+    nustd.ui.server(nustd.kv.auto_flow_atomic(ui)),
+    body=nustd.kv.auto_flow_atomic(
         nu.IfDo(Counter.value.missing(), Counter.value.set(0))
         >> nu.ForeverDo(
             Counter.value.inc() >> nu.Delay(1.0),
@@ -104,7 +106,7 @@ Run it. A browser tab opens on `http://localhost:8080`. The page shows the count
 
 ### The new concepts
 
-A **Fabric** is a backend Nu talks to. Storage is one Fabric (RocksDB, in-memory). The browser UI is another. Each has its own Shapes: `nu.Shape` and `nu.kv.IntRef` live on the storage Fabric; `nu.ui.Page` and `nu.ui.TextRef` live on the UI Fabric. Same declaration style, different Fabric. `App` is the site index, and `nu.ui.Pages({"/": Dashboard})` mounts `Dashboard` at `/`.
+A **Fabric** is a backend Nu talks to. Storage is one Fabric (RocksDB, in-memory). The browser UI is another. Each has its own Shapes: `nu.Shape` and `nustd.kv.IntRef` live on the storage Fabric; `nustd.ui.Page` and `nustd.ui.TextRef` live on the UI Fabric. Same declaration style, different Fabric. `App` is the site index, and `nustd.ui.Pages({"/": Dashboard})` mounts `Dashboard` at `/`.
 
 `nu.With` now binds two Fabrics: the RocksDB Navigator and the UI server. The server takes a tree to run whenever it needs to update the UI.
 

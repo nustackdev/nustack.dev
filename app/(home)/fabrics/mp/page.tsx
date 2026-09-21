@@ -26,9 +26,9 @@ import { FABRIC } from '@/lib/fabrics';
 import { pageOG, ogFabricImage } from '@/lib/og';
 
 export const metadata: Metadata = pageOG({
-  title: 'nu.mp - local multiprocessing fabric',
+  title: 'nustd.mp - local multiprocessing fabric',
   description:
-    'Run Nu trees in parallel across local processes. Zero-dep, no cluster required. Same shape as nu.cluster.',
+    'Run Nu trees in parallel across local processes. Zero-dep, no cluster required. Same shape as nustd.cluster.',
   image: ogFabricImage('mp'),
   path: '/fabrics/mp',
 });
@@ -43,17 +43,18 @@ const cmt = (t: string): CodeTok => ({ c: 'cmt', t });
 
 const SNIPPET: CodeTok[][] = [
   [k('import'), p(' nu')],
+  [k('import'), p(' nustd')],
   [],
   [p('work = ...  '), cmt('# your Nu tree')],
   [],
   [cmt('# spawn two local worker processes, teleport a body to each')],
-  [p('program = '), nu('nu.ProvideList'), p('('), nu('nu.mp.MpWorker'), p(', [')],
+  [p('program = '), nu('nu.ProvideList'), p('('), nu('nustd.mp.MpWorker'), p(', [')],
   [p('    {'), str('"name"'), p(': '), str('"worker-0"'), p('},')],
   [p('    {'), str('"name"'), p(': '), str('"worker-1"'), p('},')],
   [p('],')],
   [p('    '), nu('nu.Sequential'), p('(')],
-  [p('        '), nu('nu.mp.Teleport'), p('(work, target=0),')],
-  [p('        '), nu('nu.mp.Teleport'), p('(work, target=1),')],
+  [p('        '), nu('nustd.mp.Teleport'), p('(work, target=0),')],
+  [p('        '), nu('nustd.mp.Teleport'), p('(work, target=1),')],
   [p('    ),')],
   [p(')')],
   [nu('nu.run'), p('(program)')],
@@ -63,7 +64,7 @@ export default function MpFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.mp" hue={HUE} />}
+        meta={<PageBadge kind="fabric" name="nustd.mp" hue={HUE} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.mp.poweredBy} />}
         title={<>Run your Nu program across local processes.</>}
         lede={
@@ -104,7 +105,7 @@ export default function MpFabricPage() {
               <>
                 <Tagline>Your program, running across local processes.</Tagline>
                 <Description>
-                  nu.mp spawns real child processes and lets you teleport
+                  nustd.mp spawns real child processes and lets you teleport
                   any part of your Nu tree onto them. The body does not
                   know or care where it runs.
                 </Description>
@@ -146,7 +147,7 @@ export default function MpFabricPage() {
                 {
                   kicker: 'no infra',
                   title: 'Prototype the shape you will ship.',
-                  body: 'Same tree, same Teleport, same tags as nu.cluster. Design your topology on your laptop, swap in Ray when you outgrow one box.',
+                  body: 'Same tree, same Teleport, same tags as nustd.cluster. Design your topology on your laptop, swap in Ray when you outgrow one box.',
                 },
               ]}
             />
@@ -166,15 +167,15 @@ export default function MpFabricPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/cluster" name="nu.cluster" hue={FABRIC.cluster.hue} tagline="Ray cluster fabric.">
+              <LinkCard href="/fabrics/cluster" name="nustd.cluster" hue={FABRIC.cluster.hue} tagline="Ray cluster fabric.">
                 Same tree, same Teleport, cluster-scale compute. Move from
                 one box to many without rewriting the topology.
               </LinkCard>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue={FABRIC.proxy.hue} tagline="Fabrics on the wire.">
+              <LinkCard href="/fabrics/proxy" name="nustd.proxy" hue={FABRIC.proxy.hue} tagline="Fabrics on the wire.">
                 Host a fabric inside an mp worker, reach it from the driver
                 or from other workers. Turns a worker into a shared service.
               </LinkCard>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist worker results, weights, metrics. Workers share the
                 same tree of Refs, no manual handoff.
               </LinkCard>

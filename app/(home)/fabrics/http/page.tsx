@@ -19,7 +19,7 @@ import { HTTP_SAMPLE_LINES } from './http.sample.data';
 import { pageOG, ogFabricImage } from '@/lib/og';
 
 export const metadata = pageOG({
-  title: 'nu.http: plug an HTTP API into Nu',
+  title: 'nustd.http: plug an HTTP API into Nu',
   description:
     'You need to talk to an HTTP API. Name the endpoints once and call them from your Nu program like anything else.',
   image: ogFabricImage('http'),
@@ -30,7 +30,7 @@ export default function HttpFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.http" hue={FABRIC.http.hue} />}
+        meta={<PageBadge kind="fabric" name="nustd.http" hue={FABRIC.http.hue} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.http.poweredBy} />}
         title="Plug an HTTP API into Nu."
         lede={
@@ -133,7 +133,7 @@ export default function HttpFabricPage() {
             <LinkGrid>
               <LinkCard
                 href="/fabrics/ui"
-                name="nu.ui"
+                name="nustd.ui"
                 hue={FABRIC.ui.hue}
                 tagline="See responses on screen."
               >
@@ -143,7 +143,7 @@ export default function HttpFabricPage() {
 
               <LinkCard
                 href="/fabrics/kv"
-                name="nu.kv"
+                name="nustd.kv"
                 hue={FABRIC.kv.hue}
                 tagline="Remember responses on disk."
               >
@@ -153,7 +153,7 @@ export default function HttpFabricPage() {
 
               <LinkCard
                 href="/fabrics/proxy"
-                name="nu.proxy"
+                name="nustd.proxy"
                 hue={FABRIC.proxy.hue}
                 tagline="Use one client from many processes."
               >

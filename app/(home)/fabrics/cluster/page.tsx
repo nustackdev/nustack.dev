@@ -26,7 +26,7 @@ import { FABRIC } from '@/lib/fabrics';
 import { pageOG, ogFabricImage } from '@/lib/og';
 
 export const metadata: Metadata = pageOG({
-  title: 'nu.cluster - cluster compute fabric',
+  title: 'nustd.cluster - cluster compute fabric',
   description:
     'Run any Nu program on a Ray cluster. Wrap a tree in Teleport and it executes on a remote worker, unchanged.',
   image: ogFabricImage('cluster'),
@@ -43,17 +43,18 @@ const cmt = (t: string): CodeTok => ({ c: 'cmt', t });
 
 const SNIPPET: CodeTok[][] = [
   [k('import'), p(' nu')],
+  [k('import'), p(' nustd')],
   [],
   [p('train_epoch = ...  '), cmt('# your Nu tree')],
   [],
   [cmt('# spin up two Ray workers, then teleport a body to each')],
-  [p('program = '), nu('nu.Provide'), p('('), nu('nu.cluster.RayCluster'), p(', {'), str('"address"'), p(': '), str('"auto"'), p('},')],
-  [p('    '), nu('nu.ProvideList'), p('('), nu('nu.cluster.RayService'), p(', [')],
+  [p('program = '), nu('nu.Provide'), p('('), nu('nustd.cluster.RayCluster'), p(', {'), str('"address"'), p(': '), str('"auto"'), p('},')],
+  [p('    '), nu('nu.ProvideList'), p('('), nu('nustd.cluster.RayService'), p(', [')],
   [p('        {'), str('"actor_name"'), p(': '), str('"worker-0"'), p(', '), str('"num_cpus"'), p(': 4},')],
   [p('        {'), str('"actor_name"'), p(': '), str('"worker-1"'), p(', '), str('"num_cpus"'), p(': 4},')],
   [p('    ], '), nu('nu.Sequential'), p('(')],
-  [p('        '), nu('nu.cluster.Teleport'), p('(train_epoch, target=0),')],
-  [p('        '), nu('nu.cluster.Teleport'), p('(train_epoch, target=1),')],
+  [p('        '), nu('nustd.cluster.Teleport'), p('(train_epoch, target=0),')],
+  [p('        '), nu('nustd.cluster.Teleport'), p('(train_epoch, target=1),')],
   [p('    )),')],
   [p(')')],
   [nu('nu.arun'), p('(program)')],
@@ -63,7 +64,7 @@ export default function ClusterFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.cluster" hue={HUE} />}
+        meta={<PageBadge kind="fabric" name="nustd.cluster" hue={HUE} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.cluster.poweredBy} />}
         title={<>Run your Nu program on a distributed cluster.</>}
         lede={
@@ -104,7 +105,7 @@ export default function ClusterFabricPage() {
               <>
                 <Tagline>Your program, running on the cluster.</Tagline>
                 <Description>
-                  nu.cluster lets you provision Ray workers as fabric
+                  nustd.cluster lets you provision Ray workers as fabric
                   services and teleport any part of your Nu tree onto them.
                   The body does not know or care where it runs.
                 </Description>
@@ -166,16 +167,16 @@ export default function ClusterFabricPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist results, weights, metrics, job state. Workers share
                 the same tree of Refs across the cluster.
               </LinkCard>
-              <LinkCard href="/fabrics/proxy" name="nu.proxy" hue={FABRIC.proxy.hue} tagline="Fabrics on the wire.">
+              <LinkCard href="/fabrics/proxy" name="nustd.proxy" hue={FABRIC.proxy.hue} tagline="Fabrics on the wire.">
                 Host a fabric on one worker, reach it from everywhere else.
                 Perfect pair when driver, workers, and store all live apart.
               </LinkCard>
-              <LinkCard href="/fabrics/mp" name="nu.mp" hue={FABRIC.mp.hue} tagline="Local process fabric.">
-                Same shape as nu.cluster, no Ray needed. Prototype your
+              <LinkCard href="/fabrics/mp" name="nustd.mp" hue={FABRIC.mp.hue} tagline="Local process fabric.">
+                Same shape as nustd.cluster, no Ray needed. Prototype your
                 topology on one box before you spin the cluster.
               </LinkCard>
             </LinkGrid>

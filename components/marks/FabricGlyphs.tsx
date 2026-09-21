@@ -142,14 +142,14 @@ export function MemGlyph() {
   );
 }
 
-/* ------------------------------- nu.kv ------------------------------------- */
+/* ------------------------------- nustd.kv ------------------------------------- */
 /** Disk stack with backend swap-plates. */
 export function KvGlyph() {
   const cx = V.w / 2;
   const cy = V.h / 2 - 6;
 
   return (
-    <Frame aria="nu.kv glyph: a stacked-disk substrate with four labeled backend swap-plates — rocksdb, lmdb, acid-inmem, text.">
+    <Frame aria="nustd.kv glyph: a stacked-disk substrate with four labeled backend swap-plates — rocksdb, lmdb, acid-inmem, text.">
       {/* eyebrow */}
       <text
         x={40}
@@ -209,7 +209,7 @@ export function KvGlyph() {
   );
 }
 
-/* ------------------------------ nu.proxy ----------------------------------- */
+/* ------------------------------ nustd.proxy ----------------------------------- */
 /** Two nodes with a dashed remote link + tiny proxy netref. */
 export function ProxyGlyph() {
   const y = V.h / 2;
@@ -217,7 +217,7 @@ export function ProxyGlyph() {
   const rightX = V.w - 100;
 
   return (
-    <Frame aria="nu.proxy glyph: two nodes connected by a dashed remote link, a small proxy pill hovers over the wire.">
+    <Frame aria="nustd.proxy glyph: two nodes connected by a dashed remote link, a small proxy pill hovers over the wire.">
       {/* eyebrow */}
       <text
         x={40}
@@ -401,7 +401,7 @@ export function RayGlyph() {
   );
 }
 
-/* -------------------------------- nu.llm ----------------------------------- */
+/* -------------------------------- nustd.llm ----------------------------------- */
 /** Central chat pill over a row of provider swap-plates.
  *  Reads: "one chat call, many providers".
  */
@@ -424,7 +424,7 @@ export function LlmGlyph() {
   const chatY = 66;
 
   return (
-    <Frame aria="nu.llm glyph: a central chat pill reading 'prompt » text' sits over a row of four provider swap-plates — ollama (active), openai, openrouter, groq.">
+    <Frame aria="nustd.llm glyph: a central chat pill reading 'prompt » text' sits over a row of four provider swap-plates — ollama (active), openai, openrouter, groq.">
       {/* eyebrow */}
       <text
         x={40}

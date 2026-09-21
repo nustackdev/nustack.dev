@@ -20,7 +20,7 @@ import { UI_COUNTER_LINES } from './ui.sample.data';
 import { pageOG, ogFabricImage } from '@/lib/og';
 
 export const metadata = pageOG({
-  title: 'nu.ui — the browser surface for Nu apps',
+  title: 'nustd.ui — the browser surface for Nu apps',
   description:
     'Browser widgets as typed Python attributes. Declare a Page, hang buttons, tables, inputs, charts. Writes redraw the browser, clicks push back.',
   image: ogFabricImage('ui'),
@@ -31,7 +31,7 @@ export default function UiFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.ui" hue={FABRIC.ui.hue} />}
+        meta={<PageBadge kind="fabric" name="nustd.ui" hue={FABRIC.ui.hue} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.ui.poweredBy} />}
         title="The browser surface for Nu apps."
         lede={
@@ -98,7 +98,7 @@ export default function UiFabricPage() {
         <Chapter>
           <SectionHead
             title="What your program gains."
-            lede={<>Four properties once your surface lives on nu.ui.</>}
+            lede={<>Four properties once your surface lives on nustd.ui.</>}
           />
 
           <Section>
@@ -171,15 +171,15 @@ export default function UiFabricPage() {
 
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state, on disk.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Durable state, on disk.">
                 Bind widget slots to kv Refs. Restart the process, the surface snaps back to where it was.
               </LinkCard>
 
-              <LinkCard href="/fabrics/mem" name="nu.mem" hue={FABRIC.mem.hue} tagline="Hot state, in-process.">
+              <LinkCard href="/fabrics/mem" name="nustd.mem" hue={FABRIC.mem.hue} tagline="Hot state, in-process.">
                 For cache, session state, and anything that does not need to survive a restart.
               </LinkCard>
 
-              <LinkCard href="/fabrics/http" name="nu.http" hue={FABRIC.http.hue} tagline="Refs on the wire.">
+              <LinkCard href="/fabrics/http" name="nustd.http" hue={FABRIC.http.hue} tagline="Refs on the wire.">
                 Expose a Ref as an HTTP endpoint, or pull one from an outside service. The surface does not care where data lives.
               </LinkCard>
             </LinkGrid>

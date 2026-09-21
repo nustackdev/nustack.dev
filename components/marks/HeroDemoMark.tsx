@@ -65,7 +65,7 @@ function LeftTree() {
         <Line indent>
           <span className={s.ident}>val</span>
           <span className={s.dim}>: </span>
-          <span className={s.tKv}>nu.kv.IntRef</span>
+          <span className={s.tKv}>nustd.kv.IntRef</span>
         </Line>
       </Container>
 
@@ -73,12 +73,12 @@ function LeftTree() {
         <Line>
           <span className={s.kw}>class</span>{' '}
           <span className={s.tUi}>Dashboard</span>
-          <span className={s.dim}>(nu.ui.Page):</span>
+          <span className={s.dim}>(nustd.ui.Page):</span>
         </Line>
         <Line indent>
           <span className={s.ident}>count</span>
           <span className={s.dim}>: </span>
-          <span className={s.tUi}>nu.ui.TextRef</span>
+          <span className={s.tUi}>nustd.ui.TextRef</span>
         </Line>
       </Container>
 

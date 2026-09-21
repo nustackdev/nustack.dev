@@ -222,7 +222,7 @@ export default function RdbpyPage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Persistent state fabric.">
                 The fabric that turns Refs into durable state. Runs on rdbpy
                 out of the box.
               </LinkCard>

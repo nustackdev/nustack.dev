@@ -48,7 +48,9 @@ name = "nustack-workspace"
 version = "0"
 requires-python = ">=3.10"
 dependencies = [
-    "nustack-py[all]",
+    "nucore",
+    "nustd[all]",
+    "nucli",
     "virtuals-py[rocksdb]",
     "invisibles-py",
     "kh57",
@@ -59,7 +61,9 @@ dependencies = [
 members = ["../nu", "../virtuals", "../invisibles", "../kh57", "../nulog"]
 
 [tool.uv.sources]
-nustack-py    = { workspace = true }
+nucore        = { workspace = true }
+nustd         = { workspace = true }
+nucli         = { workspace = true }
 virtuals-py   = { workspace = true }
 invisibles-py = { workspace = true }
 kh57          = { workspace = true }

@@ -35,6 +35,7 @@ const HUE = FABRIC.proxy.hue;
 
 const SNIPPET: CodeTok[][] = [
   [{ c: 'kw', t: 'import' }, { t: ' nu' }],
+  [{ c: 'kw', t: 'import' }, { t: ' nustd' }],
   [],
   [{ c: 'cmt', t: '# inside the spawned process: bind a fabric, expose it on a port' }],
   [{ t: 'host_init = ' }, { c: 'nu', t: 'nu.With' }, { t: '(' }],
@@ -42,7 +43,7 @@ const SNIPPET: CodeTok[][] = [
     { t: '    ' },
     { c: 'nu', t: 'nu.Provide' },
     { t: '(' },
-    { c: 'nu', t: 'nu.kv.RocksDBStorage' },
+    { c: 'nu', t: 'nustd.kv.RocksDBStorage' },
     { t: ', {' },
     { c: 'str', t: '"path"' },
     { t: ': ' },
@@ -53,18 +54,18 @@ const SNIPPET: CodeTok[][] = [
     { t: '    ' },
     { c: 'nu', t: 'nu.Provide' },
     { t: '(' },
-    { c: 'nu', t: 'nu.kv.Navigator' },
+    { c: 'nu', t: 'nustd.kv.Navigator' },
     { t: ', {}),' },
   ],
   [
     { t: '    ' },
     { c: 'nu', t: 'nu.Provide' },
     { t: '(' },
-    { c: 'nu', t: 'nu.proxy.InvisiblesServer' },
+    { c: 'nu', t: 'nustd.proxy.InvisiblesServer' },
     { t: ', {' },
     { c: 'str', t: '"target"' },
     { t: ': ' },
-    { c: 'nu', t: 'nu.kv.Navigator' },
+    { c: 'nu', t: 'nustd.kv.Navigator' },
     { t: ', ' },
     { c: 'str', t: '"address"' },
     { t: ': ' },
@@ -78,16 +79,16 @@ const SNIPPET: CodeTok[][] = [
     { t: 'tree = ' },
     { c: 'nu', t: 'nu.Provide' },
     { t: '(' },
-    { c: 'nu', t: 'nu.mp.MpWorker' },
+    { c: 'nu', t: 'nustd.mp.MpWorker' },
     { t: ', {' },
     { c: 'str', t: '"init"' },
     { t: ': host_init},' },
   ],
   [
     { t: '    ' },
-    { c: 'nu', t: 'nu.proxy.InvisiblesProxy' },
+    { c: 'nu', t: 'nustd.proxy.InvisiblesProxy' },
     { t: '(' },
-    { c: 'nu', t: 'nu.kv.Navigator' },
+    { c: 'nu', t: 'nustd.kv.Navigator' },
     { t: ', address=' },
     { c: 'str', t: '"0.0.0.0:19000"' },
     { t: ',' },
@@ -105,7 +106,7 @@ export default function ProxyFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.proxy" hue={HUE} />}
+        meta={<PageBadge kind="fabric" name="nustd.proxy" hue={HUE} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.proxy.poweredBy} />}
         title="Any Nu fabric, across processes."
         lede={
@@ -135,7 +136,7 @@ export default function ProxyFabricPage() {
             title="See it."
             lede={
               <>
-                Pair it with <code>nu.mp</code> or <code>nu.cluster</code> to
+                Pair it with <code>nustd.mp</code> or <code>nustd.cluster</code> to
                 spin the other process. Proxy hosts the fabric there and
                 wires it back to your tree.
               </>
@@ -148,7 +149,7 @@ export default function ProxyFabricPage() {
               <>
                 <Tagline>Any fabric, hosted in another process.</Tagline>
                 <Description>
-                  nu.proxy lets you host any fabric in another process. Your
+                  nustd.proxy lets you host any fabric in another process. Your
                   Nu tree flows the same way as if the fabric were right
                   here.
                 </Description>
@@ -213,7 +214,7 @@ export default function ProxyFabricPage() {
             <LinkGrid>
               <LinkCard
                 href="/fabrics/mp"
-                name="nu.mp"
+                name="nustd.mp"
                 hue={FABRIC.mp.hue}
                 tagline="Local subprocess fabric."
               >
@@ -222,16 +223,16 @@ export default function ProxyFabricPage() {
               </LinkCard>
               <LinkCard
                 href="/fabrics/cluster"
-                name="nu.cluster"
+                name="nustd.cluster"
                 hue={FABRIC.cluster.hue}
                 tagline="Ray cluster fabric."
               >
-                Same shape as nu.mp, but the process lives on a Ray worker
+                Same shape as nustd.mp, but the process lives on a Ray worker
                 somewhere in the cluster. Proxy wires it back.
               </LinkCard>
               <LinkCard
                 href="/fabrics/kv"
-                name="nu.kv"
+                name="nustd.kv"
                 hue={FABRIC.kv.hue}
                 tagline="Durable state fabric."
               >
@@ -240,7 +241,7 @@ export default function ProxyFabricPage() {
               </LinkCard>
               <LinkCard
                 href="/fabrics/ui"
-                name="nu.ui"
+                name="nustd.ui"
                 hue={FABRIC.ui.hue}
                 tagline="Live browser widgets."
               >

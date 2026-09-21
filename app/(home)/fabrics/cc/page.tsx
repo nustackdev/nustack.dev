@@ -26,7 +26,7 @@ import { FABRIC } from '@/lib/fabrics';
 import { pageOG, ogFabricImage } from '@/lib/og';
 
 export const metadata: Metadata = pageOG({
-  title: 'nu.cc - Claude Code fabric',
+  title: 'nustd.cc - Claude Code fabric',
   description:
     'Claude Code as a Ref. Prompt from your Nu tree, scope sessions with a bracket, get text and metadata back.',
   image: ogFabricImage('cc'),
@@ -43,14 +43,15 @@ const cmt = (t: string): CodeTok => ({ c: 'cmt', t });
 
 const SNIPPET: CodeTok[][] = [
   [k('import'), p(' nu')],
+  [k('import'), p(' nustd')],
   [],
   [k('class'), p(' '), nu('Agent'), p('('), nu('nu.Service'), p('):')],
-  [p('    ask = '), nu('nu.cc.PromptRef'), p('.method()')],
+  [p('    ask = '), nu('nustd.cc.PromptRef'), p('.method()')],
   [],
   [cmt('# two independent sessions, two prompts each')],
   [p('app = '), nu('nu.With'), p('(')],
-  [p('    '), nu('nu.cc.bind'), p('('), nu('Agent'), p(', permission_mode='), str('"bypassPermissions"'), p('),')],
-  [p('    body='), nu('nu.cc.Session'), p('(')],
+  [p('    '), nu('nustd.cc.bind'), p('('), nu('Agent'), p(', permission_mode='), str('"bypassPermissions"'), p('),')],
+  [p('    body='), nu('nustd.cc.Session'), p('(')],
   [p('        '), nu('Agent'), p('.ask(prompt='), str('"my favorite color is teal. remember it."'), p('),')],
   [p('        '), nu('Agent'), p('.ask(prompt='), str('"what color did i tell you? one word."'), p('),')],
   [p('    ),')],
@@ -62,7 +63,7 @@ export default function CcFabricPage() {
   return (
     <Page>
       <Header
-        meta={<PageBadge kind="fabric" name="nu.cc" hue={HUE} />}
+        meta={<PageBadge kind="fabric" name="nustd.cc" hue={HUE} />}
         tags={<RelationsLine label="Powered by" refs={FABRIC.cc.poweredBy} />}
         title={<>Claude Code, as a Ref.</>}
         lede={
@@ -105,12 +106,12 @@ export default function CcFabricPage() {
                 <Tagline>Prompts from inside your Nu tree.</Tagline>
                 <Description>
                   <code>PromptRef.method()</code> declares the endpoint;{' '}
-                  <code>nu.cc.bind(Agent, ...)</code> hands it a
+                  <code>nustd.cc.bind(Agent, ...)</code> hands it a
                   ClaudeAgentOptions template — model, cwd, tools, system
                   prompt, permissions.
                 </Description>
                 <Description>
-                  <code>nu.cc.Session(...)</code> is a bracket. The first
+                  <code>nustd.cc.Session(...)</code> is a bracket. The first
                   prompt starts a fresh cc session, the rest continue it via{' '}
                   <code>resume=session_id</code>. Sibling brackets stay
                   independent.
@@ -144,7 +145,7 @@ export default function CcFabricPage() {
                 {
                   kicker: 'sessions',
                   title: 'Scope multi-turn work with a bracket.',
-                  body: 'nu.cc.Session wraps a subtree. Prompts inside share one cc session so context carries. Two sibling brackets = two clean contexts.',
+                  body: 'nustd.cc.Session wraps a subtree. Prompts inside share one cc session so context carries. Two sibling brackets = two clean contexts.',
                 },
                 {
                   kicker: 'text + meta',
@@ -162,20 +163,20 @@ export default function CcFabricPage() {
             title="Combines well with."
             lede={
               <>
-                nu.cc drives cc. Other fabrics hold the surrounding
+                nustd.cc drives cc. Other fabrics hold the surrounding
                 context and put the answers to work.
               </>
             }
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" name="nu.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
+              <LinkCard href="/fabrics/kv" name="nustd.kv" hue={FABRIC.kv.hue} tagline="Durable state fabric.">
                 Persist prompts, session ids, transcripts, tool traces.
                 Resume conversations across process restarts.
               </LinkCard>
-              <LinkCard href="/fabrics/llm" name="nu.llm" hue={FABRIC.llm.hue} tagline="OpenAI-compatible chat.">
-                Same shape, different backend. Use nu.llm for plain
-                chat/completions; use nu.cc when you want cc's agent loop
+              <LinkCard href="/fabrics/llm" name="nustd.llm" hue={FABRIC.llm.hue} tagline="OpenAI-compatible chat.">
+                Same shape, different backend. Use nustd.llm for plain
+                chat/completions; use nustd.cc when you want cc's agent loop
                 and tools.
               </LinkCard>
             </LinkGrid>

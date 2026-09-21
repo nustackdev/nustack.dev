@@ -54,7 +54,7 @@ type FabricSpec = Omit<Fabric, 'href' | 'docs' | 'src'>;
 
 const SPECS: FabricSpec[] = [
   {
-    name: 'nu.kv',
+    name: 'nustd.kv',
     slug: 'kv',
     hue: 'crimson',
     tagline: 'Persistent state fabric.',
@@ -71,7 +71,7 @@ const SPECS: FabricSpec[] = [
     glyph: KvGlyph,
   },
   {
-    name: 'nu.ui',
+    name: 'nustd.ui',
     slug: 'ui',
     hue: 'coral',
     tagline: 'Web UI fabric.',
@@ -86,7 +86,7 @@ const SPECS: FabricSpec[] = [
     glyph: UiGlyph,
   },
   {
-    name: 'nu.cluster',
+    name: 'nustd.cluster',
     slug: 'cluster',
     hue: 'amber',
     tagline: 'Cluster compute fabric.',
@@ -98,7 +98,7 @@ const SPECS: FabricSpec[] = [
     glyph: RayGlyph,
   },
   {
-    name: 'nu.llm',
+    name: 'nustd.llm',
     slug: 'llm',
     hue: 'gold',
     tagline: 'LLM chat fabric.',
@@ -110,7 +110,7 @@ const SPECS: FabricSpec[] = [
     glyph: LlmGlyph,
   },
   {
-    name: 'nu.mem',
+    name: 'nustd.mem',
     slug: 'mem',
     hue: 'sage',
     tagline: 'In-memory state fabric.',
@@ -121,7 +121,7 @@ const SPECS: FabricSpec[] = [
     glyph: MemGlyph,
   },
   {
-    name: 'nu.proxy',
+    name: 'nustd.proxy',
     slug: 'proxy',
     hue: 'teal',
     tagline: 'Proxy fabric.',
@@ -132,7 +132,7 @@ const SPECS: FabricSpec[] = [
     glyph: ProxyGlyph,
   },
   {
-    name: 'nu.http',
+    name: 'nustd.http',
     slug: 'http',
     hue: 'cyan',
     tagline: 'HTTP fabric.',
@@ -144,7 +144,7 @@ const SPECS: FabricSpec[] = [
     ],
   },
   {
-    name: 'nu.service',
+    name: 'nustd.service',
     slug: 'service',
     hue: 'steel',
     tagline: 'In-process service fabric.',
@@ -154,7 +154,7 @@ const SPECS: FabricSpec[] = [
     poweredBy: [],
   },
   {
-    name: 'nu.cc',
+    name: 'nustd.cc',
     slug: 'cc',
     hue: 'indigo',
     tagline: 'Claude Code fabric.',
@@ -170,7 +170,7 @@ const SPECS: FabricSpec[] = [
     ],
   },
   {
-    name: 'nu.mp',
+    name: 'nustd.mp',
     slug: 'mp',
     hue: 'violet',
     tagline: 'Multiprocessing fabric.',
@@ -183,6 +183,35 @@ const SPECS: FabricSpec[] = [
         name: 'Python multiprocessing',
         url: 'https://docs.python.org/3/library/multiprocessing.html',
       },
+    ],
+  },
+  {
+    name: 'nustd.mp_pool',
+    slug: 'mp_pool',
+    hue: 'plum',
+    tagline: 'Worker pool fabric.',
+    description:
+      'The pool itself is the fabric. One Provide owns N worker processes, so you launch one, kill one, or run a tree on the worker you name.',
+    navDesc: 'A pool of workers.',
+    poweredBy: [
+      {
+        kind: 'external',
+        name: 'Python multiprocessing',
+        url: 'https://docs.python.org/3/library/multiprocessing.html',
+      },
+    ],
+  },
+  {
+    name: 'nustd.ws_server',
+    slug: 'ws_server',
+    hue: 'magenta',
+    tagline: 'Websocket server fabric.',
+    description:
+      'Run a websocket server from your Nu program. Every client that connects gets its own arm of the tree, and you decide what travels over the wire.',
+    navDesc: 'Serve websocket clients.',
+    poweredBy: [
+      { kind: 'external', name: 'uvicorn', url: 'https://www.uvicorn.org' },
+      { kind: 'external', name: 'FastAPI', url: 'https://fastapi.tiangolo.com' },
     ],
   },
 ];

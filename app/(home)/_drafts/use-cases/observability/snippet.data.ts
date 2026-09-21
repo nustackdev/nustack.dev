@@ -6,12 +6,12 @@ import type { CodeTok } from '@/components/media/CodeSample';
  * transaction. Adapted from nulog README + examples/basic.py.
  */
 export const NULOG_SNIPPET_LINES: CodeTok[][] = [
-  [{ c: 'kw', t: 'import' }, { t: ' asyncio, nu, nulog' }],
+  [{ c: 'kw', t: 'import' }, { t: ' asyncio, nu, nustd, nulog' }],
   [],
   [{ t: 'tree = ' }, { c: 'nu', t: 'nu.With' }, { t: '(' }],
   [{ t: '    ' }, { c: 'nu', t: 'nulog.store' }, { t: '(' }, { c: 'str', t: '"logs.db"' }, { t: '),' }],
   [{ t: '    ' }, { c: 'nu', t: 'nulog.ui' }, { t: '([' }, { c: 'str', t: '"app"' }, { t: '], port=8080),' }],
-  [{ t: '    body=' }, { c: 'nu', t: 'nu.kv.Transaction' }, { t: '(' }],
+  [{ t: '    body=' }, { c: 'nu', t: 'nustd.kv.Transaction' }, { t: '(' }],
   [{ t: '        ' }, { c: 'nu', t: 'nulog.info' }, { t: '(' }, { c: 'str', t: '"app"' }, { t: ', ' }, { c: 'str', t: '"server started"' }, { t: ', port=8080)' }],
   [{ t: '        >> ' }, { c: 'nu', t: 'nulog.warn' }, { t: '(' }, { c: 'str', t: '"app"' }, { t: ', ' }, { c: 'str', t: '"cache miss"' }, { t: ', key=' }, { c: 'str', t: '"user:42"' }, { t: ')' }],
   [{ t: '        >> ' }, { c: 'nu', t: 'nulog.observe' }, { t: '(' }, { c: 'str', t: '"cpu_load"' }, { t: ', 0.42)' }],

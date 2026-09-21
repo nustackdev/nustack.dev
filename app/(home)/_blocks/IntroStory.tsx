@@ -191,7 +191,7 @@ export function IntroStory() {
                 </li>
                 <li>
                   {' '}<strong>Run distributed across a cluster</strong>{' '}
-                  &mdash; bind through <code>nu.cluster</code>; the Refs
+                  &mdash; bind through <code>nustd.cluster</code>; the Refs
                   don&apos;t notice.
                 </li>
               </ul>

@@ -1,20 +1,21 @@
 import type { CodeTok } from '@/components/media/CodeSample';
 
 /**
- * nu.mem showcase. Session and Cache Shapes with typed Refs, subscript
+ * nustd.mem showcase. Session and Cache Shapes with typed Refs, subscript
  * navigation, writes composed with `|`. Assembly binds a dict as the store.
  */
 export const MEM_COUNTER_LINES: CodeTok[][] = [
   [{ c: 'kw', t: 'import' }, { t: ' nu' }],
+  [{ c: 'kw', t: 'import' }, { t: ' nustd' }],
   [],
   [{ c: 'kw', t: 'class' }, { t: ' Session(' }, { c: 'nu', t: 'nu.Shape' }, { t: '):' }],
-  [{ t: '    user: ' }, { c: 'nu', t: 'nu.mem.StrRef' }],
-  [{ t: '    hits: ' }, { c: 'nu', t: 'nu.mem.IntRef' }],
-  [{ t: '    tags: ' }, { c: 'nu', t: 'nu.mem.PrimitiveListRef' }, { t: '[str]' }],
+  [{ t: '    user: ' }, { c: 'nu', t: 'nustd.mem.StrRef' }],
+  [{ t: '    hits: ' }, { c: 'nu', t: 'nustd.mem.IntRef' }],
+  [{ t: '    tags: ' }, { c: 'nu', t: 'nustd.mem.PrimitiveListRef' }, { t: '[str]' }],
   [],
   [{ c: 'kw', t: 'class' }, { t: ' Cache(' }, { c: 'nu', t: 'nu.Shape' }, { t: '):' }],
-  [{ t: '    sessions: ' }, { c: 'nu', t: 'nu.mem.ShapesDictRef' }, { t: '[str, Session]' }],
-  [{ t: '    active: ' }, { c: 'nu', t: 'nu.mem.IntRef' }],
+  [{ t: '    sessions: ' }, { c: 'nu', t: 'nustd.mem.ShapesDictRef' }, { t: '[str, Session]' }],
+  [{ t: '    active: ' }, { c: 'nu', t: 'nustd.mem.IntRef' }],
   [],
   [{ c: 'cmt', t: '# refs read and write like plain attributes' }],
   [{ t: 'who = Cache.sessions[' }, { c: 'str', t: '"ada"' }, { t: '].user' }],

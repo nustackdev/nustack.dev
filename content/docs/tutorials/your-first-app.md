@@ -6,31 +6,32 @@ A browser dashboard on a live counter that persists across restarts. One Nu tree
 
 ```python
 import nu
+import nustd
 
 
 class Counter(nu.Shape):
-    value: nu.kv.IntRef
+    value: nustd.kv.IntRef
 
 
-class Dashboard(nu.ui.Page):
-    count: nu.ui.TextRef
+class Dashboard(nustd.ui.Page):
+    count: nustd.ui.TextRef
 
 
-class App(nu.ui.Index):
-    pages = nu.ui.Pages({"/": Dashboard})
+class App(nustd.ui.Index):
+    pages = nustd.ui.Pages({"/": Dashboard})
 
 
 app = nu.With(
-    nu.kv.rocksdb_navigator(".dbcounter"),
-    nu.ui.server(
-        nu.kv.auto_flow_atomic(
+    nustd.kv.rocksdb_navigator(".dbcounter"),
+    nustd.ui.server(
+        nustd.kv.auto_flow_atomic(
             nu.ReactForever(
                 Counter.value.on_change(),
                 Dashboard.count.set(Counter.value),
             ),
         ),
     ),
-    body=nu.kv.auto_flow_atomic(
+    body=nustd.kv.auto_flow_atomic(
         nu.IfDo(Counter.value.missing(), Counter.value.set(0))
         >> nu.ForeverDo(
             Counter.value.inc() >> nu.Delay(1.0),
@@ -45,13 +46,13 @@ if __name__ == "__main__":
     asyncio.run(nu.arun(app))
 ```
 
-Set up Nu with the `nu.ui` Fabric first: see [Install](/docs/how-to/install). Then save the code above as `counter.py`, run `python counter.py`, open the browser tab that appears. The counter ticks once a second; the dashboard mirrors it live. Kill it, run again, it picks up where it left off.
+Set up Nu with the `nustd.ui` Fabric first: see [Install](/docs/how-to/install). Then save the code above as `counter.py`, run `python counter.py`, open the browser tab that appears. The counter ticks once a second; the dashboard mirrors it live. Kill it, run again, it picks up where it left off.
 
 ## What happened
 
 **Two Shapes, two Fabrics.** `Counter` holds one int on the kv Fabric. `Dashboard` holds one text label on the UI Fabric. `App` is the site index with one page mounted at `/`. Same declaration style, different Fabric.
 
-**One tree, two Fabrics.** `nu.With` binds `nu.kv.rocksdb_navigator` (RocksDB storage under a Navigator) and a UI server. The server runs `ReactForever` — wake on `Counter.value` change, mirror it into `Dashboard.count`. The `body` seeds the counter if missing, then ticks it forever, one second between beats.
+**One tree, two Fabrics.** `nu.With` binds `nustd.kv.rocksdb_navigator` (RocksDB storage under a Navigator) and a UI server. The server runs `ReactForever` — wake on `Counter.value` change, mirror it into `Dashboard.count`. The `body` seeds the counter if missing, then ticks it forever, one second between beats.
 
 **Composition.** `>>` runs children left-to-right. `ForeverDo` loops its body forever. `ReactForever` subscribes to a change source and re-runs on every fire. `auto_flow_atomic` wraps writes in the minimum atomic region so you get transactions without spelling them out.
 

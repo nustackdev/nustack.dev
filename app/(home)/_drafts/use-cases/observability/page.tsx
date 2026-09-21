@@ -56,7 +56,7 @@ export default function ObservabilityUseCasePage() {
               <Description>
                 Most log stacks assume a fleet. When you are one binary on
                 one box, the fleet is overhead. Nu lets observability run
-                inside your program. Writes append to <code>nu.kv</code>.
+                inside your program. Writes append to <code>nustd.kv</code>.
                 Reads open a browser.
               </Description>
               <Description>
@@ -162,7 +162,7 @@ export default function ObservabilityUseCasePage() {
           />
           <Section>
             <LinkGrid>
-              <LinkCard href="/fabrics/kv" title="nu.kv">
+              <LinkCard href="/fabrics/kv" title="nustd.kv">
                 Persistent state on RocksDB. Every log line and metric
                 point lives here.
               </LinkCard>
@@ -170,7 +170,7 @@ export default function ObservabilityUseCasePage() {
                 Deterministic sampling over sorted KV data. Any window on
                 a metric series renders fast.
               </LinkCard>
-              <LinkCard href="/docs/reference/nustd/kv" title="docs · nu.kv">
+              <LinkCard href="/docs/reference/nustd/kv" title="docs · nustd.kv">
                 Reference for the store nulog writes to. Commands, queries,
                 transactions.
               </LinkCard>
